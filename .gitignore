@@ -1,0 +1,12 @@
+.DS_Store
+**/.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.ipynb_checkpoints/
+
+# The local AS-IS PPTX/PDF archive is about 882 MiB and contains a PPTX over
+# GitHub's normal 100 MiB file limit. Keep it local until Git LFS is configured.
+/AS-IS 2025 2nd semester/*.pptx
+/AS-IS 2025 2nd semester/*.pdf
