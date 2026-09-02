@@ -42,7 +42,10 @@ llmops-16week/
 
 ## 큰 원본 파일
 
-로컬 PPTX/PDF는 약 882 MiB이며 15주차 PPTX는 GitHub의 일반 100 MiB 파일 한도를 넘는다. Git LFS를 구성하기 전에는 Git 추적에서 제외한다. 무결성 정보는 [원본 자료 인벤토리](AS-IS%202025%202nd%20semester/04_AS-IS_원본_자료_인벤토리.md)에 있다.
+로컬 PPTX/PDF는 약 882 MiB이며 15주차 PPTX는 GitHub의 일반 100 MiB 파일 한도를 넘는다. Git LFS를 구성하기 전에는 Git 추적에서 제외한다.
+
+- [2025년 2학기 AS-IS 원본 강의자료 — Google Drive 보기 전용](https://drive.google.com/drive/folders/1CCnXmqZoDwGPQrr68T41ydbyaxB4wnCF?usp=sharing)
+- 파일명, 크기와 SHA-256은 [원본 자료 인벤토리](AS-IS%202025%202nd%20semester/04_AS-IS_원본_자료_인벤토리.md)에서 확인한다.
 
 ## 라이선스·개인정보
 
