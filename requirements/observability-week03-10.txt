@@ -1,0 +1,5 @@
+-r base.txt
+-r llm-api.txt
+
+# W03/W10 use the Langfuse Python v3 API. W06/W07 contain an older v2 call.
+langfuse==3.3.4

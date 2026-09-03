@@ -1,0 +1,11 @@
+-r base.txt
+
+# Week 05 uses the renamed Pinecone package and a newer dataset stack.
+FlagEmbedding==1.3.5
+datasets==4.1.1
+matplotlib==3.10.7
+pinecone==7.3.0
+pinecone-text==0.11.0
+rank-bm25==0.2.2
+torch==2.8.0
+transformers==4.57.1

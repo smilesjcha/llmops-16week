@@ -1,0 +1,6 @@
+# Week 01 TRACE/01 and Week 09 API foundation.
+anyio==4.12.0
+fastapi==0.115.14
+httpx==0.28.1
+pydantic==2.11.7
+uvicorn[standard]==0.35.0

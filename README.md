@@ -15,10 +15,21 @@
 
 [AS-IS 2025년 2학기 안내](AS-IS%202025%202nd%20semester/README.md)에서 문서와 실습자료를 확인한다.
 
+새로 설계한 첫 수업은 [Week 01 패키지](week01/README.md)에서 바로 시작할 수 있다.
+
+- 38장 강의용 PowerPoint와 상세 강의안
+- black / paper / signal 기반 강의 디자인 시스템
+- 강의자 공개 프로필을 반영한 간결한 자기소개
+- offline-first FastAPI 서비스 `TRACE/01`
+- 실행·trace·비교·개선 흐름을 따라가는 실습 notebook
+- CPython 3.11.14 공통 환경과 충돌 주차별 dependency profile
+
 ```text
 llmops-16week/
 ├── README.md
-├── scripts/                         # PPTX text·asset manifest 재생성 도구
+├── requirements/                    # 16주 공통·주차별 Python profile
+├── scripts/                         # 자료 구조·notebook 검사 도구
+├── week01/                          # 신규 1주차 강의·TRACE/01 실습
 └── AS-IS 2025 2nd semester/
     ├── 00_AS-IS_핵심_커리큘럼.md
     ├── 01_AS-IS_주차별_통합_강의안.md
@@ -39,6 +50,14 @@ llmops-16week/
 - OpenAI, Langfuse, Pinecone, 학습/서버 실행은 자동 수행하지 않음
 
 자세한 실행 위치와 의존성은 [practice README](AS-IS%202025%202nd%20semester/practice/README.md)를 따른다.
+
+## 2026 운영 환경
+
+- canonical interpreter: CPython 3.11.14 (`>=3.11,<3.12`)
+- 기본 설치: `uv pip install -r requirements.txt`
+- macOS arm64 완전 고정 설치: `uv pip install -r requirements/locks/course-base-py311-macos-arm64.txt`
+- RAG·fine-tuning·agent·observability: [주차별 profile 안내](requirements/README.md)
+- 검증 결과: [Week 01 QA 보고서](week01/TEST_REPORT.md)
 
 ## 큰 원본 파일
 

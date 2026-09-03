@@ -1,0 +1,6 @@
+-r base.txt
+
+# Reproduces the Week 04 notebook API. Do not install with `pinecone`.
+datasets==2.21.0
+pinecone-client==5.0.1
+sentence-transformers==2.7.0

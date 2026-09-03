@@ -14,7 +14,6 @@ import zipfile
 from pathlib import Path, PurePosixPath
 from xml.etree import ElementTree as ET
 
-
 DRAWING_NS = "http://schemas.openxmlformats.org/drawingml/2006/main"
 REL_NS = "http://schemas.openxmlformats.org/package/2006/relationships"
 NOTES_REL_TYPE = (
@@ -71,13 +70,26 @@ def deck_section(path: Path) -> tuple[int, str]:
 
 
 def markdown_escape(text: str) -> str:
-    redactions = {
-        "010-9562-9958": "[REDACTED_PHONE]",
-        "sungjai426": "[REDACTED_KAKAO_ID]",
-        "business.sjcha@gmail.com": "[REDACTED_EMAIL]",
-    }
-    for source, replacement in redactions.items():
-        text = text.replace(source, replacement)
+    text = re.sub(
+        r"(?<!\d)010[- .]?\d{3,4}[- .]?\d{4}(?!\d)",
+        "[REDACTED_PHONE]",
+        text,
+    )
+    text = re.sub(
+        r"(?i)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b",
+        "[REDACTED_EMAIL]",
+        text,
+    )
+    text = re.sub(
+        r"(?i)(Kakao\s*ID\s*[:：]\s*)\S+",
+        r"\1[REDACTED_KAKAO_ID]",
+        text,
+    )
+    text = re.sub(
+        r"https://open\.kakao\.com/o/[A-Za-z0-9]+",
+        "[REDACTED_OPEN_CHAT_URL]",
+        text,
+    )
     return text.replace("\\", "\\\\").replace("`", "\\`")
 
 
@@ -147,9 +159,18 @@ def main() -> None:
     header = [
         "# AS-IS 2025년 2학기 LLMOps 슬라이드 텍스트 원문",
         "",
-        "> PPTX 14개에서 슬라이드 본문과 포함된 발표자 노트를 기계적으로 추출한 검색용 아카이브입니다.",
-        "> 이미지, 도형의 의미, 애니메이션, 시각적 관계는 포함되지 않으며 문장 순서는 화면의 시각적 읽기 순서와 다를 수 있습니다.",
-        "> 공개 Git 저장소에 불필요한 강의자 개인 연락처(전화번호·Kakao ID·이메일)는 명시적인 마스킹 토큰으로 치환했습니다. PII 교육용 가상 예시는 유지합니다.",
+        (
+            "> PPTX 14개에서 슬라이드 본문과 포함된 발표자 노트를 "
+            "기계적으로 추출한 검색용 아카이브입니다."
+        ),
+        (
+            "> 이미지, 도형의 의미, 애니메이션, 시각적 관계는 포함되지 않으며 "
+            "문장 순서는 화면의 시각적 읽기 순서와 다를 수 있습니다."
+        ),
+        (
+            "> 공개 Git 저장소에 불필요한 강의자 개인 연락처(전화번호·Kakao ID·이메일)는 "
+            "명시적인 마스킹 토큰으로 치환했습니다. PII 교육용 가상 예시는 유지합니다."
+        ),
         "",
         "## 추출 개요",
         "",

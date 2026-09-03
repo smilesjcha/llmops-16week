@@ -1,0 +1,5 @@
+-r eval-week11.txt
+
+# Optional neural toxicity model; downloads model weights on first use.
+detoxify==0.5.2
+torch==2.8.0

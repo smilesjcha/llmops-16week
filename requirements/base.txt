@@ -1,0 +1,8 @@
+# Shared notebook/data foundation. Python >=3.11,<3.12.
+ipykernel==6.29.5
+jupyter==1.1.1
+numpy==1.26.4
+pandas==2.2.3
+python-dotenv==1.1.1
+requests==2.34.2
+tqdm==4.67.1

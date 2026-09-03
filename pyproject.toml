@@ -1,0 +1,21 @@
+[project]
+name = "llmops-16week"
+version = "0.1.0"
+description = "A reproducible 16-week LLMOps course and lab environment"
+requires-python = ">=3.11,<3.12"
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+pythonpath = ["week01/lab"]
+testpaths = ["week01/lab/tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+extend-exclude = ["AS-IS 2025 2nd semester"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.format]
+quote-style = "double"

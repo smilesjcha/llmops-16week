@@ -7,7 +7,6 @@ import argparse
 import re
 from pathlib import Path
 
-
 WEEK_HEADING = re.compile(r"^##\s+(\d{2})주차\b.*$", re.MULTILINE)
 FOOTER_HEADING = re.compile(r"^##\s+공통\s+수업\s+운영\s+체크리스트\b", re.MULTILINE)
 
@@ -40,7 +39,8 @@ def main() -> None:
         raise SystemExit(f"Duplicate weekly headings: {weeks}")
 
     parts = [header, *[section for _, section in sorted(sections)], footer]
-    args.path.write_text("\n\n".join(part for part in parts if part).rstrip() + "\n", encoding="utf-8")
+    output = "\n\n".join(part for part in parts if part).rstrip() + "\n"
+    args.path.write_text(output, encoding="utf-8")
 
 
 if __name__ == "__main__":

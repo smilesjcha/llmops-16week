@@ -1,0 +1,6 @@
+# Canonical course base for CPython 3.11.14.
+# Specialist weeks add one profile from requirements/; see requirements/README.md.
+-r requirements/base.txt
+-r requirements/api.txt
+-r requirements/llm-api.txt
+-r requirements/dev.txt

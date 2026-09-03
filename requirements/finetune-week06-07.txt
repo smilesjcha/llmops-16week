@@ -1,0 +1,11 @@
+-r base.txt
+
+# Legacy-compatible candidate for the preserved W06/W07 notebooks.
+accelerate==1.10.1
+bitsandbytes==0.48.1 ; platform_system == "Linux"
+datasets==4.1.1
+peft==0.17.1
+sentencepiece==0.2.1
+torch==2.8.0
+transformers==4.57.1
+trl==0.11.4

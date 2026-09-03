@@ -306,7 +306,7 @@
 - Style of Lecture
 - 수업은 커리큘럼 + 교재 위주로 준비
 - 오픈채팅방 ‘2025-2학기-LLMOps강의’ 으로 참고하면 좋을 자료 공유할 예정 (참여 code = llmops)
-- 2025-2학기-LLMOps강의 오픈채팅방 접속 링크https://open.kakao.com/o/gQemQwPh
+- 2025-2학기-LLMOps강의 오픈채팅방 접속 링크[REDACTED_OPEN_CHAT_URL]
 - AI 산업에 대한 궁금증 혹은 개별 취업/진로 상담이 필요한 사람은 카톡으로 편하게 연락할 것!
 - 대면 / Zoom 모두 가능 (이메일은 답이 느리므로 공식적인 것 포함 최대한 카톡으로 연락주기!)
 - 차성재 교수 연락처

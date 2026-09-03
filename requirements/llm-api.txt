@@ -1,0 +1,2 @@
+# Weeks 02, 03, 10, and 12. External calls still require explicit credentials.
+openai==2.8.0
