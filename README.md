@@ -17,12 +17,15 @@
 
 새로 설계한 첫 수업은 [Week 01 패키지](week01/README.md)에서 바로 시작할 수 있다.
 
-- 38장 강의용 PowerPoint와 상세 강의안
-- black / paper / signal 기반 강의 디자인 시스템
+- 79장 강의용 PowerPoint와 상세 강의안
+- 60–80장 제작 범위와 렌더 QA를 정의한 [PPT 제작 가이드](week01/lecture/PPT_PRODUCTION_GUIDELINE.md)
+- black / white / navy / blue 기반 강의 디자인 시스템
 - 강의자 공개 프로필을 반영한 간결한 자기소개
 - offline-first FastAPI 서비스 `TRACE/01`
 - 실행·trace·비교·개선 흐름을 따라가는 실습 notebook
 - CPython 3.11.14 공통 환경과 충돌 주차별 dependency profile
+
+강의용 PPT는 명사형 제목, visible text 14pt 이상, 의미 기반 파란색 강조를 공통 정책으로 사용한다. 주황색과 위치 기반 강조를 배제하고, 동일 레이아웃이 세 장 연속 이어지지 않도록 구성한다.
 
 ```text
 llmops-16week/

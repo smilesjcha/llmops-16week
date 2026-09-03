@@ -1,0 +1,132 @@
+# LLMOps 강의 PPT 제작 가이드
+
+이 문서는 Week 01뿐 아니라 16주 강의 자료에 공통 적용하는 제작 기준이다. 특정 브랜드의 화면을 복제하지 않고, 한국 패션 에디토리얼의 선명한 흑백 대비와 날카로운 그리드를 강의 정보 설계에 적용한다.
+
+## 1. 콘텐츠 우선순위
+
+1. 한 장에는 `개념·비교·근거·실행·판정` 가운데 한 역할만 둔다.
+2. 장수 확보를 위한 문장 분할을 금지한다. 새 장표는 반례, 실제 화면, 코드 경계, 실패 복구, 새 판단 상황처럼 새로운 학습 역할을 가져야 한다.
+3. 제목만 처음부터 끝까지 읽었을 때 논리가 앞으로 전진해야 한다.
+4. 같은 결론을 제목·부제·첫 본문에서 반복하지 않는다.
+5. 설명 배경과 강사용 반례는 발표자 노트에 두고, 화면에는 이해·판단·실행·완료 확인에 필요한 내용만 남긴다.
+
+## 2. 제목과 카피
+
+- 표지 제목, 장표 제목, 부제는 짧은 명사형을 기본값으로 한다.
+- 일반 제목은 2–8단어와 한 줄을 우선한다.
+- `합니다`, `됩니다`, `있습니다`, `~다` 같은 문장형 종결어미와 마침표를 제목에 쓰지 않는다.
+- 표지 부제는 설명 문장 대신 `기술 · 과업 · 산출물` 키워드 조합으로 구성한다.
+- 파일명과 제작 메타데이터는 제목이 아니라 별도 label에 둔다.
+- `정리`, `핵심 포인트`, `왜 중요한가`처럼 어디에나 붙는 제목은 구체적인 판단 대상으로 바꾼다.
+
+## 3. 색상 정책
+
+| Token | Hex | 용도 |
+|---|---|---|
+| `BLACK` | `#050505` | 표지, 강한 section, 주요 제목 |
+| `INK` | `#191919` | 본문과 diagram |
+| `WHITE` | `#FFFFFF` | 기본 배경과 dark surface 본문 |
+| `PAPER` | `#F7F8FA` | 화면 호흡을 위한 밝은 surface |
+| `NAVY` | `#0B1F3A` | section과 구조 강조 |
+| `BLUE` | `#2563EB` | 현재 변수·운영 증거·판정 상태 |
+| `BLUE_SOFT` | `#E0F0FE` | 약한 비교 면과 annotation |
+| `GRAY` | `#667085` | 보조 본문 |
+| `HAIRLINE` | `#D0D5DD` | 구분선 |
+
+주황·빨강·노랑·초록·보라·시안, gradient, glow, glassmorphism을 사용하지 않는다. 외부 실제 화면이 원래 색을 포함하는 경우만 예외다.
+
+파랑은 순서나 위치가 아니라 의미로 사용한다.
+
+- 허용: 현재 실험 변수, 관찰할 운영 증거, 판정 상태, 실패 경로
+- 금지: 마지막 항목, 오른쪽 열, 가장 큰 숫자, 마지막 슬라이드라는 이유의 자동 강조
+- 같은 위계의 항목은 같은 색과 무게를 유지한다.
+
+## 4. Typography 정책
+
+PowerPoint/PDF에서 실제로 보이는 크기를 기준으로 검수한다.
+
+| 요소 | 최소 | 권장 |
+|---|---:|---:|
+| 표지 제목 | 54pt | 58–64pt |
+| Section 제목 | 44pt | 46–50pt |
+| 일반 제목 | 38pt | 40–44pt |
+| 중간 제목·핵심 수치 | 24pt | 26–32pt |
+| 본문 | 18pt | 20–24pt |
+| 표 Cell | 17pt | 18–20pt |
+| Code | 16pt | 17–19pt |
+| Micro label·footer·출처 | **14pt** | 14–16pt |
+
+- 화면에 보이는 모든 텍스트의 절대 최소는 14pt다.
+- `shrinkText`로 overflow를 숨기지 않는다. 문장 축약 → 정보 통합 → 장표 재설계 순서로 해결한다.
+- 한국어는 `AppleGothic` 또는 실제 변환 환경에 설치된 일반 고딕체, 코드는 `Menlo`를 사용한다.
+- 한글 glyph와 글꼴 대체는 최종 전 페이지 렌더에서 확인한다.
+
+## 5. Layout 정책
+
+- Canvas: 16:9, 1280 × 720
+- 안전 여백: 좌우 64px, 상단 40px, 하단 42px
+- 기본 구조: 12-column grid, column gap 24px, section gap 32px
+- 모서리는 0–4px로 제한하고, 카드식 dashboard보다 선·면·활자·간격으로 위계를 만든다.
+- 그림자와 3D 효과를 쓰지 않는다.
+- 같은 layout silhouette을 세 장 연속 사용하지 않는다.
+
+주요 archetype:
+
+1. 최소 표지
+2. Dark section divider
+3. 대형 명제
+4. 좌우 분류 비교
+5. 세로형 `01–05` 단계 목록
+6. Timeline·ladder·cost staircase
+7. 폐루프 lifecycle
+8. Matrix·trade-off map
+9. Trace anatomy·schema specimen
+10. Input–process–output–evaluation swimlane
+11. 실제 UI 확대와 번호 annotation
+12. Terminal command와 expected signal
+13. Failure–recovery map
+14. Application checkpoint와 worksheet
+
+## 6. 단계·흐름 도식
+
+- 3–5단계를 기본 범위로 하고 각 단계명은 2–6어절로 제한한다.
+- 실제 시간·의존 순서가 있을 때만 화살표를 사용한다.
+- 동일 위계의 모든 단계는 같은 색으로 표현한다.
+- 현재 학습 위치를 보여줄 때만 하나의 단계를 파랑으로 표시한다.
+- 순환은 끝점이 없는 폐루프로 그리며, 마지막 노드를 임의로 강조하지 않는다.
+- 긴 단계명은 가로 한 줄로 이어 붙이지 않고 번호와 개행으로 읽기 순서를 만든다.
+
+## 7. 근거와 개인정보
+
+- 모든 장표의 발표자 노트에 `[Sources] ... [/Sources]` 블록을 둔다.
+- 외부 주장·이미지는 공식 문서나 원문 논문을 우선한다.
+- 저장소 내부 근거는 portable `repo:` 경로로 기록한다.
+- 공개본에는 개인 연락처, 현직 회사·팀명, 내부 프로젝트·지표, API key, 로컬 절대경로를 넣지 않는다.
+- fingerprint는 동일 입력 확인용 식별자일 뿐 익명화가 아니므로, 민감 원문 자체를 실습에 사용하지 않는다.
+
+## 8. 빌드와 QA Gate
+
+1. 슬라이드 수 60–80장
+2. 모든 슬라이드 PNG 렌더와 1장 단위 육안 검수
+3. overflow·의도치 않은 겹침 0건
+4. 14pt 미만 visible text 0건
+5. 금지 색상과 주황색 `#FF5A36` 0건
+6. 제목 문장형 종결어미·마침표 0건
+7. 의도하지 않은 두 줄 제목 0건
+8. 동일·유사 제목과 동일 본문 반복 0건
+9. 동일 layout 3장 연속 0건
+10. 위치만으로 파랑 강조된 요소 0건
+11. notes 수 = slide 수, 모든 notes에 `[Sources]`
+12. `/Users/`, API key, 개인정보, 내부 회사 정보 0건
+13. 실제 화면 crop, 한글 glyph, 글꼴 대체 전 페이지 확인
+
+## 9. 참고한 sibling project 제작 기준
+
+- `llm-agent-and-workflow-automation/design-system/ppt/cha-sungjae-lecture/content-harness/CONTENT_HARNESS.md`
+- `llm-agent-and-workflow-automation/design-system/ppt/cha-sungjae-lecture/content-harness/COURSE_QUALITY_VALIDATION.md`
+- `test2/design-system/ppt/cha-sungjae-musinsa-lecture/design-tokens.json`
+- `test2/design-system/ppt/cha-sungjae-musinsa-lecture/USAGE.txt`
+- `how-to-work-better/lectures/20260723-worklife-ax-workshop/design/ppt-design-system.md`
+- `how-to-work-better/docs/harness/common-guidelines.md`
+
+위 경로는 제작 시점의 sibling project 기준을 프로젝트명부터 기록한 것이다. 최종 PPTX와 공개 문서에는 사용자 홈 경로를 포함하지 않는다.

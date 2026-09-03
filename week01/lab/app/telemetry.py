@@ -50,9 +50,7 @@ class TraceStore:
             success_rate=round(successes / len(items), 4),
             average_latency_ms=round(sum(latencies) / len(latencies), 2),
             p95_latency_ms=round(latencies[p95_index], 2),
-            estimated_tokens=sum(
-                item.input_tokens_est + item.output_tokens_est for item in items
-            ),
+            estimated_tokens=sum(item.input_tokens_est + item.output_tokens_est for item in items),
             providers=dict(Counter(item.provider for item in items)),
         )
 

@@ -40,15 +40,11 @@ class DemoProvider:
 
     name = "demo"
 
-    async def generate(
-        self, text: str, task: TaskName, temperature: float
-    ) -> ProviderResult:
+    async def generate(self, text: str, task: TaskName, temperature: float) -> ProviderResult:
         del temperature
         normalized = " ".join(text.split())
         sentences = [
-            part.strip()
-            for part in re.split(r"(?<=[.!?。])\s+", normalized)
-            if part.strip()
+            part.strip() for part in re.split(r"(?<=[.!?。])\s+", normalized) if part.strip()
         ]
         first = sentences[0] if sentences else normalized
 
@@ -86,9 +82,7 @@ class OllamaProvider:
         self.model = model
         self.timeout_seconds = timeout_seconds
 
-    async def generate(
-        self, text: str, task: TaskName, temperature: float
-    ) -> ProviderResult:
+    async def generate(self, text: str, task: TaskName, temperature: float) -> ProviderResult:
         _, instruction = PROMPTS[task]
         payload = {
             "model": self.model,
