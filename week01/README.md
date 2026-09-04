@@ -1,6 +1,10 @@
-# Week 01 — 거대 언어 모델 운영 오리엔테이션과 수명주기
+# Week 01 — LLM 서비스 운영의 기본
 
 첫 주의 목표는 대규모 언어 모델(Large Language Model, LLM)을 한 번 호출하는 것이 아니라, 한 번의 실행을 기록·비교·개선 가능한 서비스로 바꾸는 것이다.
+
+## 학생용 강의안
+
+오늘 수업에서 학생이 참고할 기준본은 [01주차 PDF 강의안](../output/pdf/01_week1_llmops_kickoff.pdf)이다. GitHub에서는 `output` → `pdf` → `01_week1_llmops_kickoff.pdf` 순서로 찾는다. 강의 중에는 PDF를 보고, 실습을 시작할 때만 이 폴더의 `lab/`과 `VS_CODE_GUIDE.md`를 사용한다.
 
 ## 구성
 
