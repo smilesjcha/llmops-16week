@@ -32,7 +32,7 @@
 
 새로 설계한 첫 수업은 [Week 01 패키지](week01/README.md)에서 바로 시작할 수 있다.
 
-- 80장 강의용 PowerPoint와 상세 강의안
+- 80장 강의용 [PowerPoint](week01/lecture/01_week1_llmops_kickoff.pptx), [인쇄용 PDF](output/pdf/01_week1_llmops_kickoff.pdf)와 상세 강의안
 - 60–80장 제작 범위와 렌더 QA를 정의한 [PPT 제작 가이드](week01/lecture/PPT_PRODUCTION_GUIDELINE.md)
 - black / white / navy / blue 기반 강의 디자인 시스템
 - 교수 공개 프로필을 반영한 간결한 자기소개
@@ -48,6 +48,7 @@ llmops-16week/
 ├── README.md
 ├── curriculum/                      # 현행 학기 운영·프로젝트 문서
 ├── requirements/                    # 16주 공통·주차별 Python profile
+├── output/pdf/                     # 검증을 마친 인쇄·배포용 PDF
 ├── scripts/                         # 자료 구조·notebook 검사 도구
 ├── week01/                          # 신규 1주차 강의·TRACE/01 실습
 └── AS-IS 2025 2nd semester/

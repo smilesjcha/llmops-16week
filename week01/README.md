@@ -8,10 +8,11 @@
 - `lecture/PPT_PRODUCTION_GUIDELINE.md`: 16주 공통 PPT 제작·검수 기준
 - `lecture/DESIGN_SYSTEM.md`: black / white / navy / blue 기반 Week 01 시각 시스템
 - `lecture/01_week1_llmops_kickoff.pptx`: 80장 실제 강의용 슬라이드
+- `../output/pdf/01_week1_llmops_kickoff.pdf`: PowerPoint와 동일한 80쪽 인쇄·배포용 PDF
 - `lab/`: offline-first FastAPI 서비스 `TRACE/01`
 - `lab/week01_trace01_lab.ipynb`: 실행·trace·비교·개선 guided lab
 - `VS_CODE_GUIDE.md`: VS Code 환경 준비·실행·테스트·디버깅 가이드
-- `TEST_REPORT.md`: 의존성·코드·PPTX 검증 결과와 수동 검사 경계
+- `TEST_REPORT.md`: 의존성·코드·PPTX·PDF 검증 결과와 수동 검사 경계
 
 학기 프로젝트 기준은 [2026년 2학기 운영 커리큘럼](../curriculum/2026-2/00_운영_커리큘럼.md)과 [기말 프로젝트 기획서 가이드](../curriculum/2026-2/01_기말프로젝트_기획서_가이드.md)를 따른다. 16주 전체는 대면 수업 없이 온라인으로 운영하며, 정규 주차는 실시간 강의를 원칙으로 한다. 1주차의 문제 후보와 첫 실행 추적은 8주차 제출 기획서의 첫 포트폴리오 증거가 된다. [16주 과정 로드맵](../curriculum/2026-2/web/course-roadmap.html)은 현재 주차를 파란색으로 표시하고, 9월 25일과 10월 9일은 녹화영상 업로드, 8주차는 실시간 수업 없는 온라인 제출·평가, 16주차는 실시간 온라인 프로젝트 발표로 구분한다.
 

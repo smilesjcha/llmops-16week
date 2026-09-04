@@ -5,16 +5,18 @@
 
 ## 상태 요약
 
-현재 표준 경로의 80장 PowerPoint, 전체 렌더, 실제 화면 캡처, 실습 서비스, 노트북과 16주 의존성 프로필의 검증이 완료되었다. 외부 자격 증명·모델 다운로드·교실 부하 시험은 아래 수동 검증 경계에 별도 표기했다.
+현재 표준 경로의 80장 PowerPoint, 80쪽 인쇄용 PDF, 전체 렌더, 실제 화면 캡처, 실습 서비스, 노트북과 16주 의존성 프로필의 검증이 완료되었다. 외부 자격 증명·모델 다운로드·교실 부하 시험은 아래 수동 검증 경계에 별도 표기했다.
 
 ## 확정된 프레젠테이션 검증 결과
 
-현재 최종화가 완료된 검증 대상은 다음 파일이다. `build/v2`는 재생성 과정에서만 사용하는 로컬 검증 영역으로 Git에서 제외되며, GitHub에서 배포하는 파일은 표준 경로의 PowerPoint와 이 보고서다.
+현재 최종화가 완료된 검증 대상은 다음 파일이다. `build/v2`는 재생성 과정에서만 사용하는 로컬 검증 영역으로 Git에서 제외되며, GitHub에서 배포하는 파일은 표준 경로의 PowerPoint, 인쇄용 PDF와 이 보고서다.
 
 - 배포 PowerPoint: week01/lecture/01_week1_llmops_kickoff.pptx
+- 인쇄·배포 PDF: output/pdf/01_week1_llmops_kickoff.pdf
 - 로컬 생성 산출물(git 제외): week01/lecture/build/v2/output-v3r10/01_week1_llmops_kickoff_v3r10.pptx
 - 로컬 검증 영수증(git 제외): week01/lecture/build/v2/staging-v5/01_week1_llmops_kickoff_v3r10.validation.json
-- SHA-256: 182fc5f6998db34f41ec487c8815bb890019b42722967975808bd5e985097673
+- PowerPoint SHA-256: 182fc5f6998db34f41ec487c8815bb890019b42722967975808bd5e985097673
+- PDF SHA-256: 1fe8be1dfc0ccc9f16882ad8a6ab7ae45127c6bcbe74424840eec854426e5aa1
 
 | 영역 | 결과 | 확인 내용 |
 |---|---|---|
@@ -29,6 +31,8 @@
 | 빌더 최소 글자 크기 정책 | PASS | build-audit.json 기준 가시 텍스트 최소 14pt |
 | 레이아웃 다양성 | PASS | build-audit.json 기준 51개 layout type |
 | 색상 정책 | PASS | 검정·흰색·네이비·파랑·중립 회색, 금지 주황색 #FF5A36 |
+| 인쇄용 PDF | PASS | 80쪽, 16:9 가로 페이지, 빈 페이지 0건, 전체 렌더·모판 검수 |
+| PDF 글꼴 | PASS | 한글·영문 글꼴 임베딩, 텍스트 추출과 핵심 운영 문구 확인 |
 
 ### 검증 범위 해석
 
@@ -86,6 +90,10 @@
 ~~~bash
 # 배포 파일 지문
 shasum -a 256 week01/lecture/01_week1_llmops_kickoff.pptx
+shasum -a 256 output/pdf/01_week1_llmops_kickoff.pdf
+
+# 인쇄용 PDF 페이지·크기 확인
+pdfinfo output/pdf/01_week1_llmops_kickoff.pdf
 
 # PowerPoint 구조·오버플로 재검사
 python "$PRESENTATIONS_SKILL_DIR/container_tools/slides_test.py" \
