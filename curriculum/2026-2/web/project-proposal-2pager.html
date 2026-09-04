@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="아주대학교 AI대학원 LLMOps 기말 프로젝트 2페이지 제안서 HTML 템플릿"
+    />
+    <title>기말 프로젝트 2페이지 제안서 · 아주대 AI대학원 LLMOps</title>
+    <link rel="stylesheet" href="assets/course.css" />
+    <script src="assets/course.js" defer></script>
+  </head>
+  <body data-current-week="1">
+    <a class="skip-link" href="#main">본문으로 이동</a>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="wordmark" href="course-roadmap.html">AJOU · LLMOPS · 2026 FALL</a>
+        <nav class="site-nav" aria-label="프로젝트 문서">
+          <a href="course-roadmap.html">과정 로드맵</a>
+          <a href="project-proposal-2pager.html" aria-current="page">2페이지 제안서</a>
+          <a href="project-prd.html">PRD 기획서</a>
+          <button class="print-action" type="button" data-print>인쇄 / PDF</button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="page-shell hero hero--compact no-print">
+        <div>
+          <p class="eyebrow">PROJECT PROPOSAL · TWO PAGES</p>
+          <h1>기말 프로젝트 2페이지 제안서</h1>
+          <p class="hero-lead">빠른 합의를 위한 문제·해법·판정 기준</p>
+        </div>
+        <aside class="hero-side">
+          <p class="current-kicker">SUBMISSION / WEEK 08</p>
+          <p class="current-week-title">기획서 0.1 제출</p>
+          <p class="current-week-copy">별도의 중간고사 없이 기획서 0.1 제출로 기획 단계 마감</p>
+        </aside>
+      </section>
+
+      <section class="proposal-document" aria-label="2페이지 제안서 서식">
+        <article class="proposal-page" aria-labelledby="page-one-title">
+          <header class="proposal-page__head">
+            <p class="section-index">PAGE 01</p>
+            <div>
+              <p class="eyebrow">PROJECT PROPOSAL · PROBLEM &amp; OUTPUT</p>
+              <h2 id="page-one-title">문제와 출력</h2>
+            </div>
+          </header>
+
+          <div class="document-meta">
+            <div class="meta-cell"><span class="meta-label">프로젝트명</span><span class="meta-value">[작성]</span></div>
+            <div class="meta-cell"><span class="meta-label">팀·역할</span><span class="meta-value">[작성]</span></div>
+            <div class="meta-cell"><span class="meta-label">버전</span><span class="meta-value">0.1</span></div>
+            <div class="meta-cell"><span class="meta-label">기준 커밋</span><span class="meta-value mono">[commit]</span></div>
+            <div class="meta-cell"><span class="meta-label">수정일</span><span class="meta-value">[YYYY-MM-DD]</span></div>
+          </div>
+
+          <section class="doc-section">
+            <div><p class="section-index">00 / ONE LINE</p><h3>프로젝트 정의</h3></div>
+            <div class="doc-section__body">
+              <p class="statement">[대상 사용자]가 [현재의 업무 마찰]을 줄이도록 [입력]을 받아 [검증 가능한 출력]을 제공하는 서비스</p>
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <div><p class="section-index">01 / PROBLEM</p><h3>문제와 사용자</h3></div>
+            <div class="doc-section__body field-grid field-grid--three">
+              <div class="field"><span class="field-label">핵심 사용자</span><span class="field-value">직무·사용 맥락·권한</span></div>
+              <div class="field"><span class="field-label">현재 절차</span><span class="field-value">도구와 사람의 실제 순서</span></div>
+              <div class="field"><span class="field-label">가장 큰 마찰</span><span class="field-value">판단·시간·품질의 구체적 손실</span></div>
+              <div class="field"><span class="field-label">실패 비용</span><span class="field-value">오류가 사용자와 조직에 주는 영향</span></div>
+              <div class="field"><span class="field-label">확인 근거</span><span class="field-value">인터뷰·로그·업무 문서·실행 결과</span></div>
+              <div class="field"><span class="field-label">남은 불확실성</span><span class="field-value">아직 확인하지 못한 핵심 가정</span></div>
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <div><p class="section-index">02 / BASELINE</p><h3>비인공지능 기준선</h3></div>
+            <div class="doc-section__body">
+              <table class="document-table">
+                <thead><tr><th>현재 방법</th><th>품질·시간·비용</th><th>LLM이 필요한 이유</th></tr></thead>
+                <tbody><tr><td>[사람·규칙·기존 검색]</td><td>[실측 또는 확인 계획]</td><td>[기준선 대비 검증할 변화]</td></tr></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <div><p class="section-index">03 / CONTRACT</p><h3>입력·출력 계약</h3></div>
+            <div class="doc-section__body">
+              <table class="document-table">
+                <thead><tr><th>대표 입력</th><th>필수 출력</th><th>금지·오류 조건</th><th>사람 승인</th></tr></thead>
+                <tbody>
+                  <tr><td>[사례 1]</td><td>[필드·형식]</td><td>[누락·추가·금지]</td><td>[판단 지점]</td></tr>
+                  <tr><td>[사례 2]</td><td>[필드·형식]</td><td>[누락·추가·금지]</td><td>[판단 지점]</td></tr>
+                  <tr><td>[잘못된 입력]</td><td>[오류 응답]</td><td>[차단·복구]</td><td>[에스컬레이션]</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <p class="page-conclusion">판정 질문 · 누구의 어떤 판단을 어떤 출력으로 지원하는가</p>
+        </article>
+
+        <article class="proposal-page" aria-labelledby="page-two-title">
+          <header class="proposal-page__head">
+            <p class="section-index">PAGE 02</p>
+            <div>
+              <p class="eyebrow">PROJECT PROPOSAL · SOLUTION &amp; EVIDENCE</p>
+              <h2 id="page-two-title">해법과 검증</h2>
+            </div>
+          </header>
+
+          <section class="doc-section">
+            <div><p class="section-index">04 / CHOICE</p><h3>해법과 선택 이유</h3></div>
+            <div class="doc-section__body">
+              <table class="document-table">
+                <thead><tr><th>선택한 접근</th><th>선택하지 않은 대안</th><th>다시 검토할 조건</th></tr></thead>
+                <tbody><tr><td>[프롬프트·검색·도구·모델]</td><td>[비교한 기준선과 대안]</td><td>[품질·비용·일정의 신호]</td></tr></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <div><p class="section-index">05 / EVALUATION</p><h3>평가와 중단 기준</h3></div>
+            <div class="doc-section__body field-grid">
+              <div class="field"><span class="field-label">업무 품질</span><span class="field-value">사실성·근거·형식·유용성의 판정</span></div>
+              <div class="field"><span class="field-label">응답 지연·비용</span><span class="field-value">측정 구간·목표·허용 한계</span></div>
+              <div class="field"><span class="field-label">안전·재현성</span><span class="field-value">권한·개인정보·버전·실행 추적</span></div>
+              <div class="field"><span class="field-label">결정 기준</span><span class="field-value">성공·실패·보류·중단 조건</span></div>
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <div><p class="section-index">06 / DATA</p><h3>데이터와 권한</h3></div>
+            <div class="doc-section__body">
+              <table class="document-table">
+                <thead><tr><th>출처·소유자</th><th>사용 권한·갱신</th><th>개인정보·저장·삭제</th></tr></thead>
+                <tbody><tr><td>[데이터와 책임자]</td><td>[허용 범위와 최신성]</td><td>[민감도와 보존 정책]</td></tr></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <div><p class="section-index">07 / PLAN</p><h3>실행 이정표</h3></div>
+            <div class="doc-section__body">
+              <table class="document-table">
+                <thead><tr><th>주차</th><th>검증 초점</th><th>완료 증거</th></tr></thead>
+                <tbody>
+                  <tr><td>W09–10</td><td>서비스 실행과 관찰</td><td>서비스 인터페이스·실행 추적·복구 절차</td></tr>
+                  <tr><td>W11–12</td><td>평가와 실제 지표</td><td>평가 결과·오류 분석·비교 판단</td></tr>
+                  <tr><td>W13–14</td><td>안전·비용·용량</td><td>위험·한계·보류 조건</td></tr>
+                  <tr><td>W15</td><td>통합 검증과 리허설</td><td>점검표·복구 시연·최종 결정</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="doc-section">
+            <div><p class="section-index">08 / REVIEW</p><h3>교수 설계 리뷰</h3></div>
+            <div class="doc-section__body field-grid">
+              <div class="field"><span class="field-label">현재 결정</span><span class="field-value">지금 유지하려는 선택과 근거</span></div>
+              <div class="field"><span class="field-label">확인할 판단</span><span class="field-value">가장 큰 불확실성과 비교 대안</span></div>
+            </div>
+          </section>
+
+          <p class="page-conclusion">연결 문서 · PRD · 실행 증거 · 문서 버전 · 다음 검토일</p>
+          <p class="source-note">두 페이지에는 결정에 필요한 근거만 남긴다. 세부 요구사항과 수락 기준은 제품 요구사항 문서(Product Requirements Document, PRD)에서 관리한다.</p>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer no-print">
+      <div class="page-shell site-footer__inner">
+        <p>AJOU · LARGE LANGUAGE MODEL OPERATIONS · PROJECT PROPOSAL</p>
+        <p><a href="project-prd.html">다음 문서 · PRD 기획서</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

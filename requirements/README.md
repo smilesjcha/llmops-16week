@@ -47,7 +47,7 @@ uv pip install -r requirements/rag-week05.txt
 | 04 | `rag-week04-legacy.txt` | deprecated `pinecone-client` 재현 전용 |
 | 05 | `rag-week05.txt` | `pinecone` 7.x와 HF retrieval stack |
 | 06–07 | `finetune-week06-07.txt` | CPU/macOS와 Linux CUDA 실행을 분리해야 함 |
-| 08 | 없음 | 중간고사 |
+| 08 | 없음 | 기말 프로젝트 기획서 제출·교수 설계 리뷰 |
 | 09 | `requirements.txt`; 부하 테스트는 `loadtest-week09.txt` | ASGI/FastAPI stack |
 | 10 | `requirements.txt` + `observability-week03-10.txt` | Langfuse v3 고정 |
 | 11 | `eval-week11.txt` | 완전 로컬 TF-IDF/evaluation |

@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="아주대학교 AI대학원 LLMOps 기말 프로젝트 제품 요구사항 문서 HTML 템플릿"
+    />
+    <title>기말 프로젝트 PRD 기획서 · 아주대 AI대학원 LLMOps</title>
+    <link rel="stylesheet" href="assets/course.css" />
+    <script src="assets/course.js" defer></script>
+  </head>
+  <body data-current-week="1">
+    <a class="skip-link" href="#main">본문으로 이동</a>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="wordmark" href="course-roadmap.html">AJOU · LLMOPS · 2026 FALL</a>
+        <nav class="site-nav" aria-label="프로젝트 문서">
+          <a href="course-roadmap.html">과정 로드맵</a>
+          <a href="project-proposal-2pager.html">2페이지 제안서</a>
+          <a href="project-prd.html" aria-current="page">PRD 기획서</a>
+          <button class="print-action" type="button" data-print>인쇄 / PDF</button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="page-shell hero hero--compact">
+        <div>
+          <p class="eyebrow">PRODUCT REQUIREMENTS DOCUMENT · PRD</p>
+          <h1>기말 프로젝트 제품 요구사항 문서</h1>
+          <p class="hero-lead">문제·계약·평가·운영 경계를 같은 기준으로 관리하는 구현 기준선</p>
+        </div>
+        <aside class="hero-side">
+          <p class="current-kicker">SUBMISSION / WEEK 08</p>
+          <p class="current-week-title">기획서 0.1</p>
+          <p class="current-week-copy">별도의 중간고사 없이 제출 · 이후 구현과 평가에서 버전 갱신</p>
+        </aside>
+      </section>
+
+      <div class="page-shell document">
+        <nav class="doc-nav" aria-label="연결 문서">
+          <a href="course-roadmap.html"><span>01 / COURSE</span><strong>16주 과정 로드맵</strong></a>
+          <a href="project-proposal-2pager.html"><span>02 / SUMMARY</span><strong>2페이지 제안서</strong></a>
+          <a href="project-prd.html" aria-current="page"><span>03 / SPECIFICATION</span><strong>PRD 기획서</strong></a>
+        </nav>
+
+        <div class="policy-band">
+          <strong>8주차<br /><span class="blue">기획서 제출</span></strong>
+          <p>
+            교수 질의응답은 상시 설계 리뷰로 운영한다. 피드백을 받은 뒤 학생이 채택·보류·반박을 결정하고,
+            변경 전후와 근거를 문서 버전 및 포트폴리오에 남긴다.
+          </p>
+        </div>
+
+        <section class="doc-section" id="status">
+          <div><p class="section-index">00 / STATUS</p><h3>문서 상태</h3></div>
+          <div class="doc-section__body">
+            <div class="document-meta">
+              <div class="meta-cell"><span class="meta-label">프로젝트명</span><span class="meta-value">[작성]</span></div>
+              <div class="meta-cell"><span class="meta-label">버전</span><span class="meta-value">0.1</span></div>
+              <div class="meta-cell"><span class="meta-label">상태</span><span class="meta-value">검토 전</span></div>
+              <div class="meta-cell"><span class="meta-label">책임자</span><span class="meta-value">[작성]</span></div>
+              <div class="meta-cell"><span class="meta-label">기준 커밋</span><span class="meta-value mono">[commit]</span></div>
+            </div>
+            <div class="field-grid field-grid--three">
+              <div class="field"><span class="field-label">검토일</span><span class="field-value">[YYYY-MM-DD]</span></div>
+              <div class="field"><span class="field-label">공개 범위</span><span class="field-value">공개·수업 내부·비공개</span></div>
+              <div class="field"><span class="field-label">다음 결정일</span><span class="field-value">[YYYY-MM-DD]</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="definition">
+          <div><p class="section-index">01 / DEFINITION</p><h3>제품 한 줄 정의</h3></div>
+          <div class="doc-section__body">
+            <p class="statement">[대상 사용자]가 [현재의 어려움]을 줄이도록 [입력]을 받아 [검증 가능한 출력]을 제공하는 서비스</p>
+            <div class="field-grid" style="margin-top: 32px">
+              <div class="field"><span class="field-label">지원할 업무 판단</span><span class="field-value">인공지능이 보조할 구체적 결정</span></div>
+              <div class="field"><span class="field-label">사용자의 최종 판단</span><span class="field-value">사람이 직접 확인·승인할 영역</span></div>
+              <div class="field"><span class="field-label">기대 변화</span><span class="field-value">품질·시간·비용의 측정 가능한 변화</span></div>
+              <div class="field"><span class="field-label">비지원 범위</span><span class="field-value">인공지능이 대신하지 않는 결정</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="evidence">
+          <div><p class="section-index">02 / EVIDENCE</p><h3>사용자와 문제 증거</h3></div>
+          <div class="doc-section__body">
+            <table class="document-table">
+              <thead><tr><th>항목</th><th>현재 판단</th><th>확인 근거</th><th>남은 불확실성</th></tr></thead>
+              <tbody>
+                <tr><td>핵심 사용자</td><td>[작성]</td><td>[인터뷰·로그·문서]</td><td>[작성]</td></tr>
+                <tr><td>사용 맥락</td><td>[작성]</td><td>[업무 절차]</td><td>[작성]</td></tr>
+                <tr><td>핵심 마찰</td><td>[작성]</td><td>[실패·시간·비용]</td><td>[작성]</td></tr>
+                <tr><td>실패 비용</td><td>[작성]</td><td>[사용자·조직 영향]</td><td>[작성]</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="doc-section" id="scope">
+          <div><p class="section-index">03 / SCOPE</p><h3>목표와 범위</h3></div>
+          <div class="doc-section__body field-grid">
+            <div class="field"><span class="field-label">목표</span><span class="field-value">기말 발표에서 증명할 사용자·업무 변화</span></div>
+            <div class="field"><span class="field-label">포함 범위</span><span class="field-value">반드시 구현·평가할 기능과 시나리오</span></div>
+            <div class="field"><span class="field-label">제외 범위</span><span class="field-value">이번 학기에 다루지 않을 기능과 사용자</span></div>
+            <div class="field"><span class="field-label">범위 축소 순서</span><span class="field-value">일정 위험 시 가장 먼저 보류할 항목</span></div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="flow">
+          <div><p class="section-index">04 / FLOW</p><h3>사용 흐름과 기준선</h3></div>
+          <div class="doc-section__body">
+            <ol class="decision-list">
+              <li><div><strong>현재 흐름</strong><br /><span class="field-value">사람·규칙·검색을 포함한 실제 업무 순서</span></div></li>
+              <li><div><strong>비인공지능 기준선</strong><br /><span class="field-value">현재 품질·시간·비용과 확인 방법</span></div></li>
+              <li><div><strong>목표 흐름</strong><br /><span class="field-value">서비스가 개입할 위치와 제공할 출력</span></div></li>
+              <li><div><strong>사람 승인</strong><br /><span class="field-value">자동화하지 않고 사람이 최종 판단할 지점</span></div></li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="doc-section" id="contract">
+          <div><p class="section-index">05 / CONTRACT</p><h3>입력·출력 계약</h3></div>
+          <div class="doc-section__body">
+            <table class="document-table">
+              <thead><tr><th>사례</th><th>입력</th><th>기대 출력</th><th>금지·오류</th><th>사람 확인</th></tr></thead>
+              <tbody>
+                <tr><td>대표 1</td><td>[작성]</td><td>[필드·형식]</td><td>[작성]</td><td>[작성]</td></tr>
+                <tr><td>대표 2</td><td>[작성]</td><td>[필드·형식]</td><td>[작성]</td><td>[작성]</td></tr>
+                <tr><td>대표 3</td><td>[작성]</td><td>[필드·형식]</td><td>[작성]</td><td>[작성]</td></tr>
+                <tr><td>잘못된 입력</td><td>[작성]</td><td>[오류 응답]</td><td>[차단·복구]</td><td>[에스컬레이션]</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="doc-section" id="functional">
+          <div><p class="section-index">06 / FUNCTIONAL</p><h3>기능 요구사항</h3></div>
+          <div class="doc-section__body">
+            <table class="document-table">
+              <thead><tr><th>ID</th><th>요구사항</th><th>사용자 가치</th><th>수락 기준</th><th>확인 증거</th><th>상태</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">FR-01</td><td>승인된 텍스트 입력 제출</td><td>[작성]</td><td>허용·금지 입력 구분</td><td>요청·오류 실행 추적</td><td>제안</td></tr>
+                <tr><td class="mono">FR-02</td><td>정의된 출력 필드 반환</td><td>[작성]</td><td>필수 필드 누락 0건</td><td>대표 입력 평가 결과</td><td>제안</td></tr>
+                <tr><td class="mono">FR-03</td><td>오류 상태·원인·복구 선택 반환</td><td>[작성]</td><td>오류 유형별 계약 충족</td><td>실패 시나리오</td><td>제안</td></tr>
+                <tr><td class="mono">FR-04</td><td>[프로젝트 고유 요구사항]</td><td>[작성]</td><td>[판정 가능한 조건]</td><td>[파일·로그·화면]</td><td>제안</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="doc-section" id="nonfunctional">
+          <div><p class="section-index">07 / QUALITY</p><h3>비기능 요구사항</h3></div>
+          <div class="doc-section__body">
+            <table class="document-table">
+              <thead><tr><th>ID</th><th>판단 축</th><th>목표·허용 한계</th><th>측정 방법</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">NFR-01</td><td>업무 품질</td><td>[정답·근거·형식 기준]</td><td>[평가 데이터·루브릭]</td></tr>
+                <tr><td class="mono">NFR-02</td><td>응답 지연·비용</td><td>[95번째 백분위·요청당 비용]</td><td>[측정 구간·도구]</td></tr>
+                <tr><td class="mono">NFR-03</td><td>안전성</td><td>[권한·개인정보·금지 행동]</td><td>[위협 시나리오]</td></tr>
+                <tr><td class="mono">NFR-04</td><td>재현성</td><td>프롬프트·모델·설정·데이터 버전 기록</td><td>실행 추적과 커밋</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="doc-section" id="data">
+          <div><p class="section-index">08 / DATA</p><h3>데이터·권한·개인정보</h3></div>
+          <div class="doc-section__body">
+            <table class="document-table">
+              <thead><tr><th>데이터</th><th>출처·소유자</th><th>사용 권한</th><th>갱신</th><th>민감도</th><th>보존·삭제</th></tr></thead>
+              <tbody>
+                <tr><td>[작성]</td><td>[작성]</td><td>[허용 범위]</td><td>[주기]</td><td>[등급]</td><td>[정책]</td></tr>
+                <tr><td>[작성]</td><td>[작성]</td><td>[허용 범위]</td><td>[주기]</td><td>[등급]</td><td>[정책]</td></tr>
+              </tbody>
+            </table>
+            <p class="note" style="margin-top: 24px">공개 포트폴리오에는 실제 고객 원문, 접근 토큰, 개인 연락처와 승인되지 않은 내부 정보를 포함하지 않는다.</p>
+          </div>
+        </section>
+
+        <section class="doc-section" id="alternatives">
+          <div><p class="section-index">09 / ALTERNATIVES</p><h3>기술 대안과 선택</h3></div>
+          <div class="doc-section__body">
+            <table class="document-table">
+              <thead><tr><th>대안</th><th>기대 효과</th><th>구현 비용</th><th>가역성</th><th>주요 위험</th><th>선택</th></tr></thead>
+              <tbody>
+                <tr><td>규칙·기존 검색</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[유지·보류]</td></tr>
+                <tr><td>프롬프트</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[유지·보류]</td></tr>
+                <tr><td>검색 증강 생성</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[유지·보류]</td></tr>
+                <tr><td>도구 호출·에이전트</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[유지·보류]</td></tr>
+                <tr><td>모델 적응</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[유지·보류]</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="doc-section" id="evaluation">
+          <div><p class="section-index">10 / DECISION</p><h3>평가·승격·중단 기준</h3></div>
+          <div class="doc-section__body">
+            <table class="document-table">
+              <thead><tr><th>판단 축</th><th>지표·루브릭</th><th>평가 데이터</th><th>성공</th><th>실패·중단</th></tr></thead>
+              <tbody>
+                <tr><td>업무 품질</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+                <tr><td>형식 계약</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+                <tr><td>근거·최신성</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+                <tr><td>응답 지연·비용</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+                <tr><td>안전·재현성</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="doc-section" id="architecture">
+          <div><p class="section-index">11 / SYSTEM</p><h3>시스템·관찰·복구 구조</h3></div>
+          <div class="doc-section__body field-grid field-grid--three">
+            <div class="field"><span class="field-label">사용자 화면</span><span class="field-value">입력·결과·오류·승인</span></div>
+            <div class="field"><span class="field-label">서비스 인터페이스 계약</span><span class="field-value">요청·응답·상태·오류 코드</span></div>
+            <div class="field"><span class="field-label">모델·검색·도구</span><span class="field-value">선택 기준과 대체 경로</span></div>
+            <div class="field"><span class="field-label">저장소·실행 추적</span><span class="field-value">원문·메타데이터·버전 경계</span></div>
+            <div class="field"><span class="field-label">서비스 상태</span><span class="field-value">건강 상태·운영 지표·경보</span></div>
+            <div class="field"><span class="field-label">실패 복구</span><span class="field-value">시간 초과·외부 연결·안전 차단</span></div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="plan">
+          <div><p class="section-index">12 / DELIVERY</p><h3>9–15주차 실행 계획</h3></div>
+          <div class="doc-section__body">
+            <table class="document-table">
+              <thead><tr><th>주차</th><th>검증 질문</th><th>구현·실험</th><th>완료 증거</th><th>담당</th><th>대체 경로</th></tr></thead>
+              <tbody>
+                <tr><td>09</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+                <tr><td>10</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+                <tr><td>11</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+                <tr><td>12</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+                <tr><td>13</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+                <tr><td>14</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+                <tr><td>15</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="doc-section" id="risks">
+          <div><p class="section-index">13 / RISK</p><h3>위험과 의존 관계</h3></div>
+          <div class="doc-section__body">
+            <table class="document-table">
+              <thead><tr><th>위험·의존 관계</th><th>조기 신호</th><th>영향</th><th>완화 방안</th><th>보류·중단 조건</th></tr></thead>
+              <tbody>
+                <tr><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+                <tr><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="doc-section" id="review">
+          <div><p class="section-index">14 / REVIEW</p><h3>교수 질의응답과 결정 기록</h3></div>
+          <div class="doc-section__body">
+            <div class="field-grid">
+              <div class="field"><span class="field-label">현재 결정</span><span class="field-value">유지하려는 선택과 근거</span></div>
+              <div class="field"><span class="field-label">가장 큰 불확실성</span><span class="field-value">틀렸을 때의 위험</span></div>
+              <div class="field"><span class="field-label">비교 중인 대안</span><span class="field-value">선택지별 차이와 필요한 증거</span></div>
+              <div class="field"><span class="field-label">교수에게 확인할 판단</span><span class="field-value">질문 1–3개</span></div>
+            </div>
+            <table class="document-table" style="margin-top: 30px">
+              <thead><tr><th>질문·피드백</th><th>드러난 가정</th><th>학생 결정</th><th>추가 근거</th><th>다음 수정</th></tr></thead>
+              <tbody><tr><td>[작성]</td><td>[작성]</td><td>채택·보류·반박</td><td>[작성]</td><td>[담당·완료 조건]</td></tr></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="doc-section" id="history">
+          <div><p class="section-index">15 / HISTORY</p><h3>버전 변경 기록</h3></div>
+          <div class="doc-section__body">
+            <table class="document-table">
+              <thead><tr><th>버전</th><th>변경 전</th><th>변경 후</th><th>변경 이유</th><th>근거</th><th>남은 위험</th></tr></thead>
+              <tbody>
+                <tr><td>0.1</td><td>8주차 제출본</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+                <tr><td>0.2</td><td>교수 설계 리뷰 전</td><td>[작성]</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="doc-section" id="portfolio">
+          <div><p class="section-index">16 / PORTFOLIO</p><h3>포트폴리오 증거</h3></div>
+          <div class="doc-section__body">
+            <table class="document-table">
+              <thead><tr><th>증거</th><th>파일·링크</th><th>확인한 판단</th><th>공개 범위</th></tr></thead>
+              <tbody>
+                <tr><td>기준선 실행</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+                <tr><td>대표 성공·실패</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+                <tr><td>평가표·루브릭</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+                <tr><td>실행 추적·지표</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+                <tr><td>교수 리뷰·수정 이력</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+                <tr><td>최종 시연·보고서</td><td>[작성]</td><td>[작성]</td><td>[작성]</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="doc-section" id="checklist">
+          <div><p class="section-index">FINAL / CHECK</p><h3>제출 전 확인</h3></div>
+          <div class="doc-section__body">
+            <ul class="checklist">
+              <li>사용자·문제·출력의 한 줄 정의</li>
+              <li>비인공지능 기준선과 기술 대안</li>
+              <li>대표 입력 3건과 잘못된 입력 1건</li>
+              <li>데이터 출처·권한·개인정보 경계</li>
+              <li>성공·실패·보류·중단 기준</li>
+              <li>실행 가능한 기준선 또는 최소 시작품</li>
+              <li>9–15주차 완료 증거와 대체 경로</li>
+              <li>교수에게 확인할 질문 1–3개</li>
+              <li>질의응답 이후 학생 결정과 수정 이력</li>
+              <li>자격 증명·고객 원문·내부 정보 제거</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="page-shell site-footer__inner">
+        <p>AJOU · LARGE LANGUAGE MODEL OPERATIONS · PRODUCT REQUIREMENTS DOCUMENT</p>
+        <p><a href="course-roadmap.html">16주 로드맵으로 돌아가기</a></p>
+      </div>
+    </footer>
+  </body>
+</html>
