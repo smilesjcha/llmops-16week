@@ -11,6 +11,7 @@ week01/lecture/build/
 week01/lecture/build_week01_deck.mjs
 week01/lecture/*.pptx.inspect.ndjson
 week01/lecture/01_week1_llmops_kickoff/
+~$*.pptx
 
 # The local AS-IS PPTX/PDF archive is about 882 MiB and contains a PPTX over
 # GitHub's normal 100 MiB file limit. Keep it local until Git LFS is configured.

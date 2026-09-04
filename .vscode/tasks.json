@@ -1,0 +1,230 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Environment: Install CPython 3.11.14",
+      "type": "process",
+      "command": "uv",
+      "args": [
+        "python",
+        "install",
+        "3.11.14"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PATH": "/opt/homebrew/bin:/usr/local/bin:${env:PATH}"
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Environment: Create .venv",
+      "type": "process",
+      "command": "uv",
+      "args": [
+        "venv",
+        "--python",
+        "3.11.14",
+        "--allow-existing",
+        ".venv"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PATH": "/opt/homebrew/bin:/usr/local/bin:${env:PATH}"
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Environment: Install course packages",
+      "type": "process",
+      "command": "uv",
+      "args": [
+        "pip",
+        "install",
+        "--python",
+        "${workspaceFolder}/.venv/bin/python",
+        "-r",
+        "${workspaceFolder}/requirements.txt"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PATH": "/opt/homebrew/bin:/usr/local/bin:${env:PATH}"
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Environment: Bootstrap",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Environment: Install CPython 3.11.14",
+        "Environment: Create .venv",
+        "Environment: Install course packages"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Week 01: Run TRACE/01",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "args": [
+        "-m",
+        "uvicorn",
+        "app.main:app",
+        "--app-dir",
+        "${workspaceFolder}/week01/lab",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8000",
+        "--reload"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "isBackground": true,
+      "problemMatcher": [
+        {
+          "owner": "week01-uvicorn",
+          "pattern": [
+            {
+              "regexp": "^(.*)$",
+              "message": 1
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": ".*Uvicorn running on.*",
+            "endsPattern": ".*Application startup complete.*"
+          }
+        }
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "Week 01: Run TRACE/01 with Ollama .env",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "args": [
+        "-m",
+        "uvicorn",
+        "app.main:app",
+        "--app-dir",
+        "${workspaceFolder}/week01/lab",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8000",
+        "--reload",
+        "--env-file",
+        "${workspaceFolder}/week01/lab/.env"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "isBackground": true,
+      "problemMatcher": [
+        {
+          "owner": "week01-uvicorn",
+          "pattern": [
+            {
+              "regexp": "^(.*)$",
+              "message": 1
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": ".*Uvicorn running on.*",
+            "endsPattern": ".*Application startup complete.*"
+          }
+        }
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "Week 01: Smoke demo request",
+      "type": "process",
+      "command": "/usr/bin/curl",
+      "args": [
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--header",
+        "Content-Type: application/json",
+        "--data",
+        "{\"text\":\"배송은 빠르지만 추천 근거를 알기 어렵습니다.\",\"task\":\"extract\",\"provider\":\"demo\",\"temperature\":0.2}",
+        "http://127.0.0.1:8000/api/v1/generate"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "Week 01: Start and smoke",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Week 01: Run TRACE/01",
+        "Week 01: Smoke demo request"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Week 01: Test API",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "args": [
+        "-m",
+        "pytest",
+        "-q",
+        "week01/lab/tests"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Course: Ruff check",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "args": [
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

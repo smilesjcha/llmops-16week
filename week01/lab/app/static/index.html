@@ -3,31 +3,48 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="TRACE/01 — 첫 번째 관측 가능한 LLMOps 서비스" />
-    <title>TRACE/01 — Week 01 LLMOps</title>
+    <meta
+      name="description"
+      content="TRACE/01 — 대규모 언어 모델 운영(Large Language Model Operations, LLMOps)을 위한 첫 번째 관측 가능 서비스"
+    />
+    <title>TRACE/01 — Week 01 · LLMOps</title>
     <link rel="stylesheet" href="/static/styles.css" />
   </head>
   <body>
     <header class="masthead">
       <a class="wordmark" href="/">TRACE<span>/01</span></a>
-      <div class="meta"><span class="live-dot"></span> LOCAL SERVICE</div>
+      <div class="meta">
+        <span class="live-dot" aria-hidden="true"></span>
+        <span>LOCAL · READY</span>
+      </div>
     </header>
 
     <main>
       <section class="hero">
-        <p class="eyebrow">AJOU · LLMOPS · WEEK 01</p>
-        <h1>한 번의 호출을<br /><em>개선 가능한 서비스</em>로.</h1>
-        <p class="lede">모델보다 먼저 봐야 할 것: 입력, 버전, 지연, 토큰, 실패.</p>
+        <p class="eyebrow">AJOU · WEEK 01</p>
+        <h1>
+          <span>한 번의 호출을</span>
+          <span>개선 가능한 서비스로</span>
+        </h1>
+        <p class="lede">
+          대규모 언어 모델 운영(Large Language Model Operations, LLMOps)의 출발점:<br class="lede-break" />
+          입력·버전·응답 지연·토큰·실패 기록
+        </p>
       </section>
 
-      <section class="loop" aria-label="LLMOps lifecycle">
-        <span class="active">01 INPUT</span><i>→</i><span>02 PROMPT</span><i>→</i>
-        <span>03 RUN</span><i>→</i><span>04 TRACE</span><i>→</i><span>05 IMPROVE</span>
+      <section class="loop" aria-label="대규모 언어 모델 운영 관측 흐름">
+        <ol>
+          <li class="active"><span>01</span><strong>입력</strong><small>Input</small></li>
+          <li><span>02</span><strong>프롬프트</strong><small>Prompt</small></li>
+          <li><span>03</span><strong>실행</strong><small>Run</small></li>
+          <li><span>04</span><strong>추적</strong><small>Trace</small></li>
+          <li><span>05</span><strong>개선</strong><small>Improve</small></li>
+        </ol>
       </section>
 
       <section class="workspace">
         <form id="run-form" class="panel input-panel">
-          <div class="panel-head"><span>REQUEST</span><span id="char-count">0 / 6000</span></div>
+          <div class="panel-head"><span>입력 · Input</span><span id="char-count">0 / 6000</span></div>
           <label class="sr-only" for="text">실험할 텍스트</label>
           <textarea id="text" maxlength="6000" required>배송은 빨랐지만 추천 결과가 매번 달라서 비교하기 어려웠습니다. 어떤 프롬프트와 모델을 썼는지 기록되면 팀이 더 빠르게 개선할 수 있을 것 같아요.</textarea>
           <div class="controls">
@@ -40,43 +57,47 @@
             </label>
             <label>실행
               <select id="provider">
-                <option value="demo" selected>DEMO · 오프라인</option>
-                <option value="ollama">OLLAMA · 로컬 모델</option>
+                <option value="demo" selected>Demo · 오프라인 규칙 엔진</option>
+                <option value="ollama">Ollama · 로컬 언어 모델</option>
               </select>
             </label>
             <label>온도 <output id="temperature-value">0.2</output>
               <input id="temperature" type="range" min="0" max="1" value="0.2" step="0.1" />
             </label>
           </div>
-          <button id="run-button" type="submit"><span>RUN TRACE</span><span>↗</span></button>
-          <p class="privacy">원문 대신 12자리 fingerprint와 실행 메타데이터만 기록합니다.</p>
+          <button id="run-button" type="submit"><span>추적 실행 · Run trace</span><span aria-hidden="true">↗</span></button>
+          <p class="privacy">
+            원문은 저장하지 않습니다. 12자리 콘텐츠 지문(content fingerprint)과 실행 메타데이터만 기록합니다.
+          </p>
         </form>
 
         <section class="panel output-panel" aria-live="polite">
-          <div class="panel-head"><span>RESPONSE</span><span id="status">READY</span></div>
-          <pre id="output">실행하면 응답과 trace가 여기에 나타납니다.</pre>
+          <div class="panel-head"><span>응답 · Output</span><span id="status" data-state="ready">준비</span></div>
+          <pre id="output">실행하면 응답과 추적 기록(trace)이 여기에 나타납니다.</pre>
           <dl class="trace-grid">
-            <div><dt>TRACE ID</dt><dd id="trace-id">—</dd></div>
-            <div><dt>PROMPT</dt><dd id="prompt-version">—</dd></div>
-            <div><dt>MODEL</dt><dd id="model">—</dd></div>
-            <div><dt>LATENCY</dt><dd id="latency">—</dd></div>
-            <div><dt>TOKENS*</dt><dd id="tokens">—</dd></div>
-            <div><dt>FINGERPRINT</dt><dd id="fingerprint">—</dd></div>
+            <div><dt>추적 식별자 · Trace ID</dt><dd id="trace-id">—</dd></div>
+            <div><dt>프롬프트 버전 · Prompt version</dt><dd id="prompt-version">—</dd></div>
+            <div><dt>모델 · Model</dt><dd id="model">—</dd></div>
+            <div><dt>응답 지연 · Latency</dt><dd id="latency">—</dd></div>
+            <div><dt>추정 토큰 · Estimated tokens*</dt><dd id="tokens">—</dd></div>
+            <div><dt>콘텐츠 지문 · Content fingerprint</dt><dd id="fingerprint">—</dd></div>
           </dl>
         </section>
       </section>
 
-      <section class="metrics">
-        <article><span>TOTAL RUNS</span><strong id="total-runs">0</strong></article>
-        <article><span>SUCCESS</span><strong id="success-rate">0%</strong></article>
-        <article><span>P95 LATENCY</span><strong id="p95">0 ms</strong></article>
-        <article><span>EST. TOKENS</span><strong id="total-tokens">0</strong></article>
+      <section class="metrics" aria-label="실행 집계">
+        <article><span>전체 실행 · Total runs</span><strong id="total-runs">0</strong></article>
+        <article><span>성공률 · Success rate</span><strong id="success-rate">0%</strong></article>
+        <article><span>95백분위 응답 지연 · P95 latency</span><strong id="p95">0 ms</strong></article>
+        <article><span>추정 토큰 · Estimated tokens</span><strong id="total-tokens">0</strong></article>
       </section>
     </main>
 
     <footer>
       <span>* 교육용 문자 기반 추정치 · 실제 과금 토큰과 다름</span>
-      <a href="/docs" target="_blank" rel="noreferrer">OPEN API DOCS ↗</a>
+      <a href="/docs" target="_blank" rel="noreferrer">
+        API(Application Programming Interface) 문서 ↗
+      </a>
     </footer>
     <script src="/static/app.js" defer></script>
   </body>

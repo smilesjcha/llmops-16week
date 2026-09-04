@@ -1,99 +1,111 @@
 # Week 01 검증 보고서
 
 검증 기준일: 2026-09-04
-검증 환경: macOS 26.6.2 arm64 · CPython 3.11.14 · `pytest 8.4.1`
+대상: Week 01 강의 자료와 TRACE/01 실습 환경
 
-## 결론
+## 상태 요약
 
-현재 `01_week1_llmops_kickoff.pptx`는 79장 구조, 79개 speaker notes와 79개 `[Sources]` block, 최소 14pt 가시 텍스트, 명사형·고유 제목, 41개 layout type, 검정·흰색·네이비·파랑 중심 색상, slide canvas overflow 0건을 확인했다. `TRACE/01` 로컬 API test는 4/4 통과했고, guided notebook 6개 code cell도 임시 trace store를 연결한 live server에서 오류 없이 실행했다.
+현재 표준 경로의 80장 PowerPoint, 전체 렌더, 실제 화면 캡처, 실습 서비스, 노트북과 16주 의존성 프로필의 검증이 완료되었다. 외부 자격 증명·모델 다운로드·교실 부하 시험은 아래 수동 검증 경계에 별도 표기했다.
 
-최종 PPTX 이후 생성된 `final-render-v4`의 79개 PNG와 79장 전체 contact sheet, 교정 대상 장표의 full-size render를 함께 육안 검수했다.
+## 확정된 프레젠테이션 검증 결과
 
-## 현재 자동 검증 결과
+현재 최종화가 완료된 검증 대상은 다음 파일이다. `build/v2`는 재생성 과정에서만 사용하는 로컬 검증 영역으로 Git에서 제외되며, GitHub에서 배포하는 파일은 표준 경로의 PowerPoint와 이 보고서다.
+
+- 배포 PowerPoint: week01/lecture/01_week1_llmops_kickoff.pptx
+- 로컬 생성 산출물(git 제외): week01/lecture/build/v2/output-v3r4/01_week1_llmops_kickoff_v3r4.pptx
+- 로컬 검증 영수증(git 제외): week01/lecture/build/v2/staging-v4/01_week1_llmops_kickoff_v3r4.validation.json
+- SHA-256: 51a1ae9b5019ce85f7154d943581be611576cc5d4b3c84c07ab8914959636a59
 
 | 영역 | 결과 | 확인 내용 |
 |---|---|---|
-| PowerPoint 구조 | PASS | final PPTX 79 slides |
-| Speaker notes | PASS | 79 notes, 79 `[Sources]` open/close block, source 없는 slide 0건 |
-| 가시 텍스트 크기 | PASS | builder instrument 기준 최소 14pt; 모든 visible text가 공통 text helper를 통과 |
-| 제목 assertion | PASS | 제목 누락 0건, 중복 0건, 문장형 종결 패턴 0건 |
-| Layout assertion | PASS | 41개 layout type, 동일 layout 3회 연속 0건 |
-| 색상 정책 | PASS | black/white/navy/blue와 neutral grayscale만 사용; blue tint `#A9C6F8` 포함, 금지 orange `#FF5A36` 0건 |
-| PowerPoint overflow | PASS | `slides_test.py`: overflow 0건 |
-| PowerPoint portability | PASS | slide·notes XML의 `/Users/...` 절대 경로 0건 |
-| 최종 render coverage | PASS | `final-render-v4`: 79 PNG, final PPTX 이후 생성 |
-| API tests | PASS | `week01/lab/tests`: 4/4 통과 |
-| Python format·lint | PASS | Ruff check·format check 통과, Python·notebook 7개 파일 format 일치 |
-| Course material structure | PASS | 보존 notebook 16개·제작 notebook 1개, structural error 0건 |
-| Dependency integrity | PASS | `uv pip check --python .venv/bin/python`: 123 packages compatible |
-| 장별 육안 검수 | PASS | 79장 contact sheet 전수 검수 후 교정 장표 full-size 재검수 |
-| Guided notebook 실행 | PASS | live server 기준 6 code cell, notebook error output 0건 |
-| 실서비스 smoke | PASS | `/health`, `/`, `/api/v1/generate`, `/api/v1/traces`, `/api/v1/stats`, `/metrics` 확인; 선택 Ollama 경로의 503 복구 메시지 확인 |
+| PowerPoint 패키지 구조 | PASS | 80 slides, 구조 finding 0건 |
+| 슬라이드 크기 | PASS | 13.3333 × 7.5 inch, 16:9 |
+| 레이아웃 기하 검사 | PASS | finding 0건, warning 0건 |
+| 글꼴 정책 | PASS | AppleGothic·Menlo만 관찰, 1,490개 텍스트 구간 검사 |
+| 첫 번째 당사자 가져오기 | PASS | Artifact Tool import 성공, 80 slides 재확인 |
+| 네이티브 표 산술 검사 | PASS | 대상 네이티브 표 0개, finding·warning 0건 |
+| 네이티브 차트 제목 검사 | PASS | 대상 네이티브 차트 0개, finding 0건 |
+| 빌더 장수 정책 | PASS | build-audit.json 기준 정확히 80장 |
+| 빌더 최소 글자 크기 정책 | PASS | build-audit.json 기준 가시 텍스트 최소 14pt |
+| 레이아웃 다양성 | PASS | build-audit.json 기준 50개 layout type |
+| 색상 정책 | PASS | 검정·흰색·네이비·파랑·중립 회색, 금지 주황색 #FF5A36 |
 
-## PowerPoint QA 근거
+### 검증 범위 해석
 
-- Final deck: `week01/lecture/01_week1_llmops_kickoff.pptx`
-- Builder·audit·manifest·render: `week01/lecture/build/v2/` 로컬 생성 임시 영역(git 제외)
+- 패키지 구조 검사는 PowerPoint 파일 내부 관계와 슬라이드 수를 확인한다. 문장의 사실성이나 강의 내용의 정확성을 대신하지 않는다.
+- 글꼴 정책 검사는 지정 글꼴 사용 여부를 확인한다. 네이티브 PowerPoint 애플리케이션에서의 편집·애니메이션·발표 모드는 별도 수동 확인 영역이다.
+- 최소 14pt는 빌더 계측 정책으로 확인했고, 최종 80장 PNG 렌더와 몽타주를 별도로 육안 검수했다.
+- 레이아웃 50개는 매니페스트에 기록된 고유 유형 수다. 각 장표의 미적 품질은 전체 몽타주와 핵심 장표 확대 검수로 보완했다.
 
-Builder는 export 전에 다음을 강제한다.
+## 콘텐츠 동기화 확인
 
-- 정확히 79 slides
-- visible text 14pt 미만 금지
-- title 누락·중복·문장형 종결 금지
-- notes 또는 source 누락 금지
-- 동일 layout 3회 연속 금지
+- slide-manifest.json과 강의안은 정확히 80개 제목·순번으로 구성.
+- 섹션 범위: 1–8, 9–17, 18–32, 33–45, 46–57, 58–65, 66–79, 80.
+- 자기소개 표기: 무신사 Core AI PM × 아주대 AI대학원 겸임교수.
+- 중간고사 정의: 기말 프로젝트 실행을 위한 기획서 문서.
+- 기획 고도화 흐름: 교수 질문 → 학생 결정 → 근거 보강 → 수정 이력 → 포트폴리오 반영.
+- 52번 장표: 중앙 원·대각선 연결선이 아닌 4행 상충 관계 판정표.
+- 71·72·74·75번 장표: 각각 실제 Visual Studio Code, 실제 OpenAPI 문서, 실제 사용자 입력 화면, 실제 실행 결과·추적 화면 캡처.
 
-## 검증 명령
+## 최종 산출물·실습 통합 검증
 
-```bash
-# Builder audit와 manifest
-jq . week01/lecture/build/v2/build-audit.json
-jq 'length' week01/lecture/build/v2/slide-manifest.json
+| 영역 | 결과 | 확인 내용 |
+|---|---|---|
+| 표준 경로 반영 | PASS | finalizer 산출물과 표준 PowerPoint의 SHA-256 일치 |
+| 전체 렌더 | PASS | `final-render-v7` PNG 80개, 렌더 오류 0건 |
+| 오버플로 | PASS | `slides_test.py` 결과 잘림·오버플로 0건 |
+| 전체 육안 검수 | PASS | 80장 몽타주와 10·14·19·25·45·52·54·62·63·69·71·72·74·75·77·80번 확대 검수 |
+| 52번 확대 검수 | PASS | 4행 판정표, 중앙 원·방사형 선·대각선 연결 0건, 영단어 중간 개행 0건 |
+| 실제 캡처 검수 | PASS | 71·72·74·75번 실제 Visual Studio Code·OpenAPI·입력·실행 결과, 민감정보 노출 0건 |
+| 응용 프로그래밍 인터페이스 테스트 | PASS | pytest 6건 통과, 실패 0건 |
+| Python 정적 검사 | PASS | Ruff check·format check 통과 |
+| 의존성 무결성 | PASS | 현재 123개 패키지 호환, 13개 공통·주차별 프로필 해석 충돌 0건 |
+| 강의 자료 구조 검사 | PASS | 보존 노트북 16개·작성 노트북 1개, 구조 오류 0건 |
+| 실서비스 스모크 검사 | PASS | 건강 상태·생성·실행 추적·통계·메트릭 경로 정상 응답 |
+| 가이드 노트북 실행 | PASS | 코드 셀 6개 실행, 오류 출력 0건 |
 
-# Final PPTX overflow
+## 권장 검증 명령
+
+환경 변수 PRESENTATIONS_SKILL_DIR에는 Presentations skill의 절대 경로를 지정한다.
+
+~~~bash
+# 배포 파일 지문
+shasum -a 256 week01/lecture/01_week1_llmops_kickoff.pptx
+
+# PowerPoint 구조·오버플로 재검사
 python "$PRESENTATIONS_SKILL_DIR/container_tools/slides_test.py" \
   week01/lecture/01_week1_llmops_kickoff.pptx
 
-# TRACE/01 API tests
-cd <repository-root>
+# 전체 렌더
+python "$PRESENTATIONS_SKILL_DIR/container_tools/render_slides.py" \
+  week01/lecture/01_week1_llmops_kickoff.pptx \
+  --output_dir week01/lecture/build/v2/final-render-v7
+
+# TRACE/01 실습 코드
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/pytest -q -p no:cacheprovider week01/lab/tests
 .venv/bin/ruff check week01/lab
 .venv/bin/ruff format --check week01/lab
 .venv/bin/python scripts/check_course_materials.py
 uv pip check --python .venv/bin/python
-
-# Guided notebook — port 8000 live server와 임시 trace store 사용
-.venv/bin/jupyter nbconvert --to notebook --execute \
-  --ExecutePreprocessor.timeout=180 \
-  --output-dir /tmp/trace01-notebook-qa \
-  --output executed.ipynb \
-  week01/lab/week01_trace01_lab.ipynb
-```
-
-최종 render 생성 명령은 다음과 같다.
-
-```bash
-python "$PRESENTATIONS_SKILL_DIR/container_tools/render_slides.py" \
-  week01/lecture/01_week1_llmops_kickoff.pptx \
-  --output_dir week01/lecture/build/v2/final-render-v4
-```
+~~~
 
 ## 개발환경 기준
 
-- Python support range: `>=3.11,<3.12`
-- Canonical classroom build: CPython `3.11.14`
-- 기본 실습은 model download와 외부 credential 없이 동작하는 demo provider 사용
-- `content_fingerprint`는 익명화가 아니라 동일 입력 비교용 식별자이므로 개인정보·기밀 원문을 실습 입력으로 사용하지 않음
-- `token_estimate`는 tokenizer-backed billing value가 아닌 교육용 추정치
+- Python 지원 범위: 3.11 이상 3.12 미만.
+- 강의 표준 버전: CPython 3.11.14.
+- 기본 실습: 외부 자격 증명과 모델 다운로드 없이 동작하는 결정론적 데모 제공자.
+- 선택 실습: 로컬 모델 실행 도구 Ollama.
+- 콘텐츠 지문(content fingerprint): 익명화 수단이 아니라 동일 입력 비교용 식별자. 개인정보나 기밀 원문을 입력하지 않는다.
+- 토큰 추정치(token estimate): 모델 토크나이저 또는 공급자 과금 사용량이 아닌 교육용 추정치.
 
 ## 알려진 AS-IS 경고
 
-보존 원본인 `practice/week02/02_advanced_reasoning.ipynb`의 code cell 20에는 닫히지 않은 문자열 1건이 있다. AS-IS 원본 상태를 숨기지 않기 위해 자동 수정하지 않는다.
+보존 원본인 practice/week02/02_advanced_reasoning.ipynb의 code cell 20에는 닫히지 않은 문자열 1건이 있다. 원본 보존 범위이므로 Week 01 변경에 포함하지 않는다.
 
 ## 수동 검증 경계
 
-- Ollama model pull과 실제 sampling 비교
-- OpenAI, Pinecone, Langfuse credential을 사용하는 외부 호출
-- Hugging Face model 다운로드와 1-step SFT/DPO
-- Linux/CUDA의 QLoRA와 `bitsandbytes` backend
-- 실제 강의장 네트워크에서의 다중 사용자 부하 시험
+- Ollama 모델 다운로드와 실제 샘플링 비교.
+- OpenAI, Pinecone, Langfuse 자격 증명을 사용하는 외부 호출.
+- Hugging Face 모델 다운로드와 단일 단계 지도 미세조정·직접 선호 최적화.
+- Linux·CUDA 환경의 양자화 저랭크 적응(Quantized Low-Rank Adaptation, QLoRA)과 bitsandbytes 백엔드.
+- 실제 강의장 네트워크의 다중 사용자 부하 시험.

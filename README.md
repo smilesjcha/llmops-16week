@@ -1,11 +1,22 @@
-# LLMOps 16-Week Course Archive
+# Large Language Model Operations (LLMOps) · 16주 과정
 
-2025년 2학기 `AI융합실전프로젝트10(LLMOps)`의 기존 자료를 근거 중심으로 정리한 저장소다. 공개 Notion 커리큘럼, 실제 PPTX/PDF, 기존 실습 repository를 대조해 AS-IS 기준 문서와 주차별 실습 코드를 보존한다.
+현행 LLMOps 수업의 강의안·실습·프로젝트 운영 문서와 2025년 2학기 `AI융합실전프로젝트10(LLMOps)` 보존본을 함께 관리하는 저장소다. 2025년 공개 Notion 커리큘럼, 실제 PPTX/PDF와 기존 실습 repository는 `AS-IS` 자료로 보존하고, 현행 학기 설계는 별도 문서에서 관리한다.
 
-## 현재 구성
+## 현행 학기 운영
 
-- 핵심 16주 커리큘럼
-- 01–16주차 통합 강의안(08주차 중간고사, 16주차 팀별 프로젝트 결과 발표 포함)
+- [2026년 2학기 운영 커리큘럼](curriculum/2026-2/00_운영_커리큘럼.md)
+- [중간고사 · 기말 프로젝트 기획서 가이드](curriculum/2026-2/01_중간고사_기말프로젝트_기획서.md)
+- [제출용 기획서 템플릿](curriculum/2026-2/02_중간고사_기말프로젝트_기획서_템플릿.md)
+- 중간고사: 기말 프로젝트 기획서와 교수 질의응답
+- 기말고사: 서비스 구현·평가·시연·포트폴리오
+- 교수: 차성재 · 무신사 Core AI PM × 아주대 AI대학원 겸임교수
+  - AI: Artificial Intelligence · PM: Product Manager
+
+매주의 실행 증거와 의사결정 기록을 기획서에 누적하고, 교수 질의응답 이후 수정 이력을 기말 프로젝트 포트폴리오로 연결한다. 배점과 제출 일정은 해당 학기 학습관리시스템(Learning Management System, LMS) 공지를 따른다.
+
+## 2025년 2학기 AS-IS 보존본
+
+- 01–16주차 통합 강의안과 핵심 커리큘럼
 - 실제 slide range 기반 강의 디자인 storyboard
 - 1,002장 슬라이드의 검색용 텍스트 원문
 - 기존 notebook 16개와 지원 data/code/artifact
@@ -17,19 +28,21 @@
 
 새로 설계한 첫 수업은 [Week 01 패키지](week01/README.md)에서 바로 시작할 수 있다.
 
-- 79장 강의용 PowerPoint와 상세 강의안
+- 80장 강의용 PowerPoint와 상세 강의안
 - 60–80장 제작 범위와 렌더 QA를 정의한 [PPT 제작 가이드](week01/lecture/PPT_PRODUCTION_GUIDELINE.md)
 - black / white / navy / blue 기반 강의 디자인 시스템
-- 강의자 공개 프로필을 반영한 간결한 자기소개
+- 교수 공개 프로필을 반영한 간결한 자기소개
 - offline-first FastAPI 서비스 `TRACE/01`
 - 실행·trace·비교·개선 흐름을 따라가는 실습 notebook
 - CPython 3.11.14 공통 환경과 충돌 주차별 dependency profile
+- VS Code 작업·실행·테스트·디버깅 구성
 
 강의용 PPT는 명사형 제목, visible text 14pt 이상, 의미 기반 파란색 강조를 공통 정책으로 사용한다. 주황색과 위치 기반 강조를 배제하고, 동일 레이아웃이 세 장 연속 이어지지 않도록 구성한다.
 
 ```text
 llmops-16week/
 ├── README.md
+├── curriculum/                      # 현행 학기 운영·프로젝트 문서
 ├── requirements/                    # 16주 공통·주차별 Python profile
 ├── scripts/                         # 자료 구조·notebook 검사 도구
 ├── week01/                          # 신규 1주차 강의·TRACE/01 실습
@@ -59,7 +72,7 @@ llmops-16week/
 - canonical interpreter: CPython 3.11.14 (`>=3.11,<3.12`)
 - 기본 설치: `uv pip install -r requirements.txt`
 - macOS arm64 완전 고정 설치: `uv pip install -r requirements/locks/course-base-py311-macos-arm64.txt`
-- RAG·fine-tuning·agent·observability: [주차별 profile 안내](requirements/README.md)
+- 검색 증강 생성(Retrieval-Augmented Generation, RAG)·미세조정·에이전트·관찰 가능성: [주차별 profile 안내](requirements/README.md)
 - 검증 결과: [Week 01 QA 보고서](week01/TEST_REPORT.md)
 
 ## 큰 원본 파일
@@ -73,4 +86,4 @@ llmops-16week/
 
 - 기존 실습 저장소에는 `LICENSE`가 없다. 별도 재배포 권한을 가정하지 않는다.
 - 학생 개인 정보가 포함된 Notion 페이지는 수집·복제하지 않았다.
-- 실제 API key는 포함하지 않는다.
+- 실제 응용 프로그래밍 인터페이스(Application Programming Interface, API) 키는 포함하지 않는다.

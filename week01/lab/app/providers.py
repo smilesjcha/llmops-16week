@@ -40,6 +40,28 @@ class DemoProvider:
 
     name = "demo"
 
+    @staticmethod
+    def _extract_signal_and_friction(sentences: list[str], normalized: str) -> tuple[str, str]:
+        """Split a common Korean contrast without pretending to understand arbitrary text."""
+        first = sentences[0] if sentences else normalized
+        if "지만" in first:
+            signal_clause, _, friction_clause = first.partition("지만")
+            signal_clause = signal_clause.strip(" ,")
+            friction_clause = friction_clause.strip(" ,")
+            if signal_clause and friction_clause:
+                return f"{signal_clause}다는 관찰", friction_clause
+
+        friction_terms = ("느리", "오류", "불편", "어렵", "비싸", "안 되", "실패")
+        friction = next(
+            (
+                sentence
+                for sentence in sentences
+                if any(term in sentence for term in friction_terms)
+            ),
+            "명시적 마찰 표현 없음",
+        )
+        return first, friction
+
     async def generate(self, text: str, task: TaskName, temperature: float) -> ProviderResult:
         del temperature
         normalized = " ".join(text.split())
@@ -59,10 +81,9 @@ class DemoProvider:
             keyword_text = " · ".join(keywords or ["핵심", "근거", "행동"])
             output = f"핵심 — {first[:180]}\n키워드 — {keyword_text}"
         elif task == "extract":
-            friction_terms = ("느리", "오류", "불편", "어렵", "비싸", "안 되", "실패")
-            friction = next((s for s in sentences if any(t in s for t in friction_terms)), first)
+            signal, friction = self._extract_signal_and_friction(sentences, normalized)
             output = (
-                f"SIGNAL — {first[:150]}\n"
+                f"SIGNAL — {signal[:150]}\n"
                 f"FRICTION — {friction[:150]}\n"
                 "NEXT ACTION — 같은 입력 세트로 다음 버전을 비교하고 지표를 기록한다."
             )

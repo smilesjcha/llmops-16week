@@ -6,6 +6,11 @@ const temperature = $("#temperature");
 const status = $("#status");
 const runButton = $("#run-button");
 
+function setStatus(label, state) {
+  status.textContent = label;
+  status.dataset.state = state;
+}
+
 function countCharacters() {
   $("#char-count").textContent = `${text.value.length} / 6000`;
 }
@@ -31,7 +36,7 @@ async function refreshStats() {
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
   runButton.disabled = true;
-  status.textContent = "RUNNING";
+  setStatus("실행 중", "running");
   $("#output").textContent = "호출 중…";
 
   try {
@@ -49,11 +54,11 @@ form.addEventListener("submit", async (event) => {
     if (!response.ok) throw new Error(body.detail || "요청에 실패했습니다.");
     $("#output").textContent = body.output;
     setTrace(body.trace);
-    status.textContent = "OK";
+    setStatus("정상", "success");
     await refreshStats();
   } catch (error) {
     $("#output").textContent = error.message;
-    status.textContent = "ERROR";
+    setStatus("오류", "error");
     await refreshStats();
   } finally {
     runButton.disabled = false;

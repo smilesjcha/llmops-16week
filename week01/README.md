@@ -1,18 +1,21 @@
-# Week 01 — Orientation & LLM Lifecycle
+# Week 01 — 거대 언어 모델 운영 오리엔테이션과 수명주기
 
-첫 주의 목표는 LLM을 한 번 호출하는 것이 아니라, 한 번의 실행을 기록·비교·개선 가능한 서비스로 바꾸는 것이다.
+첫 주의 목표는 대규모 언어 모델(Large Language Model, LLM)을 한 번 호출하는 것이 아니라, 한 번의 실행을 기록·비교·개선 가능한 서비스로 바꾸는 것이다.
 
 ## 구성
 
-- `lecture/01_week1_강의안.md`: 79장 강의 콘티, 180분/100분 운영 경로, 교수자 노트
+- `lecture/01_week1_강의안.md`: 80장 강의 콘티, 180분/100분 운영 경로, 교수자 노트
 - `lecture/PPT_PRODUCTION_GUIDELINE.md`: 16주 공통 PPT 제작·검수 기준
 - `lecture/DESIGN_SYSTEM.md`: black / white / navy / blue 기반 Week 01 시각 시스템
-- `lecture/01_week1_llmops_kickoff.pptx`: 79장 실제 강의용 슬라이드
+- `lecture/01_week1_llmops_kickoff.pptx`: 80장 실제 강의용 슬라이드
 - `lab/`: offline-first FastAPI 서비스 `TRACE/01`
 - `lab/week01_trace01_lab.ipynb`: 실행·trace·비교·개선 guided lab
+- `VS_CODE_GUIDE.md`: VS Code 환경 준비·실행·테스트·디버깅 가이드
 - `TEST_REPORT.md`: 의존성·코드·PPTX 검증 결과와 수동 검사 경계
 
-PPT는 과정별 60–80장 범위에서 구성한다. Week 01은 79장이며, 모든 제목·부제는 명사형을 기본값으로 한다. 화면에 보이는 글자는 14pt 이상, 본문은 18pt 이상을 유지하고, 주황색 없이 검정·흰색·네이비·파랑 계열만 사용한다. 파란색은 마지막 위치가 아니라 현재 변수·운영 증거·판정 상태처럼 맥락상 필요한 요소에만 적용하며, 동일 레이아웃은 세 장 연속 사용하지 않는다.
+학기 프로젝트 기준은 [2026년 2학기 운영 커리큘럼](../curriculum/2026-2/00_운영_커리큘럼.md)과 [중간고사 · 기말 프로젝트 기획서 가이드](../curriculum/2026-2/01_중간고사_기말프로젝트_기획서.md)를 따른다. 1주차의 문제 후보와 첫 실행 추적은 중간 기획서의 첫 포트폴리오 증거가 된다.
+
+PPT는 과정별 60–80장 범위에서 구성한다. Week 01은 80장이며, 모든 제목·부제는 명사형을 기본값으로 한다. 화면에 보이는 글자는 14pt 이상, 본문은 18pt 이상을 유지하고, 주황색 없이 검정·흰색·네이비·파랑 계열만 사용한다. 파란색은 마지막 위치가 아니라 현재 변수·운영 증거·판정 상태처럼 맥락상 필요한 요소에만 적용하며, 동일 레이아웃은 세 장 연속 사용하지 않는다. 기술 약어의 첫 등장은 한글 용어와 영어 전체 이름을 함께 표기한다.
 
 ## 실습 바로 시작
 
@@ -24,4 +27,6 @@ uv pip install -r requirements.txt
 uvicorn app.main:app --app-dir week01/lab --reload
 ```
 
-브라우저에서 <http://127.0.0.1:8000>을 열고 같은 입력으로 두 번 실행한 뒤 trace를 비교한다. 자세한 순서는 [lab README](lab/README.md)를 따른다.
+브라우저에서 <http://127.0.0.1:8000>을 열고 같은 입력으로 두 번 실행한 뒤 실행 추적(trace)을 비교한다. 자세한 순서는 [lab README](lab/README.md)를 따른다.
+
+VS Code에서는 저장소 루트를 연 뒤 `Tasks: Run Task` → `Environment: Bootstrap` → `Week 01: Start and smoke` 순서로 실행한다. 자세한 내용은 [VS Code 실행 가이드](VS_CODE_GUIDE.md)를 따른다.
