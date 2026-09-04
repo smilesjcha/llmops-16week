@@ -13,17 +13,17 @@
 
 - 배포 PowerPoint: week01/lecture/01_week1_llmops_kickoff.pptx
 - 인쇄·배포 PDF: output/pdf/01_week1_llmops_kickoff.pdf
-- 로컬 생성 산출물(git 제외): week01/lecture/build/v2/output-v3r10/01_week1_llmops_kickoff_v3r10.pptx
-- 로컬 검증 영수증(git 제외): week01/lecture/build/v2/staging-v5/01_week1_llmops_kickoff_v3r10.validation.json
-- PowerPoint SHA-256: 182fc5f6998db34f41ec487c8815bb890019b42722967975808bd5e985097673
-- PDF SHA-256: 1fe8be1dfc0ccc9f16882ad8a6ab7ae45127c6bcbe74424840eec854426e5aa1
+- 로컬 생성 산출물(git 제외): week01/lecture/build/v2/output-v3r15/01_week1_llmops_kickoff_v3r15.pptx
+- 로컬 검증 영수증(git 제외): week01/lecture/build/v2/staging-v5/01_week1_llmops_kickoff_v3r15.validation.json
+- PowerPoint SHA-256: 4fbab1b9606611d70a20e8c64966ddafb97a7ec191b107805d844e8dadc84a52
+- PDF SHA-256: e25dc535fbc83c8148d8023b3b4acac67b31f8436b82955e1073b701f07beb90
 
 | 영역 | 결과 | 확인 내용 |
 |---|---|---|
 | PowerPoint 패키지 구조 | PASS | 80 slides, 구조 finding 0건 |
 | 슬라이드 크기 | PASS | 13.3333 × 7.5 inch, 16:9 |
 | 레이아웃 기하 검사 | PASS | finding 0건, warning 0건 |
-| 글꼴 정책 | PASS | AppleGothic·Menlo만 관찰, 1,579개 텍스트 구간 검사 |
+| 글꼴 정책 | PASS | AppleGothic·Menlo만 관찰, 1,600개 텍스트 구간 검사 |
 | 첫 번째 당사자 가져오기 | PASS | Artifact Tool import 성공, 80 slides 재확인 |
 | 네이티브 표 산술 검사 | PASS | 대상 네이티브 표 0개, finding·warning 0건 |
 | 네이티브 차트 제목 검사 | PASS | 대상 네이티브 차트 0개, finding 0건 |
@@ -31,7 +31,7 @@
 | 빌더 최소 글자 크기 정책 | PASS | build-audit.json 기준 가시 텍스트 최소 14pt |
 | 레이아웃 다양성 | PASS | build-audit.json 기준 51개 layout type |
 | 색상 정책 | PASS | 검정·흰색·네이비·파랑·중립 회색, 금지 주황색 #FF5A36 |
-| 인쇄용 PDF | PASS | 80쪽, 16:9 가로 페이지, 빈 페이지 0건, 전체 렌더·모판 검수 |
+| 인쇄용 PDF | PASS | 80쪽, 960.009 × 540pt 가로 페이지, 빈 페이지 0건, 전체 렌더·모판 검수 |
 | PDF 글꼴 | PASS | 한글·영문 글꼴 임베딩, 텍스트 추출과 핵심 운영 문구 확인 |
 
 ### 검증 범위 해석
@@ -53,7 +53,10 @@
 - 공휴일 운영: 9월 25일 추석과 10월 9일 한글날은 휴강이 아니며, 정규 실시간 온라인 강의 대신 녹화 강의영상으로 대체.
 - 최종 발표: 16주차 기말 프로젝트 발표와 질의응답을 실시간 온라인으로 진행.
 - 초반 현재 위치 모듈: 2번 현재 1주차, 3번 16주 일정, 4번 포트폴리오 로드맵, 5번 제출 패키지, 6번 교수 설계 리뷰, 7번 공휴일 주차의 녹화 강의.
-- 52번 장표: 중앙 원·대각선 연결선이 아닌 4행 상충 관계 판정표.
+- 52번 장표: 중앙 원·대각선 연결선이 아닌 4행 상충 관계 비교표.
+- 표현 감사: 사용자 피드백에서 지적된 번역투·추상 표현의 배포 자료 잔존 0건.
+- 16번 장표: 02 항목을 2행으로 정리하고 가변 행 높이와 구분선 사이 12px 이상 안전 간격 확보.
+- 18번 장표: `모델 성능과 서비스 신뢰성의 간극`으로 제목·부제·교수자 노트 동기화.
 - 71·72·74·75번 장표: 각각 실제 Visual Studio Code, 실제 OpenAPI 문서, 실제 사용자 입력 화면, 실제 실행 결과·추적 화면 캡처.
 
 ## 최종 산출물·실습 통합 검증
@@ -61,10 +64,12 @@
 | 영역 | 결과 | 확인 내용 |
 |---|---|---|
 | 표준 경로 반영 | PASS | finalizer 산출물과 표준 PowerPoint의 SHA-256 일치 |
-| 전체 렌더 | PASS | `final-render-v13` PNG 80개, 렌더 오류 0건 |
+| 전체 렌더 | PASS | `final-render-v18` PNG 80개, 렌더 오류 0건 |
 | 오버플로 | PASS | `slides_test.py` 결과 잘림·오버플로 0건 |
-| 전체 육안 검수 | PASS | 80장 렌더와 2·3·5·6·7·11·52·65·71·72·74·75·77·80번 확대 검수 |
-| 52번 확대 검수 | PASS | 4행 판정표, 중앙 원·방사형 선·대각선 연결 0건, 영단어 중간 개행 0건 |
+| 전체 육안 검수 | PASS | 80장 전수, 변경 장표 원본 1600 × 900 확대, 선·면·텍스트 충돌 0건 |
+| 16·18번 확대 검수 | PASS | 16번 행·구분선 분리, 18번 제목·부제·구분선 간격 정상 |
+| 55·69번 확대 검수 | PASS | `시간 초과` 복합어 분리와 단독 단어 줄바꿈 해소, API·RAG 풀어쓰기 정상 |
+| 52번 확대 검수 | PASS | 4행 비교표, 중앙 원·방사형 선·대각선 연결 0건, 영단어 중간 개행 0건 |
 | 실제 캡처 검수 | PASS | 71·72·74·75번 실제 Visual Studio Code·OpenAPI·입력·실행 결과, 민감정보 노출 0건 |
 | 응용 프로그래밍 인터페이스 테스트 | PASS | pytest 6건 통과, 실패 0건 |
 | Python 정적 검사 | PASS | Ruff check·format check 통과 |
@@ -102,7 +107,7 @@ python "$PRESENTATIONS_SKILL_DIR/container_tools/slides_test.py" \
 # 전체 렌더
 python "$PRESENTATIONS_SKILL_DIR/container_tools/render_slides.py" \
   week01/lecture/01_week1_llmops_kickoff.pptx \
-  --output_dir week01/lecture/build/v2/final-render-v13
+  --output_dir week01/lecture/build/v2/final-render-v18
 
 # HTML 문서
 python -m http.server 4173 --directory curriculum/2026-2/web
