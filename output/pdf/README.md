@@ -2,6 +2,8 @@
 
 학생은 매주 이 폴더의 PDF를 강의안 기준본으로 사용한다. `AS-IS 2025 2nd semester` 폴더는 이전 학기 참고자료이며, 현재 수업 자료가 아니다.
 
+> 현재 저장소는 비공개(Private)다. 수강생은 초대받은 GitHub 계정으로 로그인해야 하며, 권한이 없으면 링크가 `404`로 표시된다.
+
 ## 확인 순서
 
 1. [LLMOps 16주 저장소](https://github.com/smilesjcha/llmops-16week) 접속
