@@ -19,9 +19,33 @@ function setTrace(trace) {
   $("#trace-id").textContent = trace.trace_id;
   $("#prompt-version").textContent = trace.prompt_version;
   $("#model").textContent = trace.model;
+  $("#thinking").textContent = trace.thinking_requested ? "ON" : "OFF";
   $("#latency").textContent = `${trace.latency_ms.toFixed(2)} ms`;
+  $("#model-load").textContent =
+    trace.model_load_ms == null ? "—" : `${trace.model_load_ms.toFixed(2)} ms`;
   $("#tokens").textContent = trace.input_tokens_est + trace.output_tokens_est;
+  $("#output-limit").textContent = trace.output_token_limit ?? "—";
+  $("#model-generation").textContent =
+    trace.model_generation_ms == null
+      ? "—"
+      : `${trace.model_generation_ms.toFixed(2)} ms · ${trace.model_output_tokens ?? "?"} tokens`;
+  $("#finish-reason").textContent =
+    trace.finish_reason === "length" ? "출력 상한 도달 · length" : trace.finish_reason ?? "—";
   $("#fingerprint").textContent = trace.content_fingerprint;
+}
+
+async function refreshRuntimeConfig() {
+  try {
+    const response = await fetch("/api/v1/config");
+    const body = await response.json();
+    const config = body.ollama;
+    $("#runtime-model").textContent = config.model;
+    $("#runtime-options").textContent =
+      `Thinking ${config.thinking_requested ? "ON" : "OFF"} · ` +
+      `출력 상한 ${config.num_predict} · 컨텍스트 ${config.num_ctx} · 유지 ${config.keep_alive}`;
+  } catch (_error) {
+    $("#runtime-model").textContent = "설정을 확인할 수 없음";
+  }
 }
 
 async function refreshStats() {
@@ -54,7 +78,10 @@ form.addEventListener("submit", async (event) => {
     if (!response.ok) throw new Error(body.detail || "요청에 실패했습니다.");
     $("#output").textContent = body.output;
     setTrace(body.trace);
-    setStatus("정상", "success");
+    setStatus(
+      body.trace.finish_reason === "length" ? "출력 상한 도달" : "정상",
+      body.trace.finish_reason === "length" ? "warning" : "success",
+    );
     await refreshStats();
   } catch (error) {
     $("#output").textContent = error.message;
@@ -71,3 +98,4 @@ temperature.addEventListener("input", () => {
 });
 countCharacters();
 refreshStats();
+refreshRuntimeConfig();

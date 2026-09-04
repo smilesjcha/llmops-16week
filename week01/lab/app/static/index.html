@@ -65,6 +65,11 @@
               <input id="temperature" type="range" min="0" max="1" value="0.2" step="0.1" />
             </label>
           </div>
+          <div class="runtime-config" aria-live="polite">
+            <span>수업용 Ollama 설정</span>
+            <strong id="runtime-model">설정 확인 중</strong>
+            <span id="runtime-options">Thinking OFF · 출력 상한 128 · 컨텍스트 2048</span>
+          </div>
           <button id="run-button" type="submit"><span>추적 실행 · Run trace</span><span aria-hidden="true">↗</span></button>
           <p class="privacy">
             원문은 저장하지 않습니다. 12자리 콘텐츠 지문(content fingerprint)과 실행 메타데이터만 기록합니다.
@@ -78,8 +83,13 @@
             <div><dt>추적 식별자 · Trace ID</dt><dd id="trace-id">—</dd></div>
             <div><dt>프롬프트 버전 · Prompt version</dt><dd id="prompt-version">—</dd></div>
             <div><dt>모델 · Model</dt><dd id="model">—</dd></div>
+            <div><dt>Thinking 요청값</dt><dd id="thinking">—</dd></div>
             <div><dt>응답 지연 · Latency</dt><dd id="latency">—</dd></div>
+            <div><dt>모델 적재 · Load</dt><dd id="model-load">—</dd></div>
             <div><dt>추정 토큰 · Estimated tokens*</dt><dd id="tokens">—</dd></div>
+            <div><dt>출력 상한 · Output limit</dt><dd id="output-limit">—</dd></div>
+            <div><dt>모델 생성 · Generation</dt><dd id="model-generation">—</dd></div>
+            <div><dt>종료 사유 · Finish reason</dt><dd id="finish-reason">—</dd></div>
             <div><dt>콘텐츠 지문 · Content fingerprint</dt><dd id="fingerprint">—</dd></div>
           </dl>
         </section>

@@ -33,12 +33,19 @@ class ProviderError(RuntimeError):
 class ProviderResult:
     text: str
     model: str
+    thinking_requested: bool = False
+    output_token_limit: int | None = None
+    model_load_ms: float | None = None
+    model_generation_ms: float | None = None
+    model_output_tokens: int | None = None
+    finish_reason: str | None = None
 
 
 class DemoProvider:
     """Deterministic fallback so every student can finish the lab offline."""
 
     name = "demo"
+    model = "trace-demo-1"
 
     @staticmethod
     def _extract_signal_and_friction(sentences: list[str], normalized: str) -> tuple[str, str]:
@@ -90,7 +97,7 @@ class DemoProvider:
         else:
             output = f"실무 문장 — {first[:220].rstrip('.')}"
 
-        return ProviderResult(text=output, model="trace-demo-1")
+        return ProviderResult(text=output, model=self.model)
 
 
 class OllamaProvider:
@@ -98,36 +105,114 @@ class OllamaProvider:
 
     name = "ollama"
 
-    def __init__(self, base_url: str, model: str, timeout_seconds: float = 60.0) -> None:
+    def __init__(
+        self,
+        base_url: str,
+        model: str,
+        *,
+        thinking_requested: bool = False,
+        num_ctx: int = 2_048,
+        num_predict: int = 128,
+        keep_alive: str = "30m",
+        seed: int = 42,
+        timeout_seconds: float = 60.0,
+        transport: httpx.AsyncBaseTransport | None = None,
+    ) -> None:
         self.base_url = base_url.rstrip("/")
         self.model = model
+        self.thinking_requested = thinking_requested
+        self.num_ctx = num_ctx
+        self.num_predict = num_predict
+        self.keep_alive = keep_alive
+        self.seed = seed
         self.timeout_seconds = timeout_seconds
+        self.transport = transport
+
+    def public_config(self) -> dict[str, str | int | bool]:
+        """Return the reproducibility settings students are expected to record."""
+        return {
+            "base_url": self.base_url,
+            "model": self.model,
+            "thinking_requested": self.thinking_requested,
+            "num_ctx": self.num_ctx,
+            "num_predict": self.num_predict,
+            "keep_alive": self.keep_alive,
+            "seed": self.seed,
+        }
+
+    @staticmethod
+    def _duration_ms(body: dict, key: str) -> float | None:
+        value = body.get(key)
+        if not isinstance(value, int | float):
+            return None
+        return round(value / 1_000_000, 2)
 
     async def generate(self, text: str, task: TaskName, temperature: float) -> ProviderResult:
         _, instruction = PROMPTS[task]
         payload = {
             "model": self.model,
             "stream": False,
+            "think": self.thinking_requested,
+            "keep_alive": self.keep_alive,
             "messages": [
                 {
                     "role": "system",
-                    "content": "당신은 근거를 벗어나지 않는 간결한 한국어 업무 보조자입니다.",
+                    "content": (
+                        "당신은 근거를 벗어나지 않는 간결한 한국어 업무 보조자입니다. "
+                        "분석 과정은 출력하지 말고 요청한 결과만 한국어로 답하세요."
+                    ),
                 },
                 {"role": "user", "content": f"{instruction}\n\nINPUT:\n{text}"},
             ],
-            "options": {"temperature": temperature},
+            "options": {
+                "temperature": temperature,
+                "num_ctx": self.num_ctx,
+                "num_predict": self.num_predict,
+                "seed": self.seed,
+            },
         }
         try:
-            async with httpx.AsyncClient(timeout=self.timeout_seconds) as client:
+            async with httpx.AsyncClient(
+                timeout=self.timeout_seconds,
+                transport=self.transport,
+            ) as client:
                 response = await client.post(f"{self.base_url}/api/chat", json=payload)
                 response.raise_for_status()
                 body = response.json()
                 output = body["message"]["content"].strip()
+        except httpx.TimeoutException as exc:
+            raise ProviderError(
+                f"Ollama 응답이 {self.timeout_seconds:.0f}초를 초과했습니다(model={self.model}). "
+                "Thinking 설정과 출력 상한을 확인하세요."
+            ) from exc
+        except httpx.HTTPStatusError as exc:
+            try:
+                detail = exc.response.json().get("error", exc.response.text)
+            except ValueError:
+                detail = exc.response.text
+            raise ProviderError(
+                f"Ollama가 HTTP {exc.response.status_code}를 반환했습니다"
+                f"(model={self.model}): {detail}"
+            ) from exc
         except (httpx.HTTPError, KeyError, TypeError, ValueError) as exc:
             raise ProviderError(
-                "Ollama 호출에 실패했습니다. `ollama serve`와 모델 설치 상태를 확인하세요."
+                f"Ollama 호출에 실패했습니다(model={self.model}). "
+                "`ollama list`와 모델 태그를 확인하세요."
             ) from exc
 
         if not output:
             raise ProviderError("Ollama가 빈 응답을 반환했습니다.")
-        return ProviderResult(text=output, model=self.model)
+        return ProviderResult(
+            text=output,
+            model=self.model,
+            thinking_requested=self.thinking_requested,
+            output_token_limit=self.num_predict,
+            model_load_ms=self._duration_ms(body, "load_duration"),
+            model_generation_ms=self._duration_ms(body, "eval_duration"),
+            model_output_tokens=(
+                body.get("eval_count") if isinstance(body.get("eval_count"), int) else None
+            ),
+            finish_reason=(
+                body.get("done_reason") if isinstance(body.get("done_reason"), str) else None
+            ),
+        )

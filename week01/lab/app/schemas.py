@@ -29,8 +29,15 @@ class TraceRecord(BaseModel):
     provider: ProviderName
     model: str
     prompt_version: str
+    temperature: float = Field(ge=0.0, le=1.0)
+    thinking_requested: bool = False
+    output_token_limit: int | None = Field(default=None, ge=1)
     status: Literal["ok", "error"]
     latency_ms: float = Field(ge=0)
+    model_load_ms: float | None = Field(default=None, ge=0)
+    model_generation_ms: float | None = Field(default=None, ge=0)
+    model_output_tokens: int | None = Field(default=None, ge=0)
+    finish_reason: str | None = None
     input_chars: int = Field(ge=0)
     output_chars: int = Field(ge=0)
     input_tokens_est: int = Field(ge=0)

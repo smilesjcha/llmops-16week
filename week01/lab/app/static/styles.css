@@ -236,6 +236,12 @@ h1 span {
   color: var(--blue-soft);
 }
 
+#status[data-state="warning"] {
+  color: var(--blue-soft);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 #status[data-state="error"] {
   color: var(--white);
   text-decoration: underline;
@@ -300,6 +306,33 @@ select {
 input[type="range"] {
   width: 100%;
   accent-color: var(--blue);
+}
+
+.runtime-config {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px 18px;
+  align-items: baseline;
+  margin: -5px 0 22px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font: 700 11px/1.4 "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: 0.04em;
+}
+
+.runtime-config strong {
+  min-width: 0;
+  color: var(--paper);
+  font-family: var(--mono);
+  overflow-wrap: anywhere;
+}
+
+.runtime-config span:last-child {
+  grid-column: 2;
+  min-width: 0;
+  color: var(--blue-soft);
 }
 
 button {
@@ -580,6 +613,14 @@ footer a {
 
   .metrics span {
     min-height: 0;
+  }
+
+  .runtime-config {
+    grid-template-columns: 1fr;
+  }
+
+  .runtime-config span:last-child {
+    grid-column: auto;
   }
 }
 

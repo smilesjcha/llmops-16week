@@ -26,12 +26,14 @@ PPT는 과정별 60–80장 범위에서 구성한다. Week 01은 80장이며, �
 
 ```bash
 uv python install 3.11.14
-uv venv --python 3.11.14 .venv
+uv venv --python 3.11.14 --allow-existing .venv
 source .venv/bin/activate
-uv pip install -r requirements.txt
-uvicorn app.main:app --app-dir week01/lab --reload
+uv pip install --python .venv/bin/python -r requirements.txt
+.venv/bin/python -m uvicorn app.main:app --app-dir week01/lab --reload
 ```
 
 브라우저에서 <http://127.0.0.1:8000>을 열고 같은 입력으로 두 번 실행한 뒤 실행 추적(trace)을 비교한다. 자세한 순서는 [lab README](lab/README.md)를 따른다.
 
 VS Code에서는 저장소 루트를 연 뒤 `Tasks: Run Task` → `Environment: Bootstrap` → `Week 01: Start and smoke` 순서로 실행한다. 자세한 내용은 [VS Code 실행 가이드](VS_CODE_GUIDE.md)를 따른다.
+
+Ollama 선택 실습의 수업 기준 모델은 `qwen3:4b-instruct`이며 Thinking 요청값은 `false`다. `qwen3:4b` 별칭은 현재 Thinking 전용 모델과 같은 ID이므로 사용하지 않는다. 모델·출력 상한·문맥·유지 시간은 실행 중 <http://127.0.0.1:8000/api/v1/config>에서 확인한다.

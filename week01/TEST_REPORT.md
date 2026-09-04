@@ -5,7 +5,7 @@
 
 ## 상태 요약
 
-현재 표준 경로의 80장 PowerPoint, 80쪽 인쇄용 PDF, 전체 렌더, 실제 화면 캡처, 실습 서비스, 노트북과 16주 의존성 프로필의 검증이 완료되었다. 외부 자격 증명·모델 다운로드·교실 부하 시험은 아래 수동 검증 경계에 별도 표기했다.
+현재 표준 경로의 80장 PowerPoint, 80쪽 인쇄용 PDF, 전체 렌더, 실제 화면 캡처, 실습 서비스, 노트북과 16주 의존성 프로필의 검증이 완료되었다. Qwen3 4B Instruct 로컬 호출까지 실제로 실행했으며, 외부 자격 증명·학생별 장비 차이·교실 부하 시험은 아래 수동 검증 경계에 별도 표기했다.
 
 ## 확정된 프레젠테이션 검증 결과
 
@@ -13,17 +13,17 @@
 
 - 배포 PowerPoint: week01/lecture/01_week1_llmops_kickoff.pptx
 - 인쇄·배포 PDF: output/pdf/01_week1_llmops_kickoff.pdf
-- 로컬 생성 산출물(git 제외): week01/lecture/build/v2/output-v3r15/01_week1_llmops_kickoff_v3r15.pptx
-- 로컬 검증 영수증(git 제외): week01/lecture/build/v2/staging-v5/01_week1_llmops_kickoff_v3r15.validation.json
-- PowerPoint SHA-256: 4fbab1b9606611d70a20e8c64966ddafb97a7ec191b107805d844e8dadc84a52
-- PDF SHA-256: e25dc535fbc83c8148d8023b3b4acac67b31f8436b82955e1073b701f07beb90
+- 로컬 생성 산출물(git 제외): week01/lecture/build/v2/output-v3r21/01_week1_llmops_kickoff_v3r21.pptx
+- 로컬 검증 영수증(git 제외): week01/lecture/build/v2/staging-v11/01_week1_llmops_kickoff_v3r21.validation.json
+- PowerPoint SHA-256: b4596bb7d73517ccc4c5ec86e8c44556bd2e256b5c6f7e26aee0a5c72cd82abc
+- PDF SHA-256: 8f1b8e5d6960ebfdc7643c0a2c4267e595fa79b0a050916ca3474ebe63e784ee
 
 | 영역 | 결과 | 확인 내용 |
 |---|---|---|
 | PowerPoint 패키지 구조 | PASS | 80 slides, 구조 finding 0건 |
 | 슬라이드 크기 | PASS | 13.3333 × 7.5 inch, 16:9 |
 | 레이아웃 기하 검사 | PASS | finding 0건, warning 0건 |
-| 글꼴 정책 | PASS | AppleGothic·Menlo만 관찰, 1,600개 텍스트 구간 검사 |
+| 글꼴 정책 | PASS | AppleGothic·Menlo만 관찰, 1,648개 텍스트 구간 검사 |
 | 첫 번째 당사자 가져오기 | PASS | Artifact Tool import 성공, 80 slides 재확인 |
 | 네이티브 표 산술 검사 | PASS | 대상 네이티브 표 0개, finding·warning 0건 |
 | 네이티브 차트 제목 검사 | PASS | 대상 네이티브 차트 0개, finding 0건 |
@@ -57,26 +57,42 @@
 - 표현 감사: 사용자 피드백에서 지적된 번역투·추상 표현의 배포 자료 잔존 0건.
 - 16번 장표: 02 항목을 2행으로 정리하고 가변 행 높이와 구분선 사이 12px 이상 안전 간격 확보.
 - 18번 장표: `모델 성능과 서비스 신뢰성의 간극`으로 제목·부제·교수자 노트 동기화.
-- 71·72·74·75번 장표: 각각 실제 Visual Studio Code, 실제 OpenAPI 문서, 실제 사용자 입력 화면, 실제 실행 결과·추적 화면 캡처.
+- 71·72·74·76번 장표: 각각 실제 Visual Studio Code, 실제 OpenAPI 문서, 실제 Demo 실행 화면, 실제 Qwen3 Instruct 실행 결과·추적 화면 캡처.
 
 ## 최종 산출물·실습 통합 검증
 
 | 영역 | 결과 | 확인 내용 |
 |---|---|---|
 | 표준 경로 반영 | PASS | finalizer 산출물과 표준 PowerPoint의 SHA-256 일치 |
-| 전체 렌더 | PASS | `final-render-v18` PNG 80개, 렌더 오류 0건 |
+| 전체 렌더 | PASS | `final-render-v24` PNG 80개, 렌더 오류 0건 |
 | 오버플로 | PASS | `slides_test.py` 결과 잘림·오버플로 0건 |
 | 전체 육안 검수 | PASS | 80장 전수, 변경 장표 원본 1600 × 900 확대, 선·면·텍스트 충돌 0건 |
 | 16·18번 확대 검수 | PASS | 16번 행·구분선 분리, 18번 제목·부제·구분선 간격 정상 |
 | 55·69번 확대 검수 | PASS | `시간 초과` 복합어 분리와 단독 단어 줄바꿈 해소, API·RAG 풀어쓰기 정상 |
 | 52번 확대 검수 | PASS | 4행 비교표, 중앙 원·방사형 선·대각선 연결 0건, 영단어 중간 개행 0건 |
-| 실제 캡처 검수 | PASS | 71·72·74·75번 실제 Visual Studio Code·OpenAPI·입력·실행 결과, 민감정보 노출 0건 |
-| 응용 프로그래밍 인터페이스 테스트 | PASS | pytest 6건 통과, 실패 0건 |
+| 실제 캡처 검수 | PASS | 71·72·74·76번 실제 Visual Studio Code·OpenAPI·Demo·Qwen3 Instruct 실행 결과, 민감정보 노출 0건 |
+| 응용 프로그래밍 인터페이스 테스트 | PASS | pytest 8건 통과, 실패 0건 |
 | Python 정적 검사 | PASS | Ruff check·format check 통과 |
 | 의존성 무결성 | PASS | 현재 123개 패키지 호환, 13개 공통·주차별 프로필 해석 충돌 0건 |
 | 강의 자료 구조 검사 | PASS | 보존 노트북 16개·작성 노트북 1개, 구조 오류 0건 |
-| 실서비스 스모크 검사 | PASS | 건강 상태·생성·실행 추적·통계·메트릭 경로 정상 응답 |
+| 실서비스 스모크 검사 | PASS | 건강 상태·현재 설정·Qwen3 Instruct 생성·실행 추적·통계·메트릭 경로 정상 응답 |
 | 가이드 노트북 실행 | PASS | 코드 셀 6개 실행, 오류 출력 0건 |
+
+## Qwen3 4B 응답 시간 설정 검증
+
+수업 기본 모델은 `qwen3:4b`가 아니라 `qwen3:4b-instruct`로 고정했다. 현재 Ollama 태그에서 `qwen3:4b`는 Thinking 계열 모델과 같은 식별자를 가리키므로 `think: false`만으로 기대한 속도 개선이 재현되지 않을 수 있다. `--hidethinking`은 사고 과정 표시를 숨기는 옵션이며 생성 연산을 줄이는 설정으로 사용하지 않는다.
+
+| 항목 | 확정값·결과 |
+|---|---|
+| 모델 | `qwen3:4b-instruct` |
+| Thinking 요청값 | `false` — Ollama `/api/chat` 요청의 최상위 필드 |
+| 컨텍스트·출력 상한 | `num_ctx=2048`, `num_predict=128` |
+| 반복 호출 | `keep_alive=30m`, `seed=42` |
+| 실제 로컬 실행 | HTTP 200, `finish_reason=stop`, 출력 토큰 66 |
+| 현재 장비 실행 예시 | 전체 1,527.38ms, 모델 적재 16.34ms, 생성 919.74ms |
+| 적재 상태 | `ollama ps` 기준 100% GPU, context 2048, 30분 유지 |
+
+응답 시간은 장비·동시 실행·첫 호출 여부에 따라 달라진다. 첫 호출과 두 번째 호출을 분리하고, 사용자 화면과 `/api/v1/traces`에서 모델 적재 시간과 생성 시간을 함께 확인한다. 설정 근거는 [Ollama Thinking 문서](https://docs.ollama.com/capabilities/thinking), [Chat API](https://docs.ollama.com/api/chat), [FAQ](https://docs.ollama.com/faq), [Qwen3 태그](https://ollama.com/library/qwen3/tags)다.
 
 ## HTML 문서 검증
 
@@ -107,7 +123,7 @@ python "$PRESENTATIONS_SKILL_DIR/container_tools/slides_test.py" \
 # 전체 렌더
 python "$PRESENTATIONS_SKILL_DIR/container_tools/render_slides.py" \
   week01/lecture/01_week1_llmops_kickoff.pptx \
-  --output_dir week01/lecture/build/v2/final-render-v18
+  --output_dir week01/lecture/build/v2/final-render-v24
 
 # HTML 문서
 python -m http.server 4173 --directory curriculum/2026-2/web
@@ -135,7 +151,7 @@ uv pip check --python .venv/bin/python
 
 ## 수동 검증 경계
 
-- Ollama 모델 다운로드와 실제 샘플링 비교.
+- 학생별 운영체제·메모리·가속기에서의 Ollama 설치, 모델 다운로드와 응답 시간 비교.
 - OpenAI, Pinecone, Langfuse 자격 증명을 사용하는 외부 호출.
 - Hugging Face 모델 다운로드와 단일 단계 지도 미세조정·직접 선호 최적화.
 - Linux·CUDA 환경의 양자화 저랭크 적응(Quantized Low-Rank Adaptation, QLoRA)과 bitsandbytes 백엔드.

@@ -23,6 +23,25 @@ STATIC_DIR = APP_DIR / "static"
 DEFAULT_LOG_PATH = APP_DIR.parent / "data" / "traces.jsonl"
 
 
+def _env_bool(name: str, default: bool) -> bool:
+    value = os.getenv(name)
+    if value is None:
+        return default
+    normalized = value.strip().lower()
+    if normalized in {"1", "true", "yes", "on"}:
+        return True
+    if normalized in {"0", "false", "no", "off"}:
+        return False
+    raise ValueError(f"{name} must be true or false, got {value!r}")
+
+
+def _env_int(name: str, default: int, *, minimum: int, maximum: int) -> int:
+    value = int(os.getenv(name, str(default)))
+    if not minimum <= value <= maximum:
+        raise ValueError(f"{name} must be between {minimum} and {maximum}, got {value}")
+    return value
+
+
 def _estimated_tokens(value: str) -> int:
     """A teaching estimate, not a tokenizer-backed billing value."""
     return 0 if not value else max(1, math.ceil(len(value) / 3))
@@ -44,7 +63,12 @@ def create_app(log_path: Path | None = None) -> FastAPI:
         "demo": DemoProvider(),
         "ollama": OllamaProvider(
             base_url=os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434"),
-            model=os.getenv("OLLAMA_MODEL", "llama3.2:3b"),
+            model=os.getenv("OLLAMA_MODEL", "qwen3:4b-instruct"),
+            thinking_requested=_env_bool("OLLAMA_THINK", False),
+            num_ctx=_env_int("OLLAMA_NUM_CTX", 2_048, minimum=512, maximum=262_144),
+            num_predict=_env_int("OLLAMA_NUM_PREDICT", 128, minimum=16, maximum=4_096),
+            keep_alive=os.getenv("OLLAMA_KEEP_ALIVE", "30m"),
+            seed=int(os.getenv("OLLAMA_SEED", "42")),
         ),
     }
 
@@ -56,20 +80,28 @@ def create_app(log_path: Path | None = None) -> FastAPI:
     async def health() -> dict[str, str]:
         return {"status": "ok", "service": "TRACE/01", "version": app.version}
 
+    @app.get("/api/v1/config")
+    async def runtime_config() -> dict[str, dict[str, str | int | bool]]:
+        return {"ollama": app.state.providers["ollama"].public_config()}
+
     @app.post("/api/v1/generate", response_model=GenerateResponse)
     async def generate(request: GenerateRequest) -> GenerateResponse:
         trace_id = uuid4().hex[:12]
         started = time.perf_counter()
         result_text = ""
-        model = "unknown"
         status = "ok"
         error_type: str | None = None
         provider = app.state.providers[request.provider]
+        model = str(getattr(provider, "model", "unknown"))
+        thinking_requested = bool(getattr(provider, "thinking_requested", False))
+        output_token_limit = getattr(provider, "num_predict", None)
 
         try:
             result = await provider.generate(request.text, request.task, request.temperature)
             result_text = result.text
             model = result.model
+            thinking_requested = result.thinking_requested
+            output_token_limit = result.output_token_limit
         except ProviderError as exc:
             status = "error"
             error_type = type(exc).__name__
@@ -81,6 +113,9 @@ def create_app(log_path: Path | None = None) -> FastAPI:
                 provider=request.provider,
                 model=model,
                 prompt_version=PROMPTS[request.task][0],
+                temperature=request.temperature,
+                thinking_requested=thinking_requested,
+                output_token_limit=output_token_limit,
                 status=status,
                 latency_ms=latency_ms,
                 input_chars=len(request.text),
@@ -101,8 +136,15 @@ def create_app(log_path: Path | None = None) -> FastAPI:
             provider=request.provider,
             model=model,
             prompt_version=PROMPTS[request.task][0],
+            temperature=request.temperature,
+            thinking_requested=thinking_requested,
+            output_token_limit=output_token_limit,
             status=status,
             latency_ms=latency_ms,
+            model_load_ms=result.model_load_ms,
+            model_generation_ms=result.model_generation_ms,
+            model_output_tokens=result.model_output_tokens,
+            finish_reason=result.finish_reason,
             input_chars=len(request.text),
             output_chars=len(result_text),
             input_tokens_est=_estimated_tokens(request.text),
