@@ -20,6 +20,7 @@ def test_health_and_frontend(tmp_path: Path) -> None:
     assert health.json()["status"] == "ok"
     assert page.status_code == 200
     assert "TRACE/01" in page.text
+    assert "LLMOPS · INTEGRATED COURSE · WEEK 01" in page.text
 
 
 def test_demo_generation_creates_privacy_safe_trace(tmp_path: Path) -> None:

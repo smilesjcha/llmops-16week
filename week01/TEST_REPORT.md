@@ -13,17 +13,17 @@
 
 - 배포 PowerPoint: week01/lecture/01_week1_llmops_kickoff.pptx
 - 인쇄·배포 PDF: output/pdf/01_week1_llmops_kickoff.pdf
-- 로컬 생성 산출물(git 제외): week01/lecture/build/v2/output-v3r21/01_week1_llmops_kickoff_v3r21.pptx
-- 로컬 검증 영수증(git 제외): week01/lecture/build/v2/staging-v11/01_week1_llmops_kickoff_v3r21.validation.json
-- PowerPoint SHA-256: b4596bb7d73517ccc4c5ec86e8c44556bd2e256b5c6f7e26aee0a5c72cd82abc
-- PDF SHA-256: 8f1b8e5d6960ebfdc7643c0a2c4267e595fa79b0a050916ca3474ebe63e784ee
+- 로컬 생성 산출물(git 제외): week01/lecture/build/v2/output-v3r22/01_week1_llmops_kickoff_v3r22.pptx
+- 로컬 검증 영수증(git 제외): week01/lecture/build/v2/staging-v12/01_week1_llmops_kickoff_v3r22.validation.json
+- PowerPoint SHA-256: 77e27156b94e21d457511da7e1eff799bf9274455f15c362bd8ebba666b9be26
+- PDF SHA-256: 9e7f32f2390a642b564f25d94db6fe5f77341c0d870718856f4cc278b21d70c4
 
 | 영역 | 결과 | 확인 내용 |
 |---|---|---|
 | PowerPoint 패키지 구조 | PASS | 80 slides, 구조 finding 0건 |
 | 슬라이드 크기 | PASS | 13.3333 × 7.5 inch, 16:9 |
 | 레이아웃 기하 검사 | PASS | finding 0건, warning 0건 |
-| 글꼴 정책 | PASS | AppleGothic·Menlo만 관찰, 1,648개 텍스트 구간 검사 |
+| 글꼴 정책 | PASS | AppleGothic·Menlo만 관찰, 1,722개 텍스트 구간 검사 |
 | 첫 번째 당사자 가져오기 | PASS | Artifact Tool import 성공, 80 slides 재확인 |
 | 네이티브 표 산술 검사 | PASS | 대상 네이티브 표 0개, finding·warning 0건 |
 | 네이티브 차트 제목 검사 | PASS | 대상 네이티브 차트 0개, finding 0건 |
@@ -31,6 +31,7 @@
 | 빌더 최소 글자 크기 정책 | PASS | build-audit.json 기준 가시 텍스트 최소 14pt |
 | 레이아웃 다양성 | PASS | build-audit.json 기준 51개 layout type |
 | 색상 정책 | PASS | 검정·흰색·네이비·파랑·중립 회색, 금지 주황색 #FF5A36 |
+| 학교 비종속성 | PASS | 배포 PowerPoint 화면·발표자 노트와 PDF 추출 텍스트에서 특정 대학명·학교별 교과목 코드 0건 |
 | 인쇄용 PDF | PASS | 80쪽, 960.009 × 540pt 가로 페이지, 빈 페이지 0건, 전체 렌더·모판 검수 |
 | PDF 글꼴 | PASS | 한글·영문 글꼴 임베딩, 텍스트 추출과 핵심 운영 문구 확인 |
 
@@ -45,7 +46,9 @@
 
 - slide-manifest.json과 강의안은 정확히 80개 제목·순번으로 구성.
 - 섹션 범위: 1–7, 8–17, 18–32, 33–45, 46–57, 58–65, 66–79, 80.
-- 자기소개 표기: 무신사 Core AI PM × 아주대 AI대학원 겸임교수.
+- 수강 대상 표기: 특정 대학에 한정하지 않는 대학생·대학원생 대상 통합 LLMOps 강좌.
+- 자기소개 표기: 무신사 Core AI PM × AI 대학원 겸임교수.
+- 학교 비종속성: 표지·공통 푸터·자기소개·발표자 노트·실습 화면에서 특정 대학명과 학교별 교과목 코드 0건.
 - 전체 운영: 16주 전체 대면 수업 없이 온라인으로 진행하며, 정규 주차는 실시간 강의를 원칙으로 운영.
 - 평가 운영: 중간고사와 실시간 수업 없이 8주차에 기말 프로젝트 기획서 0.1을 온라인으로 제출·평가.
 - 제출 묶음: 16주 과정 로드맵, 2페이지 제안서, 제품 요구사항 문서(Product Requirements Document, PRD) HTML과 PowerPoint 요약.
@@ -64,7 +67,7 @@
 | 영역 | 결과 | 확인 내용 |
 |---|---|---|
 | 표준 경로 반영 | PASS | finalizer 산출물과 표준 PowerPoint의 SHA-256 일치 |
-| 전체 렌더 | PASS | `final-render-v24` PNG 80개, 렌더 오류 0건 |
+| 전체 렌더 | PASS | `final-render-v25` PNG 80개, 렌더 오류 0건 |
 | 오버플로 | PASS | `slides_test.py` 결과 잘림·오버플로 0건 |
 | 전체 육안 검수 | PASS | 80장 전수, 변경 장표 원본 1600 × 900 확대, 선·면·텍스트 충돌 0건 |
 | 16·18번 확대 검수 | PASS | 16번 행·구분선 분리, 18번 제목·부제·구분선 간격 정상 |
@@ -99,6 +102,7 @@
 | 영역 | 결과 | 확인 내용 |
 |---|---|---|
 | 내부 링크·문서 구조 | PASS | 세 HTML, 공통 CSS·JavaScript, 로컬 링크, 고유 식별자와 제목 구조 정상 |
+| 통합 강좌 표기 | PASS | 세 HTML의 메타·헤더·푸터에서 특정 대학명 0건, 대학생·대학원생 대상 통합 강좌로 통일 |
 | 현재 주차 상호작용 | PASS | `?week=4`, `?week=8`, `?week=16`, 주차 버튼, 잘못된 주차값 보정, 두 위치의 현재 주차 표시 동기화 |
 | 반응형 화면 | PASS | 1,440px 데스크톱과 390px 모바일에서 문서 가로 넘침 0건 |
 | 2페이지 인쇄 | PASS | 2페이지 제안서를 A4 PDF로 출력했을 때 정확히 2쪽, 결론·출처 잘림 0건 |
@@ -123,7 +127,7 @@ python "$PRESENTATIONS_SKILL_DIR/container_tools/slides_test.py" \
 # 전체 렌더
 python "$PRESENTATIONS_SKILL_DIR/container_tools/render_slides.py" \
   week01/lecture/01_week1_llmops_kickoff.pptx \
-  --output_dir week01/lecture/build/v2/final-render-v24
+  --output_dir week01/lecture/build/v2/final-render-v25
 
 # HTML 문서
 python -m http.server 4173 --directory curriculum/2026-2/web
