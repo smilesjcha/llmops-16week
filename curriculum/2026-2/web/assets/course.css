@@ -343,7 +343,7 @@ h3 {
 }
 
 .week-item {
-  min-height: 152px;
+  min-height: 176px;
   padding: 18px 14px;
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -370,7 +370,7 @@ button.week-item {
   color: var(--white);
 }
 
-.week-item.is-online:not(.is-current) {
+.week-item.is-recorded:not(.is-current) {
   border-top: 4px solid var(--navy);
   padding-top: 14px;
 }
@@ -439,8 +439,12 @@ button.week-item {
   background: var(--blue);
 }
 
-.legend .legend-online::before {
+.legend .legend-recorded::before {
   background: var(--navy);
+}
+
+.legend .legend-live::before {
+  background: var(--line);
 }
 
 .legend .legend-submit::before {
@@ -482,7 +486,7 @@ button.week-item {
   border-left: 5px solid var(--navy);
 }
 
-.schedule-table tr.is-online:not(.is-current) td:first-child {
+.schedule-table tr.is-recorded:not(.is-current) td:first-child {
   border-left: 5px solid var(--navy);
 }
 
@@ -494,6 +498,47 @@ button.week-item {
   font-family: var(--font-mono);
   font-size: 14px;
   font-weight: 800;
+}
+
+.delivery-band {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--white);
+  border-bottom: 1px solid #25324a;
+}
+
+.delivery-band p {
+  min-height: 126px;
+  margin: 0;
+  padding: 24px 24px 24px 0;
+  border-right: 1px solid #25324a;
+}
+
+.delivery-band p + p {
+  padding-left: 24px;
+}
+
+.delivery-band p:last-child {
+  border-right: 0;
+}
+
+.delivery-band span,
+.delivery-band strong {
+  display: block;
+}
+
+.delivery-band span {
+  margin-bottom: 12px;
+  color: var(--mid);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.delivery-band strong {
+  color: var(--white);
+  font-size: 19px;
+  line-height: 1.35;
 }
 
 .notice-grid {
@@ -953,6 +998,7 @@ button.week-item {
 
   .evidence-line,
   .notice-grid,
+  .delivery-band,
   .doc-nav,
   .field-grid,
   .field-grid--three,
@@ -963,12 +1009,24 @@ button.week-item {
   .evidence-line > div,
   .notice-column,
   .notice-column + .notice-column,
+  .delivery-band p,
+  .delivery-band p + p,
   .doc-nav a,
   .checklist li,
   .checklist li:nth-child(2n) {
     border-right: 0;
     border-left: 0;
     padding-left: 0;
+  }
+
+  .delivery-band p {
+    min-height: 0;
+    border-right: 0;
+    border-bottom: 1px solid #25324a;
+  }
+
+  .delivery-band p:last-child {
+    border-bottom: 0;
   }
 
   .phase-row {

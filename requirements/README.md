@@ -47,14 +47,14 @@ uv pip install -r requirements/rag-week05.txt
 | 04 | `rag-week04-legacy.txt` | deprecated `pinecone-client` 재현 전용 |
 | 05 | `rag-week05.txt` | `pinecone` 7.x와 HF retrieval stack |
 | 06–07 | `finetune-week06-07.txt` | CPU/macOS와 Linux CUDA 실행을 분리해야 함 |
-| 08 | 없음 | 기말 프로젝트 기획서 제출·교수 설계 리뷰 |
+| 08 | 없음 | 실시간 수업 없이 기말 프로젝트 기획서 온라인 제출·평가 |
 | 09 | `requirements.txt`; 부하 테스트는 `loadtest-week09.txt` | ASGI/FastAPI stack |
 | 10 | `requirements.txt` + `observability-week03-10.txt` | Langfuse v3 고정 |
 | 11 | `eval-week11.txt` | 완전 로컬 TF-IDF/evaluation |
 | 12 | `agents-week12.txt` | LangChain integration packages를 한 세트로 고정 |
 | 13 | `eval-week11.txt`; neural toxicity는 `safety-week13.txt` | 모델 다운로드 없는 heuristic 경로 우선 |
 | 14 | `cost-week14.txt` | tiktoken 선택 경로 포함 |
-| 15–16 | 프로젝트가 사용한 profile 조합 | Capstone/발표 |
+| 15–16 | 프로젝트가 사용한 profile 조합 | Capstone/실시간 온라인 발표 |
 
 ## 단일 거대 환경을 만들지 않는 이유
 

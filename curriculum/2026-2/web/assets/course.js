@@ -33,7 +33,7 @@ function setCurrentWeek(week) {
   const scheduleCells = scheduleRow?.querySelectorAll("td");
   if (scheduleCells?.length >= 5) {
     const date = scheduleCells[1].textContent.trim();
-    const mode = scheduleCells[2].textContent.trim();
+    const mode = scheduleRow.dataset.modeSummary || scheduleCells[2].textContent.trim();
     const output = scheduleCells[4].textContent.trim();
     document.querySelectorAll("[data-current-week-copy]").forEach((element) => {
       element.textContent = `${date} · ${mode} / 산출물 · ${output}`;
