@@ -6,6 +6,8 @@
 
 오늘 수업에서 학생이 참고할 기준본은 [01주차 PDF 강의안](../output/pdf/01_week1_llmops_kickoff.pdf)이다. GitHub에서는 `output` → `pdf` → `01_week1_llmops_kickoff.pdf` 순서로 찾는다. 강의 중에는 PDF를 보고, 실습을 시작할 때만 이 폴더의 `lab/`과 `VS_CODE_GUIDE.md`를 사용한다.
 
+수업 이후에는 [1주차 강의영상·음성·채팅 기록](resources/README.md)을 복습 자료로 사용한다. 대용량 공개용 영상·음성은 Google Drive에서 열고, GitHub에서는 비식별 채팅 기록과 활용·재배포 기준을 확인한다.
+
 ## 구성
 
 - `lecture/01_week1_강의안.md`: 80장 강의 콘티, 180분/100분 운영 경로, 교수자 노트
@@ -14,6 +16,7 @@
 - `lecture/01_week1_llmops_kickoff.pptx`: 80장 실제 강의용 슬라이드
 - `../output/pdf/01_week1_llmops_kickoff.pdf`: PowerPoint와 동일한 80쪽 인쇄·배포용 PDF
 - `lab/`: offline-first FastAPI 서비스 `TRACE/01`
+- `resources/README.md`: 공개용 강의영상·음성·비식별 채팅과 개인정보 안내
 - `lab/week01_trace01_lab.ipynb`: 실행·trace·비교·개선 guided lab
 - `VS_CODE_GUIDE.md`: VS Code 환경 준비·실행·테스트·디버깅 가이드
 - `TEST_REPORT.md`: 의존성·코드·PPTX·PDF 검증 결과와 수동 검사 경계

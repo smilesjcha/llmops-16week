@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1750" height="1330" viewBox="0 0 1750 1330" role="img" aria-labelledby="title desc">
+  <title id="title">공개용 편집 구간</title>
+  <desc id="desc">제3자 정보와 기관별 안내 음성을 비식별 처리한 구간</desc>
+  <rect width="1750" height="1330" fill="#05070A"/>
+  <rect x="140" y="158" width="92" height="8" rx="4" fill="#3974FF"/>
+  <text x="140" y="235" fill="#98A2B3" font-family="Apple SD Gothic Neo, AppleGothic, sans-serif" font-size="28" font-weight="600" letter-spacing="3">WEEK 01 · PRIVACY EDIT</text>
+  <text x="140" y="585" fill="#FFFFFF" font-family="Apple SD Gothic Neo, AppleGothic, sans-serif" font-size="76" font-weight="700">공개용 편집 구간</text>
+  <text x="140" y="680" fill="#A8B2C1" font-family="Apple SD Gothic Neo, AppleGothic, sans-serif" font-size="34" font-weight="500">제3자 정보와 기관별 안내 음성 비식별 처리</text>
+  <line x1="140" y1="810" x2="1610" y2="810" stroke="#263044" stroke-width="2"/>
+  <text x="140" y="880" fill="#3974FF" font-family="Apple SD Gothic Neo, AppleGothic, sans-serif" font-size="28" font-weight="600">최신 운영 기준</text>
+  <text x="415" y="880" fill="#D5DAE3" font-family="Apple SD Gothic Neo, AppleGothic, sans-serif" font-size="28">GitHub 커리큘럼 · 학생용 PDF</text>
+  <text x="140" y="1178" fill="#677286" font-family="Apple SD Gothic Neo, AppleGothic, sans-serif" font-size="24">LLMOPS · 대학생·대학원생 대상 통합 강좌</text>
+</svg>

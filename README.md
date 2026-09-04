@@ -23,9 +23,10 @@
 
 학생이 매주 확인할 강의안의 기준 위치는 [`output/pdf/`](output/pdf/README.md)다. 이전 학기 자료가 있는 `AS-IS 2025 2nd semester`가 아니라, `main` 브랜치의 주차별 PDF를 사용한다.
 
-현재 저장소는 비공개이므로 수강생은 초대받은 GitHub 계정으로 로그인해야 한다. 접근 권한이 없는 계정에서는 링크가 `404`로 보인다.
+현재 저장소는 **Public**으로 운영한다. 강의 기록은 교수자 공개 정보와 개인정보 비식별 처리를 마친 복습본만 연결하며, 수강생 등 제3자의 이름·얼굴·프로필·소속·비공개 대화는 공개하지 않는다.
 
 - 오늘 수업: [01주차 PDF · LLM 서비스 운영의 기본](output/pdf/01_week1_llmops_kickoff.pdf)
+- 1주차 복습: [강의영상·음성·채팅 기록](week01/resources/README.md)
 - 확인 경로: `llmops-16week` → `output` → `pdf` → 해당 주차 PDF
 - 발표용 PowerPoint와 실습 코드: 각 `weekNN` 폴더
 - 수정본 확인: 수업 직전 `main` 브랜치 새로고침
@@ -49,6 +50,7 @@
 - black / white / navy / blue 기반 강의 디자인 시스템
 - 교수 공개 프로필을 반영한 간결한 자기소개
 - offline-first FastAPI 서비스 `TRACE/01`
+- Google Drive 비식별 강의영상·음성과 GitHub·Drive 비식별 채팅 복습 자료
 - 실행·trace·비교·개선 흐름을 따라가는 실습 notebook
 - CPython 3.11.14 공통 환경과 충돌 주차별 dependency profile
 - VS Code 작업·실행·테스트·디버깅 구성
@@ -62,7 +64,7 @@ llmops-16week/
 ├── requirements/                    # 16주 공통·주차별 Python profile
 ├── output/pdf/                     # 검증을 마친 인쇄·배포용 PDF
 ├── scripts/                         # 자료 구조·notebook 검사 도구
-├── week01/                          # 신규 1주차 강의·TRACE/01 실습
+├── week01/                          # 신규 1주차 강의·TRACE/01 실습·복습 기록
 └── AS-IS 2025 2nd semester/
     ├── 00_AS-IS_핵심_커리큘럼.md
     ├── 01_AS-IS_주차별_통합_강의안.md
