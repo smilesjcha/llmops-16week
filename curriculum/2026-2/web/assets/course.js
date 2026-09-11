@@ -2,7 +2,8 @@ const WEEK_MIN = 1;
 const WEEK_MAX = 16;
 
 function resolveCurrentWeek() {
-  const queryWeek = Number(new URLSearchParams(window.location.search).get("week"));
+  const queryValue = new URLSearchParams(window.location.search).get("week");
+  const queryWeek = queryValue === null || queryValue.trim() === "" ? NaN : Number(queryValue);
   const fallbackWeek = Number(document.body.dataset.currentWeek || "1");
   const candidate = Number.isInteger(queryWeek) ? queryWeek : fallbackWeek;
   return Math.min(WEEK_MAX, Math.max(WEEK_MIN, candidate));

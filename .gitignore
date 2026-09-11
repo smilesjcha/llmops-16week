@@ -11,6 +11,11 @@ week01/lecture/build/
 week01/lecture/build_week01_deck.mjs
 week01/lecture/*.pptx.inspect.ndjson
 week01/lecture/01_week1_llmops_kickoff/
+week02/lecture/build/
+week02/lecture/*.pptx.inspect.ndjson
+week02/lab/reports/
+node_modules/
+week02/lecture/node_modules
 ~$*.pptx
 
 # The local AS-IS PPTX/PDF archive is about 882 MiB and contains a PPTX over

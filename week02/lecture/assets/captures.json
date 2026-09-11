@@ -1,0 +1,14 @@
+{
+  "captured_at": "2026-09-11",
+  "source": "Actual VS Code and local PROMPT/02 browser screenshots; original JPEG bytes",
+  "privacy": "Synthetic customer inquiries only; no student data or API keys",
+  "layout": "Native PowerPoint image crops, not edited raster images. Whole source screenshots retained.",
+  "images": {
+    "vscode-ready.jpg": {"size": [1028, 645], "region": [196, 8, 640, 252]},
+    "app-overview.jpg": {"size": [1280, 720], "region": [60, 304, 1160, 244]},
+    "prompt-preview.jpg": {"size": [1280, 720], "region": [60, 82, 1160, 307]},
+    "comparison-results.jpg": {"size": [1280, 720], "region": [64, 200, 1152, 310]},
+    "failure-detail.jpg": {"size": [1280, 720], "region": [116, 182, 1048, 340]},
+    "decision-export.jpg": {"size": [1280, 720], "region": [60, 303, 1160, 265]}
+  }
+}

@@ -25,7 +25,9 @@
 
 현재 저장소는 **Public**으로 운영한다. 강의 기록은 교수자 공개 정보와 개인정보 비식별 처리를 마친 복습본만 연결하며, 수강생 등 제3자의 이름·얼굴·프로필·소속·비공개 대화는 공개하지 않는다.
 
-- 오늘 수업: [01주차 PDF · LLM 서비스 운영의 기본](output/pdf/01_week1_llmops_kickoff.pdf)
+- 오늘 수업: [02주차 PDF · 프롬프트 설계와 버전 관리](output/pdf/02_week2_prompt_design_versioning.pdf)
+- 오늘 실습: [Week 02 패키지](week02/README.md) · [VS Code 실행 가이드](week02/VS_CODE_GUIDE.md)
+- 1주차 강의안: [01주차 PDF · LLM 서비스 운영의 기본](output/pdf/01_week1_llmops_kickoff.pdf)
 - 1주차 복습: [강의영상·음성·채팅 기록](week01/resources/README.md)
 - 확인 경로: `llmops-16week` → `output` → `pdf` → 해당 주차 PDF
 - 발표용 PowerPoint와 실습 코드: 각 `weekNN` 폴더
@@ -43,7 +45,20 @@
 
 [AS-IS 2025년 2학기 안내](AS-IS%202025%202nd%20semester/README.md)에서 문서와 실습자료를 확인한다.
 
-새로 설계한 첫 수업은 [Week 01 패키지](week01/README.md)에서 바로 시작할 수 있다.
+현재 수업은 [Week 02 패키지](week02/README.md)에서 시작한다. 1주차 수업과 공통 환경 설정은 [Week 01 패키지](week01/README.md)에 보존한다.
+
+### Week 02 · 프롬프트 설계와 버전 관리
+
+- 72장 강의용 [PowerPoint](week02/lecture/02_week2_prompt_design_versioning.pptx)와 [인쇄용 PDF](output/pdf/02_week2_prompt_design_versioning.pdf): 본 수업 60장 + 심화 참고 12장
+- 2시간 수업 진행과 질문·활동을 담은 [상세 강의안](week02/lecture/02_week2_강의안.md)
+- 고객 문의 분류 실습 `PROMPT/02`: 같은 입력으로 프롬프트 v1·v2·v3 비교, 출력 형식과 업무 규칙 검증, 선택 근거 기록
+- 모델 설치나 API 키 없이 실행하는 Demo와 선택형 Ollama 연결
+- [VS Code 실행 가이드](week02/VS_CODE_GUIDE.md) · [실습 코드](week02/lab/) · [실습 검증 보고서](week02/LAB_TEST_REPORT.md)
+- [작년 자료 대비 개선 내용](week02/ASIS_IMPROVEMENTS.md)
+
+Demo 결과는 수업 흐름을 익히기 위한 결정적 시뮬레이션이며, 실제 언어 모델의 성능 측정값이 아니다. 1·2주차는 동일한 저장소 루트의 `.venv`와 `requirements.txt`를 사용한다.
+
+### Week 01 · LLM 서비스 운영의 기본
 
 - 80장 강의용 [PowerPoint](week01/lecture/01_week1_llmops_kickoff.pptx), [인쇄용 PDF](output/pdf/01_week1_llmops_kickoff.pdf)와 상세 강의안
 - 60–80장 제작 범위와 렌더 QA를 정의한 [PPT 제작 가이드](week01/lecture/PPT_PRODUCTION_GUIDELINE.md)
@@ -65,6 +80,7 @@ llmops-16week/
 ├── output/pdf/                     # 검증을 마친 인쇄·배포용 PDF
 ├── scripts/                         # 자료 구조·notebook 검사 도구
 ├── week01/                          # 신규 1주차 강의·TRACE/01 실습·복습 기록
+├── week02/                          # 신규 2주차 강의·PROMPT/02 실습
 └── AS-IS 2025 2nd semester/
     ├── 00_AS-IS_핵심_커리큘럼.md
     ├── 01_AS-IS_주차별_통합_강의안.md
@@ -93,6 +109,7 @@ llmops-16week/
 - macOS arm64 완전 고정 설치: `uv pip install -r requirements/locks/course-base-py311-macos-arm64.txt`
 - 검색 증강 생성(Retrieval-Augmented Generation, RAG)·미세조정·에이전트·관찰 가능성: [주차별 profile 안내](requirements/README.md)
 - 검증 결과: [Week 01 QA 보고서](week01/TEST_REPORT.md)
+- 2주차 실습 검증: [Week 02 실습 검증 보고서](week02/LAB_TEST_REPORT.md)
 
 ## 큰 원본 파일
 

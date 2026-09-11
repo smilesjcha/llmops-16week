@@ -212,6 +212,147 @@
       "problemMatcher": []
     },
     {
+      "label": "Week 02: Run PROMPT/02",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "args": [
+        "-m",
+        "uvicorn",
+        "prompt02.main:app",
+        "--app-dir",
+        "${workspaceFolder}/week02/lab",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8002",
+        "--reload"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "isBackground": true,
+      "problemMatcher": [
+        {
+          "owner": "week02-uvicorn",
+          "pattern": [
+            {
+              "regexp": "^(.*)$",
+              "message": 1
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": ".*Uvicorn running on.*",
+            "endsPattern": ".*Application startup complete.*"
+          }
+        }
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "Week 02: Run PROMPT/02 with Ollama .env",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "args": [
+        "-m",
+        "uvicorn",
+        "prompt02.main:app",
+        "--app-dir",
+        "${workspaceFolder}/week02/lab",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8002",
+        "--reload",
+        "--env-file",
+        "${workspaceFolder}/week02/lab/.env"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "isBackground": true,
+      "problemMatcher": [
+        {
+          "owner": "week02-uvicorn",
+          "pattern": [
+            {
+              "regexp": "^(.*)$",
+              "message": 1
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": ".*Uvicorn running on.*",
+            "endsPattern": ".*Application startup complete.*"
+          }
+        }
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "Week 02: Smoke demo experiment",
+      "type": "process",
+      "command": "/usr/bin/curl",
+      "args": [
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--header",
+        "Content-Type: application/json",
+        "--data",
+        "{\"provider\":\"demo\",\"versions\":[\"v1\",\"v2\",\"v3\"],\"case_ids\":[\"T01\",\"T03\",\"T06\"]}",
+        "http://127.0.0.1:8002/api/experiments"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "Week 02: Start and smoke",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Week 02: Run PROMPT/02",
+        "Week 02: Smoke demo experiment"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Week 02: Test API",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "args": [
+        "-m",
+        "pytest",
+        "-q",
+        "week02/lab/tests"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
       "label": "Course: Ruff check",
       "type": "process",
       "command": "${workspaceFolder}/.venv/bin/python",

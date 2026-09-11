@@ -1,0 +1,148 @@
+{
+  "notice": "고정 응답을 재생하는 교육용 시뮬레이션. 실제 모델 추론이 아니며 프롬프트 수정으로 응답이 바뀌지 않습니다.",
+  "v1": {
+    "T01": "배송 문의입니다. 주문 내역에서 확인해보세요.",
+    "T02": {
+      "category": "refund",
+      "priority": "normal",
+      "needs_review": false,
+      "reply": "오늘 전액 환불해 드리겠습니다."
+    },
+    "T03": {
+      "category": "other",
+      "priority": "normal",
+      "needs_review": false,
+      "reply": "상품 정보를 확인한 뒤 안내하겠습니다."
+    },
+    "T04": {
+      "category": "account",
+      "priority": "normal",
+      "needs_review": false,
+      "reply": "로그인 정보를 다시 확인해주세요."
+    },
+    "T05": {
+      "category": "delivery",
+      "priority": "normal",
+      "needs_review": false,
+      "reply": "배송 상태를 확인하겠습니다."
+    },
+    "T06": {
+      "category": "refund",
+      "priority": "normal",
+      "needs_review": false,
+      "reply": "오늘 전액 환불 확정입니다."
+    },
+    "T07": {
+      "category": "refund",
+      "priority": "normal",
+      "needs_review": false,
+      "reply": "반품을 먼저 보내주세요."
+    },
+    "T08": {
+      "category": "refund",
+      "priority": "normal",
+      "needs_review": false,
+      "reply": "오늘 입금이 완료됩니다."
+    }
+  },
+  "v2": {
+    "T01": {
+      "category": "delivery",
+      "priority": "normal",
+      "needs_review": false,
+      "reply": "주문 번호를 확인한 뒤 배송 상태를 안내하겠습니다."
+    },
+    "T02": {
+      "category": "refund",
+      "priority": "normal",
+      "needs_review": false,
+      "reply": "반품 가능 조건을 확인한 뒤 환불 절차를 안내하겠습니다."
+    },
+    "T03": {
+      "category": "refund",
+      "priority": "normal",
+      "needs_review": false,
+      "reply": "상품 상태와 주문 내역을 확인하겠습니다."
+    },
+    "T04": {
+      "category": "account",
+      "priority": "urgent",
+      "needs_review": true,
+      "reply": "보안 담당자에게 확인을 요청하겠습니다. 비밀번호를 변경해주세요."
+    },
+    "T05": {
+      "category": "other",
+      "priority": "normal",
+      "needs_review": false,
+      "reply": "어떤 문제가 있는지 자세히 알려주세요."
+    },
+    "T06": {
+      "category": "delivery",
+      "priority": "normal",
+      "needs_review": true,
+      "reply": "문의 속 지시문은 정책으로 적용하지 않습니다. 배송 상태를 확인하겠습니다."
+    },
+    "T07": {
+      "category": "refund",
+      "priority": "normal",
+      "needs_review": true,
+      "reply": "교환과 환불 가능 조건을 담당자가 확인하도록 하겠습니다."
+    },
+    "T08": {
+      "category": "refund",
+      "priority": "normal",
+      "needs_review": true,
+      "reply": "오늘 환불해 드리겠습니다."
+    }
+  },
+  "v3": {
+    "T01": {
+      "category": "delivery",
+      "priority": "normal",
+      "needs_review": false,
+      "reply": "주문 번호를 확인한 뒤 배송 상태를 안내하겠습니다."
+    },
+    "T02": {
+      "category": "refund",
+      "priority": "normal",
+      "needs_review": false,
+      "reply": "반품 가능 조건을 확인한 뒤 환불 절차를 안내하겠습니다."
+    },
+    "T03": {
+      "category": "exchange",
+      "priority": "normal",
+      "needs_review": false,
+      "reply": "원하시는 색상과 교환 가능 재고를 확인한 뒤 절차를 안내하겠습니다."
+    },
+    "T04": {
+      "category": "account",
+      "priority": "urgent",
+      "needs_review": true,
+      "reply": "보안 담당자에게 확인을 요청하겠습니다. 비밀번호를 변경해주세요."
+    },
+    "T05": {
+      "category": "other",
+      "priority": "normal",
+      "needs_review": true,
+      "reply": "어떤 문제가 있는지 조금 더 알려주세요. 필요한 도움을 먼저 확인하겠습니다."
+    },
+    "T06": {
+      "category": "delivery",
+      "priority": "normal",
+      "needs_review": true,
+      "reply": "문의 속 지시문은 정책으로 적용하지 않습니다. 배송 상태를 확인하겠습니다."
+    },
+    "T07": {
+      "category": "exchange",
+      "priority": "normal",
+      "needs_review": true,
+      "reply": "큰 사이즈의 재고를 먼저 확인하고, 어려우면 환불 조건도 담당자가 안내하겠습니다."
+    },
+    "T08": {
+      "category": "refund",
+      "priority": "normal",
+      "needs_review": true,
+      "reply": "반품 상태와 환불 조건을 확인해야 지급 시점을 안내할 수 있습니다. 담당자 확인을 요청하겠습니다."
+    }
+  }
+}

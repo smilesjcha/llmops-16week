@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>PROMPT/02 · 프롬프트 비교 실습</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <script src="/static/app.js" defer></script>
+  </head>
+  <body>
+    <header class="masthead">
+      <a href="/">LLMOPS LAB</a><span>WEEK 02 / PROMPT ENGINEERING</span
+      ><a href="/docs" target="_blank" rel="noopener">API 명세 ↗</a>
+    </header>
+    <main>
+      <section class="hero">
+        <div>
+          <p class="eyebrow">같은 입력, 다른 프롬프트</p>
+          <h1>PROMPT<span>/02</span></h1>
+          <p class="lead">
+            고객 문의 분류부터 답변 검증까지.<br />프롬프트 변경의 근거를
+            기록하는 실험 작업대.
+          </p>
+        </div>
+        <div class="hero-note">
+          <strong>오늘의 실험</strong>
+          <ol>
+            <li>규칙과 출력 형식의 명시</li>
+            <li>경계 사례를 위한 소수 예시</li>
+            <li>동일 조건 비교와 변경 근거</li>
+          </ol>
+        </div>
+      </section>
+      <aside class="notice" id="mode-notice">
+        <strong>교육용 시뮬레이션</strong> 고정 응답을 재생합니다. 실제 모델의
+        성능 측정이 아니며, 프롬프트를 수정해도 demo 응답은 바뀌지 않습니다.
+      </aside>
+
+      <section class="panel" id="setup">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">STEP 01</p>
+            <h2>실험 설정</h2>
+          </div>
+          <p>합성 문의 · 실제 고객 정보 없음</p>
+        </div>
+        <div class="setup-row">
+          <label class="field"
+            >실행 모드<select id="provider">
+              <option value="demo">demo · 오프라인 시뮬레이션</option>
+              <option value="ollama">Ollama · 실제 로컬 모델</option>
+            </select></label
+          >
+          <div class="provider-details" id="provider-details">
+            API 키와 모델 설치 없이 모든 필수 실습을 진행할 수 있습니다.
+          </div>
+        </div>
+        <div class="case-heading">
+          <h3>동일한 입력 세트</h3>
+          <button id="select-all" class="text-button">전체 선택</button
+          ><span id="case-count">8건 선택</span>
+        </div>
+        <div id="cases" class="cases"></div>
+        <div class="run-row">
+          <p>
+            선택한 각 문의를 v1 · v2 · v3에 동일하게 전달합니다.<br />평가
+            정답은 모델 메시지에 포함하지 않습니다.
+          </p>
+          <button id="run" class="primary">
+            3개 버전 비교 실행 <span>↗</span>
+          </button>
+        </div>
+        <p id="status" role="status" aria-live="polite">실행 준비 완료</p>
+      </section>
+
+      <section class="panel" id="prompts">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">STEP 02</p>
+            <h2>프롬프트와 입력 확인</h2>
+          </div>
+          <label class="compact-field"
+            >미리보기 문의<select id="preview-case"></select
+          ></label>
+        </div>
+        <div class="tabs" role="tablist" aria-label="프롬프트 버전">
+          <button role="tab" aria-selected="true" data-version="v1">
+            v1 <span>간단한 지시</span></button
+          ><button role="tab" aria-selected="false" data-version="v2">
+            v2 <span>출력 형식·규칙</span></button
+          ><button role="tab" aria-selected="false" data-version="v3">
+            v3 <span>소수 예시 추가</span>
+          </button>
+        </div>
+        <div class="prompt-grid">
+          <div>
+            <h3>시스템 메시지 · 업무 지시</h3>
+            <pre id="prompt-text" class="prompt-text"></pre>
+          </div>
+          <div>
+            <h3>사용자 메시지 · 문의 데이터</h3>
+            <pre id="input-text"></pre>
+            <p class="muted">
+              JSON(JavaScript Object Notation)은 데이터를 표현하는 형식입니다.
+              데이터 경계를 표시해도 지시문 주입을 완전히 방지하지는 못합니다.
+            </p>
+            <div class="hash-line">
+              <span>프롬프트 SHA-256 해시</span><code id="prompt-hash"></code>
+            </div>
+            <p class="muted">
+              파일 위치: <code>week02/lab/prompts/</code><br />v3는 v2의 규칙에
+              평가 문의와 다른 예시 3건을 추가합니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="results">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">STEP 03</p>
+            <h2>결과와 실패 원인</h2>
+          </div>
+          <span id="run-kind" class="badge">실행 대기</span>
+        </div>
+        <p class="explanation">
+          형식 → 분류 → 확정 약속 → 검토·우선순위를 각각 확인합니다. 형식이
+          틀리면 의미 검사는 <strong>미평가</strong>입니다. 아래 성공률은 전체
+          선택 문의 수를 분모로 사용합니다.
+        </p>
+        <div id="summary" class="summary">
+          <div class="empty">비교 실행 후 버전별 결과가 여기에 표시됩니다.</div>
+        </div>
+        <div class="table-scroll">
+          <table id="comparison">
+            <caption>
+              같은 문의의 버전별 결과 · 결과 버튼으로 원문과 기준 확인
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">문의 / 평가 기준</th>
+                <th scope="col">v1 · 간단한 지시</th>
+                <th scope="col">v2 · 형식·규칙</th>
+                <th scope="col">v3 · 소수 예시</th>
+              </tr>
+            </thead>
+            <tbody id="comparison-body"></tbody>
+          </table>
+        </div>
+        <details id="metadata">
+          <summary>재현에 필요한 실행 정보</summary>
+          <pre id="metadata-text">실행 전</pre>
+        </details>
+        <p class="muted">
+          확정 약속 검사는 수업용 정규표현식입니다. 허용된 문장을 오탐하거나
+          우회 표현을 놓칠 수 있으므로 실제 서비스에는 추가 평가와 사람의 검토가
+          필요합니다.
+        </p>
+      </section>
+
+      <section class="panel" id="decision">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">STEP 04</p>
+            <h2>후보 선택과 변경 근거</h2>
+          </div>
+          <span class="badge">교육용 기록 · 실제 배포 없음</span>
+        </div>
+        <div class="decision-grid">
+          <div>
+            <label class="field"
+              >다음 검증 후보<select id="candidate">
+                <option value="v3">v3 · 소수 예시</option>
+                <option value="v2">v2 · 형식·규칙</option>
+                <option value="v1">v1 · 간단한 지시</option>
+              </select></label
+            ><label class="field"
+              >선택 근거와 다음 검증<textarea
+                id="reason"
+                minlength="15"
+                maxlength="1000"
+                rows="4"
+                placeholder="어떤 실패를 줄였나요? 아직 무엇을 더 확인해야 하나요? 합성 사례와 결과를 근거로 15자 이상 작성하세요."
+              ></textarea></label
+            ><button id="save-decision" class="secondary" disabled>
+              결정 기록 추가
+            </button>
+            <p id="decision-status" role="status" aria-live="polite"></p>
+          </div>
+          <div class="export-box">
+            <h3>실험 보고서</h3>
+            <p>
+              입력 세트, 프롬프트 원문과 해시, 모델 설정, 검증 결과, 선택 근거를
+              JSON 파일로 저장합니다.
+            </p>
+            <p class="muted">
+              기록은 서버 메모리에 최근 30개까지 보관됩니다. 서버를 종료하기
+              전에 내보내세요. 결정 근거에 개인정보를 입력하지 마세요.
+            </p>
+            <a id="export" class="download disabled" aria-disabled="true"
+              >JSON 보고서 내보내기 ↓</a
+            >
+          </div>
+        </div>
+      </section>
+      <footer>
+        <span>LLMOPS / WEEK 02</span>
+        <p>좋아 보이는 답변에서, 비교 가능한 변경 근거로.</p>
+        <a href="/docs">OpenAPI 대화형 문서</a>
+      </footer>
+    </main>
+    <dialog id="detail-dialog">
+      <div class="dialog-top">
+        <p class="eyebrow" id="detail-title"></p>
+        <button id="close-dialog" aria-label="결과 상세 닫기">닫기 ×</button>
+      </div>
+      <h2>결과 원문과 검사 기준</h2>
+      <div class="detail-grid">
+        <div>
+          <h3>문의와 기대 결과</h3>
+          <p id="detail-input"></p>
+          <pre id="detail-expected"></pre>
+          <h3>모델 출력 원문</h3>
+          <pre id="detail-output"></pre>
+        </div>
+        <div>
+          <h3>검사 결과</h3>
+          <div id="detail-checks"></div>
+          <h3>실패 원인</h3>
+          <ul id="detail-issues"></ul>
+          <h3>실행 정보</h3>
+          <pre id="detail-metadata"></pre>
+        </div>
+      </div>
+    </dialog>
+  </body>
+</html>
