@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="LLMOps 2주차 과제 01. 프롬프트 비교와 선택 근거, 실습 실행, 분석 문서 작성, 제출 경로와 체크리스트.">
+  <title>과제 01 · 프롬프트 비교와 선택 근거 | LLMOps</title>
+  <style>
+    :root { --ink:#15181d; --muted:#4d5869; --line:#d5dce5; --blue:#1759c7; --navy:#112844; --wash:#f1f5fb; --paper:#fff; }
+    * { box-sizing:border-box; }
+    html { scroll-padding-top:1.5rem; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif; font-size:1rem; line-height:1.8; word-break:keep-all; overflow-wrap:anywhere; }
+    a { color:var(--blue); text-underline-offset:.22em; }
+    a:hover { text-decoration-thickness:2px; }
+    a:focus-visible { outline:3px solid var(--blue); outline-offset:5px; }
+    .skip { position:absolute; left:1rem; top:-5rem; padding:.6rem 1rem; background:#fff; z-index:5; }
+    .skip:focus { top:1rem; }
+    .page { width:min(1080px,calc(100% - 3rem)); margin:0 auto; }
+    .masthead { display:flex; flex-wrap:wrap; justify-content:space-between; gap:.5rem 2rem; padding:1.5rem 0 1rem; border-bottom:2px solid var(--ink); font-size:.875rem; }
+    .masthead strong { letter-spacing:.08em; }
+    .masthead span { color:var(--muted); }
+    header { padding:3.5rem 0 2.5rem; }
+    .eyebrow { margin:0 0 1rem; color:var(--muted); font-size:.875rem; font-weight:700; letter-spacing:.07em; }
+    .intro { display:grid; grid-template-columns:minmax(0,1fr) minmax(230px,.45fr); align-items:start; gap:2.5rem; }
+    h1 { margin:0; font-size:clamp(2.1rem,4.5vw,3.3rem); font-weight:800; letter-spacing:-.045em; line-height:1.3; }
+    .lead { margin:1.5rem 0 0; max-width:42rem; font-size:1.125rem; }
+    .deadline { padding:1.3rem 1.5rem; border-left:4px solid var(--blue); background:var(--wash); }
+    .deadline p { margin:0; }
+    .deadline .date { display:block; margin:.35rem 0; font-size:1.9rem; line-height:1.3; font-weight:800; color:var(--navy); letter-spacing:-.03em; }
+    .deadline .small { color:var(--muted); font-size:.875rem; }
+    nav { display:flex; flex-wrap:wrap; gap:.5rem 1.8rem; margin-top:2rem; padding-top:1.25rem; border-top:1px solid var(--line); }
+    nav a { color:var(--ink); font-weight:600; font-size:.95rem; }
+    section { padding:2.7rem 0; border-top:1px solid var(--line); }
+    .section-title { display:flex; gap:1.15rem; align-items:baseline; margin-bottom:1.6rem; }
+    .section-title .num { flex:none; font-size:.9rem; color:var(--muted); font-variant-numeric:tabular-nums; }
+    h2 { margin:0; font-size:1.65rem; letter-spacing:-.035em; line-height:1.45; }
+    h3 { margin:0 0 .8rem; font-size:1.2rem; letter-spacing:-.02em; line-height:1.5; }
+    p { margin:.7rem 0; }
+    ul,ol { margin:.8rem 0; padding-left:1.5rem; }
+    li { margin:.4rem 0; padding-left:.15rem; }
+    .subtle { color:var(--muted); }
+    .note { padding:1rem 1.3rem; background:var(--wash); margin:1.4rem 0 0; }
+    .note p:first-child { margin-top:0; }
+    .note p:last-child { margin-bottom:0; }
+    .routes { display:grid; grid-template-columns:1fr 1fr; gap:0 2.5rem; }
+    .route { padding:1.2rem 0; border-top:2px solid var(--ink); }
+    .route h3 { font-size:1rem; }
+    .route .destination { font-size:1.45rem; font-weight:700; line-height:1.5; }
+    .route .explain { font-size:.9rem; color:var(--muted); }
+    .files { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; }
+    .file { padding-top:1rem; border-top:2px solid var(--ink); }
+    .file .type { margin:0 0 .65rem; color:var(--blue); font-size:.875rem; font-weight:700; }
+    .file h3 { font-size:1.5rem; }
+    .file code { display:block; margin-top:1.1rem; width:fit-content; }
+    .flow { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1.5rem; list-style:none; padding:0; margin:0 0 1.8rem; counter-reset:flow; }
+    .flow li { counter-increment:flow; padding:1rem 0 0; border-top:2px solid var(--line); margin:0; }
+    .flow li::before { content:counter(flow,decimal-leading-zero); display:block; color:var(--muted); font-size:.875rem; margin-bottom:.35rem; }
+    .flow strong { display:block; font-size:1.1rem; }
+    .flow span { color:var(--muted); font-size:.9rem; }
+    .environment { margin-top:2rem; }
+    .platforms { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:1.4rem; }
+    .platform { min-width:0; }
+    .platform h3 { font-size:1rem; }
+    code,pre { font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace; font-size:.9rem; }
+    code { background:var(--wash); padding:.12rem .35rem; border-radius:2px; word-break:break-word; }
+    pre { margin:.8rem 0 1.2rem; padding:1.1rem; background:#f3f5f8; border:1px solid var(--line); white-space:pre-wrap; overflow-wrap:anywhere; line-height:1.7; }
+    pre code { background:none; border-radius:0; padding:0; font-size:inherit; }
+    .steps { counter-reset:step; list-style:none; padding:0; margin:1.4rem 0 0; }
+    .steps>li { counter-increment:step; position:relative; padding:.8rem 0 1rem 2.6rem; margin:0; border-bottom:1px solid var(--line); }
+    .steps>li::before { content:counter(step,decimal-leading-zero); position:absolute; top:.9rem; left:0; color:var(--muted); font-size:.875rem; }
+    .steps strong { display:block; }
+    .questions { counter-reset:question; }
+    .question { counter-increment:question; padding:1.5rem 0; border-bottom:1px solid var(--line); }
+    .question:first-child { padding-top:0; }
+    .question:last-child { border-bottom:0; padding-bottom:0; }
+    .question h3::before { content:counter(question,decimal-leading-zero); margin-right:.8rem; color:var(--muted); font-weight:400; font-size:.95rem; }
+    .example { padding:.5rem 0 .5rem 1.1rem; margin:1rem 0; border-left:2px solid var(--line); color:var(--muted); }
+    .definitions { display:grid; grid-template-columns:9rem minmax(0,1fr); margin:1rem 0; }
+    .definitions dt,.definitions dd { margin:0; padding:.8rem 0; border-bottom:1px solid var(--line); }
+    .definitions dt { font-weight:700; }
+    .definitions dd { padding-left:1rem; }
+    .checklist { list-style:none; padding:0; }
+    .checklist li { padding:.7rem 0 .7rem 2rem; margin:0; border-bottom:1px solid var(--line); position:relative; }
+    .checklist li::before { content:"□"; position:absolute; left:0; top:.65rem; font-size:1.2rem; line-height:1.5; color:var(--muted); }
+    footer { padding:1.4rem 0 2.5rem; border-top:2px solid var(--ink); color:var(--muted); font-size:.875rem; }
+    footer p { margin:.4rem 0; }
+    @media (max-width:760px) {
+      .page { width:calc(100% - 2rem); }
+      header { padding:2rem 0; }
+      .intro,.routes,.files,.platforms { grid-template-columns:1fr; gap:1.5rem; }
+      .deadline { padding:1rem 1.2rem; }
+      .deadline .date { font-size:1.7rem; }
+      .flow { grid-template-columns:1fr 1fr; gap:1rem 1.5rem; }
+      section { padding:2rem 0; }
+      h2 { font-size:1.45rem; }
+      .section-title { gap:.75rem; }
+      .definitions { grid-template-columns:1fr; }
+      .definitions dt { padding-bottom:0; border:0; }
+      .definitions dd { padding:.25rem 0 .8rem; }
+    }
+    @media print {
+      @page { size:A4; margin:16mm; }
+      body { font-size:10.5pt; line-height:1.65; background:#fff; color:#000; }
+      .page { width:100%; max-width:none; }
+      .skip,nav,.screen-only { display:none; }
+      .masthead { padding-top:0; font-size:9pt; }
+      header { padding:1.2rem 0; }
+      h1 { font-size:27pt; }
+      h2 { font-size:17pt; }
+      h3 { font-size:12pt; }
+      .lead { font-size:11pt; }
+      section { padding:1.4rem 0; }
+      .section-title { margin-bottom:1rem; }
+      h1,h2,h3,.section-title { break-after:avoid; }
+      p,li { orphans:3; widows:3; }
+      .deadline,.route,.file,.flow,.note,.question,.platform,pre { break-inside:avoid; }
+      .question { padding:1rem 0; }
+      .intro { grid-template-columns:1.55fr 1fr; gap:1.5rem; }
+      .platforms { grid-template-columns:1fr; gap:.5rem; }
+      .files,.routes { gap:1.5rem; }
+      .note,.deadline { background:#f5f7fa; border:1px solid var(--line); }
+      code,pre { font-size:9pt; }
+      a { color:#000; text-decoration:none; }
+      .flow { gap:1rem; }
+      footer { padding-bottom:0; font-size:9pt; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">과제 본문으로 이동</a>
+  <div class="page">
+    <div class="masthead"><strong>LLMOPS / WEEK 02</strong><span>차성재 · 2026년 2학기</span></div>
+    <header>
+      <p class="eyebrow">ASSIGNMENT 01</p>
+      <div class="intro">
+        <div>
+          <h1>프롬프트 비교와<br>선택 근거</h1>
+          <p class="lead">같은 고객 문의를 세 가지 프롬프트로 비교하고, 실패 이유와 선택 근거를 설명하는 과제입니다. 수업에서 실행한 <strong>PROMPT/02</strong>의 결과를 기말 프로젝트 기획서와 포트폴리오의 근거로 남깁니다.</p>
+        </div>
+        <aside class="deadline" aria-label="과제 일정">
+          <p>제출 기한</p>
+          <time class="date" datetime="2026-09-18">2026.09.18 이내</time>
+          <p>9월 11일 출제 · 일주일 이내 제출</p>
+          <p class="small">세부 마감 시각은 별도 안내</p>
+        </aside>
+      </div>
+      <nav aria-label="본문 바로가기">
+        <a href="#submission">제출 경로</a><a href="#deliverables">제출물</a><a href="#practice">실습 순서</a><a href="#analysis">분석 질문</a><a href="#checklist">최종 확인</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section id="submission" aria-labelledby="submission-title">
+        <div class="section-title"><span class="num" aria-hidden="true">01</span><h2 id="submission-title">제출 경로와 일정</h2></div>
+        <p>이번 <strong>2주차부터 격주로 과제</strong>를 안내합니다. 매 과제의 제출 기간은 출제 후 <strong>일주일 이내</strong>입니다. 첫 과제는 <time datetime="2026-09-18">2026년 9월 18일 이내</time>에 아래 경로로 제출합니다.</p>
+        <div class="routes">
+          <article class="route"><h3>아주대AI대학원생</h3><p class="destination">온라인 LMS 과제 제출란</p><p class="explain">Learning Management System · 학습관리시스템</p></article>
+          <article class="route"><h3>군산대·창원대 학생</h3><p class="destination">교수자 이메일</p><p class="explain">이메일 주소 별도 안내. 아직 안내받지 못했다면 수업 중 또는 수업 질의응답 채널에서 확인합니다.</p></article>
+        </div>
+        <p>마감 시각은 아직 지정하지 않았습니다. 세부 제출 방법과 변경 사항은 소속별 과제 공지를 따릅니다.</p>
+        <div class="note"><p><strong>GitHub는 공개 강의자료 저장소입니다.</strong> 과제 파일과 본인·다른 사람의 개인정보는 공개 GitHub에 올리지 않습니다. 제출에 필요한 본인 식별 정보는 LMS 또는 이메일 제출 안내를 따릅니다.</p></div>
+      </section>
+
+      <section id="deliverables" aria-labelledby="deliverables-title">
+        <div class="section-title"><span class="num" aria-hidden="true">02</span><h2 id="deliverables-title">제출물 · 파일 두 개</h2></div>
+        <div class="files">
+          <article class="file"><p class="type">FILE 01 / JSON</p><h3>실험 보고서</h3><p>합성 문의 <strong>T01–T08 8건 × v1·v2·v3</strong>의 총 24건 비교 결과와 저장한 선택 근거를 포함합니다. 실습 화면의 <strong>JSON 보고서 내보내기</strong>로 저장합니다.</p><p class="subtle">JSON: JavaScript Object Notation<br>시스템 간 데이터를 주고받는 텍스트 형식</p><code>assignment01_experiment.json</code></article>
+          <article class="file"><p class="type">FILE 02 / PDF</p><h3>짧은 분석 문서</h3><p><strong>실패 1건, 버전 선택 근거, 새 검증 사례 1건, 교수에게 묻고 싶은 질문</strong>을 정리합니다. 아래 네 가지 질문을 문서의 목차로 사용해도 됩니다.</p><p class="subtle">PDF: Portable Document Format<br>문서의 배치를 유지하는 배포용 파일 형식</p><code>assignment01_analysis.pdf</code></article>
+        </div>
+        <p class="note">위 파일명은 예시입니다. 별도의 페이지 수 제한은 두지 않습니다. 표나 화면 캡처로 핵심을 짧게 정리하고, Word·한글·Google Docs 등 익숙한 도구에서 PDF로 저장하면 됩니다. 프롬프트 파일을 별도로 제출할 필요는 없습니다. 선택형 Ollama 결과는 추가 자료입니다.</p>
+      </section>
+
+      <section id="practice" aria-labelledby="practice-title">
+        <div class="section-title"><span class="num" aria-hidden="true">03</span><h2 id="practice-title">실습 실행과 결과 저장</h2></div>
+        <ol class="flow" aria-label="과제 진행 흐름"><li><strong>같은 조건 비교</strong><span>8개 문의 · 3개 버전</span></li><li><strong>실패 원인 확인</strong><span>기대값과 실제 응답</span></li><li><strong>선택 이유 기록</strong><span>채택 또는 보류 근거</span></li><li><strong>파일 두 개 제출</strong><span>JSON 보고서 + 분석 PDF</span></li></ol>
+        <div class="environment">
+          <h3>실행 전 준비</h3>
+          <p>1주차에서 준비한 <strong>Python 3.11.14</strong>, 공통 가상환경 <code>.venv</code>와 <code>requirements.txt</code>를 그대로 사용합니다. 2주차 추가 패키지나 유료 API 키는 필요하지 않습니다. API는 Application Programming Interface, 프로그램 간 기능 호출 인터페이스입니다.</p>
+          <p>Visual Studio Code(VS Code)에서 수업의 <code>llmops-16week</code> 폴더를 엽니다. 터미널의 현재 위치에 <code>requirements.txt</code>와 <code>week02</code> 폴더가 보여야 합니다. 코드를 아직 받지 않았다면 <a href="https://github.com/smilesjcha/llmops-16week">공개 강의 저장소</a>의 <strong>Code → Download ZIP</strong>으로 내려받아 압축을 풉니다.</p>
+          <p>기존 환경이 준비되어 있다면 아래 <strong>서버 실행</strong> 명령만 사용합니다. 처음 환경을 만드는 경우에는 1주차에 준비한 <code>uv</code>(Python 환경·패키지 관리 도구)가 설치되어 있어야 합니다. <code>uv</code> 명령이 없다면 설치부터 교수자에게 확인합니다. 기존 <code>.venv</code>를 불필요하게 다시 만들지 않습니다.</p>
+        </div>
+        <div class="platforms">
+          <div class="platform">
+            <h3>macOS / Linux</h3><p class="subtle">처음 환경을 만들 때만 실행</p>
+            <pre><code>uv python install 3.11.14
+uv venv --python 3.11.14 .venv
+uv pip install --python .venv/bin/python -r requirements.txt
+uv pip check --python .venv/bin/python</code></pre>
+            <p><strong>서버 실행</strong></p>
+            <pre><code>.venv/bin/python -m uvicorn prompt02.main:app --app-dir week02/lab --host 127.0.0.1 --port 8002</code></pre>
+          </div>
+          <div class="platform">
+            <h3>Windows PowerShell</h3><p class="subtle">처음 환경을 만들 때만 실행</p>
+            <pre><code>uv python install 3.11.14
+uv venv --python 3.11.14 .venv
+uv pip install --python .\.venv\Scripts\python.exe -r requirements.txt
+uv pip check --python .\.venv\Scripts\python.exe</code></pre>
+            <p><strong>서버 실행</strong></p>
+            <pre><code>.\.venv\Scripts\python.exe -m uvicorn prompt02.main:app --app-dir week02/lab --host 127.0.0.1 --port 8002</code></pre>
+          </div>
+        </div>
+        <p>터미널에 실행 주소가 표시되면 브라우저에서 <a href="http://127.0.0.1:8002">http://127.0.0.1:8002</a>를 엽니다. 서버 터미널은 켜 둡니다. 추가 명령은 새 터미널에서 실행합니다. Windows에서는 macOS/Linux용 VS Code 자동 작업 대신 위 PowerShell 명령을 사용합니다.</p>
+        <p class="subtle">실제 환경 실행 검증은 macOS에서 진행했습니다. Linux·Windows의 실제 실행은 검증하지 않았습니다. 노트북을 사용하는 경우에도 인터프리터·커널은 같은 <code>.venv</code>를 선택합니다.</p>
+        <ol class="steps">
+          <li><strong>Demo에서 24건 비교</strong>실행 모드 <code>Demo</code>와 합성 문의 T01–T08 8건을 확인하고 <strong>3개 버전 비교 실행</strong>을 누릅니다. v1·v2·v3에 같은 문의가 전달됩니다.</li>
+          <li><strong>프롬프트와 실패 사례 확인</strong>세 버전의 규칙·출력 형식·예시를 읽습니다. 실패 결과를 열어 문의 원문, 기대 결과, 실제 응답과 검사 이유를 비교합니다. 예: T01/v1은 형식 오류, T03/v2는 분류 오류, T08/v2는 미확정 환불 약속입니다.</li>
+          <li><strong>선택 또는 보류 이유 기록</strong>다음에 검증할 후보 버전을 선택하고 근거를 15자 이상 입력한 뒤 <strong>결정 기록 추가</strong>를 누릅니다. 아직 채택하기 어렵다면 보류 이유를 적어도 됩니다.</li>
+          <li><strong>JSON 보고서 저장</strong><strong>JSON 보고서 내보내기</strong>를 누릅니다. 내려받은 파일을 VS Code에서 열어 24건 비교 결과와 선택 근거가 함께 저장되었는지 확인합니다.</li>
+          <li><strong>분석 PDF 작성과 제출</strong>다음 네 가지 질문에 답한 문서를 PDF로 저장합니다. JSON과 PDF 두 파일이 열리는지 확인하고, 위의 소속별 경로로 제출합니다.</li>
+        </ol>
+        <div class="note"><p><strong>서버를 종료하기 전에 JSON을 먼저 저장합니다.</strong> 서버를 종료·재시작하면 실험 기록이 사라집니다. 저장을 마치면 서버 터미널에서 <code>Ctrl+C</code>로 종료합니다.</p></div>
+        <h3 style="margin-top:1.8rem">실행이 안 될 때</h3>
+        <ul>
+          <li><code>No module named prompt02</code>: 저장소 루트에서 실행했는지, 명령에 <code>--app-dir week02/lab</code>이 포함되어 있는지 확인합니다.</li>
+          <li>8002 포트 사용 중: 이미 실행한 실습 서버가 있다면 그 화면을 사용합니다. 다른 프로그램을 임의로 종료하지 않습니다.</li>
+          <li>JSON 형식 실패: 서버 고장이 아니라 모델 응답의 형식 문제일 수 있습니다. 원문을 보고 실패 이유를 분석합니다.</li>
+          <li>저장한 기록이 사라짐: 서버를 다시 시작하면 기록이 초기화됩니다. Demo 비교를 다시 실행하고 선택 근거를 입력한 뒤 즉시 내보냅니다.</li>
+        </ul>
+      </section>
+
+      <section id="analysis" aria-labelledby="analysis-title">
+        <div class="section-title"><span class="num" aria-hidden="true">04</span><h2 id="analysis-title">분석 문서의 네 가지 질문</h2></div>
+        <div class="questions">
+          <article class="question"><h3>어떤 실패가 있었나요?</h3><ul><li>문의 번호와 프롬프트 버전을 적습니다. 예: <code>T03 / v2</code>.</li><li>기대 결과와 실제 응답에서 다른 부분을 짚습니다.</li><li>형식 오류인지, 분류·업무 규칙 판단 오류인지 구분합니다.</li><li>자동 검사 결과만 옮기지 말고, 사람이 읽었을 때 왜 문제가 되는지 설명합니다.</li></ul></article>
+          <article class="question"><h3>어떤 버전을 선택하고 싶나요?</h3><ul><li>v1·v2·v3의 지시·출력 형식·예시 중 무엇이 다른지 비교합니다.</li><li>지금 선택할 후보와 이유를 적습니다. 보류 이유를 설명해도 됩니다.</li><li>이 결과만으로 실제 서비스에 적용해도 되는지, 무엇을 더 확인해야 하는지 적습니다.</li></ul></article>
+          <article class="question"><h3>다음에는 어떤 문의로 확인할 건가요?</h3><ul><li>기존 8건과 다른 <strong>합성 문의 1건</strong>을 직접 만듭니다. 실제 고객의 문의를 가져오지 않습니다.</li><li>기대하는 <code>category</code>, <code>priority</code>, <code>needs_review</code>와 판단 이유를 적습니다.</li><li>어떤 모호함이나 실패 가능성을 확인하려는 사례인지 설명합니다.</li><li>새 사례를 실행하지 않았다면 <strong>“검증 계획 · 미실행”</strong>으로 표시합니다. 실행 결과를 만들어 쓰지 않습니다.</li></ul>
+            <dl class="definitions"><dt><code>category</code></dt><dd>담당 업무 분류: <code>delivery</code> 배송 / <code>refund</code> 환불 / <code>exchange</code> 교환 / <code>account</code> 계정 / <code>other</code> 기타</dd><dt><code>priority</code></dt><dd>처리 우선순위: <code>normal</code> 일반 / <code>urgent</code> 긴급</dd><dt><code>needs_review</code></dt><dd>추가적인 사람 검토 표시: <code>true</code> 필요 / <code>false</code> 별도 표시 없음. 답변 초안은 실제 고객에게 자동 전송되지 않습니다.</dd></dl>
+            <p class="subtle">기대값은 교육용 합성 서비스의 업무 기준입니다. 모든 회사에 공통인 정책은 아닙니다. 결과의 <code>reply</code>는 상담 담당자가 읽을 5–160자의 한국어 답변 초안입니다.</p>
+          </article>
+          <article class="question"><h3>교수에게 무엇을 묻고 싶나요?</h3><ul><li>실험·평가·업무 규칙 중 이해가 어렵거나 의견을 듣고 싶은 질문 1개를 적습니다.</li></ul><blockquote class="example">예: “교환과 환불이 함께 있는 문의를 첫 요청으로 분류하는 기준이 실제 서비스에서도 적절할까요?”</blockquote></article>
+        </div>
+      </section>
+
+      <section id="scope" aria-labelledby="scope-title">
+        <div class="section-title"><span class="num" aria-hidden="true">05</span><h2 id="scope-title">Demo와 실제 모델의 구분</h2></div>
+        <p><strong>필수 과제는 Demo만으로 완료할 수 있습니다.</strong> 모델 설치나 유료 호출이 필요하지 않습니다. 높은 성공률보다 같은 조건의 비교, 실패 해석과 선택 근거를 설명하는 데 집중합니다.</p>
+        <ul><li>Demo는 <strong>수업용 고정 응답</strong>을 재생합니다. 버전별 결과 차이는 정해진 예시이며 실제 대규모 언어 모델(Large Language Model, LLM)의 성능 측정값이 아닙니다.</li><li>프롬프트 파일을 수정해도 Demo 응답은 바뀌지 않습니다. 변경된 지시와 확인하려는 효과는 <strong>개선안</strong>으로 적고, 개선 효과를 검증했다고 쓰지 않습니다.</li><li>Ollama로 추가 실험했다면 Demo와 구분하고, 모델명·실행 조건·실제 성공·실패·미실행 건수를 함께 기록합니다.</li><li>설치 실패나 장비 성능 때문에 Ollama를 사용하지 못해도 필수 과제를 제출할 수 있습니다.</li></ul>
+        <h3 style="margin-top:1.8rem">선택 실습 · Ollama</h3>
+        <p>Ollama는 선택 실습입니다. 진행하려면 설치된 Ollama 앱을 켜고, 별도 터미널로 모델을 확인·준비합니다. 처음 받는 모델은 다운로드와 로딩 시간이 필요합니다.</p>
+        <pre><code>ollama list
+ollama pull qwen3:4b-instruct
+ollama run qwen3:4b-instruct "한국어로 준비 완료라고만 답하세요."</code></pre>
+        <p>모델이 한 번 응답하면 실습 화면에서 <strong>Ollama</strong>를 선택하고 기본 선택된 <strong>T01 한 건</strong>으로 시작합니다. 이번 코드의 기본 설정은 <code>think:false</code>, <code>temperature:0</code>, <code>seed:42</code>, <code>num_ctx:4096</code>, <code>num_predict:384</code>입니다. 각각 Thinking 비활성화, 생성 무작위성 조절, 난수 시드, 문맥 길이, 생성 토큰 상한을 뜻합니다. 같은 시드를 사용해도 장비·모델 버전에 따른 결과 차이가 생길 수 있습니다.</p>
+        <p>연결 오류나 시간 초과가 나면 오류를 기록하고 Demo 과제를 먼저 마칩니다. 앱은 자동으로 Demo로 전환하지 않습니다. 다른 실행 모드의 결과를 실제 모델 결과로 합쳐 보고하지 않습니다.</p>
+      </section>
+
+      <section id="checklist" aria-labelledby="checklist-title">
+        <div class="section-title"><span class="num" aria-hidden="true">06</span><h2 id="checklist-title">제출 전 확인</h2></div>
+        <ul class="checklist"><li>JSON에 8개 문의 × 3개 버전의 비교 결과와 선택 근거가 들어 있습니다.</li><li>실패 1건의 기대 결과와 실제 응답을 비교했습니다.</li><li>선택 이유와 아직 확인하지 못한 한계를 구분했습니다.</li><li>새 합성 문의 1건, 기대 기준, 교수에게 묻고 싶은 질문을 적었습니다.</li><li>Demo와 실제 모델 결과, 실행 결과와 검증 계획을 구분했습니다.</li><li>JSON과 PDF 두 파일을 직접 열어 확인했습니다.</li><li>실제 고객 문의·연락처·학생 개인정보·API 키·접속 토큰을 넣지 않았습니다.</li></ul>
+        <p class="note">본인 식별 정보는 소속별 제출 안내에 따라 LMS·이메일에 기재합니다. 실험 데이터와 공개 저장소에는 본인이나 다른 사람의 개인정보를 넣지 않습니다.</p>
+      </section>
+
+      <section id="next" aria-labelledby="next-title">
+        <div class="section-title"><span class="num" aria-hidden="true">07</span><h2 id="next-title">다음 수업과 프로젝트 연결</h2></div>
+        <p>이번 과제의 실패 사례와 질문은 <strong>3주차 평가 수업</strong>의 출발점입니다. 격주 과제에서 확인한 문제·실험·수정 이유를 축적해 <strong>8주차 기말 프로젝트 기획서</strong>와 최종 포트폴리오에 연결합니다.</p>
+        <ul><li><strong>8주차:</strong> 중간고사와 실시간 수업 없이 온라인 기획서 제출물로 평가합니다.</li><li><strong>16주차:</strong> 프로젝트를 실시간 온라인으로 시연·발표하고 질의응답을 진행합니다.</li></ul>
+        <p class="subtle">8주차 기획서 평가·16주차 발표가 있는 주차의 별도 과제 여부, 배점과 평가 비중은 개별 공지를 우선합니다.</p>
+      </section>
+    </main>
+    <footer><p>LLMOps · 2주차 과제 01 · 2026.09.11 안내</p><p class="screen-only">인쇄본이 필요하면 브라우저의 인쇄 메뉴에서 PDF로 저장할 수 있습니다.</p></footer>
+  </div>
+</body>
+</html>

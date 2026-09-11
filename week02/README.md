@@ -12,7 +12,7 @@
 - [사진·연구 도표의 원문과 라이선스](lecture/EXTERNAL_VISUAL_SOURCES.md)
 - [VS Code 실행 가이드](VS_CODE_GUIDE.md)
 - [실습 코드와 노트북](lab/README.md)
-- [과제 01 · 프롬프트 비교와 선택 근거](ASSIGNMENT_01.md)
+- 과제 01 · 프롬프트 비교와 선택 근거: [공유용 HTML](ASSIGNMENT_01.html) · [Markdown](ASSIGNMENT_01.md)
 - [2025년 자료에서 개선한 내용](ASIS_IMPROVEMENTS.md)
 - [실습 검증 결과](LAB_TEST_REPORT.md) · [강의안 검수 결과](lecture/QA_REPORT.md)
 
