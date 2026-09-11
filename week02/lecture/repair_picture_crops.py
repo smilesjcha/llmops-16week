@@ -21,8 +21,8 @@ NS = {"a": A, "p": P}
 
 def repair(candidate: Path, manifest: Path) -> None:
     entries = json.loads(manifest.read_text())
-    if len(entries) != 6:
-        raise ValueError("Exactly six screenshot owner slides are expected")
+    if not entries:
+        raise ValueError("Expected an explicit authored crop manifest")
     with ZipFile(candidate) as archive:
         members = archive.infolist()
         payloads = {member.filename: archive.read(member) for member in members}
@@ -30,9 +30,10 @@ def repair(candidate: Path, manifest: Path) -> None:
         name = f"ppt/slides/slide{entry['slide']}.xml"
         root = ET.fromstring(payloads[name])
         pictures = root.findall(".//p:pic", NS)
-        if len(pictures) != 1:
-            raise ValueError(f"Expected one screenshot on {name}")
-        picture = pictures[0]
+        expected_count = entry.get("pictureCount", 1)
+        if len(pictures) != expected_count:
+            raise ValueError(f"Expected {expected_count} pictures on {name}")
+        picture = pictures[entry.get("pictureIndex", 0)]
         fill = picture.find("p:blipFill", NS)
         crop = fill.find("a:srcRect", NS)
         if crop is None:

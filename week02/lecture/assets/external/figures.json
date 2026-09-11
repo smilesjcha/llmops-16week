@@ -1,0 +1,8 @@
+{
+  "apple-blank": {"file": "apple-blank.jpg", "size": [322,322], "region": [0,0,322,322]},
+  "apple-ipod": {"file": "apple-ipod.jpg", "size": [322,322], "region": [0,0,322,322]},
+  "demonstrations": {"file": "demonstrations-page2.png", "size": [1489,2105], "region": [760,165,548,237]},
+  "lost-middle": {"file": "lost-middle-page2.png", "size": [1489,2105], "region": [173,135,551,530]},
+  "tot-chain": {"file": "tree-of-thoughts.png", "size": [1139,565], "region": [233,40,215,515]},
+  "tot-tree": {"file": "tree-of-thoughts.png", "size": [1139,565], "region": [704,36,415,518]}
+}

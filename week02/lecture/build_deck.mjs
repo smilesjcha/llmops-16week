@@ -4,6 +4,7 @@ import path from 'node:path';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {Presentation, PresentationFile} from '@oai/artifact-tool';
+import {renderTeachingVisual} from './visual_layouts.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../..');
@@ -16,12 +17,14 @@ await fs.mkdir(BUILD, {recursive:true});
 const content = JSON.parse(await fs.readFile(path.join(HERE, 'slide_content.json'), 'utf8'));
 const specs = Array.isArray(content) ? content : content.slides;
 const captureSpecs = JSON.parse(await fs.readFile(path.join(HERE,'assets','captures.json'),'utf8')).images;
+const externalFigures = JSON.parse(await fs.readFile(path.join(HERE,'assets','external','figures.json'),'utf8'));
+const measuredRun = JSON.parse(await fs.readFile(path.join(HERE,'assets','ollama-results-summary.json'),'utf8'));
 const pictureCrops = [];
 const C = {black:'#050505', ink:'#191919', white:'#FFFFFF', paper:'#F7F8FA', navy:'#0B1F3A', blue:'#2563EB', soft:'#E0F0FE', gray:'#667085', line:'#D0D5DD', darkLine:'#314156', muted:'#AFB8C7'};
 const FONT='AppleGothic', MONO='Menlo';
 const p = Presentation.create({slideSize:{width:1280,height:720}});
 p.theme.colorScheme = {name:'BLACK WHITE NAVY BLUE',themeColors:{accent1:C.blue,accent2:C.navy,accent3:C.gray,accent4:C.soft,accent5:C.ink,accent6:C.line,bg1:C.white,bg2:C.black,tx1:C.ink,tx2:C.white,dk1:C.black,dk2:C.navy,lt1:C.white,lt2:C.paper,hlink:C.blue,folHlink:C.navy}};
-const boxes=[], tableOwners=[], minSizes=[], layoutNames=[], renderErrors=[];
+const boxes=[], tableOwners=[], chartOwners=[], minSizes=[], layoutNames=[], renderErrors=[];
 let current=0;
 const plain=s=>String(s??'').replace(/\*\*/g,'').replace(/`/g,'');
 const advance=(s,px,mono=false)=>[...s].reduce((a,c)=>a+(/[\u2e80-\uffff]/.test(c)?1:(mono?0.61:/[MW@]/.test(c)?0.83:/[il .,:'!|]/.test(c)?0.28:0.55))*px,0);
@@ -155,6 +158,70 @@ async function screenshot(s,spec){
   const items=spec.body??[];const w=(1152-36*(items.length-1))/Math.max(1,items.length);
   items.forEach((item,i)=>{const x=64+i*(w+36);txt(s,String(i+1).padStart(2,'0'),x,522,w,28,14,{color:C.gray,mono:true});txt(s,item,x,560,w,64,18,{color:C.ink});});
 }
+async function externalPicture(s,key,position,pictureIndex=0,pictureCount=1){
+  const item=externalFigures[key];if(!item)throw new Error(`Unknown external figure ${key}`);
+  const [sw,sh]=item.size,[x,y,w,h]=item.region;
+  const scale=Math.min(position.width/w,position.height/h);
+  const frame={left:position.left+(position.width-w*scale)/2,top:position.top+(position.height-h*scale)/2,width:w*scale,height:h*scale};
+  const crop={left:x/sw,top:y/sh,right:(sw-x-w)/sw,bottom:(sh-y-h)/sh};
+  const blob=new Uint8Array(await fs.readFile(path.join(HERE,'assets','external',item.file)));
+  s.images.add({blob,contentType:item.file.endsWith('.png')?'image/png':'image/jpeg',alt:key,fit:'cover',crop,position:frame});
+  pictureCrops.push({slide:current,filename:item.file,pictureIndex,pictureCount,crop:{l:crop.left,t:crop.top,r:crop.right,b:crop.bottom},frame});
+}
+async function researchVisual(s,spec){
+  const v=spec.visual;
+  if(spec.layout==='photo-study'){
+    await externalPicture(s,'apple-blank',{left:64,top:207,width:320,height:320},0,2);
+    await externalPicture(s,'apple-ipod',{left:424,top:207,width:320,height:320},1,2);
+    txt(s,'사과 85.61%',64,554,320,46,25,{bold:true});
+    txt(s,'iPod 99.68%',424,554,320,46,25,{bold:true});
+    txt(s,v.question,808,207,408,143,26,{bold:true});
+    txt(s,v.model,808,381,408,42,24,{bold:true});
+    txt(s,'Contrastive Language–Image\nPre-training',808,432,408,61,16,{color:C.gray});
+    txt(s,v.limitation,808,515,408,81,17,{color:C.gray});
+    txt(s,'사진별 분류 점수 · 검증된 정확도나 신뢰도가 아님',64,606,1152,28,14,{color:C.gray});
+    return;
+  }
+  if(v.asset==='demonstrations'){
+    await externalPicture(s,'demonstrations',{left:64,top:215,width:744,height:334});
+    txt(s,v.heading,871,224,345,119,27,{bold:true});
+    txt(s,v.takeaway,871,386,345,98,22);
+    txt(s,v.limitation,64,579,1152,39,19,{color:C.gray});
+  }else if(v.asset==='lost-middle'){
+    await externalPicture(s,'lost-middle',{left:64,top:181,width:455,height:435});
+    txt(s,v.heading,592,205,624,47,26,{bold:true});
+    txt(s,v.takeaway,592,282,624,95,27,{bold:true});
+    txt(s,'실습에서 고정할 조건',592,421,624,42,22,{bold:true});
+    txt(s,'입력 내용과 순서\n모델과 생성 설정',592,482,624,87,22,{color:C.gray});
+    txt(s,v.limitation,592,588,624,39,14,{color:C.gray});
+  }else if(v.asset==='tot'){
+    await externalPicture(s,'tot-chain',{left:64,top:181,width:320,height:417},0,2);
+    await externalPicture(s,'tot-tree',{left:403,top:181,width:385,height:417},1,2);
+    txt(s,v.heading,837,213,379,91,27,{bold:true});
+    txt(s,v.takeaway,837,354,379,103,22);
+    txt(s,'CoT: Chain of Thought\nToT: Tree of Thoughts',837,490,379,76,17,{color:C.gray});
+    txt(s,v.limitation,64,605,1152,29,14,{color:C.gray});
+  }else throw new Error(`Unknown research asset ${v.asset}`);
+}
+function measuredChart(s,spec){
+  const v=spec.visual;
+  txt(s,v.heading,64,181,1152,43,24,{bold:true});
+  s.charts.add('bar',{
+    position:{left:64,top:257,width:744,height:331},
+    categories:measuredRun.categories,
+    series:[{name:'전체 검사 통과',values:measuredRun.overall_pass_counts,fill:C.navy}],
+    hasLegend:false,barOptions:{direction:'column',grouping:'clustered',gapWidth:120},
+    chartFill:C.paper,plotAreaFill:C.paper,chartLine:{fill:'none',width:0},plotAreaLine:{fill:'none',width:0},
+    xAxis:{visible:true,textStyle:{typeface:FONT,fontSize:24,fill:C.ink},majorGridlines:null,line:{fill:C.gray,width:1}},
+    yAxis:{visible:true,min:0,max:3,majorUnit:1,numberFormatCode:'0',textStyle:{typeface:FONT,fontSize:20,fill:C.gray},majorGridlines:{fill:C.line,width:1},line:{fill:'none',width:0}},
+    dataLabels:{showValue:true,position:'outEnd',textStyle:{typeface:FONT,fontSize:30,fill:C.ink,bold:true}},
+  });
+  chartOwners.push(current);minSizes.push(15);
+  txt(s,'qwen3:4b-instruct',862,264,354,38,18,{mono:true,bold:true});
+  txt(s,'T01 · T03 · T07\n같은 문의 3건씩',862,325,354,86,21,{color:C.gray});
+  txt(s,v.takeaway,862,441,354,146,20,{bold:true});
+  txt(s,v.limitation,64,607,1152,28,14,{color:C.gray});
+}
 function caseLayout(s,spec){
   const colors=shell(s,spec);const y=intro(s,spec,colors);
   if(spec.columns){compare(s,spec);return;}
@@ -192,7 +259,12 @@ for(const [i,spec] of specs.entries()){
   if(!spec.notes||!spec.sources?.length)throw new Error(`Notes/sources missing ${current}`);
   if(i>=2&&spec.layout===specs[i-1].layout&&spec.layout===specs[i-2].layout)throw new Error(`Repeated layout ${current}`);
   const s=p.slides.add();layoutNames.push(spec.layout);
-  try { switch(spec.layout){
+  try { if(spec.visual){
+    shell(s,spec);
+    if(spec.layout==='photo-study'||spec.layout==='research-figure')await researchVisual(s,spec);
+    else if(spec.layout==='result-chart')measuredChart(s,spec);
+    else if(!renderTeachingVisual(s,spec,{txt,rect,rule,C,FONT,registerTable:n=>tableOwners.push(n)}))throw new Error(`Unknown visual ${spec.layout}`);
+  } else switch(spec.layout){
     case 'cover':cover(s,spec);break;case 'section':section(s,spec);break;
     case 'statement':statement(s,spec);break;case 'compare':compare(s,spec);break;
     case 'steps':steps(s,spec);break;case 'table':table(s,spec);break;
@@ -203,12 +275,13 @@ for(const [i,spec] of specs.entries()){
     case 'case':caseLayout(s,spec);break;default:throw new Error(`Unknown layout ${spec.layout}`);
   } } catch (error) {renderErrors.push(`${current}: ${error.message}`);}
   if(spec.caption)txt(s,spec.caption,64,635,1152,28,14,{color:C.gray});
-  s.speakerNotes.textFrame.setText(`${spec.notes}\n\n[Sources]\n${spec.sources.map(v=>`- ${v}`).join('\n')}\n[/Sources]`);
+  const licenseNotice=spec.visual?.asset==='tot'?`\n\n[Image license]\n${await fs.readFile(path.join(HERE,'assets','external','tree-of-thoughts-LICENSE.txt'),'utf8')}`:'';
+  s.speakerNotes.textFrame.setText(`${spec.notes}\n\n[Sources]\n${spec.sources.map(v=>`- ${v}`).join('\n')}\n[/Sources]${licenseNotice}`);
   s.speakerNotes.setVisible(true);
 }
 if(renderErrors.length)throw new Error(renderErrors.join('\n'));
 await fs.writeFile(path.join(BUILD,'geometry.json'),JSON.stringify(boxes,null,2));
-await fs.writeFile(path.join(BUILD,'manifest.json'),JSON.stringify({slides:specs.length,minFontPt:Math.min(...minSizes),tableOwners,layouts:layoutNames,palette:C},null,2));
+await fs.writeFile(path.join(BUILD,'manifest.json'),JSON.stringify({slides:specs.length,minFontPt:Math.min(...minSizes),tableOwners,chartOwners,layouts:layoutNames,palette:C},null,2));
 const candidate=path.join(BUILD,'candidate.pptx');
 await(await PresentationFile.exportPptx(p)).save(candidate);
 // This runtime substitutes center-fit crops during export. Restore the authored
@@ -219,5 +292,5 @@ execFileSync(PYTHON,[path.join(HERE,'repair_picture_crops.py'),candidate,cropMan
 const {finalizePresentation}=await import(pathToFileURL(path.join(SKILL,'container_tools/artifact_tool_utils.mjs')).href);
 const finalPath=path.join(BUILD,'final','02_week2_prompt_design_versioning.pptx');
 await fs.mkdir(path.dirname(finalPath),{recursive:true});
-await finalizePresentation({workspaceDir:ROOT,candidatePath:candidate,finalPath,explicitTotalSlideCount:72,requiredNativeTableOwnerSlides:tableOwners,requiredNativeChartOwnerSlides:[],pythonExecutable:PYTHON,integrityValidatorPath:path.join(SKILL,'container_tools/inspect_presentation_package_integrity.py'),layoutValidatorPath:path.join(SKILL,'container_tools/inspect_presentation_layout_geometry.py'),layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-bullet-geometry','--validate-heading-fit',...tableOwners.flatMap(n=>['--require-native-table-slide',String(n)])],fontPolicy:{basis:'design',families:[FONT,MONO]},verifyArtifactToolImport:true,receiptPath:path.join(BUILD,'validation.json')});
+await finalizePresentation({workspaceDir:ROOT,candidatePath:candidate,finalPath,explicitTotalSlideCount:72,requiredNativeTableOwnerSlides:tableOwners,requiredNativeChartOwnerSlides:chartOwners,materializeLiteralChartWorkbooks:chartOwners.length>0,pythonExecutable:PYTHON,integrityValidatorPath:path.join(SKILL,'container_tools/inspect_presentation_package_integrity.py'),layoutValidatorPath:path.join(SKILL,'container_tools/inspect_presentation_layout_geometry.py'),layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-bullet-geometry','--validate-heading-fit',...tableOwners.flatMap(n=>['--require-native-table-slide',String(n)])],fontPolicy:{basis:'design',families:[FONT,MONO]},verifyArtifactToolImport:true,receiptPath:path.join(BUILD,'validation.json')});
 console.log(JSON.stringify({finalPath,slides:specs.length,minFontPt:Math.min(...minSizes),nativeTables:tableOwners,layouts:[...new Set(layoutNames)]}));

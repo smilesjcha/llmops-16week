@@ -1,0 +1,19 @@
+{
+  "recorded_at": "2026-09-11T00:40:46.387734+00:00",
+  "run_id": "run-5b26cfe90918",
+  "source_report_sha256": "2d10cb72016e90f42903c0e6104bf5a5bf483482cfcf738db01c09c0f28ca003",
+  "provider": "ollama",
+  "simulation": false,
+  "model": "qwen3:4b-instruct",
+  "case_ids": ["T01", "T03", "T07"],
+  "cases_per_version": 3,
+  "categories": ["v1", "v2", "v3"],
+  "overall_pass_counts": [0, 2, 3],
+  "format_pass_counts": [0, 3, 3],
+  "semantic_evaluated_counts": [0, 3, 3],
+  "request_errors": 0,
+  "config": {"think": false, "temperature": 0, "seed": 42, "num_ctx": 4096, "num_predict": 384, "structured_decoding": false},
+  "evaluator_version": "support-rules-1.0",
+  "dataset_hash": "568aa309d1dfca6bd7492cd9ed148353b8dd73c0c55ef32062e5413b33b61007",
+  "limitation": "One local run on three synthetic inquiries per version. Not a benchmark or general model ranking. v1 semantic checks were not evaluated because JSON parsing failed."
+}
