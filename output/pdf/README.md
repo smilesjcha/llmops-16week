@@ -18,8 +18,8 @@
 | 주차 | 수업일 | 주제 | PDF | 진행 방식 | 복습 자료 |
 |---:|---:|---|---|---|---|
 | 01 | 2026.09.04 | LLM 서비스 운영의 기본 | [01주차 강의안 열기](01_week1_llmops_kickoff.pdf) | 실시간 온라인 | [영상·음성·채팅](../../week01/resources/README.md) |
-| 02 | 2026.09.11 | 프롬프트 설계와 버전 관리 | [02주차 강의안 열기](02_week2_prompt_design_versioning.pdf) | 실시간 온라인 | [실습·실행 가이드](../../week02/README.md) |
-| 03 | 2026.09.18 | 프롬프트 평가와 오류 분류 | [03주차 강의안 열기](03_week3_prompt_evaluation_error_analysis.pdf) | 실시간 온라인 | [EVAL/03 실습·실행 가이드](../../week03/README.md) |
+| 02 | 2026.09.11 | 프롬프트 설계와 버전 관리 | [02주차 강의안 열기](02_week2_prompt_design_versioning.pdf) | 실시간 온라인 | [영상·실습 가이드](../../week02/README.md) |
+| 03 | 2026.09.18 | 프롬프트 평가와 오류 분류 | [03주차 강의안 열기](03_week3_prompt_evaluation_error_analysis.pdf) | 실시간 온라인 | [영상·EVAL/03 가이드](../../week03/README.md) |
 
 2주차 강의안은 72쪽으로, 1–60쪽은 2시간 본 수업용이고 61–72쪽은 심화 참고용이다. 실습은 [VS Code 실행 가이드](../../week02/VS_CODE_GUIDE.md)를 따라 진행한다.
 
