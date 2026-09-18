@@ -353,6 +353,93 @@
       "problemMatcher": []
     },
     {
+      "label": "Week 03: Run EVAL/03",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "args": [
+        "-m",
+        "uvicorn",
+        "eval03.main:app",
+        "--app-dir",
+        "${workspaceFolder}/week03/lab",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8003",
+        "--reload"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "isBackground": true,
+      "problemMatcher": [
+        {
+          "owner": "week03-uvicorn",
+          "pattern": [
+            {
+              "regexp": "^(.*)$",
+              "message": 1
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": ".*Uvicorn running on.*",
+            "endsPattern": ".*Application startup complete.*"
+          }
+        }
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "Week 03: Smoke EVAL/03",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "args": [
+        "-m",
+        "eval03.smoke",
+        "--url",
+        "http://127.0.0.1:8003"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}/week03/lab"
+        }
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "Week 03: Test EVAL/03",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "args": [
+        "-m",
+        "pytest",
+        "-q",
+        "week03/lab/tests"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}/week03/lab"
+        }
+      },
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
       "label": "Course: Ruff check",
       "type": "process",
       "command": "${workspaceFolder}/.venv/bin/python",

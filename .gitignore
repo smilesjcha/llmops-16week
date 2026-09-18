@@ -14,6 +14,8 @@ week01/lecture/01_week1_llmops_kickoff/
 week02/lecture/build/
 week02/lecture/*.pptx.inspect.ndjson
 week02/lab/reports/
+week03/lecture/build/
+week03/lecture/node_modules
 node_modules/
 week02/lecture/node_modules
 ~$*.pptx
