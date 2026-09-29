@@ -15,6 +15,7 @@ python -m pytest -q course_labs/tests
 이미 `.venv`가 있으면 생성은 생략한다. Windows는 `py -3.11 -m venv .venv`,
 PowerShell 활성화는 `.venv\Scripts\Activate.ps1`이다. 보안 정책을 변경하지 말고 필요하면
 `.venv\Scripts\python.exe -m pip install -r requirements.txt`처럼 직접 실행한다.
+기존 환경에서 `No module named pip`가 나오면 `python -m ensurepip --upgrade` 후 설치 명령을 다시 실행한다.
 검증 기준 CPython 3.11.14, 지원 minor 3.11. 패키지 버전은 루트 requirements의 고정값을 따른다.
 
 ## Notebook 실행 순서
