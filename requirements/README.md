@@ -43,9 +43,9 @@ uv pip install -r requirements/rag-week05.txt
 |---:|---|---|
 | 01 | `requirements.txt` | TRACE/01 + Jupyter + API test |
 | 02 | `requirements.txt` | OpenAI/Ollama 호출은 선택 |
-| 03 | `requirements.txt` + `observability-week03-10.txt` | Langfuse v3 고정 |
-| 04 | `rag-week04-legacy.txt` | deprecated `pinecone-client` 재현 전용 |
-| 05 | `rag-week05.txt` | `pinecone` 7.x와 HF retrieval stack |
+| 03 | `requirements.txt` | EVAL/03 기본 실습; Langfuse profile은 선택 |
+| 04 | `requirements.txt` | 4개 notebook + 로컬 검색 앱, API 키·벡터 DB 불필요 |
+| 05 | `requirements.txt` | 4개 notebook + 검색 비교 앱, 추가 설치 불필요 |
 | 06–07 | `finetune-week06-07.txt` | CPU/macOS와 Linux CUDA 실행을 분리해야 함 |
 | 08 | 없음 | 실시간 수업 없이 기말 프로젝트 기획서 온라인 제출·평가 |
 | 09 | `requirements.txt`; 부하 테스트는 `loadtest-week09.txt` | ASGI/FastAPI stack |
@@ -68,6 +68,11 @@ AS-IS 코드는 같은 이름의 라이브러리를 서로 다른 API 세대로 
 따라서 root `requirements.txt`는 전 주차의 **공통 spine**이고, 위험한 stack은 주차별 environment로 고정한다. 이것이 설치 성공률·재현성·수업 복구 시간을 모두 개선한다.
 
 ## 검증 수준
+
+2026년 4·5주차는 `course_labs/`의 표준 라이브러리 기반 검색 구현을 사용한다.
+TF-IDF는 학습된 임베딩이 아니며, 규칙 재정렬은 신경망 reranker가 아니다.
+`rag-week04-legacy.txt`와 `rag-week05.txt`는 AS-IS 재현·선택 심화용이며 현재 필수 설치 파일이 아니다.
+새 notebook 8개는 각각 새 Python 3.11 커널에서 전체 실행했다. Ollama 연결 셀은 기본적으로 꺼져 있으며 실제 모델 호출 검증과는 구분한다.
 
 자동 검증은 비용·credential·model download 없이 실행되는 범위로 제한한다.
 

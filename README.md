@@ -27,9 +27,12 @@
 
 현재 저장소는 **Public**으로 운영한다. 강의 기록은 교수자 공개 정보와 개인정보 비식별 처리를 마친 복습본만 연결하며, 수강생 등 제3자의 이름·얼굴·프로필·소속·비공개 대화는 공개하지 않는다.
 
-- 오늘 수업: [02주차 PDF · 프롬프트 설계와 버전 관리](output/pdf/02_week2_prompt_design_versioning.pdf)
-- 오늘 실습: [Week 02 패키지](week02/README.md) · [VS Code 실행 가이드](week02/VS_CODE_GUIDE.md)
-- 이번 과제: [과제 01 · 제출물·기한·소속별 제출 경로](week02/ASSIGNMENT_01.md)
+- 4주차: [PDF · 검색 증강 생성](output/pdf/04_week4_rag_evidence.pdf) · [단계별 Notebook 실습](week04/lab/README.md)
+- 5주차: [PDF · 검색 품질 개선](output/pdf/05_week5_search_quality.pdf) · [단계별 Notebook 실습](week05/lab/README.md)
+- 이번 과제: [과제 02 · 독립 HTML](week04/assignment/assignment02.html)
+- 8주차: [기획서 제출 안내](curriculum/2026-2/web/project-submission.html) · [요약 PDF](output/pdf/08_project_proposal_guide.pdf)
+- 팀 신청: [아주대AI대학원 2–4인 팀 Google Form](https://docs.google.com/forms/d/e/1FAIpQLSd3UOP4SjCUct_RJKcgvVNGEBCpOOLmNkZPi6QFBIQAilKIag/viewform)
+- 강의·과제 HTML: 파일을 내려받아 브라우저로 열기. GitHub 파일 페이지는 HTML을 실행하지 않습니다.
 - 1주차 강의안: [01주차 PDF · LLM 서비스 운영의 기본](output/pdf/01_week1_llmops_kickoff.pdf)
 - 1주차 복습: [강의영상·음성·채팅 기록](week01/resources/README.md)
 - 확인 경로: `llmops-16week` → `output` → `pdf` → 해당 주차 PDF
@@ -48,7 +51,11 @@
 
 [AS-IS 2025년 2학기 안내](AS-IS%202025%202nd%20semester/README.md)에서 문서와 실습자료를 확인한다.
 
-현재 수업은 [Week 02 패키지](week02/README.md)에서 시작한다. 1주차 수업과 공통 환경 설정은 [Week 01 패키지](week01/README.md)에 보존한다.
+현재 수업은 [Week 04 패키지](week04/README.md)와 [Week 05 패키지](week05/README.md)에서 시작한다.
+실습은 문서 분할·검색·평가·순위 결합·API 검증을 직접 변경하는 8개 notebook(272셀, 코드96셀)로 구성한다.
+필수 실습은 모델 다운로드·API 키 없이 루트 `.venv`에서 실행한다. 실제 Ollama 임베딩·생성은 선택 경로다.
+학생 연락처와 팀 신청 응답은 제한된 Google Drive에만 보관하며 공개 GitHub에 포함하지 않는다.
+1주차 수업과 공통 환경 설정은 [Week 01 패키지](week01/README.md)에 보존한다.
 
 ### Week 02 · 프롬프트 설계와 버전 관리
 

@@ -17,6 +17,11 @@ week02/lab/reports/
 week03/lecture/build/
 week03/lecture/node_modules
 node_modules/
+scripts/node_modules
+week*/lecture/build/
+output/validation/
+.chart-data-*/
+scripts/capture_sink.py
 week02/lecture/node_modules
 ~$*.pptx
 

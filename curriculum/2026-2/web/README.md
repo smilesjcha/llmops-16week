@@ -5,8 +5,10 @@
 - `course-roadmap.html`: 16주 일정, 현재 주차, 실시간 온라인 수업과 예외 운영, 프로젝트 구간
 - `project-proposal-2pager.html`: 화면과 인쇄에서 사용하는 2페이지 제안서
 - `project-prd.html`: 제품 요구사항 문서(Product Requirements Document, PRD) 기획서
+- `project-submission.html`: 팀 신청·제출 경로·평가 기준·도구·체크리스트
+- `examples/`: 글쓰기 코치의 2Pager와 PRD 예시
 
-모든 페이지는 검정·흰색·네이비·파랑만 사용하고, 한글 어절의 임의 분리를 막는 공통 스타일을 사용한다. 과정 로드맵은 기본적으로 1주차를 강조하며 주소의 `week` 값으로 현재 주차를 바꿀 수 있다.
+모든 페이지는 검정·흰색·네이비·파랑만 사용한다. 새 페이지는 CSS와 JavaScript를 파일 안에 포함하므로 HTML 하나를 내려받아 바로 공유·실행할 수 있다. 로드맵은 기본적으로 4주차를 강조하며 주소의 `week` 값으로 현재 주차를 바꿀 수 있다.
 
 ```text
 course-roadmap.html?week=1
@@ -22,7 +24,7 @@ course-roadmap.html?week=16
 python -m http.server 4173 --directory curriculum/2026-2/web
 ```
 
-브라우저에서 <http://127.0.0.1:4173/course-roadmap.html>을 연다. `project-proposal-2pager.html`은 브라우저의 인쇄 기능에서 A4 두 페이지로 저장할 수 있다.
+브라우저에서 <http://127.0.0.1:4173/course-roadmap.html>을 연다. HTML을 직접 열어도 동작한다. 양식은 화면에서 편집한 뒤 작성본 HTML 저장 또는 인쇄 → PDF로 보관한다. GitHub 파일 화면은 웹페이지를 실행하지 않으므로 Download raw file로 내려받아 브라우저에서 연다. 내용이 긴 2Pager는 인쇄 미리보기에서 분량을 줄여 두 페이지로 맞춘다.
 
 ## 운영 기준
 

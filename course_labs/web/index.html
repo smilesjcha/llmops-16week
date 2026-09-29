@@ -1,0 +1,80 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>W__WEEK__ 검색 실험실</title>
+<style> *{box-sizing:border-box}body{margin:0;background:#f6f7f9;color:#17191d;font:16px/1.65 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif}header{background:#08090b;color:white;padding:28px 5vw}header small{color:#b4c0d0}h1{font-size:32px;margin:8px 0}main{max-width:1300px;padding:32px;margin:auto}.grid{display:grid;grid-template-columns:1fr 1.6fr;gap:36px}section{background:white;padding:24px;border:1px solid #dce0e6}h2{font-size:22px;margin:0 0 16px}label{display:block;margin:12px 0 4px}input,select,button{font:inherit;padding:10px;border:1px solid #cbd2dc;border-radius:0}input[type=text]{width:100%}button{background:#102747;color:white;cursor:pointer;margin:14px 6px 0 0}.settings{display:grid;grid-template-columns:1fr 1fr;gap:14px}.settings input{width:100%}.checks label{display:inline-block;margin-right:14px}.note{color:#536174;font-size:14px}.hit{border-top:1px solid #dce0e6;padding:18px 0}.hit h3{margin:0;font-size:19px}.hit small{color:#536174}.answer{border-left:3px solid #2563eb;padding:8px 18px;margin:20px 0}table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;border-bottom:1px solid #dde3ec;padding:9px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Menlo,monospace}#status{min-height:28px}.banner{border-bottom:1px solid #dce0e6;padding:0 0 20px;margin-bottom:24px}@media(max-width:850px){.grid{grid-template-columns:1fr}main{padding:16px}}</style>
+<style>.grid{grid-template-columns:minmax(0,1fr) minmax(0,1.6fr)}section,.settings>div{min-width:0}.settings select{width:100%}button{max-width:100%}table{display:block;overflow:auto}@media(max-width:850px){.grid{grid-template-columns:minmax(0,1fr)}}@media(max-width:500px){.settings{grid-template-columns:1fr}}</style>
+<header><small>LLMOPS / WEEK __WEEK__ / LOCAL LAB</small><h1>검색 실험실</h1><div>문서 · 검색 순위 · 출처 · 평가 결과</div></header><main>
+<div class="banner">교육용 합성 정책 18개 · 모델 다운로드와 API 키 불필요 · 응답은 검색 원문 발췌이며 LLM 생성이 아닙니다.</div>
+<div class="grid"><section><h2>01 검색 설정</h2><label for="query">질문</label><input id="query" type="text" value="상품 반품 기간"><div class="settings"><div><label for="method">검색 방식</label><select id="method"><option value="bm25">BM25 키워드 검색</option><option value="tfidf">TF-IDF 코사인 검색</option><option value="rrf">RRF 순위 결합</option></select></div><div><label for="role">수업용 접근 역할</label><select id="role"><option value="public">공개 문서만</option><option value="staff">직원 문서 포함</option></select></div><div><label for="size">문서 조각 크기 (문자)</label><input id="size" type="number" value="120" min="30" max="600"></div><div><label for="overlap">겹치는 구간 (문자)</label><input id="overlap" type="number" value="24" min="0" max="200"></div><div><label for="k">검색 문서 수 (k)</label><input id="k" type="number" value="3" min="1" max="8"></div><div><label for="as_of">기준 날짜</label><input id="as_of" type="date" value="2026-09-29"></div></div><div class="checks"><label><input id="expand" type="checkbox"> 동의어 확장</label><label><input id="rerank" type="checkbox"> 규칙 재정렬</label></div><p class="note">TF-IDF는 학습된 임베딩이 아닙니다. 규칙 재정렬은 신경망 reranker가 아닙니다. 역할 선택은 수업용 모의 설정이며 인증 기능이 아닙니다.</p><button id="search">검색 실행</button><button id="evaluate">16개 질의 평가</button><button id="download" disabled>결과 JSON 저장</button><div id="status" role="status"></div></section>
+<section><h2>02 근거와 결과</h2><div id="result">검색 후 문서 ID·버전·원문 위치를 확인합니다.</div></section></div>
+<section style="margin-top:28px"><h2>03 관찰 기록</h2><p>한 번에 설정 하나만 변경합니다. 어떤 질의의 근거와 순위가 달라졌는지 설명합니다.</p><div id="summary">평가는 정답 문서 ID를 기준으로 합니다. 답이 없는 질의는 Recall·MRR 평균에서 제외하고 보류 여부를 따로 집계합니다.</div></section></main>
+<script>
+let latest;
+const el = id => document.getElementById(id);
+// Treat retrieved text as data, never as executable HTML.
+const esc = s => String(s).replace(/[&<>"']/g, c => ({
+  '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+}[c]));
+const config = () => ({
+  query: el('query').value, method: el('method').value,
+  size: +el('size').value, overlap: +el('overlap').value, k: +el('k').value,
+  as_of: el('as_of').value, role: el('role').value,
+  expand: el('expand').checked, rerank: el('rerank').checked
+});
+
+async function run(path) {
+  latest = null;
+  el('download').disabled = true;
+  el('search').disabled = true;
+  el('evaluate').disabled = true;
+  el('result').textContent = '새 설정으로 실행 중 · 이전 결과 초기화';
+  el('summary').textContent = '이번 실행 결과를 확인합니다.';
+  el('status').textContent = '실행 중';
+  try {
+    const res = await fetch('/api/' + path, {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(config())
+    });
+    const data = await res.json();
+    if (!res.ok) throw Error(JSON.stringify(data.detail));
+    latest = data;
+    el('download').disabled = false;
+    el('status').textContent = '완료 · JSON 저장 가능';
+    if (path === 'search') {
+      el('result').innerHTML = `
+        <div class="note">준비 질의: ${esc(data.prepared_query)}<br>
+        허용 조각 ${data.eligible_chunks} · 제외 조각 ${data.excluded_chunks} · ${data.elapsed_ms.toFixed(2)} ms</div>
+        <div class="answer"><strong>${data.answer.status === 'abstain' ? '답변 보류' : '근거 원문 발췌'}</strong>
+        <p>${esc(data.answer.text)}</p><small>${data.answer.citations.map(c => esc(c.doc_id+' / v'+c.version+' / '+c.start+'–'+c.end)).join('<br>')}</small></div>
+      ` + data.hits.map((hit, i) => `
+        <div class="hit"><h3>${i+1}. ${esc(hit.chunk.title)}</h3>
+        <small>${esc(hit.chunk.id)} · v${esc(hit.chunk.version)} · ${hit.score.toFixed(4)} · ${esc(hit.method)}</small>
+        <p>${esc(hit.chunk.text)}</p></div>
+      `).join('');
+    } else {
+      el('result').textContent = '16개 질의 평가 완료 · 아래 관찰 기록에서 질의별 결과를 확인하세요.';
+      el('summary').innerHTML = '<p class="note">평가는 각 질의의 역할·기준 날짜를 고정합니다. 화면의 역할·날짜는 개별 검색에만 적용됩니다.</p>'
+        + '<pre>' + esc(JSON.stringify(data.summary, null, 2)) + '</pre>'
+        + '<table><thead><tr><th>질의</th><th>검색 문서</th><th>Recall</th><th>MRR</th><th>보류</th></tr></thead><tbody>'
+        + data.rows.map(row => `<tr><td>${esc(row.id+' '+row.query)}</td><td>${esc(row.retrieved.join(', '))}</td>
+          <td>${row.recall === null ? '대상 아님' : row.recall.toFixed(2)}</td>
+          <td>${row.mrr === null ? '대상 아님' : row.mrr.toFixed(2)}</td><td>${row.abstained ? '예' : '아니오'}</td></tr>`).join('')
+        + '</tbody></table>';
+    }
+  } catch (error) {
+    el('status').textContent = '오류: ' + error.message;
+    el('result').textContent = '이번 실행이 실패했습니다. 입력 설정을 수정한 뒤 다시 실행하세요.';
+  } finally {
+    el('search').disabled = false;
+    el('evaluate').disabled = false;
+  }
+}
+el('search').onclick = () => run('search');
+el('evaluate').onclick = () => run('evaluate');
+el('download').onclick = () => {
+  const url = URL.createObjectURL(new Blob([JSON.stringify(latest, null, 2)], {type:'application/json'}));
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'week__WEEK__-retrieval-report.json';
+  link.click();
+  URL.revokeObjectURL(url);
+};
+</script></html>

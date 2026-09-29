@@ -1,0 +1,18 @@
+[
+ {"id":"Q01","split":"dev","query":"상품 반품 기간","relevant":["D01"]},
+ {"id":"Q02","split":"dev","query":"단순 변심 반품 배송비","relevant":["D02"]},
+ {"id":"Q03","split":"dev","query":"상품 크기 교환 품절","relevant":["D04"]},
+ {"id":"Q04","split":"dev","query":"돈은 언제 돌려줘요","relevant":["D03"]},
+ {"id":"Q05","split":"dev","query":"검색 출처 문서 버전 표시","relevant":["D11"]},
+ {"id":"Q06","split":"dev","query":"상품 되돌려 보내는 기간","relevant":["D01"]},
+ {"id":"Q07","split":"dev","query":"화성 우주 정거장 운임","relevant":[]},
+ {"id":"Q08","split":"dev","query":"내부 승인 티켓 EX-77","relevant":[],"role":"public"},
+ {"id":"Q09","split":"test","query":"출고 후 주소 변경 가능","relevant":["D06"]},
+ {"id":"Q10","split":"test","query":"포인트 적립 시점과 사용 기한","relevant":["D07"]},
+ {"id":"Q11","split":"test","query":"사용자 문서 삭제 인덱스 캐시","relevant":["D15"]},
+ {"id":"Q12","split":"test","query":"검색 근거 부족 답변 보류","relevant":["D12"]},
+ {"id":"Q13","split":"test","query":"반품 배송비와 환불 처리 기간","relevant":["D02","D03"]},
+ {"id":"Q14","split":"test","query":"2026년 8월 반품 기간","relevant":["D08"],"as_of":"2026-08-15"},
+ {"id":"Q15","split":"test","query":"목성 항공권 운항 시간","relevant":[]},
+ {"id":"Q16","split":"test","query":"내부 승인 티켓 EX-77","relevant":["D09"],"role":"staff"}
+]

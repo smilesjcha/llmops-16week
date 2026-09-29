@@ -440,6 +440,34 @@
       "problemMatcher": []
     },
     {
+      "label": "Week 04: Run retrieval lab",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "windows": {"command": "${workspaceFolder}/.venv/Scripts/python.exe"},
+      "args": ["-m", "uvicorn", "week04.lab.rag04.main:app", "--host", "127.0.0.1", "--port", "8004"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Week 05: Run search lab",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "windows": {"command": "${workspaceFolder}/.venv/Scripts/python.exe"},
+      "args": ["-m", "uvicorn", "week05.lab.search05.main:app", "--host", "127.0.0.1", "--port", "8005"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Week 04–05: Test retrieval",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "windows": {"command": "${workspaceFolder}/.venv/Scripts/python.exe"},
+      "args": ["-m", "pytest", "-q", "course_labs/tests"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
       "label": "Course: Ruff check",
       "type": "process",
       "command": "${workspaceFolder}/.venv/bin/python",
