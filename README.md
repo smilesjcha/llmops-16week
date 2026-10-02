@@ -10,16 +10,18 @@
 - [16주 과정 로드맵](curriculum/2026-2/web/course-roadmap.html)
 - [2페이지 프로젝트 제안서](curriculum/2026-2/web/project-proposal-2pager.html)
 - [제품 요구사항 문서](curriculum/2026-2/web/project-prd.html)
+- [기획서 Word 양식](week08/templates/08_project_proposal_word_template.docx) · [Word 기반 PDF](output/pdf/08_project_proposal_word_template.pdf) · [PPT 양식](week08/templates/08_project_proposal_ppt_template.pptx)
 - 수업 운영: 16주 전체 대면 수업 없이 온라인으로 진행하며, 정규 수업은 실시간 강의를 원칙으로 운영
-- 8주차: 중간고사와 실시간 강의 없이 기말 프로젝트 기획서 0.1을 온라인으로 제출·평가
+- 7주차: 프로젝트 기획서 초안 0.1 제출·교수 피드백
+- 8주차: 중간고사와 실시간 강의 없이 수정본 0.2를 온라인으로 제출·평가
 - 16주차: 서비스 구현·평가·시연·포트폴리오 발표를 실시간 온라인으로 진행
 - 대상: 특정 대학에 한정하지 않는 대학생·대학원생 대상 통합 강좌
 - 교수: 차성재 · 무신사 Core AI PM × AI 대학원 겸임교수
   - AI: Artificial Intelligence · PM: Product Manager
 
-매주의 실행 증거와 의사결정 기록을 기획서에 누적하고, 교수 설계 리뷰 이후 수정 이력을 기말 프로젝트 포트폴리오로 연결한다. 모든 수업은 온라인으로 운영하며, 9월 25일 추석과 10월 9일 한글날 주차만 정규 실시간 온라인 강의 대신 녹화 강의영상을 업로드한다. 두 주차는 휴강이 아니다. 8주차는 실시간 수업 없이 온라인 제출물만으로 평가하고, 16주차 프로젝트 발표는 실시간 온라인으로 진행한다. 배점·영상 시청·제출 일정은 해당 학기 수업 공지와 소속별 제출 안내를 따른다.
+매주의 실행 증거와 의사결정 기록을 기획서에 누적하고, 교수 설계 리뷰 이후 수정 이력을 기말 프로젝트 포트폴리오로 연결한다. 대면 수업은 없다. 4주차 추석에는 녹화영상을 업로드했고, 6주차 10월 9일 한글날에는 실시간 수업·녹화영상·신규 과제가 없다. 7주차 10월 16일 온라인 실시간 강의를 이어가며 기획서 초안을 검토한다. 8주차는 실시간 수업 없이 수정본 제출물로 평가하고, 16주차 발표는 실시간 온라인이다. 정확한 시각과 제출 채널은 소속별 공지를 따른다.
 
-**2주차부터 격주 과제**를 진행하며, 출제 후 **일주일 이내**에 제출한다. 첫 과제는 [과제 01 · 프롬프트 비교와 선택 근거](week02/ASSIGNMENT_01.md)이며 **2026년 9월 18일 이내** 제출이다. 제출은 [소속별 경로 안내](week02/ASSIGNMENT_01.md#제출-경로와-일정)에 따라 온라인 학습관리시스템(Learning Management System, LMS) 또는 이메일을 이용한다. 공개 GitHub에는 과제와 개인정보를 올리지 않는다. 8·16주차의 별도 과제 여부와 평가 비중은 해당 주차 공지를 우선한다.
+과제 01은 [프롬프트 비교](week02/ASSIGNMENT_01.md), 과제 02는 [검색 근거와 개선](week04/assignment/assignment02.html)이다. 과제 02는 **2026년 10월 8일(목)까지** 제출한다. 6주차 신규 과제는 없다. 제출은 소속별 LMS 또는 공지된 담당 교수 이메일을 이용하며, 정확한 마감 시각은 소속별 공지를 따른다. 공개 GitHub에는 과제와 개인정보를 올리지 않는다.
 
 ## 학생용 주차별 강의안
 
@@ -29,7 +31,7 @@
 
 - 4주차: [PDF · 검색 증강 생성](output/pdf/04_week4_rag_evidence.pdf) · [단계별 Notebook 실습](week04/lab/README.md)
 - 5주차: [PDF · 검색 품질 개선](output/pdf/05_week5_search_quality.pdf) · [단계별 Notebook 실습](week05/lab/README.md)
-- 이번 과제: [과제 02 · 독립 HTML](week04/assignment/assignment02.html)
+- 이번 과제: [과제 02 · 독립 HTML · 10월 8일(목)까지](week04/assignment/assignment02.html)
 - 8주차: [기획서 제출 안내](curriculum/2026-2/web/project-submission.html) · [요약 PDF](output/pdf/08_project_proposal_guide.pdf)
 - 팀 신청: [아주대AI대학원 2–4인 팀 Google Form](https://docs.google.com/forms/d/e/1FAIpQLSd3UOP4SjCUct_RJKcgvVNGEBCpOOLmNkZPi6QFBIQAilKIag/viewform)
 - 강의·과제 HTML: 파일을 내려받아 브라우저로 열기. GitHub 파일 페이지는 HTML을 실행하지 않습니다.

@@ -44,7 +44,9 @@ WEEK 05 · 2026.10.02 · 온라인 실시간
 
 01–03, 05, 07, 09–15 · 온라인 실시간 강의
 
-04 · 09.25 / 06 · 10.09 · 휴일 주간 · 녹화영상 업로드로 대체
+04 · 09.25 · 추석 · 녹화영상 업로드
+
+06 · 10.09 · 한글날 휴일 · 수업·영상·신규 과제 없음
 
 08 · 10.23 · 중간고사 없음 · 기획서 온라인 제출·평가
 
@@ -52,7 +54,7 @@ WEEK 05 · 2026.10.02 · 온라인 실시간
 
 
 
-온라인 수업 운영. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 결과 예측을 요청한다. 주차 · 운영 · 01–03, 05, 07, 09–15 · 온라인 실시간 강의 · 04 · 09.25 / 06 · 10.09 · 휴일 주간 · 녹화영상 업로드로 대체 · 08 · 10.23 · 중간고사 없음 · 기획서 온라인 제출·평가 · 16 · 12.18 · 온라인 실시간 프로젝트 발표. 실습 단계에서는 같은 조건으로 실행하고 한 변수만 변경해 기록한다. 교육용 합성 자료와 실제 모델 실행 범위를 구분하며, 확인되지 않은 일반 성능을 주장하지 않는다.
+온라인 수업 운영. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 결과 예측을 요청한다. 주차 · 운영 · 01–03, 05, 07, 09–15 · 온라인 실시간 강의 · 04 · 09.25 · 추석 · 녹화영상 업로드 · 06 · 10.09 · 한글날 휴일 · 수업·영상·신규 과제 없음 · 08 · 10.23 · 중간고사 없음 · 기획서 온라인 제출·평가 · 16 · 12.18 · 온라인 실시간 프로젝트 발표. 실습 단계에서는 같은 조건으로 실행하고 한 변수만 변경해 기록한다. 교육용 합성 자료와 실제 모델 실행 범위를 구분하며, 확인되지 않은 일반 성능을 주장하지 않는다.
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
@@ -88,15 +90,15 @@ W05 · 검색 개선 · 검색 방식·질의 표현·평가 · 필요한 자료
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 7. 이번 주의 과제 운영
+## 7. 과제 02와 다음 일정
 
-새 과제 출제 없이 과제 02 개선·피드백
+4주차 과제 02 · 10월 8일(목)까지 제출
 
-격주 과제 · 다음 출제는 6주차 · 온라인 제출 기준은 공지 확인
+6주차 10월 9일(금)은 휴일 · 수업·영상·새 과제 없음
 
 
 
-이번 주의 과제 운영. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 결과 예측을 요청한다. 새 과제 출제 없이 과제 02 개선·피드백 · 격주 과제 · 다음 출제는 6주차 · 온라인 제출 기준은 공지 확인. 실습 단계에서는 같은 조건으로 실행하고 한 변수만 변경해 기록한다. 교육용 합성 자료와 실제 모델 실행 범위를 구분하며, 확인되지 않은 일반 성능을 주장하지 않는다.
+과제 02와 다음 일정. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 결과 예측을 요청한다. 4주차 과제 02 · 10월 8일(목)까지 제출 · 6주차 10월 9일(금)은 휴일 · 수업·영상·새 과제 없음. 실습 단계에서는 같은 조건으로 실행하고 한 변수만 변경해 기록한다. 교육용 합성 자료와 실제 모델 실행 범위를 구분하며, 확인되지 않은 일반 성능을 주장하지 않는다.
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
@@ -114,7 +116,21 @@ W05 · 검색 개선 · 검색 방식·질의 표현·평가 · 필요한 자료
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 9. 검색 방식의 이해
+## 9. 표현 차이가 만든 검색 실패
+
+설정 · 첫 관련 문서 · 답변 · 읽을 점
+
+기본 BM25 · 검색되지 않음 · 보류 · 표현이 다른 질의
+
+동의어 확장 · D03 · 1위 · 보류 · 찾아도 발췌 조건 미충족
+
+합성 질의 “돈은 언제 돌려줘요” · 2026.09.29 공개 자료 · 검색과 답변을 따로 평가
+
+표현 차이가 만든 검색 실패. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 결과 예측을 요청한다. 합성 질의 “돈은 언제 돌려줘요” · 2026.09.29 공개 자료 · 검색과 답변을 따로 평가. 실습 단계에서는 같은 조건으로 실행하고 한 변수만 변경해 기록한다. 교육용 합성 자료와 실제 모델 실행 범위를 구분하며, 확인되지 않은 일반 성능을 주장하지 않는다.
+
+출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
+
+## 10. 검색 방식의 이해
 
 Sparse · 희소 표현 / Dense · 밀집 표현
 
@@ -126,7 +142,7 @@ Sparse · 희소 표현 / Dense · 밀집 표현
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 10. 희소 표현과 밀집 표현
+## 11. 희소 표현과 밀집 표현
 
 희소 표현 · sparse · 단어별 빈도·가중치 · BM25·TF-IDF 등 어휘 기반
 
@@ -138,7 +154,7 @@ Sparse · 희소 표현 / Dense · 밀집 표현
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 11. 키워드 검색의 흐름
+## 12. 키워드 검색의 흐름
 
 텍스트 정리
 
@@ -154,7 +170,7 @@ Sparse · 희소 표현 / Dense · 밀집 표현
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 12. 한국어 토큰화 예시
+## 13. 한국어 토큰화 예시
 
 반품 / 반품은 / 반품할
 
@@ -168,7 +184,7 @@ Sparse · 희소 표현 / Dense · 밀집 표현
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 13. 단어와 문자 n-gram
+## 14. 단어와 문자 n-gram
 
 단어만 · 단어 의미와 경계를 유지 · 조사·띄어쓰기 변화에 약함
 
@@ -180,7 +196,7 @@ Sparse · 희소 표현 / Dense · 밀집 표현
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 14. TF-IDF · 단어 가중치
+## 15. TF-IDF · 단어 가중치
 
 Term Frequency–Inverse Document Frequency
 
@@ -194,7 +210,7 @@ TF-IDF · 단어 가중치. 도식이나 예시를 먼저 관찰한 뒤 수강�
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 15. 문서 빈도와 구분력
+## 16. 문서 빈도와 구분력
 
 
 
@@ -204,7 +220,7 @@ TF-IDF · 단어 가중치. 도식이나 예시를 먼저 관찰한 뒤 수강�
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 16. 코사인 유사도
+## 17. 코사인 유사도
 
 벡터 내적 / 두 벡터 길이의 곱
 
@@ -218,7 +234,7 @@ TF-IDF 벡터는 학습된 의미 임베딩이 아닙니다.
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 17. BM25의 동작
+## 18. BM25의 동작
 
 단어 빈도 포화 · 문서 길이 정규화
 
@@ -230,7 +246,7 @@ BM25의 동작. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 결�
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 18. BM25 · 검색 점수
+## 19. BM25 · 검색 점수
 
 Best Matching 25 · 어휘 기반 순위 함수
 
@@ -244,7 +260,7 @@ BM25 · 검색 점수. 도식이나 예시를 먼저 관찰한 뒤 수강생에�
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 19. 빈도 포화의 효과
+## 20. 빈도 포화의 효과
 
 
 
@@ -254,7 +270,7 @@ BM25 · 검색 점수. 도식이나 예시를 먼저 관찰한 뒤 수강생에�
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 20. 문서 길이의 효과
+## 21. 문서 길이의 효과
 
 
 
@@ -264,7 +280,7 @@ BM25 · 검색 점수. 도식이나 예시를 먼저 관찰한 뒤 수강생에�
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 21. BM25 설정
+## 22. BM25 설정
 
 설정 · 의미 · 실습 기준
 
@@ -282,7 +298,7 @@ BM25 설정. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 결과 
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 22. TF-IDF와 BM25
+## 23. TF-IDF와 BM25
 
 TF-IDF + cosine · 정규화된 어휘 벡터 비교 · 간단한 기준 검색기
 
@@ -294,7 +310,7 @@ TF-IDF와 BM25. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 결�
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 23. 검색 점수의 척도
+## 24. 검색 점수의 척도
 
 BM25 점수와 코사인 점수는 다른 척도입니다.
 
@@ -306,7 +322,23 @@ BM25 점수와 코사인 점수는 다른 척도입니다.
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 24. 선택 실습 · 실제 임베딩
+## 25. 같은 문서의 서로 다른 점수
+
+검색기 · 질의 · D01 점수 · 해석
+
+BM25 · 상품 반품 기간 · 5.721 · 해당 방식 안의 순위
+
+TF-IDF · 상품 반품 기간 · 0.289 · 코사인 유사도
+
+RRF · 상품 반품 기간 · 0.033 · 두 순위의 역수 결합
+
+같은 합성 문서·질의·기본 설정의 예시 · 5.721과 0.289를 확률처럼 비교하지 않음
+
+같은 문서의 서로 다른 점수. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 결과 예측을 요청한다. 같은 합성 문서·질의·기본 설정의 예시 · 5.721과 0.289를 확률처럼 비교하지 않음. 실습 단계에서는 같은 조건으로 실행하고 한 변수만 변경해 기록한다. 교육용 합성 자료와 실제 모델 실행 범위를 구분하며, 확인되지 않은 일반 성능을 주장하지 않는다.
+
+출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
+
+## 26. 선택 실습 · 실제 임베딩
 
 자료 · 안전한 문서 · Ollama embed · 문서 벡터
 
@@ -318,7 +350,7 @@ BM25 점수와 코사인 점수는 다른 척도입니다.
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 25. 기준선과 모델 검색
+## 27. 기준선과 모델 검색
 
 필수 기준선 · 작은 자료 · 빠른 실행 · 원리·실패·평가를 먼저 확인
 
@@ -330,7 +362,7 @@ BM25 점수와 코사인 점수는 다른 척도입니다.
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 26. 순위 결합과 재정렬
+## 28. 순위 결합과 재정렬
 
 후보 생성 · 결합 · 재정렬을 분리
 
@@ -342,7 +374,7 @@ BM25 점수와 코사인 점수는 다른 척도입니다.
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 27. 하이브리드 검색의 구조
+## 29. 하이브리드 검색의 구조
 
 경로 A · 질문 · 키워드 검색 · 후보 A
 
@@ -354,7 +386,7 @@ BM25 점수와 코사인 점수는 다른 척도입니다.
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 28. 검색 파이프라인
+## 30. 검색 파이프라인
 
 후보 생성
 
@@ -370,7 +402,7 @@ BM25 점수와 코사인 점수는 다른 척도입니다.
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 29. RRF · 순위 역수 결합
+## 31. RRF · 순위 역수 결합
 
 Reciprocal Rank Fusion
 
@@ -384,7 +416,7 @@ RRF · 순위 역수 결합. 도식이나 예시를 먼저 관찰한 뒤 수강�
 
 출처: https://cormack.uwaterloo.ca/cormacksigir09-rrf.pdf, repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 30. RRF의 계산 예시
+## 32. RRF의 계산 예시
 
 A · 검색기1 1위 + 검색기2 3위
 
@@ -398,7 +430,23 @@ RRF의 계산 예시. 도식이나 예시를 먼저 관찰한 뒤 수강생에�
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 31. 점수 결합과 순위 결합
+## 33. RRF 순위 계산 연습
+
+후보 · 검색기 1 · 검색기 2 · RRF 점수
+
+A · 1위 · 3위 · 0.032266
+
+B · 2위 · 1위 · 0.032522
+
+C · 3위 · 후보 없음 · 0.015873
+
+constant=60 · 같은 검색기 안 중복은 1회만 기여 · B > A > C
+
+RRF 순위 계산 연습. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 결과 예측을 요청한다. constant=60 · 같은 검색기 안 중복은 1회만 기여 · B > A > C. 실습 단계에서는 같은 조건으로 실행하고 한 변수만 변경해 기록한다. 교육용 합성 자료와 실제 모델 실행 범위를 구분하며, 확인되지 않은 일반 성능을 주장하지 않는다.
+
+출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
+
+## 34. 점수 결합과 순위 결합
 
 점수 결합 · 점수 척도·정규화·가중치 필요 · 후보 분포 변화에 민감
 
@@ -410,7 +458,7 @@ RRF 순위 결합 · 점수 대신 순위를 사용 · 동점·중복·상수 �
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 32. 중복 후보의 처리
+## 35. 중복 후보의 처리
 
 같은 검색 목록에서 문서가 중복되어도 기여는 한 번
 
@@ -424,7 +472,7 @@ RRF 순위 결합 · 점수 대신 순위를 사용 · 동점·중복·상수 �
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 33. 후보 수와 정답 누락
+## 36. 후보 수와 정답 누락
 
 전체 허용 자료
 
@@ -440,7 +488,7 @@ RRF 순위 결합 · 점수 대신 순위를 사용 · 동점·중복·상수 �
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 34. 재정렬 방식
+## 37. 재정렬 방식
 
 규칙 기반 재정렬 · 질문 단어의 원문 포함 비율 · 가볍지만 의미·부정·예외에 한계
 
@@ -452,7 +500,7 @@ RRF 순위 결합 · 점수 대신 순위를 사용 · 동점·중복·상수 �
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 35. 재정렬 효과와 한계
+## 38. 재정렬 효과와 한계
 
 순위 변경과 새 근거 발견은 다른 작업입니다.
 
@@ -464,7 +512,7 @@ RRF 순위 결합 · 점수 대신 순위를 사용 · 동점·중복·상수 �
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 36. 복합 질문의 검색
+## 39. 복합 질문의 검색
 
 질문 범위 파악
 
@@ -480,7 +528,7 @@ RRF 순위 결합 · 점수 대신 순위를 사용 · 동점·중복·상수 �
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 37. 단계별 Notebook 실습
+## 40. 단계별 Notebook 실습
 
 01 어휘 검색 · 02 결합·재정렬
 
@@ -492,7 +540,7 @@ RRF 순위 결합 · 점수 대신 순위를 사용 · 동점·중복·상수 �
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 38. 실습 파일 구성
+## 41. 실습 파일 구성
 
 노트북 · 핵심 실험
 
@@ -510,7 +558,7 @@ RRF 순위 결합 · 점수 대신 순위를 사용 · 동점·중복·상수 �
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 39. Notebook 실행과 기록
+## 42. Notebook 실행과 기록
 
 예측 · 결과를 보기 전 정답 문서·순위 예상
 
@@ -524,7 +572,7 @@ Notebook 실행과 기록. 도식이나 예시를 먼저 관찰한 뒤 수강생
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 40. 실습 01 · 토큰 확인
+## 43. 실습 01 · 토큰 확인
 
 tokenize('반품은 수령 후 가능합니다', False)
 
@@ -538,7 +586,7 @@ tokenize('반품은 수령 후 가능합니다', True)
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 41. 실습 01 · 검색 방식 비교
+## 44. 실습 01 · 검색 방식 비교
 
 for method in ['tfidf', 'bm25']:
 
@@ -552,7 +600,7 @@ for method in ['tfidf', 'bm25']:
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 42. 실습 01 · 길이 보정
+## 45. 실습 01 · 길이 보정
 
 
 
@@ -562,7 +610,7 @@ b만 바꿔 짧은 문서·긴 문서의 상대 점수 비교
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 43. 실습 01 · 표현 실패
+## 46. 실습 01 · 표현 실패
 
 문서 용어: 환불 처리 기간
 
@@ -576,7 +624,7 @@ b만 바꿔 짧은 문서·긴 문서의 상대 점수 비교
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 44. 실습 02 · 후보 비교
+## 47. 실습 02 · 후보 비교
 
 BM25 · 원문 조각의 순위
 
@@ -590,7 +638,7 @@ RRF · 공통 후보·순위 역수 결합
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 45. 실습 02 · RRF 실행
+## 48. 실습 02 · RRF 실행
 
 bm = index.search(query, 'bm25', 8)
 
@@ -606,7 +654,7 @@ hits = reciprocal_rank_fusion([bm, tf],
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 46. 실습 02 · constant 비교
+## 49. 실습 02 · constant 비교
 
 
 
@@ -616,7 +664,7 @@ hits = reciprocal_rank_fusion([bm, tf],
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 47. 실습 02 · 재정렬 실행
+## 50. 실습 02 · 재정렬 실행
 
 hits = retrieve(query, method='rrf', k=5)['hits']
 
@@ -632,7 +680,7 @@ print([(h['chunk']['doc_id'], h['score'])
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 48. 실습 02 · 복합 질문
+## 51. 실습 02 · 복합 질문
 
 반품 배송비와 환불 처리 기간
 
@@ -646,7 +694,7 @@ print([(h['chunk']['doc_id'], h['score'])
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 49. 휴식과 설정 점검
+## 52. 휴식과 설정 점검
 
 5분 · 커널·포트·Notebook 확인
 
@@ -658,7 +706,7 @@ print([(h['chunk']['doc_id'], h['score'])
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 50. 검색 실험과 선택
+## 53. 검색 실험과 선택
 
 변경 변수·데이터·지표·실패 사례
 
@@ -670,7 +718,7 @@ print([(h['chunk']['doc_id'], h['score'])
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 51. 실습 03 · 기준 설정
+## 54. 실습 03 · 기준 설정
 
 baseline = {'method': 'bm25', 'size': 120,
 
@@ -684,7 +732,7 @@ baseline = {'method': 'bm25', 'size': 120,
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 52. 실습 03 · 변경 비교
+## 55. 실습 03 · 변경 비교
 
 
 
@@ -694,7 +742,23 @@ baseline = {'method': 'bm25', 'size': 120,
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 53. 질의별 비교 기록
+## 56. 개발 질의의 비교 결과
+
+설정 · Recall@3 · MRR@3 · 답 있는 질의 보류
+
+BM25 · 5/6 · 83.3% · 83.3% · 1/6
+
+BM25+동의어 · 6/6 · 100% · 100% · 1/6
+
+TF-IDF / RRF · 각 5/6 · 각 83.3% · 각 1/6
+
+합성 개발 질의 8개 중 답 있는 6개 · 검색 회수 개선이 답변 보류 개선을 뜻하지 않음
+
+개발 질의의 비교 결과. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 결과 예측을 요청한다. 합성 개발 질의 8개 중 답 있는 6개 · 검색 회수 개선이 답변 보류 개선을 뜻하지 않음. 실습 단계에서는 같은 조건으로 실행하고 한 변수만 변경해 기록한다. 교육용 합성 자료와 실제 모델 실행 범위를 구분하며, 확인되지 않은 일반 성능을 주장하지 않는다.
+
+출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
+
+## 57. 질의별 비교 기록
 
 항목 · 기록
 
@@ -712,7 +776,7 @@ baseline = {'method': 'bm25', 'size': 120,
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 54. Recall@k와 MRR@k
+## 58. Recall@k와 MRR@k
 
 Recall: 필요한 문서를 얼마나 찾았는가
 
@@ -726,7 +790,7 @@ Recall@k와 MRR@k. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 �
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 55. k 증가의 효과
+## 59. k 증가의 효과
 
 
 
@@ -736,7 +800,7 @@ k 증가의 효과. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 56. 평균 결과와 실패 질의
+## 60. 평균 결과와 실패 질의
 
 평균 결과 · 전체 변화의 요약 · 소수의 중요한 실패가 가려질 수 있음
 
@@ -748,7 +812,7 @@ k 증가의 효과. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 57. 로컬 응답 시간
+## 61. 로컬 응답 시간
 
 
 
@@ -758,7 +822,7 @@ k 증가의 효과. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 58. p95의 해석
+## 62. p95의 해석
 
 95th percentile · 95백분위 응답 시간
 
@@ -772,7 +836,7 @@ p95의 해석. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 결�
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 59. 재현 가능한 실험 기록
+## 63. 재현 가능한 실험 기록
 
 자료 해시 + 코드 버전 + 설정 + 질의 세트
 
@@ -786,7 +850,7 @@ p95의 해석. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 결�
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 60. 설정 선택과 확인
+## 64. 설정 선택과 확인
 
 선택 · 개발 질의로 후보 비교 · 단순한 기준선과 비용도 검토
 
@@ -798,7 +862,7 @@ p95의 해석. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 결�
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 61. 검색 실험실 · 평가 화면
+## 65. 검색 실험실 · 평가 화면
 
 같은 질의로 BM25·TF-IDF·RRF 비교
 
@@ -810,7 +874,7 @@ p95의 해석. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 결�
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 62. 검색 실험실 실행
+## 66. 검색 실험실 실행
 
 python -m uvicorn week05.lab.search05.main:app \
 
@@ -822,7 +886,7 @@ python -m uvicorn week05.lab.search05.main:app \
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 63. 실습 04 · API 검증
+## 67. 실습 04 · API 검증
 
 TestClient로 health·검색 요청 확인
 
@@ -836,7 +900,7 @@ TestClient로 health·검색 요청 확인
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 64. 자기 서비스 자료 적용
+## 68. 자기 서비스 자료 적용
 
 합성 문서 5개
 
@@ -852,7 +916,7 @@ TestClient로 health·검색 요청 확인
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 65. 글쓰기 개선 서비스 예시
+## 69. 글쓰기 개선 서비스 예시
 
 원문 구조
 
@@ -868,7 +932,7 @@ TestClient로 health·검색 요청 확인
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 66. 글쓰기 평가 기준의 분리
+## 70. 글쓰기 평가 기준의 분리
 
 평가 항목 · 검토
 
@@ -886,7 +950,7 @@ TestClient로 health·검색 요청 확인
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 67. 근거 있는 개선 피드백
+## 71. 근거 있는 개선 피드백
 
 기준 ID
 
@@ -902,25 +966,27 @@ TestClient로 health·검색 요청 확인
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 68. 8주차 기획서 제출
+## 72. 8주차 기획서 제출
 
 구분 · 구성·제출
 
-아주대AI대학원 · 2–4인 자율 팀 · 팀 지원 URL 등록 · LMS 제출
+아주대AI대학원 · 2–4인 자율 팀 · 지원 URL · LMS 제출
 
-군산대·국립창원대 등 · 개인 기획서 · 이메일 제출
+군산대·국립창원대 등 · 개인 진행 가능 · 공지된 교수 이메일 제출
 
-공통 · 10.23 온라인 제출·평가 · 실시간 수업·중간고사 없음
+7주차 · 10.16 · 초안 먼저 제출 · 교수 피드백 후 수정
 
-형식 · HTML·Word·PDF·PPT 자유 · 열리는 링크·파일 확인
+8주차 · 10.23 · 수정본 온라인 제출·평가 · 시험 없음
+
+형식 · PPT·Word·PDF·HTML 가능 · 한글(HWP) 제외
 
 
 
-8주차 기획서 제출. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 결과 예측을 요청한다. 구분 · 구성·제출 · 아주대AI대학원 · 2–4인 자율 팀 · 팀 지원 URL 등록 · LMS 제출 · 군산대·국립창원대 등 · 개인 기획서 · 이메일 제출 · 공통 · 10.23 온라인 제출·평가 · 실시간 수업·중간고사 없음 · 형식 · HTML·Word·PDF·PPT 자유 · 열리는 링크·파일 확인. 실습 단계에서는 같은 조건으로 실행하고 한 변수만 변경해 기록한다. 교육용 합성 자료와 실제 모델 실행 범위를 구분하며, 확인되지 않은 일반 성능을 주장하지 않는다.
+8주차 기획서 제출. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 결과 예측을 요청한다. 구분 · 구성·제출 · 아주대AI대학원 · 2–4인 자율 팀 · 지원 URL · LMS 제출 · 군산대·국립창원대 등 · 개인 진행 가능 · 공지된 교수 이메일 제출 · 7주차 · 10.16 · 초안 먼저 제출 · 교수 피드백 후 수정 · 8주차 · 10.23 · 수정본 온라인 제출·평가 · 시험 없음 · 형식 · PPT·Word·PDF·HTML 가능 · 한글(HWP) 제외. 실습 단계에서는 같은 조건으로 실행하고 한 변수만 변경해 기록한다. 교육용 합성 자료와 실제 모델 실행 범위를 구분하며, 확인되지 않은 일반 성능을 주장하지 않는다.
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 69. 기획서 제출 구성
+## 73. 기획서 제출 구성
 
 제안 요약
 
@@ -936,7 +1002,7 @@ TestClient로 health·검색 요청 확인
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 70. 세 관점의 피드백
+## 74. 세 관점의 피드백
 
 관점 · 검토 질문
 
@@ -952,7 +1018,7 @@ UX · User Experience · 사용자 경험
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 71. 프로젝트 아이디어 예시
+## 75. 프로젝트 아이디어 예시
 
 글쓰기 코치 · 구조·논증·피드백
 
@@ -968,7 +1034,7 @@ UX · User Experience · 사용자 경험
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 72. 리서치와 프로토타입 도구
+## 76. 리서치와 프로토타입 도구
 
 목적 · 선택 도구·확인
 
@@ -986,7 +1052,7 @@ UX · User Experience · 사용자 경험
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 73. 과제 02 피드백 기준
+## 77. 과제 02 피드백 기준
 
 재현 · Notebook Restart 후 Run All
 
@@ -1000,19 +1066,7 @@ UX · User Experience · 사용자 경험
 
 출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
 
-## 74. 6주차 연결
-
-데이터 설계와 모델 개선의 선택
-
-10.09 한글날 · 실시간 강의 대신 녹화영상 업로드
-
-
-
-6주차 연결. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 결과 예측을 요청한다. 데이터 설계와 모델 개선의 선택 · 10.09 한글날 · 실시간 강의 대신 녹화영상 업로드. 실습 단계에서는 같은 조건으로 실행하고 한 변수만 변경해 기록한다. 교육용 합성 자료와 실제 모델 실행 범위를 구분하며, 확인되지 않은 일반 성능을 주장하지 않는다.
-
-출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
-
-## 75. 참고 자료와 실행 위치
+## 78. 참고 자료와 실행 위치
 
 Stanford IR · RRF 원 논문 · Ollama 공식 문서
 
@@ -1025,3 +1079,35 @@ week05/lab/notebooks · week05/lab/README.md
 참고 자료와 실행 위치. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 결과 예측을 요청한다. Stanford IR · RRF 원 논문 · Ollama 공식 문서 · week05/lab/notebooks · week05/lab/README.md · 과제 02 · 8주차 기획서 HTML. 실습 단계에서는 같은 조건으로 실행하고 한 변수만 변경해 기록한다. 교육용 합성 자료와 실제 모델 실행 범위를 구분하며, 확인되지 않은 일반 성능을 주장하지 않는다.
 
 출처: https://nlp.stanford.edu/IR-book/html/htmledition/okapi-bm25-a-non-binary-model-1.html, https://cormack.uwaterloo.ca/cormacksigir09-rrf.pdf, https://docs.ollama.com/capabilities/thinking, repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
+
+## 79. 6주차 휴일 운영
+
+10.09 한글날 · 운영
+
+강의 · 실시간 수업·녹화영상 업로드 없음
+
+과제 · 6주차 신규 과제 없음
+
+기존 과제 02 · 10.08(목)까지 · 정확한 시각은 소속별 공지
+
+다음 강의 · 7주차 10.16(금) 온라인 실시간
+
+4주차 추석 녹화영상과 다른 운영 · 6주차 학습 내용은 7주차에 이어서 진행
+
+6주차 휴일 운영. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 결과 예측을 요청한다. 4주차 추석 녹화영상과 다른 운영 · 6주차 학습 내용은 7주차에 이어서 진행. 실습 단계에서는 같은 조건으로 실행하고 한 변수만 변경해 기록한다. 교육용 합성 자료와 실제 모델 실행 범위를 구분하며, 확인되지 않은 일반 성능을 주장하지 않는다.
+
+출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md
+
+## 80. 7주차 초안과 피드백
+
+10.16 · 초안 제출 · 팀 또는 개인의 문제·사용 흐름·기술·평가 계획
+
+교수 설계 리뷰 · 사업 가치·사용성·구현 가능성의 질문과 수정 의견
+
+10.23 · 수정본 제출 · 피드백을 반영한 8주차 기획서 온라인 제출·평가
+
+아주대 팀 LMS · 다른 학교 개인 공지 이메일 · PPT/Word/PDF/HTML 가능 · HWP 제외
+
+7주차 초안과 피드백. 도식이나 예시를 먼저 관찰한 뒤 수강생에게 결과 예측을 요청한다. 아주대 팀 LMS · 다른 학교 개인 공지 이메일 · PPT/Word/PDF/HTML 가능 · HWP 제외. 실습 단계에서는 같은 조건으로 실행하고 한 변수만 변경해 기록한다. 교육용 합성 자료와 실제 모델 실행 범위를 구분하며, 확인되지 않은 일반 성능을 주장하지 않는다.
+
+출처: repo:course_labs/retrieval.py, repo:course_labs/data/documents.json, repo:curriculum/2026-2/00_운영_커리큘럼.md

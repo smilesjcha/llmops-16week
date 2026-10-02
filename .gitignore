@@ -19,6 +19,7 @@ week03/lecture/node_modules
 node_modules/
 scripts/node_modules
 week*/lecture/build/
+week08/templates/build/
 output/validation/
 .chart-data-*/
 scripts/capture_sink.py
