@@ -31,6 +31,8 @@
 
 - 4주차: [PDF · 검색 증강 생성](output/pdf/04_week4_rag_evidence.pdf) · [단계별 Notebook 실습](week04/lab/README.md)
 - 5주차: [PDF · 검색 품질 개선](output/pdf/05_week5_search_quality.pdf) · [단계별 Notebook 실습](week05/lab/README.md)
+- 6주차: [한글날 휴일 운영·SFT/LoRA 참고 강의안](week06/README.md) · 정규 수업·녹화·신규 과제 없음
+- 7주차: [PDF · 모델 적응과 서비스 기획 · 77쪽](output/pdf/07_week7_model_adaptation_project.pdf) · [4개 Notebook·VS Code](week07/lab/README.md) · [기획서 초안 안내 HTML](week07/assignment/project-draft.html)
 - 이번 과제: [과제 02 · 독립 HTML · 10월 8일(목)까지](week04/assignment/assignment02.html)
 - 8주차: [기획서 제출 안내](curriculum/2026-2/web/project-submission.html) · [요약 PDF](output/pdf/08_project_proposal_guide.pdf)
 - 팀 신청: [아주대AI대학원 2–4인 팀 Google Form](https://docs.google.com/forms/d/e/1FAIpQLSd3UOP4SjCUct_RJKcgvVNGEBCpOOLmNkZPi6QFBIQAilKIag/viewform)
@@ -40,6 +42,8 @@
 - 확인 경로: `llmops-16week` → `output` → `pdf` → 해당 주차 PDF
 - 발표용 PowerPoint와 실습 코드: 각 `weekNN` 폴더
 - 수정본 확인: 수업 직전 `main` 브랜치 새로고침
+
+PPT 제작 시 내용·근거와 디자인 코드를 분리한 [강의 PPT 제작 가이드](scripts/presentation-production.md)를 사용한다. 공통 규칙은 `scripts/presentation_design.mjs`, 주차별 내용은 `scripts/course_deck_content.mjs`, 생성 코드는 `scripts/build_course_deck.mjs`에 둔다.
 
 ## 2025년 2학기 AS-IS 보존본
 
