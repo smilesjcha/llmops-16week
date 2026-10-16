@@ -4,7 +4,7 @@
 
 - [학생용 PDF · 77쪽](../output/pdf/07_week7_model_adaptation_project.pdf)
 - [발표용 PowerPoint · 77장](lecture/07_week7_model_adaptation_project.pptx)
-- [6주차 SFT·LoRA·QLoRA 시각 보충 자료 · 32장](../week06/README.md)
+- [6주차 SFT·LoRA·QLoRA 확장 강의안 · 76장](../week06/README.md)
 - [6–7주차 통합 강의 영상 · Drive](resources/README.md)
 - [장표별 내용·출처](lecture/lecture-notes.md)
 - [교수용 100분 진행안](lecture/TEACHING_GUIDE.md)

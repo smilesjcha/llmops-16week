@@ -39,6 +39,26 @@ function table(s,a){shell(s,a);const rows=a.items,cols=rows[0].length;const widt
 function caseLayout(s,a){shell(s,a);let y=190;for(const [i,v]of a.items.entries()){const pt=i===0?27:21;const ht=h(v,1100,pt);if(i===0)rule(s,64,y+ht+24,1152);text(s,v,64,y,1100,ht,pt,{bold:i===0,color:i===0?C.ink:C.gray});y+=ht+(i===0?68:32)}note(s,a)}
 function code(s,a){shell(s,a);const lines=a.items.join('\n');const ht=lines.split('\n').length*18*4/3*1.22+70;if(lines.split('\n').some(v=>advance(v,24,true)>1100))throw Error(`Code width ${current}`);rect(s,64,208,1152,ht,C.navy);text(s,lines,90,240,1100,ht-60,18,{mono:true,color:C.white});note(s,a)}
 function formula(s,a){shell(s,a);text(s,a.items[0],64,214,1152,110,28,{bold:true});rule(s,64,358,1152);list(s,a.items.slice(1),64,406,1120,22,{color:C.gray,gap:26});note(s,a)}
+function tokenmap(s,a){
+ shell(s,a);
+ const values=[['예측 위치','0','1','2','3','4'],['입력 토큰','10','11','12','20','21'],['다음 정답','11','12','20','21','22'],['답변 학습','제외','제외','사용','사용','사용']];
+ const t=s.tables.add({rows:4,columns:6,left:64,top:204,width:1152,height:328,columnWidths:[292,172,172,172,172,172],values});
+ t.styleOptions={headerRow:false,bandedRows:false};
+ for(let r=0;r<4;r++){t.rows[r].height=82;for(let c=0;c<6;c++){const cell=t.getCell(r,c);cell.fill=r===0?C.soft:C.white;cell.text.style={typeface:FONT,fontSize:27,color:c===0?C.ink:C.gray,bold:c===0||r===0,alignment:c===0?'left':'center',verticalAlignment:'middle',insets:{left:18,right:18,top:16,bottom:16}};for(const side of ['top','bottom','left','right']){cell.borders[side].visible=false;cell.borders[side].fill='none';cell.borders[side].width=0}}rule(s,64,204+r*82,1152,r===0?C.navy:C.line)}
+ rule(s,64,532,1152,C.navy);text(s,'원본 label의 3·4·5번 위치가 예측 2·3·4번 위치와 대응',64,557,1152,34,20,{color:C.gray});note(s,a);
+}
+function loraPaths(s,a){
+ shell(s,a);
+ const node=(x,y,w,head,body)=>{const box=rect(s,x,y,w,106,C.white,C.line,1);text(s,head,x+18,y+15,w-36,38,23,{bold:true});text(s,body,x+18,y+65,w-36,30,17,{color:C.gray});return box};
+ const input=node(64,332,166,'입력 x','8 × 1');
+ const fixed=node(340,202,430,'W 고정','12 × 8');
+ const lowA=node(340,448,190,'A 학습','2 × 8');
+ const lowB=node(588,448,182,'B 학습','12 × 2');
+ const sum=node(998,332,218,'출력 합산','12 × 1');
+ const connect=(from,to,kind='straight')=>s.shapes.connect(from,to,{kind,fromSide:'right',toSide:'left',line:{fill:C.blue,width:2},tail:{type:'triangle',width:'sm',length:'sm'}});
+ connect(input,fixed,'elbow');connect(input,lowA,'elbow');connect(lowA,lowB);connect(fixed,sum,'elbow');connect(lowB,sum,'elbow');
+ text(s,'Wx',800,205,152,40,22,{bold:true});text(s,'(α/r)BAx',790,550,196,40,20,{color:C.gray});note(s,a);
+}
 function windows(s,a){shell(s,a);text(s,'원본 문서 · 문자 위치',64,188,1080,38,22,{bold:true});rule(s,220,274,950,C.ink);for(const [i,[start,end]]of [[0,60],[48,108],[96,120]].entries()){const y=307+i*80,x=220+start*7.2,w=(end-start)*7.2;rect(s,x,y,w,52,i===1?C.soft:C.white,C.gray,1);text(s,`${start}–${end}`,x+12,y+13,w-24,28,16,{mono:true});text(s,`C${i+1}`,64,y+10,120,28,18,{mono:true})}text(s,a.items.join(' · '),64,573,1152,34,17,{color:C.gray});note(s,a)}
 function dates(s,a){shell(s,a);a.items.forEach(([label,date,value],i)=>{const y=218+i*115;text(s,label,64,y,230,44,23,{bold:true});text(s,date,320,y,580,40,21,{color:C.gray});text(s,value,1040,y,176,44,23,{bold:true});rule(s,320,y+62,896)});note(s,a)}
 function rank(s,a){shell(s,a);a.items.forEach(([label,body],i)=>{const y=212+i*113;text(s,label,64,y,220,38,23,{bold:true});text(s,body,300,y,890,74,22,{color:C.gray});rule(s,300,y+78,916)});note(s,a)}
@@ -52,6 +72,9 @@ for(const name of ['retrieval-chart-data.json','retrieval-timing.json']){
 const chartData=JSON.parse(await fs.readFile(path.join(ROOT,'output/validation/retrieval-chart-data.json'),'utf8'));
 async function chart(s,a){shell(s,a);let categories,series,type='bar',format='0.0',max,majorUnit;
 switch(a.chart){
+case 'sft-probability':{const data=JSON.parse(await fs.readFile(path.join(ROOT,'output/validation/week06-concepts/concept-report.json'),'utf8'));categories=data.probability_loss.map(x=>String(x.probability));series=[{name:'정답 토큰 손실 (자연로그)',values:data.probability_loss.map(x=>x.loss)}];format='0.000';break;}
+case 'uniform-quantization':{const data=JSON.parse(await fs.readFile(path.join(ROOT,'output/validation/week06-concepts/concept-report.json'),'utf8'));categories=data.uniform_quantization.map(x=>x.bits+'-bit');series=[{name:'평균제곱오차',values:data.uniform_quantization.map(x=>x.mse)}];format='0.00000';break;}
+case 'weight-storage':{const data=JSON.parse(await fs.readFile(path.join(ROOT,'output/validation/week06-concepts/concept-report.json'),'utf8'));categories=data.raw_weight_storage.map(x=>x.bits+'-bit');series=[{name:'가중치 원시 저장량 GB',values:data.raw_weight_storage.map(x=>x.raw_weight_gb)}];format='0.0';break;}
 case 'adaptation-params':categories=['rank1','rank2','rank4','rank8'];series=[{name:'전체 행렬',values:[96,96,96,96]},{name:'두 행렬 합계',values:[20,40,80,160]}];format='0';break;
 case 'adaptation-error':{const data=JSON.parse(await fs.readFile(path.join(ROOT,'output/validation/adaptation-labs/low-rank-report.json'),'utf8'));categories=data.metrics.map(x=>'rank'+x.rank);series=[{name:'상대 행렬 오차',values:data.metrics.map(x=>x.relative_error)}];format='0.000';max=1;break;}
 case 'dpo-loss':type='line';categories=['-6','-3','0','3','6'];series=[{name:'DPO loss · beta=0.1',values:[-6,-3,0,3,6].map(m=>Math.log1p(Math.exp(-.1*m)))}];format='0.000';break;
@@ -84,7 +107,7 @@ async function imageLayout(s,a){
  else {if(evaluation){text(s,'01 · 검색 지표',766,198,450,40,23,{bold:true});text(s,'정답 문서 회수율과\n첫 관련 문서의 순위',766,264,450,90,21,{color:C.gray});rule(s,766,374,450);text(s,'02 · 답변 보류',766,404,450,40,23,{bold:true});text(s,'답이 있는 질의와 없는 질의를\n분리해서 확인',766,468,450,82,21,{color:C.gray})}if(a.items.length)text(s,a.items.join(' · '),64,563,1152,42,17,{color:C.gray});}
  if(a.imageMode==='full-figure'&&a.caption)text(s,a.caption,64,632,1152,26,14,{color:C.gray});else note(s,a);
 }
-const renderers={cover,section,statement,focus,annotated,compare,steps,timeline:steps,flow,swimlane,table,case:caseLayout,code,formula,windows,dates,rank,funnel,citation,ideas,roadmap,chart,notebook:caseLayout,links:caseLayout,image:imageLayout};
+const renderers={cover,section,statement,focus,annotated,compare,steps,timeline:steps,flow,swimlane,table,case:caseLayout,code,formula,tokenmap,'lora-paths':loraPaths,windows,dates,rank,funnel,citation,ideas,roadmap,chart,notebook:caseLayout,links:caseLayout,image:imageLayout};
 const auditWarnings=auditDeck(D,renderers);
 for(const a of D.slides){current=a.n;const slide=p.slides.add();await renderers[resolveLayout(a)](slide,a);slide.speakerNotes.textFrame.setText(`${a.notes}\n\n[Sources]\n${a.sources.map(x=>'- '+x).join('\n')}\n[/Sources]`);slide.speakerNotes.setVisible(true)}
 await fs.writeFile(path.join(BUILD,'geometry.json'),JSON.stringify(geometry));

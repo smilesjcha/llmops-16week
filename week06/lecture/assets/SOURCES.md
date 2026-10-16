@@ -20,3 +20,11 @@
 - 각 장표의 발표자 노트에도 원문 URL을 기록했다. 강의용 수식·표·추가 해설은 편집 가능한 PowerPoint 객체다.
 
 추가 검토 자료: [Hugging Face QLoRA 공식 해설](https://huggingface.co/blog/4bit-transformers-bitsandbytes), [PEFT LoRA 가이드](https://huggingface.co/docs/peft/developer_guides/lora). 본 수업의 설치·실행 조건은 저장소의 고정 환경이 우선하며, 외부 문서의 최신 설치 명령을 그대로 적용하지 않는다.
+
+## 76쪽 확장본의 계산·도식
+
+- 메모리·gradient accumulation·checkpointing 설명: [Transformers v4.46.3 공식 문서 원본](https://github.com/huggingface/transformers/blob/v4.46.3/docs/source/en/perf_train_gpu_one.md). 문서 개념을 참고하며 해당 버전을 공통 환경 설치값으로 지정한 것은 아니다.
+- 다음 토큰 정렬표와 LoRA 두 경로는 위 공식 원리의 편집 가능한 수업용 도식이다. 원 논문 실험 수치와 구분한다.
+- 새 손실·균등 양자화·7B 원시 저장량 차트는 `week06/lab/notebooks/01_loss_quantization.ipynb`의 계산에 기반한다. 실행 결과는 공개하지 않는 `output/validation/week06-concepts/concept-report.json`에 생성한다.
+- 균등 양자화는 `[-1,1]`의 1,001개 값, 반올림, 평균제곱오차를 사용한 자체 수치 실험이다. NF4·실제 모델 정확도·GPU 메모리·속도 측정으로 해석하지 않는다.
+- rank 오차 차트는 7주차 Notebook 02의 SVD 근사 결과다. 실제 LoRA Adapter 학습 결과가 아니다. 차트는 편집 가능한 PowerPoint 객체이며 표시 정밀도보다 높은 소수 6자리로 데이터를 보존한다.

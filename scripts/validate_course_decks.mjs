@@ -5,7 +5,7 @@ const layouts = Object.fromEntries([
   'cover','section','statement','focus','annotated','compare','steps',
   'timeline','flow','swimlane','table','case','code','formula','windows',
   'dates','rank','funnel','citation','ideas','roadmap','chart','notebook',
-  'links','image',
+  'links','image','tokenmap','lora-paths',
 ].map(kind => [kind, true]));
 
 let failed = false;

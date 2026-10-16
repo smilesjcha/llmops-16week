@@ -11,7 +11,7 @@
 
 ## 복습 순서
 
-1. [6주차 시각 보충 PDF · 32쪽](../../output/pdf/06_week6_sft_lora_reference.pdf): SFT·LoRA·QLoRA의 핵심 도식을 읽는다.
+1. [6주차 확장 PDF · 76쪽](../../output/pdf/06_week6_sft_lora_reference.pdf): 배경·손실·LoRA 구조·양자화와 [수치 실습](../../week06/lab/README.md)을 확인한다.
 2. [7주차 PDF · 77쪽](../../output/pdf/07_week7_model_adaptation_project.pdf): 선호 데이터·평가·기획서 연결을 확인한다.
 3. [Notebook 4개 및 VS Code 실행 안내](../lab/README.md)를 따라 핵심 셀을 실행한다.
 4. 영상보다 최신 일정 공지를 우선한다. 기획서 수정본 마감은 **2026-10-22(목) 23:59 한국시간**이며, 10월 23일은 시험·실시간 강의 없이 제출물 평가다.
