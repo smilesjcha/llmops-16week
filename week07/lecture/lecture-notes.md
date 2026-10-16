@@ -34,9 +34,9 @@ WEEK 07 · 2026.10.16 · 온라인 실시간
 
 07 · 10.16 · 실시간 온라인 · 기획서 초안 0.1·피드백
 
-08 · 10.23 · 시험·실시간 수업 없이 수정본 0.2 제출·평가
+08 · 10.23 · 시험·실시간 수업 없이 제출물 평가
 
-강의 포인트: 6주차 기술 내용은 이번 주에 연결 · 제출 시각은 소속별 공지
+강의 포인트: 수정본 0.2 마감: 10.22(목) 23:59 한국시간 · 6주차 내용은 7주차에 통합
 
 근거: repo:curriculum/2026-2/00_운영_커리큘럼.md, repo:course_labs/adaptation.py
 
@@ -134,15 +134,19 @@ SFT · 기대 답변 학습
 
 근거: repo:curriculum/2026-2/00_운영_커리큘럼.md, repo:course_labs/adaptation.py
 
-## 13. SFT의 학습 신호
+## 13. SFT의 토큰 예측과 손실
 
-입력에 이어 나올 답변 토큰의 예측
+input_ids · 입력 토큰 ID
 
-정답 예시의 형식·품질·사용 권한이 중요
+logits · 다음 토큰에 대한 점수
 
-학습 손실 감소만으로 서비스 품질 판단 불가
+loss · 예측과 label의 차이
 
-근거: repo:curriculum/2026-2/00_운영_커리큘럼.md, repo:course_labs/adaptation.py
+강의 포인트: Hugging Face TRL 공식 도식 · 원본 이미지의 흑백 표시
+
+토큰이 한 칸 이동한 labels와 다음 토큰 예측을 비교한다. 손실 감소는 학습 예시를 더 잘 맞춘다는 신호이며 실제 업무 품질은 보류 입력에서 별도로 평가한다.
+
+근거: https://huggingface.co/docs/trl/sft_trainer
 
 ## 14. 외부 지식과 반복 행동
 
@@ -162,7 +166,7 @@ response:
 
 입력·기대 출력의 경계
 
-실제 고객 정보가 아닌 합성 예시
+합성 사례만 사용
 
 출력 계약과 근거의 분리
 
@@ -240,17 +244,19 @@ test · 4 · 8
 
 근거: repo:curriculum/2026-2/00_운영_커리큘럼.md, repo:course_labs/adaptation.py
 
-## 22. 손실 마스킹 예시
+## 22. 대화 답변의 손실 마스킹
 
-token_ids = [10, 11, 12, 20, 21, 22]
+사용자 입력 · 답변에 필요한 문맥
 
-labels = [-100, -100, -100, 20, 21, 22]
+assistant 답변 · 학습할 label 위치
 
-assert sum(x != -100 for x in labels) == 3
+빗금 영역 · 손실 계산 제외
 
-강의 포인트: 가상 토큰 ID · 실제 tokenizer나 trainer 실행이 아닌 경계 설명
+강의 포인트: Hugging Face TRL · assistant-only loss · 실제 마스크는 모델 템플릿 확인
 
-근거: repo:curriculum/2026-2/00_운영_커리큘럼.md, repo:course_labs/adaptation.py
+Notebook 01의 -100 labels 예제와 연결한다. 이 그림은 대화 역할을 구분한 것이며, 실제 모델의 토큰 경계와 템플릿을 실행 검증했다는 뜻은 아니다.
+
+근거: https://huggingface.co/docs/trl/sft_trainer
 
 ## 23. 길이 제한과 문맥 손실
 
@@ -282,19 +288,19 @@ r: rank · α: scaling 설정
 
 근거: https://arxiv.org/abs/2106.09685
 
-## 26. 행렬의 차원
+## 26. LoRA의 고정 경로와 학습 경로
 
-B · 12 × 2
+W · 고정 가중치의 계산
 
-A · 2 × 8
+A와 B · 학습하는 작은 두 행렬
 
-BA · 12 × 8
+차원 예시 · A: 2×8 · B: 12×2 · BA: 12×8
 
-W + BA · 동일 출력 차원
+강의 포인트: Hu et al., 2021, Figure 1 · 원본 발췌·흑백 렌더링
 
-강의 포인트: Notebook 02 · 작은 행렬 구조 · 언어 모델 학습 아님
+원 논문의 A 무작위/B=0 초기화로 시작 시 변화량은 0이다. 오른쪽 차원은 수업용 12×8 행렬의 예시이며 원 논문 실험의 크기와 구분한다.
 
-근거: repo:curriculum/2026-2/00_운영_커리큘럼.md, repo:course_labs/adaptation.py
+근거: https://arxiv.org/abs/2106.09685, repo:course_labs/adaptation.py
 
 ## 27. rank와 파라미터 수
 
@@ -348,19 +354,19 @@ SVD · Singular Value Decomposition
 
 근거: repo:curriculum/2026-2/00_운영_커리큘럼.md, repo:course_labs/adaptation.py
 
-## 32. 학습 방식의 비교
+## 32. 전체 미세조정·LoRA·QLoRA
 
-방식 · 학습 대상 · 운영 확인
+전체 미세조정 · 모델 가중치와 optimizer 상태
 
-전체 미세조정 · 다수 가중치 · 자원·저장·복구
+LoRA · 고정 모델과 학습 Adapter
 
-LoRA · 저차원 행렬 · rank·대상 모듈
+QLoRA · 4-bit 고정 모델과 Adapter
 
-QLoRA · 양자화 Base + LoRA · 정밀도·지원 환경
+강의 포인트: QLoRA Figure 1 · CC BY 4.0 · 흑백 발췌
 
-강의 포인트: QLoRA · Quantized Low-Rank Adaptation · 양자화 기반 LoRA
+QLoRA는 Quantized Low-Rank Adaptation, 양자화 기반 LoRA다. 모델 저장 정밀도와 계산 정밀도를 구분한다. 고정 모델을 통과한 gradient와 모델 가중치의 업데이트는 다른 개념이다. 도식 면적을 실측 메모리 수치로 읽지 않는다.
 
-근거: https://arxiv.org/abs/2106.09685, https://arxiv.org/abs/2305.14314
+근거: https://arxiv.org/abs/2305.14314, https://arxiv.org/abs/2106.09685
 
 ## 33. 메모리 추정의 구성
 
@@ -758,9 +764,9 @@ HTML 시안 검토와 교수에게 확인할 질문
 
 10.16 · 7주차 · 초안 0.1·피드백 준비
 
-10.23 · 8주차 · 수정본 0.2 온라인 제출·평가
+10.22 · 목요일 · 수정본 0.2 · 23:59 한국시간 마감
 
-강의 포인트: 팀 신청 폼은 기획서 제출함이 아님 · 정확한 시각은 소속별 공지
+강의 포인트: 10.23(금)은 시험·실시간 강의 없이 제출물 평가 · 팀 신청 폼과 제출함은 별개
 
 근거: repo:curriculum/2026-2/00_운영_커리큘럼.md, repo:course_labs/adaptation.py
 

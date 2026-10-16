@@ -1,6 +1,12 @@
-# Week 06 · SFT/LoRA 참고 강의안
+# Week 06 · SFT·LoRA·QLoRA 시각 보충 강의안
 
-2026년 2학기 6주차인 **10월 9일은 한글날 휴일**이다. 현행 운영안에는 실시간 강의, 녹화영상, 신규 과제가 없다. 이 폴더의 [20장 PPT](lecture/06_week6_sft_lora_reference.pptx)와 [PDF](lecture/06_week6_sft_lora_reference.pdf)는 정규 수업 공지가 아니라, 2025년 6주차 SFT/LoRA 자료를 다음 학기·보충 강의에 재사용할 수 있도록 재구성한 참고안이다.
+2026년 2학기 6주차인 **10월 9일은 한글날 휴일**이며 당시 수업·녹화영상·신규 과제는 없다. 6주차 기술 내용은 10월 16일 7주차 통합 강의에서 이어서 진행했다. 아래 자료는 이 내용을 복습하기 위한 **32장 시각 보충 강의안**이다.
+
+- [학생용 PDF · 32쪽](../output/pdf/06_week6_sft_lora_reference.pdf)
+- [발표용 PPT · 32장](lecture/06_week6_sft_lora_reference.pptx)
+- [장표별 설명과 근거](lecture/lecture-notes.md)
+- [외부 도식 출처·인용 안내](lecture/assets/SOURCES.md)
+- [6–7주차 통합 녹화 영상](../week07/resources/README.md)
 
 ## 자료의 범위
 
@@ -17,7 +23,7 @@
 ## 재사용 절차
 
 1. 2026년 운영안과 소속별 아주대·군산대·국립창원대 공지를 확인한다. 현행 6주차를 정규 강의로 표시하지 않는다.
-2. `scripts/course_deck_content.mjs`에서 6주차 내용을 새 학기 일정·학습성과에 맞게 수정한다.
+2. `scripts/week06_deck_content.mjs`에서 6주차 내용을 새 학기 일정·학습성과에 맞게 수정한다.
 3. `scripts/presentation_design.mjs`에서 색·서체·레이아웃 의도와 리듬을 확인한다.
 4. `scripts/build_course_deck.mjs 6`으로 다시 빌드하고 모든 슬라이드를 PDF로 렌더링해 검수한다.
 

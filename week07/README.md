@@ -1,9 +1,11 @@
 # Week 07 · 모델 적응과 서비스 기획
 
-2026년 10월 16일 온라인 실시간 수업. 6주차 휴일에 진행하지 않은 기술 내용을 연결하고, 기말 프로젝트 기획서 초안 0.1을 검토한다. 8주차 10월 23일은 시험·실시간 강의 없이 피드백 반영 수정본 0.2를 제출·평가한다.
+2026년 10월 16일 온라인 실시간 수업. 6주차 휴일에 진행하지 않은 기술 내용을 연결하고, 기말 프로젝트 기획서 초안 0.1을 검토한다. 수정본 0.2 제출 마감은 **10월 22일(목) 23:59 한국시간**이다. 8주차 10월 23일은 시험·실시간 강의 없이 제출물로 평가한다.
 
 - [학생용 PDF · 77쪽](../output/pdf/07_week7_model_adaptation_project.pdf)
 - [발표용 PowerPoint · 77장](lecture/07_week7_model_adaptation_project.pptx)
+- [6주차 SFT·LoRA·QLoRA 시각 보충 자료 · 32장](../week06/README.md)
+- [6–7주차 통합 강의 영상 · Drive](resources/README.md)
 - [장표별 내용·출처](lecture/lecture-notes.md)
 - [교수용 100분 진행안](lecture/TEACHING_GUIDE.md)
 - [4개 Notebook 실습·VS Code 가이드](lab/README.md)

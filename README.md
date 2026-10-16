@@ -14,6 +14,7 @@
 - 수업 운영: 16주 전체 대면 수업 없이 온라인으로 진행하며, 정규 수업은 실시간 강의를 원칙으로 운영
 - 7주차: 프로젝트 기획서 초안 0.1 제출·교수 피드백
 - 8주차: 중간고사와 실시간 강의 없이 수정본 0.2를 온라인으로 제출·평가
+- 기획서 수정본 마감: **2026년 10월 22일(목) 23:59 한국시간** · [아주대 LMS 제출란](https://eclass2.ajou.ac.kr/ultra/courses/_118756_1/assessment/test/_2520772_1?gradeitemView=details)
 - 16주차: 서비스 구현·평가·시연·포트폴리오 발표를 실시간 온라인으로 진행
 - 대상: 특정 대학에 한정하지 않는 대학생·대학원생 대상 통합 강좌
 - 교수: 차성재 · 무신사 Core AI PM × AI 대학원 겸임교수
@@ -27,11 +28,11 @@
 
 학생이 매주 확인할 강의안의 기준 위치는 [`output/pdf/`](output/pdf/README.md)다. 이전 학기 자료가 있는 `AS-IS 2025 2nd semester`가 아니라, `main` 브랜치의 주차별 PDF를 사용한다.
 
-현재 저장소는 **Public**으로 운영한다. 강의 기록은 교수자 공개 정보와 개인정보 비식별 처리를 마친 복습본만 연결하며, 수강생 등 제3자의 이름·얼굴·프로필·소속·비공개 대화는 공개하지 않는다.
+현재 저장소는 **Public**으로 운영한다. 1주차는 비식별 복습본을 연결하며, 이후 강의 녹화는 교수자가 공개를 요청한 파일을 Drive 보기 전용으로 연결한다. 원본 영상 전체를 비식별 처리했다고 주장하지 않는다. 학생 연락처·명단·설문·메일·제출물은 공개 저장소에 넣지 않는다.
 
 - 4주차: [PDF · 검색 증강 생성](output/pdf/04_week4_rag_evidence.pdf) · [단계별 Notebook 실습](week04/lab/README.md)
 - 5주차: [PDF · 검색 품질 개선](output/pdf/05_week5_search_quality.pdf) · [단계별 Notebook 실습](week05/lab/README.md)
-- 6주차: [한글날 휴일 운영·SFT/LoRA 참고 강의안](week06/README.md) · 정규 수업·녹화·신규 과제 없음
+- 6주차: [SFT·LoRA·QLoRA 시각 보충 PDF · 32쪽](output/pdf/06_week6_sft_lora_reference.pdf) · 10.09 휴일, 기술 내용은 7주차 통합 강의에서 진행
 - 7주차: [PDF · 모델 적응과 서비스 기획 · 77쪽](output/pdf/07_week7_model_adaptation_project.pdf) · [4개 Notebook·VS Code](week07/lab/README.md) · [기획서 초안 안내 HTML](week07/assignment/project-draft.html)
 - 이번 과제: [과제 02 · 독립 HTML · 10월 8일(목)까지](week04/assignment/assignment02.html)
 - 8주차: [기획서 제출 안내](curriculum/2026-2/web/project-submission.html) · [요약 PDF](output/pdf/08_project_proposal_guide.pdf)
@@ -39,6 +40,8 @@
 - 강의·과제 HTML: 파일을 내려받아 브라우저로 열기. GitHub 파일 페이지는 HTML을 실행하지 않습니다.
 - 1주차 강의안: [01주차 PDF · LLM 서비스 운영의 기본](output/pdf/01_week1_llmops_kickoff.pdf)
 - 1주차 복습: [강의영상·음성·채팅 기록](week01/resources/README.md)
+- 4–5주차 통합 녹화: [Drive 영상·복습 안내](week05/resources/README.md)
+- 6–7주차 통합 녹화: [Drive 영상·복습 안내](week07/resources/README.md)
 - 확인 경로: `llmops-16week` → `output` → `pdf` → 해당 주차 PDF
 - 발표용 PowerPoint와 실습 코드: 각 `weekNN` 폴더
 - 수정본 확인: 수업 직전 `main` 브랜치 새로고침

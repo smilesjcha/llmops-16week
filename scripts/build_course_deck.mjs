@@ -7,7 +7,7 @@ import {decks} from './course_deck_content.mjs';
 import {C as BaseColors,FONT,MONO,CANVAS,resolveLayout,auditDeck} from './presentation_design.mjs';
 const ROOT=path.resolve(import.meta.dirname,'..');
 const week=Number(process.argv[2]); const D=decks[week];
-const C=week===7?{...BaseColors,green:'#284B72',soft:'#EDF1F6'}:BaseColors;
+const C=[6,7].includes(week)?{...BaseColors,green:'#284B72',soft:'#EDF1F6'}:BaseColors;
 if(!D)throw Error('Usage: node scripts/build_course_deck.mjs 4|5|6|7|8');
 const noPublish=process.argv.includes('--no-publish');
 const SKILL=process.env.PRESENTATIONS_SKILL_DIR, PY=process.env.ARTIFACT_PYTHON;
@@ -45,7 +45,7 @@ function rank(s,a){shell(s,a);a.items.forEach(([label,body],i)=>{const y=212+i*1
 function funnel(s,a){shell(s,a);a.items.forEach((item,i)=>{const w=1050-i*160,x=64+(1152-w)/2,y=186+i*96;rect(s,x,y,w,70,C.white,C.line,1);text(s,item,x+22,y+19,w-44,40,22)});note(s,a)}
 function citation(s,a){shell(s,a);text(s,a.items[0],64,208,1152,94,27,{bold:true});rule(s,64,328,1152);list(s,a.items.slice(1),64,377,1120,22,{color:C.gray,gap:28});note(s,a)}
 function ideas(s,a){shell(s,a);a.items.forEach(([head,detail],i)=>{const x=64+(i%2)*600,y=208+Math.floor(i/2)*204;text(s,head,x,y,550,70,27,{bold:true});rule(s,x,y+83,552);text(s,detail,x,y+112,550,74,21,{color:C.gray})});note(s,a)}
-function roadmap(s,a){shell(s,a);const entries=[['01','09.04','실행 추적'],['02','09.11','프롬프트 비교'],['03','09.18','평가·오류 분류'],['04','09.25','RAG·근거 · 녹화'],['05','10.02','검색 품질'],['06','10.09','휴일 · 수업 없음'],['07','10.16','강의 재개·초안'],['08','10.23','수정본 제출·평가'],['09–15','10.30–12.11','구현·운영·프로젝트'],['16','12.18','실시간 온라인 발표']];entries.forEach(([n,date,title],i)=>{const x=64+Math.floor(i/5)*594,y=179+(i%5)*86,active=Number(n)===week;if(active)rect(s,x,y,558,78,C.soft);text(s,n,x+12,y+10,90,23,14,{mono:true,color:active?C.blue:C.gray,bold:active});text(s,date,x+114,y+10,400,23,14,{color:C.gray});text(s,title,x+12,y+43,534,30,18,{bold:active,color:active?C.blue:C.ink})})}
+function roadmap(s,a){shell(s,a);const entries=[['01','09.04','실행 추적'],['02','09.11','프롬프트 비교'],['03','09.18','평가·오류 분류'],['04','09.25','RAG·근거 · 녹화'],['05','10.02','검색 품질'],['06','10.09','휴일 · 수업 없음'],['07','10.16','강의 재개·초안'],['08','10.23','기획서 평가 · 마감10.22'],['09–15','10.30–12.11','구현·운영·프로젝트'],['16','12.18','실시간 온라인 발표']];entries.forEach(([n,date,title],i)=>{const x=64+Math.floor(i/5)*594,y=179+(i%5)*86,active=Number(n)===week;if(active)rect(s,x,y,558,78,C.soft);text(s,n,x+12,y+10,90,23,14,{mono:true,color:active?C.blue:C.gray,bold:active});text(s,date,x+114,y+10,400,23,14,{color:C.gray});text(s,title,x+12,y+43,534,30,18,{bold:active,color:active?C.blue:C.ink})})}
 for(const name of ['retrieval-chart-data.json','retrieval-timing.json']){
   await fs.access(path.join(ROOT,'output/validation',name)).catch(()=>execFileSync(PY,[path.join(ROOT,'scripts/measure_retrieval_charts.py')],{cwd:ROOT}));
 }
@@ -69,12 +69,27 @@ default:throw Error('Unknown chart '+a.chart)}
 // embedded Excel snapshot losslessly representable. Raw measurements stay raw.
 series=series.map(x=>({...x,values:x.values.map(v=>Math.round(v*1e6)/1e6)}));
 const styles={typeface:FONT,fontSize:20,fill:C.gray};s.charts.add(type,{position:{left:70,top:190,width:1140,height:385},categories,series:series.map((x,i)=>({...x,valuesFormatCode:format,fill:i?C.navy:C.blue,line:{fill:i?C.navy:C.blue,width:2}})),hasLegend:series.length>1,legend:{position:'bottom',textStyle:styles},xAxis:{axisType:'textAxis',textStyle:styles},yAxis:{numberFormatCode:format,textStyle:styles,...(max?{min:0,max}:{}),...(majorUnit?{majorUnit}:{})},dataLabels:{showValue:type==='bar'&&series.length===1,textStyle:styles,numberFormatCode:format},lineOptions:{smooth:false},barOptions:{direction:'column',grouping:'clustered'},chartFill:'none',chartLine:{fill:'none',width:0},plotAreaFill:'none',plotAreaLine:{fill:'none',width:0}});note(s,a)}
-async function imageLayout(s,a){shell(s,a);const file=path.join(ROOT,a.image);const evaluation=week===5&&a.image.endsWith('lab-evaluation.jpg');s.images.add({blob:new Uint8Array(await fs.readFile(file)),contentType:a.image.endsWith('.jpg')?'image/jpeg':'image/png',alt:a.title,fit:'contain',position:{left:64,top:168,width:evaluation?640:1152,height:380}});if(evaluation){text(s,'01 · 검색 지표',766,198,450,40,23,{bold:true});text(s,'정답 문서 회수율과\n첫 관련 문서의 순위',766,264,450,90,21,{color:C.gray});rule(s,766,374,450);text(s,'02 · 답변 보류',766,404,450,40,23,{bold:true});text(s,'답이 있는 질의와 없는 질의를\n분리해서 확인',766,468,450,82,21,{color:C.gray})}if(a.items.length)text(s,a.items.join(' · '),64,563,1152,42,17,{color:C.gray});note(s,a)}
+async function imageLayout(s,a){
+ shell(s,a);const file=path.join(ROOT,a.image),evaluation=week===5&&a.image.endsWith('lab-evaluation.jpg');
+ let frame={left:64,top:168,width:evaluation?640:1152,height:380};
+ if(a.imageMode==='side-explain')frame={left:80,top:171,width:550,height:410};
+ if(a.imageMode==='wide-explain')frame={left:64,top:164,width:1152,height:300};
+ if(a.imageMode==='tall-explain')frame={left:64,top:170,width:820,height:420};
+ if(a.imageMode==='full-figure')frame={left:64,top:164,width:1152,height:410};
+ s.images.add({blob:new Uint8Array(await fs.readFile(file)),contentType:a.image.endsWith('.jpg')?'image/jpeg':'image/png',alt:a.title,fit:'contain',position:frame});
+ if(a.imageMode==='side-explain')a.items.forEach(([head,body],i)=>{const y=180+i*130;text(s,head,714,y,488,42,23,{bold:true});text(s,body,714,y+51,488,68,20,{color:C.gray});});
+ else if(a.imageMode==='wide-explain')a.items.forEach(([head,body],i)=>{const x=64+i*390;text(s,head,x,481,366,36,21,{bold:true});text(s,body,x,530,366,62,18,{color:C.gray});});
+ else if(a.imageMode==='tall-explain')a.items.forEach(([head,body],i)=>{const y=186+i*130;text(s,head,930,y,286,36,22,{bold:true});text(s,body,930,y+48,286,72,18,{color:C.gray});});
+ else if(a.imageMode==='full-figure')a.items.forEach(([,body],i)=>text(s,body,64+i*390,583,366,38,18,{color:C.gray}));
+ else {if(evaluation){text(s,'01 · 검색 지표',766,198,450,40,23,{bold:true});text(s,'정답 문서 회수율과\n첫 관련 문서의 순위',766,264,450,90,21,{color:C.gray});rule(s,766,374,450);text(s,'02 · 답변 보류',766,404,450,40,23,{bold:true});text(s,'답이 있는 질의와 없는 질의를\n분리해서 확인',766,468,450,82,21,{color:C.gray})}if(a.items.length)text(s,a.items.join(' · '),64,563,1152,42,17,{color:C.gray});}
+ if(a.imageMode==='full-figure'&&a.caption)text(s,a.caption,64,632,1152,26,14,{color:C.gray});else note(s,a);
+}
 const renderers={cover,section,statement,focus,annotated,compare,steps,timeline:steps,flow,swimlane,table,case:caseLayout,code,formula,windows,dates,rank,funnel,citation,ideas,roadmap,chart,notebook:caseLayout,links:caseLayout,image:imageLayout};
 const auditWarnings=auditDeck(D,renderers);
 for(const a of D.slides){current=a.n;const slide=p.slides.add();await renderers[resolveLayout(a)](slide,a);slide.speakerNotes.textFrame.setText(`${a.notes}\n\n[Sources]\n${a.sources.map(x=>'- '+x).join('\n')}\n[/Sources]`);slide.speakerNotes.setVisible(true)}
 await fs.writeFile(path.join(BUILD,'geometry.json'),JSON.stringify(geometry));
 const candidate=path.join(BUILD,'candidate.pptx');await(await PresentationFile.exportPptx(p)).save(candidate);
+if(D.slides.some(a=>a.monochrome))execFileSync(PY,[path.join(ROOT,'scripts/pptx_image_display.py'),candidate,...D.slides.filter(a=>a.monochrome).map(a=>String(a.n))]);
 const {finalizePresentation}=await import(pathToFileURL(path.join(SKILL,'container_tools/artifact_tool_utils.mjs')).href);
 const finalDir=await fs.mkdtemp(path.join(BUILD,'final-'));
 const finalPath=path.join(finalDir,D.name+'.pptx');

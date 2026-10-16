@@ -1,6 +1,9 @@
 # Week 08 · 프로젝트 기획서 제출·평가
 
-10월 16일 7주차에 기획서 초안 0.1을 먼저 제출하고 교수 피드백을 받는다. 10월 23일 8주차는 실시간 강의·중간고사 없이 피드백을 반영한 수정본 0.2 제출로 평가한다.
+10월 16일 7주차에 기획서 초안 0.1을 먼저 제출하고 교수 피드백을 받는다. **수정본 0.2 마감은 2026년 10월 22일(목) 23:59 한국시간**이다. 10월 23일 8주차는 실시간 강의·중간고사 없이 제출물로 평가한다.
+
+- [아주대 LMS 기획서 제출란](https://eclass2.ajou.ac.kr/ultra/courses/_118756_1/assessment/test/_2520772_1?gradeitemView=details)
+- 기존 안내 PPT·PDF의 10월 23일은 8주차 평가일이다. 제출 마감은 위 10월 22일 공지를 우선한다.
 
 - [제출·팀·평가 안내 HTML](../curriculum/2026-2/web/project-submission.html)
 - [16장 안내 PPT](lecture/08_project_proposal_guide.pptx) · [PDF](../output/pdf/08_project_proposal_guide.pdf)
