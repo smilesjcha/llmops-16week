@@ -85,6 +85,6 @@ notebook('04_project_proposal.ipynb', '04 · 실험에서 기획서 초안으로
  ('HTML 문서 생성', '입력 문자열은 escape 처리합니다. 생성 후 브라우저에서 문서를 검토하세요.', "html = proposal_html(doc)\npath = OUT/'proposal-draft.html'\npath.write_text(html,encoding='utf-8')\nprint(path)"),
  ('시안 미리보기', '이 미리보기는 문서입니다. 실제 서비스나 사용성 검증이 아닙니다.', "display(HTML(html))"),
  ('피드백 기록', '피드백을 받은 뒤 채택·보류·반박의 이유를 남깁니다. 아래는 빈 기록 양식입니다.', "feedback = {'version':'0.1','question':doc['question'],'professor_feedback':'미수신','decision':'미결정','reason':'','next_evidence':''}\nsave_report(OUT/'feedback-log.json',feedback)\ndisplay(feedback)"),
- ('제출 전 검사', '초안10/16 → 피드백 → 수정본10/23. 소속 공지의 정확한 시각·채널을 확인합니다.', "save_report(OUT/'proposal-draft.json',doc)\nprint('아주대: LMS / 다른 학교: 공지 교수 이메일')\nprint('PPT·Word·PDF·HTML 가능 / HWP 제외 / 개인정보 공개 GitHub 금지')"),
+ ('제출 전 검사', '초안10/16 이후 피드백을 반영한 수정본은 2026-10-22(목) 23:59 한국시간까지 제출합니다. 10/23은 제출물 평가일입니다.', "save_report(OUT/'proposal-draft.json',doc)\nprint('아주대: LMS / 다른 학교: 공지 교수 이메일')\nprint('PPT·Word·PDF·HTML 가능 / HWP 제외 / 개인정보 공개 GitHub 금지')"),
 ])
 print('Generated 4 Week07 notebooks')

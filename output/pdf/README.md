@@ -27,7 +27,7 @@
 | 04 | 2026.09.25 | 검색 증강 생성과 근거 확인 | [04주차 강의안 · 77쪽](04_week4_rag_evidence.pdf) | 추석 · 녹화영상 대체 | [실습·과제](../../week04/README.md) |
 | 05 | 2026.10.02 | 검색 품질 개선 | [05주차 강의안 · 80쪽](05_week5_search_quality.pdf) | 실시간 온라인 | [4–5주차 통합 영상](../../week05/resources/README.md) |
 | 06 | 2026.10.09 | SFT·LoRA·QLoRA 기술 단원 | [확장 강의안 · 76쪽](06_week6_sft_lora_reference.pdf) | 당일 휴일 · 기술 내용은 7주차에 통합 | [영상](../../week07/resources/README.md) · [수치 실습](../../week06/lab/README.md) |
-| 07 | 2026.10.16 | 모델 적응·기획서 초안 | [07주차 강의안 · 77쪽](07_week7_model_adaptation_project.pdf) | 실시간 온라인 | [6–7주차 통합 영상·실습](../../week07/resources/README.md) |
+| 07 | 2026.10.16 | 모델 적응·기획서 초안 | [07주차 강의안 · 80쪽](07_week7_model_adaptation_project.pdf) | 실시간 온라인 | [6–7주차 통합 영상·실습](../../week07/resources/README.md) |
 | 08 | 2026.10.23 | 프로젝트 기획서 제출 | [제출 안내 · 16쪽](08_project_proposal_guide.pdf) | 온라인 제출·평가만 | [양식·평가 안내](../../week08/README.md) |
 
 2주차 강의안은 72쪽으로, 1–60쪽은 2시간 본 수업용이고 61–72쪽은 심화 참고용이다. 실습은 [VS Code 실행 가이드](../../week02/VS_CODE_GUIDE.md)를 따라 진행한다.

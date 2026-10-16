@@ -2,13 +2,14 @@
 
 2026년 10월 16일 온라인 실시간 수업. 6주차 휴일에 진행하지 않은 기술 내용을 연결하고, 기말 프로젝트 기획서 초안 0.1을 검토한다. 수정본 0.2 제출 마감은 **10월 22일(목) 23:59 한국시간**이다. 8주차 10월 23일은 시험·실시간 강의 없이 제출물로 평가한다.
 
-- [학생용 PDF · 77쪽](../output/pdf/07_week7_model_adaptation_project.pdf)
-- [발표용 PowerPoint · 77장](lecture/07_week7_model_adaptation_project.pptx)
+- [학생용 PDF · 80쪽](../output/pdf/07_week7_model_adaptation_project.pdf)
+- [발표용 PowerPoint · 80장](lecture/07_week7_model_adaptation_project.pptx)
 - [6주차 SFT·LoRA·QLoRA 확장 강의안 · 76장](../week06/README.md)
 - [6–7주차 통합 강의 영상 · Drive](resources/README.md)
 - [장표별 내용·출처](lecture/lecture-notes.md)
 - [교수용 100분 진행안](lecture/TEACHING_GUIDE.md)
-- [4개 Notebook 실습·VS Code 가이드](lab/README.md)
+- [5개 Notebook 실습·VS Code 가이드](lab/README.md)
+- [외부 도식과 수치 예시 출처](lecture/assets/SOURCES.md)
 - [초안 제출 안내 · 독립 HTML](assignment/project-draft.html)
 - [8주차 제출 안내와 기존 양식](../week08/README.md)
 
@@ -17,8 +18,10 @@
 1. 프롬프트·검색·모델 학습의 개선 대상과 선택 근거
 2. SFT(Supervised Fine-Tuning, 지도 미세조정)의 데이터·분할·손실 마스킹
 3. LoRA(Low-Rank Adaptation, 저차원 행렬 기반 모델 적응)의 구조와 비용
-4. DPO(Direct Preference Optimization, 직접 선호 최적화)의 선호쌍·reference·손실
-5. 고정 평가 입력, 실패·복구 계획과 기획서 초안
+4. DPO(Direct Preference Optimization, 직접 선호 최적화)의 배경·선호쌍·reference·시퀀스 로그확률·손실·단일 정책 실험
+5. 가림 평가·차원별 회귀·배포 판단, 기술 선택을 PRD 요구사항과 기획서 초안으로 연결
+
+80쪽 확장본은 6주차의 원리를 적용 조건으로 복습한 뒤 선호 기준·DPO·비교 평가를 상세히 다룬다. 새 [Notebook 05](lab/notebooks/05_dpo_evaluation_workshop.ipynb)는 로그확률·β 곡선·합성 평가 12건의 집계와 회귀 사례를 실행한다. 평가 플래그는 직접 작성한 수업용 입력이며 실제 모델 품질이나 학생 평가 결과가 아니다.
 
 기본 실습은 Python 3.11과 기존 `requirements.txt`로 실행한다. 실제 LLM 학습, 모델 다운로드, 유료 API는 필수가 아니다. 행렬 근사와 장난감 정책 학습은 실제 LLM 학습 성공이나 업무 품질 향상의 증거가 아니다.
 

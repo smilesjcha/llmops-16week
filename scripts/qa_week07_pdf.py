@@ -35,4 +35,4 @@ for start in range(0,len(doc.pages),4):
 receipt={'pages':len(doc.pages),'issues':issues,'visual_review':'See qa sheets and individual slide PNGs; automated checks do not prove visual quality.'}
 (folder/'receipt.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2))
 print(receipt)
-assert len(doc.pages)==(76 if week == 6 else 77) and not issues
+assert len(doc.pages)==(76 if week == 6 else 80) and not issues
