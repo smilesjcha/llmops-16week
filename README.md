@@ -10,6 +10,7 @@
 - [16주 과정 로드맵](curriculum/2026-2/web/course-roadmap.html)
 - [2페이지 프로젝트 제안서](curriculum/2026-2/web/project-proposal-2pager.html)
 - [제품 요구사항 문서](curriculum/2026-2/web/project-prd.html)
+- [10주차 기획서 · 포트폴리오·AI 활용·시간 배분·검증 기록 양식](curriculum/2026-2/web/project-portfolio-week10.html) · [작성 안내](week10/README.md)
 - [기획서 Word 양식](week08/templates/08_project_proposal_word_template.docx) · [Word 기반 PDF](output/pdf/08_project_proposal_word_template.pdf) · [PPT 양식](week08/templates/08_project_proposal_ppt_template.pptx)
 - 수업 운영: 16주 전체 대면 수업 없이 온라인으로 진행하며, 정규 수업은 실시간 강의를 원칙으로 운영
 - 7주차: 프로젝트 기획서 초안 0.1 제출·교수 피드백
