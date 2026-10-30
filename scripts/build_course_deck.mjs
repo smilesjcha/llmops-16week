@@ -4,11 +4,12 @@ import {pathToFileURL} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {Presentation,PresentationFile} from '@oai/artifact-tool';
 import {decks} from './course_deck_content.mjs';
+import {week09Renderers} from './week09_renderers.mjs';
 import {C as BaseColors,FONT,MONO,CANVAS,resolveLayout,auditDeck} from './presentation_design.mjs';
 const ROOT=path.resolve(import.meta.dirname,'..');
 const week=Number(process.argv[2]); const D=decks[week];
-const C=[6,7].includes(week)?{...BaseColors,green:'#284B72',soft:'#EDF1F6'}:BaseColors;
-if(!D)throw Error('Usage: node scripts/build_course_deck.mjs 4|5|6|7|8');
+const C=[6,7,9].includes(week)?{...BaseColors,green:'#284B72',soft:'#EDF1F6'}:BaseColors;
+if(!D)throw Error('Usage: node scripts/build_course_deck.mjs 4|5|6|7|8|9');
 const noPublish=process.argv.includes('--no-publish');
 const SKILL=process.env.PRESENTATIONS_SKILL_DIR, PY=process.env.ARTIFACT_PYTHON;
 if(!SKILL||!PY)throw Error('Bundled runtime variables required');
@@ -95,6 +96,8 @@ for(const name of ['retrieval-chart-data.json','retrieval-timing.json']){
 const chartData=JSON.parse(await fs.readFile(path.join(ROOT,'output/validation/retrieval-chart-data.json'),'utf8'));
 async function chart(s,a){shell(s,a);let categories,series,type='bar',format='0.0',max,majorUnit;
 switch(a.chart){
+case 'w9-stream':{const d=JSON.parse(await fs.readFile(path.join(ROOT,'output/validation/week09-live/receipt.json'),'utf8')).stream_runs[0];categories=['첫 내용 조각','전체 완료'];series=[{name:'로컬 TCP · ms',values:[d.first_delta_ms,d.total_ms]}];format='0.0';break;}
+case 'w9-errors':case 'w9-latency':case 'w9-goodput':case 'w9-cache':{const d=JSON.parse(await fs.readFile(path.join(ROOT,'output/validation/week09-lab/benchmark-report.json'),'utf8'));categories=d.runs.map(x=>'동시 요청 '+x.concurrency);format='0.0';if(a.chart==='w9-errors'){series=[{name:'오류율',values:d.runs.map(x=>x.summary.error_rate)}];format='0.0%';max=1;}else if(a.chart==='w9-latency'){categories=d.runs.map(x=>'동시 '+x.concurrency+' (n='+x.summary.success+')');series=[50,95].map(p=>({name:'성공 p'+p+' · ms',values:d.runs.map(x=>x.summary.success_latency_ms['p'+p])}));max=Math.ceil(Math.max(...series.flatMap(x=>x.values))/10)*10;majorUnit=10;}else if(a.chart==='w9-goodput'){series=[{name:'성공 요청/s',values:d.runs.map(x=>x.summary.successful_rps)},{name:'전체 완료 요청/s',values:d.runs.map(x=>x.summary.completed_rps)}];}else{categories=['캐시 OFF','워밍업 후 적중'];series=[{name:'성공 p50 · ms',values:[d.runs[1].summary.success_latency_ms.p50,d.cached.summary.success_latency_ms.p50]}];}break;}
 case 'dpo-beta':{const d=JSON.parse(await fs.readFile(path.join(ROOT,'output/validation/week07-workshop/workshop-report.json'),'utf8'));type='line';categories=d.margins.map(String);series=d.beta_curves.map(x=>({name:'β='+x.beta,values:x.values}));format='0.00';break;}
 case 'toy-training-loss':case 'toy-training-probability':{const d=JSON.parse(await fs.readFile(path.join(ROOT,'output/validation/week07-workshop/workshop-report.json'),'utf8'));const rows=d.toy_history.filter(x=>x.step%10===0),probability=a.chart.endsWith('probability');type='line';categories=rows.map(x=>String(x.step));series=[{name:probability?'chosen 선택 확률':'DPO loss',values:rows.map(x=>probability?x.chosen_probability:x.loss)}];format=probability?'0.0%':'0.000';if(probability)max=1;break;}
 case 'evaluation-fixtures':{const d=JSON.parse(await fs.readFile(path.join(ROOT,'output/validation/week07-workshop/workshop-report.json'),'utf8'));const keys=['evidence','format','useful','no_excess_refusal'];categories=['근거','형식','유용성','과도한 거절 없음'];series=['baseline','candidate'].map(name=>({name,values:keys.map(k=>d.evaluation.rates[name][k])}));format='0.0%';max=1;majorUnit=.25;break;}
@@ -134,6 +137,7 @@ async function imageLayout(s,a){
  if(a.imageMode==='full-figure'&&a.caption)text(s,a.caption,64,632,1152,26,14,{color:C.gray});else note(s,a);
 }
 const renderers={cover,section,statement,focus,annotated,compare,steps,timeline:steps,flow,swimlane,table,case:caseLayout,code,formula,tokenmap,'lora-paths':loraPaths,'preference-pair':preferencePair,'dpo-paths':dpoPaths,windows,dates,rank,funnel,citation,ideas,roadmap,chart,notebook:caseLayout,links:caseLayout,image:imageLayout};
+Object.assign(renderers,week09Renderers({shell,rect,rule,text,note,C}));
 const auditWarnings=auditDeck(D,renderers);
 for(const a of D.slides){current=a.n;const slide=p.slides.add();await renderers[resolveLayout(a)](slide,a);slide.speakerNotes.textFrame.setText(`${a.notes}\n\n[Sources]\n${a.sources.map(x=>'- '+x).join('\n')}\n[/Sources]`);slide.speakerNotes.setVisible(true)}
 await fs.writeFile(path.join(BUILD,'geometry.json'),JSON.stringify(geometry));

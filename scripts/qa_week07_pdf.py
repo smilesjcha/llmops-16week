@@ -8,11 +8,11 @@ from PIL import Image, ImageOps, ImageDraw
 
 root = Path(__file__).resolve().parents[1]
 week = int(sys.argv[1]) if len(sys.argv) > 1 else 7
-if week not in (6, 7):
-    raise ValueError('supported weeks: 6 or 7')
+if week not in (6, 7, 9):
+    raise ValueError('supported weeks: 6, 7 or 9')
 folder = root/f'output/validation/week{week:02}-pages-final'
 folder.mkdir(parents=True, exist_ok=True)
-source = root/'output/pdf'/('06_week6_sft_lora_reference.pdf' if week == 6 else '07_week7_model_adaptation_project.pdf')
+source = root/'output/pdf'/{6:'06_week6_sft_lora_reference.pdf',7:'07_week7_model_adaptation_project.pdf',9:'09_week9_api_serving.pdf'}[week]
 doc = pdfplumber.open(source)
 subprocess.run(['pdftoppm','-scale-to-x','1280','-scale-to-y','-1','-png',str(source),str(folder/'slide')],check=True)
 issues=[]

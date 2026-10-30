@@ -37,6 +37,7 @@
 - 7주차: [PDF · 모델 적응과 서비스 기획 · 80쪽](output/pdf/07_week7_model_adaptation_project.pdf) · [5개 Notebook·VS Code](week07/lab/README.md) · [기획서 초안 안내 HTML](week07/assignment/project-draft.html)
 - 이번 과제: [과제 02 · 독립 HTML · 10월 8일(목)까지](week04/assignment/assignment02.html)
 - 8주차: [기획서 제출 안내](curriculum/2026-2/web/project-submission.html) · [요약 PDF](output/pdf/08_project_proposal_guide.pdf)
+- 9주차: [PDF · API 계약과 LLM 서비스 구현 · 80쪽](output/pdf/09_week9_api_serving.pdf) · [발표용 PPT](week09/lecture/09_week9_api_serving.pptx) · [5개 Notebook·VS Code 실행 안내](week09/lab/README.md)
 - 팀 신청: [아주대AI대학원 2–4인 팀 Google Form](https://docs.google.com/forms/d/e/1FAIpQLSd3UOP4SjCUct_RJKcgvVNGEBCpOOLmNkZPi6QFBIQAilKIag/viewform)
 - 강의·과제 HTML: 파일을 내려받아 브라우저로 열기. GitHub 파일 페이지는 HTML을 실행하지 않습니다.
 - 1주차 강의안: [01주차 PDF · LLM 서비스 운영의 기본](output/pdf/01_week1_llmops_kickoff.pdf)

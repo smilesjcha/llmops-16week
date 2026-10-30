@@ -6,6 +6,7 @@ const layouts = Object.fromEntries([
   'timeline','flow','swimlane','table','case','code','formula','windows',
   'dates','rank','funnel','citation','ideas','roadmap','chart','notebook',
   'links','image','tokenmap','lora-paths','preference-pair','dpo-paths',
+  'roadmap9','service-boundary','request-sequence','async-lanes','admission-gate','cache-branches','stream-lanes',
 ].map(kind => [kind, true]));
 
 let failed = false;

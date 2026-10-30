@@ -29,6 +29,7 @@
 | 06 | 2026.10.09 | SFT·LoRA·QLoRA 기술 단원 | [확장 강의안 · 76쪽](06_week6_sft_lora_reference.pdf) | 당일 휴일 · 기술 내용은 7주차에 통합 | [영상](../../week07/resources/README.md) · [수치 실습](../../week06/lab/README.md) |
 | 07 | 2026.10.16 | 모델 적응·기획서 초안 | [07주차 강의안 · 80쪽](07_week7_model_adaptation_project.pdf) | 실시간 온라인 | [6–7주차 통합 영상·실습](../../week07/resources/README.md) |
 | 08 | 2026.10.23 | 프로젝트 기획서 제출 | [제출 안내 · 16쪽](08_project_proposal_guide.pdf) | 온라인 제출·평가만 | [양식·평가 안내](../../week08/README.md) |
+| 09 | 2026.10.30 | API 계약과 LLM 서비스 구현 | [09주차 강의안 · 80쪽](09_week9_api_serving.pdf) | 실시간 온라인 | [5개 Notebook·VS Code 실행 안내](../../week09/lab/README.md) |
 
 2주차 강의안은 72쪽으로, 1–60쪽은 2시간 본 수업용이고 61–72쪽은 심화 참고용이다. 실습은 [VS Code 실행 가이드](../../week02/VS_CODE_GUIDE.md)를 따라 진행한다.
 
@@ -47,6 +48,7 @@
 4주차 추석에는 녹화영상을 업로드했다. 6주차 한글날에는 실시간 수업·녹화영상·신규 과제가 없다. 7주차에 기획서 초안을 검토하고, 8주차에는 실시간 수업 없이 피드백 반영 수정본을 온라인 제출·평가한다. 16주차 발표는 실시간 온라인으로 진행한다.
 ## 최신 추가 자료
 
+- [09주차 · API 계약과 LLM 서비스 구현 · 80장](09_week9_api_serving.pdf) · [PPT·실습·출처 안내](../../week09/README.md)
 - [04주차 · 검색 증강 생성 · 77장](04_week4_rag_evidence.pdf)
 - [05주차 · 검색 품질 개선 · 80장](05_week5_search_quality.pdf)
 - [08주차 · 프로젝트 기획서 제출 안내 · 16장](08_project_proposal_guide.pdf)

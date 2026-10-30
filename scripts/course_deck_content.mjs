@@ -1,5 +1,6 @@
 import {week07} from './week07_deck_content.mjs';
 import {week06} from './week06_deck_content.mjs';
+import {week09} from './week09_deck_content.mjs';
 const rag='https://arxiv.org/abs/2005.11401';
 const ir='https://nlp.stanford.edu/IR-book/html/htmledition/okapi-bm25-a-non-binary-model-1.html';
 const ollama='https://docs.ollama.com/capabilities/thinking';
@@ -22,6 +23,7 @@ const common={
  tools:table('리서치와 프로토타입 도구',[['목적','선택 도구·확인'],['자료 조사','Gemini Deep Research · 원출처 재확인'],['코드·시안','Codex / Claude Code · 실제 실행·오류 확인'],['디자인','Figma 또는 HTML · 핵심 흐름과 실패 상태'],['데모','60–120초 권장 · 합성 자료·동작 범위 명시']]),
 };
 export const decks={
+ 9:week09,
  7:week07,
  4:{week:4,name:'04_week4_rag_evidence',title:'검색 증강 생성',subtitle:'문서 · 검색 · 출처 · 답변 보류',slides:[
  S('검색 증강 생성','cover',['문서 · 검색 · 출처 · 답변 보류','WEEK 04 · 2026.09.25 · 녹화영상 대체','차성재 · 무신사 Core AI PM × AI 대학원 겸임교수']),
