@@ -47,6 +47,7 @@
 - 4–5주차 통합 녹화: [Drive 영상·복습 안내](week05/resources/README.md)
 - 6–7주차 통합 녹화: [Drive 영상·복습 안내](week07/resources/README.md)
 - 9주차 녹화: [Drive 영상·복습 안내](week09/resources/README.md)
+- 10주차 녹화: [Drive 영상·복습 안내](week10/resources/README.md)
 - 확인 경로: `llmops-16week` → `output` → `pdf` → 해당 주차 PDF
 - 발표용 PowerPoint와 실습 코드: 각 `weekNN` 폴더
 - 수정본 확인: 수업 직전 `main` 브랜치 새로고침

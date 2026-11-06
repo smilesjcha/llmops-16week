@@ -3,6 +3,7 @@
 2026년 11월 6일 온라인 실시간 수업용 **80쪽 강의안**과 단계별 실습이다. 9주차 API의 다음 단계로 실행 버전·구조화 로그·Trace·지표·장애 진단·복구·배포 전 검증을 다룬다.
 
 - [학생 공유 링크·VS Code·Docker/Prometheus 시연 순서](QUICKSTART.md)
+- [10주차 강의 녹화 · Drive 보기 전용](resources/README.md)
 - [지난주 9주차 강의 녹화 · Drive 보기 전용](../week09/resources/README.md)
 - [학생용 PDF · 80쪽](../output/pdf/10_week10_observable_deployment.pdf)
 - [발표용 PPT · 80쪽](lecture/10_week10_observable_deployment.pptx)

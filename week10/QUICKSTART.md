@@ -8,6 +8,7 @@
 | 실습 Notebook | [01–06 파일 목록](https://github.com/smilesjcha/llmops-16week/tree/main/week10/lab/notebooks) |
 | 전체 실습·실행 안내 | [week10/lab](https://github.com/smilesjcha/llmops-16week/tree/main/week10/lab) |
 | 기획서2차 양식 HTML | [GitHub에서 내려받기](https://github.com/smilesjcha/llmops-16week/blob/main/curriculum/2026-2/web/project-portfolio-week10.html) |
+| 10주차 강의 녹화 | [Drive 영상·보기 전용](https://drive.google.com/file/d/1h2TY8oV7t2fH7MKnlNFsaleC7NGy3z6C/view?usp=sharing) |
 | 지난주9주차 녹화 | [Drive 영상·보기 전용](https://drive.google.com/file/d/1SmW8c3hZlwVVcrjycZ5svKfz80aScnLg/view?usp=drivesdk) |
 
 HTML은 GitHub 파일 화면에서 **Download raw file**로 내려받아 브라우저로 연다. 입력 후 **작성본 HTML 저장**을 누르고 저장한 파일을 다시 열어 내용이 남아 있는지 확인한다. 인쇄→PDF도 가능하다.
