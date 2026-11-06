@@ -10,12 +10,12 @@
 - [16주 과정 로드맵](curriculum/2026-2/web/course-roadmap.html)
 - [2페이지 프로젝트 제안서](curriculum/2026-2/web/project-proposal-2pager.html)
 - [제품 요구사항 문서](curriculum/2026-2/web/project-prd.html)
-- [10주차 기획서 · 포트폴리오·AI 활용·시간 배분·검증 기록 양식](curriculum/2026-2/web/project-portfolio-week10.html) · [작성 안내](week10/README.md)
+- **기획서 2차 제출: 11월 6일(금), 미제출자는 늦어도 11월 7일(토)까지.** [10주차 기획서 · 포트폴리오·AI 활용·시간 배분·검증 기록 양식](curriculum/2026-2/web/project-portfolio-week10.html) · [작성 안내](week10/README.md)
 - [기획서 Word 양식](week08/templates/08_project_proposal_word_template.docx) · [Word 기반 PDF](output/pdf/08_project_proposal_word_template.pdf) · [PPT 양식](week08/templates/08_project_proposal_ppt_template.pptx)
 - 수업 운영: 16주 전체 대면 수업 없이 온라인으로 진행하며, 정규 수업은 실시간 강의를 원칙으로 운영
 - 7주차: 프로젝트 기획서 초안 0.1 제출·교수 피드백
 - 8주차: 중간고사와 실시간 강의 없이 수정본 0.2를 온라인으로 제출·평가
-- 기획서 수정본 마감: **2026년 10월 22일(목) 23:59 한국시간** · [아주대 LMS 제출란](https://eclass2.ajou.ac.kr/ultra/courses/_118756_1/assessment/test/_2520772_1?gradeitemView=details)
+- 8주차 기획서 수정본 마감: **2026년 10월 22일(목) 23:59 한국시간** · [아주대 LMS 제출란](https://eclass2.ajou.ac.kr/ultra/courses/_118756_1/assessment/test/_2520772_1?gradeitemView=details)
 - 16주차: 서비스 구현·평가·시연·포트폴리오 발표를 실시간 온라인으로 진행
 - 대상: 특정 대학에 한정하지 않는 대학생·대학원생 대상 통합 강좌
 - 교수: 차성재 · 무신사 Core AI PM × AI 대학원 겸임교수
@@ -38,6 +38,7 @@
 - 이번 과제: [과제 02 · 독립 HTML · 10월 8일(목)까지](week04/assignment/assignment02.html)
 - 8주차: [기획서 제출 안내](curriculum/2026-2/web/project-submission.html) · [요약 PDF](output/pdf/08_project_proposal_guide.pdf)
 - 9주차: [PDF · API 계약과 LLM 서비스 구현 · 80쪽](output/pdf/09_week9_api_serving.pdf) · [발표용 PPT](week09/lecture/09_week9_api_serving.pptx) · [5개 Notebook·VS Code 실행 안내](week09/lab/README.md)
+- 10주차: [PDF · 배포와 실행 관찰 · 76쪽](output/pdf/10_week10_observable_deployment.pdf) · [발표용 PPT](week10/lecture/10_week10_observable_deployment.pptx) · [Notebook 6개·VS Code 실행 안내](week10/lab/README.md) · [기획서 2차 제출 공지](week10/README.md#기획서-2차-제출-공지)
 - 팀 신청: [아주대AI대학원 2–4인 팀 Google Form](https://docs.google.com/forms/d/e/1FAIpQLSd3UOP4SjCUct_RJKcgvVNGEBCpOOLmNkZPi6QFBIQAilKIag/viewform)
 - 강의·과제 HTML: 파일을 내려받아 브라우저로 열기. GitHub 파일 페이지는 HTML을 실행하지 않습니다.
 - 1주차 강의안: [01주차 PDF · LLM 서비스 운영의 기본](output/pdf/01_week1_llmops_kickoff.pdf)

@@ -1,0 +1,12 @@
+// Editable instructional diagrams and data charts; no decorative drawing assets.
+import {FONT} from './presentation_design.mjs';
+export function week10Renderers({shell,rect,rule,text,note,C}){
+ const diagram=(s,a)=>{shell(s,a);const boxes={};for(const n of a.nodes){boxes[n.id]=rect(s,n.x,n.y,n.w,n.h,a.open?'none':C.white,a.open?'none':C.line,a.open?0:1);if(a.open)rule(s,n.x+20,n.y+76,n.w-40);text(s,n.head,n.x+20,n.y+18,n.w-40,n.h<160?40:76,23,{bold:true});if(n.body)text(s,n.body,n.x+20,n.y+(n.h<160?64:94),n.w-40,n.h-(n.h<160?68:98),18,{color:C.gray})}for(const [f,t,fromSide='right',toSide='left',kind='straight'] of a.edges)s.shapes.connect(boxes[f],boxes[t],{kind,fromSide,toSide,line:{fill:C.blue,width:2},tail:{type:'triangle',width:'sm',length:'sm'}});note(s,a)};
+ return {
+  'roadmap10':(s,a)=>{shell(s,a);const rows=[['01–03','09.04–09.18','문제·프롬프트·평가'],['04–05','09.25–10.02','검색·근거'],['06','10.09','휴일·수업 없음'],['07–08','10.16–10.23','기획 리뷰·제출 평가'],['09','10.30','API 계약·실패 복구'],['10','11.06','배포·관찰 · 기획서 2차'],['11–12','11.13–11.20','오프라인·온라인 평가'],['13–14','11.27–12.04','안전·비용·용량'],['15','12.11','통합 점검·리허설'],['16','12.18','실시간 온라인 발표']];rows.forEach(([w,d,t],i)=>{const x=64+Math.floor(i/5)*594,y=176+(i%5)*86,active=w==='10';if(active)rect(s,x,y,558,78,C.soft);text(s,w,x+12,y+8,98,25,15,{mono:true,color:active?C.blue:C.gray,bold:active});text(s,d,x+130,y+8,410,25,15,{color:C.gray});text(s,t,x+12,y+41,534,32,20,{bold:active,color:active?C.blue:C.ink})})},
+  'diagram10':diagram,
+  'open-diagram10':(s,a)=>diagram(s,{...a,open:true}),
+  'notice10':(s,a)=>{shell(s,a);a.items.forEach(([label,date],i)=>{const y=196+i*202;text(s,label,64,y,1152,40,22,{color:C.gray});text(s,date,64,y+63,1152,70,34,{bold:true});if(i===0)rule(s,64,y+151,1152)});note(s,a)},
+  'chart10':(s,a)=>{shell(s,a);const styles={typeface:FONT,fontSize:22,fill:C.gray};s.charts.add('bar',{position:{left:70,top:190,width:1140,height:385},categories:a.categories,series:a.series.map((x,i)=>({...x,valuesFormatCode:a.format||'0.0',fill:[C.blue,C.navy][i%2]})),hasLegend:a.series.length>1,legend:{position:'bottom',textStyle:styles},xAxis:{axisType:'textAxis',textStyle:styles},yAxis:{min:0,...(a.max?{max:a.max,majorUnit:1}:{}),numberFormatCode:a.format||'0.0',textStyle:styles},dataLabels:{showValue:a.series.length===1,textStyle:styles,numberFormatCode:a.format||'0.0'},barOptions:{direction:'column',grouping:'clustered'},chartFill:'none',chartLine:{fill:'none',width:0},plotAreaFill:'none',plotAreaLine:{fill:'none',width:0}});note(s,a)},
+ };
+}

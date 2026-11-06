@@ -1,0 +1,72 @@
+{
+  "scope": "actual localhost TCP, synthetic MOCK stages",
+  "normal_spans": [
+    {
+      "name": "assist",
+      "offset_ms": 0.507,
+      "duration_ms": 44.262,
+      "status": "OK"
+    },
+    {
+      "name": "retrieve",
+      "offset_ms": 0.521,
+      "duration_ms": 12.063,
+      "status": "OK"
+    },
+    {
+      "name": "generate",
+      "offset_ms": 12.594,
+      "duration_ms": 32.103,
+      "status": "OK"
+    },
+    {
+      "name": "format",
+      "offset_ms": 44.709,
+      "duration_ms": 0.052,
+      "status": "OK"
+    }
+  ],
+  "release_comparison": [
+    {
+      "release": "v1",
+      "requests": 4,
+      "http_success": 4,
+      "fixture_pass": 4,
+      "manifest": {
+        "release": "v1",
+        "model": "mock-fixed-v1",
+        "prompt": "v1",
+        "dataset": "synthetic-docs-v1",
+        "schema": "assist-v1",
+        "timeout_s": 0.25,
+        "capacity": 2,
+        "config_id": "cf986bd9579a"
+      }
+    },
+    {
+      "release": "v2",
+      "requests": 4,
+      "http_success": 4,
+      "fixture_pass": 0,
+      "manifest": {
+        "release": "v2",
+        "model": "mock-fixed-v1",
+        "prompt": "v2",
+        "dataset": "synthetic-docs-v1",
+        "schema": "assist-v1",
+        "timeout_s": 0.25,
+        "capacity": 2,
+        "config_id": "13a2e6309eba"
+      }
+    }
+  ],
+  "conditions": {
+    "python": "3.11.14",
+    "normal_requests": 1,
+    "retrieve_wait_ms": 10,
+    "generate_wait_ms": 30,
+    "release_fixture_requests_each": 4,
+    "date": "2026-11-06",
+    "unit": "ms"
+  }
+}

@@ -4,12 +4,13 @@ import {pathToFileURL} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {Presentation,PresentationFile} from '@oai/artifact-tool';
 import {decks} from './course_deck_content.mjs';
+import {week10Renderers} from './week10_renderers.mjs';
 import {week09Renderers} from './week09_renderers.mjs';
 import {C as BaseColors,FONT,MONO,CANVAS,resolveLayout,auditDeck} from './presentation_design.mjs';
 const ROOT=path.resolve(import.meta.dirname,'..');
 const week=Number(process.argv[2]); const D=decks[week];
-const C=[6,7,9].includes(week)?{...BaseColors,green:'#284B72',soft:'#EDF1F6'}:BaseColors;
-if(!D)throw Error('Usage: node scripts/build_course_deck.mjs 4|5|6|7|8|9');
+const C=[6,7,9,10].includes(week)?{...BaseColors,green:'#284B72',soft:'#EDF1F6'}:BaseColors;
+if(!D)throw Error('Usage: node scripts/build_course_deck.mjs 4|5|6|7|8|9|10');
 const noPublish=process.argv.includes('--no-publish');
 const SKILL=process.env.PRESENTATIONS_SKILL_DIR, PY=process.env.ARTIFACT_PYTHON;
 if(!SKILL||!PY)throw Error('Bundled runtime variables required');
@@ -138,6 +139,7 @@ async function imageLayout(s,a){
 }
 const renderers={cover,section,statement,focus,annotated,compare,steps,timeline:steps,flow,swimlane,table,case:caseLayout,code,formula,tokenmap,'lora-paths':loraPaths,'preference-pair':preferencePair,'dpo-paths':dpoPaths,windows,dates,rank,funnel,citation,ideas,roadmap,chart,notebook:caseLayout,links:caseLayout,image:imageLayout};
 Object.assign(renderers,week09Renderers({shell,rect,rule,text,note,C}));
+Object.assign(renderers,week10Renderers({shell,rect,rule,text,note,C}));
 const auditWarnings=auditDeck(D,renderers);
 for(const a of D.slides){current=a.n;const slide=p.slides.add();await renderers[resolveLayout(a)](slide,a);slide.speakerNotes.textFrame.setText(`${a.notes}\n\n[Sources]\n${a.sources.map(x=>'- '+x).join('\n')}\n[/Sources]`);slide.speakerNotes.setVisible(true)}
 await fs.writeFile(path.join(BUILD,'geometry.json'),JSON.stringify(geometry));
