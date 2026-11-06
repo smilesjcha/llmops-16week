@@ -1,15 +1,17 @@
 # Week 10 · LLM 서비스 배포와 실행 관찰
 
-2026년 11월 6일 온라인 실시간 수업용 **76쪽 강의안**과 단계별 실습이다. 9주차 API의 다음 단계로 실행 버전·구조화 로그·Trace·지표·장애 진단·복구·배포 전 검증을 다룬다.
+2026년 11월 6일 온라인 실시간 수업용 **80쪽 강의안**과 단계별 실습이다. 9주차 API의 다음 단계로 실행 버전·구조화 로그·Trace·지표·장애 진단·복구·배포 전 검증을 다룬다.
 
-- [학생용 PDF · 76쪽](../output/pdf/10_week10_observable_deployment.pdf)
-- [발표용 PPT · 76쪽](lecture/10_week10_observable_deployment.pptx)
+- [학생 공유 링크·VS Code·Docker/Prometheus 시연 순서](QUICKSTART.md)
+- [지난주 9주차 강의 녹화 · Drive 보기 전용](../week09/resources/README.md)
+- [학생용 PDF · 80쪽](../output/pdf/10_week10_observable_deployment.pdf)
+- [발표용 PPT · 80쪽](lecture/10_week10_observable_deployment.pptx)
 - [실습 Notebook 6개·VS Code 실행 안내](lab/README.md)
 - [100분 수업 진행안](lecture/TEACHING_GUIDE.md)
 - [장표별 설명·노트](lecture/lecture-notes.md)
 - [공식 도식·화면 캡처·측정 출처](lecture/assets/SOURCES.md)
 
-공통 실습은 기존 Python3.11 환경에서 추가 패키지·모델·GPU·API 키 없이 실행한다. MOCK 고정 응답을 이용한 계측·복구 실험으로 실제 LLM의 성능 시험과 구분한다. Docker는 선택 경로이며 검수 기기의 데몬 미기동으로 이미지 빌드·컨테이너 기동은 미검증이다.
+공통 실습은 기존 Python3.11 환경에서 추가 패키지·모델·GPU·API 키 없이 실행한다. MOCK 고정 응답을 이용한 계측·복구 실험으로 실제 LLM의 성능 시험과 구분한다. Docker는 선택 경로다. API 이미지 빌드·컨테이너 준비 상태·Prometheus 수집·상태별 그래프를 Mac의 Colima/Linux arm64에서 확인했다. 운영체제별 설치는 공식 안내를 따른다.
 
 ## 기획서 2차 제출 공지
 
@@ -21,7 +23,7 @@
 - 기존 피드백의 반영 전후, 사용자 문제·최소 기능·검증 근거·남은 위험·실행 계획 정리.
 - 정확한 마감 시각과 추가 안내는 소속별 공지 확인. 이 자료에서 별도 감점 규칙을 추가하지 않음.
 
-같은 공지를 강의안 마지막74–76쪽과 작성 양식 HTML에 반영했다.
+같은 공지를 강의안 마지막78–80쪽과 작성 양식 HTML에 반영했다.
 
 ## 기획서 개선안과 프로젝트 포트폴리오
 

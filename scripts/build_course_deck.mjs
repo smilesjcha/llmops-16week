@@ -26,7 +26,7 @@ function rect(s,x,y,w,ht,fill='none',stroke='none',sw=0){return s.shapes.add({ge
 function rule(s,x,y,w,color=C.line){rect(s,x,y,w,1,color)}
 function text(s,v,x,y,w,ht,pt=20,o={}){const val=o.mono?String(v):wrap(v,w,pt); if(pt<14||y<0||y+ht>720||x<0||x+w>1280)throw Error(`Geometry s${current} ${v}`);if(val.split('\n').length*pt*4/3*1.16>ht+4)throw Error(`Text height s${current} ${val}`);const box=rect(s,x,y,w,ht);box.text=val;box.text.style={typeface:o.mono?MONO:FONT,fontSize:pt*4/3,color:o.color||C.ink,bold:!!o.bold,alignment:o.align||'left',verticalAlignment:'top',wrap:'none',autoFit:'none',lineSpacing:1.16,insets:{top:0,bottom:0,left:0,right:0}};geometry.push({slide:current,x,y,w,h:ht,text:val,pt});return box}
 function list(s,items,x,y,w,pt=20,o={}){for(const item of items){const ht=h(item,w,pt);text(s,item,x,y,w,ht,pt,o);y+=ht+(o.gap??20)}return y}
-function shell(s,a){s.background.fill=C.paper;text(s,`LLMOPS / W${String(week).padStart(2,'0')}`,64,26,1000,24,14,{color:C.gray});text(s,String(current).padStart(2,'0'),1140,26,76,24,14,{mono:true,color:C.gray,align:'right'});text(s,a.title,64,76,1152,70,34,{bold:true});rule(s,64,663,1152);text(s,D.subtitle,64,680,1152,24,14,{color:C.gray})}
+function shell(s,a){s.background.fill=C.paper;text(s,`LLMOPS / W${String(week).padStart(2,'0')}`,64,26,1000,24,14,{color:C.gray});text(s,String(current).padStart(2,'0'),1140,26,76,24,14,{mono:true,color:C.gray,align:'right'});text(s,a.title,64,76,1152,70,34,{bold:true});if(week!==10)rule(s,64,663,1152);text(s,D.subtitle,64,680,1152,24,14,{color:C.gray})}
 function note(s,a){if(a.caption)text(s,a.caption,64,608,1152,48,16,{color:C.gray})}
 function cover(s,a){s.background.fill=C.black;text(s,`LLMOPS / WEEK ${String(week).padStart(2,'0')}`,64,42,1100,24,14,{color:C.muted});text(s,a.title,64,174,1152,200,54,{bold:true,color:C.white});rule(s,64,426,1152,C.gray);list(s,a.items,64,464,1120,20,{color:C.muted,gap:16})}
 function section(s,a){s.background.fill=C.navy;text(s,`W${String(week).padStart(2,'0')} / ${String(current).padStart(2,'0')}`,64,42,1100,24,14,{color:C.muted});text(s,a.title,64,176,1152,160,44,{bold:true,color:C.white});rule(s,64,392,1152,C.gray);list(s,a.items,64,440,1152,23,{color:C.white,gap:18})}
@@ -129,10 +129,10 @@ async function imageLayout(s,a){
  if(a.imageMode==='wide-explain')frame={left:64,top:164,width:1152,height:300};
  if(a.imageMode==='tall-explain')frame={left:64,top:170,width:820,height:420};
  if(a.imageMode==='full-figure')frame={left:64,top:164,width:1152,height:410};
- s.images.add({blob:new Uint8Array(await fs.readFile(file)),contentType:a.image.endsWith('.jpg')?'image/jpeg':'image/png',alt:a.title,fit:'contain',position:frame});
+ s.images.add({blob:new Uint8Array(await fs.readFile(file)),contentType:a.image.endsWith('.jpg')?'image/jpeg':'image/png',alt:a.title,fit:'contain',position:frame,...(a.imageCrop?{crop:a.imageCrop}:{})});
  if(a.imageMode==='side-explain')a.items.forEach(([head,body],i)=>{const y=180+i*130;text(s,head,714,y,488,42,23,{bold:true});text(s,body,714,y+51,488,68,20,{color:C.gray});});
- else if(a.imageMode==='wide-explain')a.items.forEach(([head,body],i)=>{const x=64+i*390;text(s,head,x,481,366,36,21,{bold:true});text(s,body,x,530,366,62,18,{color:C.gray});});
- else if(a.imageMode==='tall-explain')a.items.forEach(([head,body],i)=>{const y=186+i*130;text(s,head,930,y,286,36,22,{bold:true});text(s,body,930,y+48,286,72,18,{color:C.gray});});
+ else if(a.imageMode==='wide-explain')a.items.forEach(([head,body],i)=>{const x=64+i*390;if(a.compactLabels)text(s,head+'\n'+body,x,481,366,106,20,{color:C.gray});else{text(s,head,x,481,366,36,21,{bold:true});text(s,body,x,530,366,62,18,{color:C.gray});}});
+ else if(a.imageMode==='tall-explain')a.items.forEach(([head,body],i)=>{const y=186+i*130;if(a.compactLabels)text(s,head+'\n'+body,930,y,286,116,20,{color:C.gray});else{text(s,head,930,y,286,36,22,{bold:true});text(s,body,930,y+48,286,72,18,{color:C.gray});}});
  else if(a.imageMode==='full-figure')a.items.forEach(([,body],i)=>text(s,body,64+i*390,583,366,38,18,{color:C.gray}));
  else {if(evaluation){text(s,'01 · 검색 지표',766,198,450,40,23,{bold:true});text(s,'정답 문서 회수율과\n첫 관련 문서의 순위',766,264,450,90,21,{color:C.gray});rule(s,766,374,450);text(s,'02 · 답변 보류',766,404,450,40,23,{bold:true});text(s,'답이 있는 질의와 없는 질의를\n분리해서 확인',766,468,450,82,21,{color:C.gray})}if(a.items.length)text(s,a.items.join(' · '),64,563,1152,42,17,{color:C.gray});}
  if(a.imageMode==='full-figure'&&a.caption)text(s,a.caption,64,632,1152,26,14,{color:C.gray});else note(s,a);

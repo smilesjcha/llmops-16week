@@ -29,4 +29,13 @@ OpenTelemetry Authors, [Observability primer](https://opentelemetry.io/docs/conc
 - [Prometheus naming](https://prometheus.io/docs/practices/naming/), [histograms](https://prometheus.io/docs/practices/histograms/): 단위·라벨·누적 버킷·구간 집계.
 - [Google SRE monitoring](https://sre.google/sre-book/monitoring-distributed-systems/): 사용자 영향·모니터링 질문. 임의 실습 임계값을 운영 SLO로 주장하지 않음.
 
-Docker CLI는 존재하지만 검수 시 daemon이 꺼져 있어 이미지 빌드·컨테이너 기동은 미검증이다. 실제 모델·GPU·외부 수집 백엔드도 이번 검증 대상이 아니다. 해당 제한은 강의안·실습 안내에 표시했다.
+## Prometheus 실제 실행 캡처
+
+- `prometheus-targets.png`: 선택 Compose의 `week10-api` 수집 대상 UP 화면. 아래 빈 영역만 PPT native crop으로 생략했다.
+- `prometheus-graph.png`: `lab_assist_requests_total{job="week10-api"}`의5분 그래프. 상태별 누적 건수는200=18·502=6·504=6이다. PPT에서 그래프·범례를 확대 발췌하고 핵심 건수를 편집 가능한 텍스트로 병기했다.
+- 2026-11-06 직접 실행한 로컬 Prometheus3.16.0·합성 MOCK 앱·요청30건. 학생·사용자 입력 없음. 원본 PNG를 보존하고 PPT에서는 native grayscale 효과를 적용했다. 원본 Prometheus UI의 색상을 강의의 의미 강조로 사용하지 않았다.
+- [Prometheus 시작 가이드](https://prometheus.io/docs/prometheus/latest/getting_started/), [설치](https://prometheus.io/docs/prometheus/latest/installation/), [3.16.0 릴리스](https://github.com/prometheus/prometheus/releases/tag/v3.16.0).
+- 이미지 태그 `prom/prometheus:v3.16.0`의 이번 pull 결과: `sha256:e04987641b57704f408e31f6373ba4138ecf27cb4a165d24aabb6c38fddd0f06`. Compose는 태그 지정이며 digest 잠금은 별도다.
+- [Docker Desktop Mac](https://docs.docker.com/desktop/setup/install/mac-install/), [Windows](https://docs.docker.com/desktop/setup/install/windows-install/), [Engine](https://docs.docker.com/engine/install/), [Compose](https://docs.docker.com/compose/gettingstarted/).
+
+API 이미지 빌드·컨테이너 실행·readiness·실제 Prometheus 수집을 Mac의 Colima/Linux arm64에서 확인했다. 운영체제별 학생 설치, 실제 모델·GPU·장기 보존·알림·운영 보안은 별도 범위다.

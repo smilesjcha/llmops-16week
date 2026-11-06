@@ -1,0 +1,9 @@
+# Classroom timing. Reassess overhead/retention before operational use.
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+scrape_configs:
+  - job_name: week10-api
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["api:8010"]

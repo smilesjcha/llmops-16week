@@ -181,7 +181,7 @@ CMD ["python", "-m", "uvicorn", "week10.lab.app:app", ...]
 
 강의 포인트: 명령 구조 발췌 · COPY·CMD 전체 값은 lab/Dockerfile 참조
 
-슬라이드의 말줄임은 실행 코드가 아니다. 학생은 실제 Dockerfile을 사용한다. 기본 이미지는 태그 수준 지정이며 digest 잠금·이미지 빌드·취약점 검증을 마친 운영 이미지라고 주장하지 않는다.
+슬라이드의 말줄임은 실행 코드가 아니다. 학생은 실제 Dockerfile을 사용한다. 기본 이미지는 태그 수준 지정이며 이미지 빌드·컨테이너 실행은 선택 실습에서 확인한다. digest 잠금·취약점 검증을 마친 운영 이미지라고 주장하지 않는다.
 
 근거: https://docs.docker.com/build/building/best-practices/, repo:week10/lab/Dockerfile
 
@@ -207,25 +207,25 @@ CMD ["python", "-m", "uvicorn", "week10.lab.app:app", ...]
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 17. Docker 선택 실행 명령
+## 17. Docker 설치와 실행 준비
 
-docker build -t llmops-w10:local week10/lab
+환경 · 준비·확인
 
-docker run --rm --name llmops-w10-demo \
+macOS · Docker Desktop 설치·실행 · Apple Silicon/Intel 구분
 
-  -p 127.0.0.1:8010:8010 \
+Windows · Docker Desktop · WSL 2·가상화 요구사항 확인
 
-  -e WEEK10_RELEASE=v1 llmops-w10:local
+Linux · Docker Engine + Compose plugin 설치
 
+기존 Colima 사용자 · 기존 환경 시작 · Docker context 확인
 
+공통 확인 · docker info의 Server · docker compose version
 
-docker stop llmops-w10-demo
+강의 포인트: CLI 버전 확인 뒤 Docker 엔진의 실행 상태까지 확인
 
-강의 포인트: Docker daemon 실행 필요 · 공통 실습은 .venv로 동일하게 진행 가능
+설치 링크와 운영체제별 순서는 week10/QUICKSTART.md에 있다. Docker Desktop은 설치 후 앱을 실행해야 한다. 이미 Colima를 쓰는 Mac은 기존 환경을 사용한다. 공통 Notebook은 Docker 설치 없이 완료할 수 있다.
 
-현재 검수 기기의 Docker CLI는 있지만 데몬은 실행 중이 아니었다. 컨테이너 빌드·기동 결과를 검증했다고 표시하지 않는다. 필요한 학생은 가이드대로 선택 실행하고 /release·/health/ready·정상 요청을 확인한다.
-
-근거: https://docs.docker.com/engine/containers/run/, repo:week10/lab/Dockerfile
+근거: https://docs.docker.com/desktop/setup/install/mac-install/, https://docs.docker.com/desktop/setup/install/windows-install/, https://docs.docker.com/engine/install/, https://docs.docker.com/compose/install/linux/, repo:week10/QUICKSTART.md
 
 ## 18. 실행 설정의 공개 manifest
 
@@ -406,9 +406,9 @@ Trace · 실행 추적 · 어느 단계에서 지연됐나 · 부모·자식 Spa
 
 
 
-강의 포인트: 공통 실습은 첫 단계와 메모리 조회만 구현 · 외부 수집 경로는 확장 주제
+강의 포인트: 공통 실습은 메모리 조회 · 선택 Compose에서 Prometheus 지표 수집
 
-직접 만든 Telemetry 클래스의 구조를 OpenTelemetry SDK API와 혼동하지 않는다. 실제 프로젝트에 적용할 때는 공식 SDK·표준 전송·백엔드 보존 정책을 선택한다. 이번에는 개념을 익히기 위해 추가 패키지와 서버 의존성을 줄였다.
+직접 만든 Telemetry 클래스의 구조를 OpenTelemetry SDK API와 혼동하지 않는다. 실제 프로젝트에 적용할 때는 공식 SDK·표준 전송·백엔드 보존 정책을 선택한다. 공통 Notebook은 추가 서버 없이 실행한다. 선택 Compose는 앱의 /metrics를 Prometheus로 수집한다. OpenTelemetry SDK·Collector·Trace 백엔드는 이번 구현에 포함하지 않는다.
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
@@ -635,13 +635,74 @@ lab_assist_requests_total{status="502"} 2
 
 lab_assist_active 0
 
-강의 포인트: 형식 예시 · GET /metrics는 서버가 읽을 수 있는 텍스트 제공
+강의 포인트: 형식 예시 · GET /metrics는 수집 서버가 읽을 수 있는 텍스트 제공
 
-endpoint에서 텍스트를 반환하는 것과 Prometheus 서버의 수집·장기 저장·알림은 별도다. 이번 실습은 표준적인 이름·단위·라벨의 개념과 노출 형식을 직접 읽는다. 실제 수집 서버를 설치했다고 말하지 않는다.
+앱은 현재 지표를 노출하고 Prometheus 서버가 주기적으로 읽어 시계열로 저장한다. 공통 Notebook은 이 텍스트와 snapshot을 직접 비교하며, 다음 선택 실습에서 실제 Prometheus 서버의 수집과 그래프를 확인한다.
 
 근거: https://prometheus.io/docs/practices/naming/, repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 48. 라벨 조합과 저장량
+## 48. Prometheus의 수집·저장·조회
+
+
+
+강의 포인트: Prometheus가 앱의 /metrics를 주기적으로 요청하는 Pull 방식
+
+브라우저는 Prometheus에 조회식을 보내고 Prometheus는 저장한 시간별 숫자를 반환한다. Prometheus 컨테이너에서 api:8010은 Compose 서비스 이름으로 앱을 찾는 주소다. localhost는 자기 컨테이너를 가리킨다. 이 선택 실습은 지표 수집이며 Trace·로그 수집기나 Grafana는 포함하지 않는다.
+
+근거: https://prometheus.io/docs/prometheus/latest/getting_started/, repo:week10/lab/observability/prometheus.yml
+
+## 49. API와 Prometheus의 동시 실행
+
+docker compose -p llmops-week10-demo \
+
+  -f week10/lab/observability/compose.yaml up -d --build
+
+
+
+python week10/lab/observability/seed_traffic.py --count 30
+
+
+
+# API: http://127.0.0.1:8010/
+
+# Prometheus: http://127.0.0.1:9090/targets
+
+강의 포인트: Docker 엔진 시작 · 기존 Python 서버 종료 · 저장소 루트에서 실행
+
+Compose가 앱을 빌드하고 준비 상태를 확인한 뒤 Prometheus를 시작한다. 최초 이미지 다운로드는 사전에 완료한다. seed는 활성화한 Python 가상환경의 다른 터미널에서 실행한다. 합성 요청30건 중 정상18·검색 오류6·시간 초과6을 만들며 외부 모델을 호출하지 않는다. 종료는 같은 Compose 명령의 up -d --build를 down으로 바꾼다.
+
+근거: https://docs.docker.com/compose/gettingstarted/, repo:week10/lab/observability/compose.yaml, repo:week10/lab/observability/seed_traffic.py
+
+## 50. 수집 대상의 연결 상태
+
+수집 상태 · UP · /metrics 요청 성공
+
+내부 주소 · api:8010/metrics
+
+다음 확인 · 요청 실행 후 상태별 건수 조회
+
+강의 포인트: 직접 실행한 Prometheus 화면 발췌 · 합성 MOCK 앱 · 2026.11.06
+
+Targets 화면에서 week10-api와 UP을 확인한다. UP은 /metrics 수집에 성공했다는 뜻이다. 검색 결과의 정확성이나 모든 요청의 성공을 보장하지 않는다. DOWN이면 API 준비 상태·api:8010 주소·Compose 로그를 확인한다.
+
+근거: https://prometheus.io/docs/prometheus/latest/getting_started/, repo:week10/lab/observability/prometheus.yml
+
+## 51. 정상·장애 요청의 시계열
+
+200 · 18건 · 정상 응답
+
+502 · 6건 · 검색 오류 주입
+
+504 · 6건 · 제한시간 초과 주입
+
+강의 포인트: 조회: lab_assist_requests_total{job="week10-api"}
+직접 실행 캡처 발췌 · 합성 요청30건 · 누적 건수 그래프
+
+조회식은 lab_assist_requests_total{job="week10-api"}다. Table에서 상태별 누적 건수를 읽고 Graph에서 증가 구간을 본다. 정상18·검색 오류6·시간 초과6은 이 캡처의 합성 요청 결과다. 두 오류의 누적값이 같아 그래프 선이 겹치므로 상태별 수치는 Table에서도 확인한다. counter는 재시작하면 초기화된다. 수집 간격은5초라 짧은 active 작업을 놓칠 수 있고 rate는 적어도 두 번의 수집이 필요하다.
+
+근거: https://prometheus.io/docs/prometheus/latest/getting_started/, repo:week10/lab/observability/queries.promql, repo:week10/lab/observability/seed_traffic.py
+
+## 52. 라벨 조합과 저장량
 
 상태 6종 × 경로 4종 = 최대 24조합
 
@@ -655,7 +716,7 @@ endpoint에서 텍스트를 반환하는 것과 Prometheus 서버의 수집·장
 
 근거: https://prometheus.io/docs/practices/naming/, repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 49. 누적 수와 구간 차이
+## 53. 누적 수와 구간 차이
 
 
 
@@ -665,7 +726,7 @@ endpoint에서 텍스트를 반환하는 것과 Prometheus 서버의 수집·장
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 50. Histogram 누적 버킷 예시
+## 54. Histogram 누적 버킷 예시
 
 상한 le · 초 · 이하 누적 건수 · 구간 해석
 
@@ -683,7 +744,7 @@ endpoint에서 텍스트를 반환하는 것과 Prometheus 서버의 수집·장
 
 근거: https://prometheus.io/docs/practices/histograms/, repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 51. 운영 조회식의 의미
+## 55. 운영 조회식의 의미
 
 sum(rate(lab_assist_requests_total{status=~"5.."}[5m]))
 
@@ -691,13 +752,13 @@ sum(rate(lab_assist_requests_total{status=~"5.."}[5m]))
 
 sum(rate(lab_assist_requests_total[5m]))
 
-강의 포인트: PromQL 개념 예시 · 수집 서버가 있을 때 사용 · 이번 실습은 snapshot 차이
+강의 포인트: PromQL · Prometheus Query Language · 시계열 조회 언어
 
-PromQL은 Prometheus Query Language다. 분자와 분모에 같은 시간 구간과 대상 필터를 사용한다. 요청이 없으면 분모0이 되므로 성공률100%로 처리하지 않고 데이터 부족을 구분한다. 실제 scrape 구성과 알림 규칙은 이번 공통 실습에서 실행하지 않는다.
+PromQL은 Prometheus Query Language다. 분자와 분모에 같은 시간 구간과 대상 필터를 사용한다. 요청이 없으면 분모0이 되므로 성공률100%로 처리하지 않고 데이터 부족을 구분한다. 선택 Compose의 queries.promql은 job 필터와1분 창으로 직접 실행한다. 5xx 시계열이 아직 없을 때의 처리도 포함한다. 알림 규칙은 이번 실습에 포함하지 않는다.
 
 근거: https://prometheus.io/docs/practices/naming/, https://prometheus.io/docs/practices/histograms/, repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 52. 서버 오류율과 업무 성공률
+## 56. 서버 오류율과 업무 성공률
 
 서버 오류율 · 5xx / 전체 assist 요청 · 이번 예제는 422도 분모에 포함
 
@@ -709,7 +770,7 @@ PromQL은 Prometheus Query Language다. 분자와 분모에 같은 시간 구간
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 53. 알림 전 확인할 관찰 범위
+## 57. 알림 전 확인할 관찰 범위
 
 요청 0건: 성공 100%가 아니라 관측 부족
 
@@ -723,7 +784,7 @@ PromQL은 Prometheus Query Language다. 분자와 분모에 같은 시간 구간
 
 근거: https://sre.google/sre-book/monitoring-distributed-systems/, repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 54. 실습 04 · 관찰 구간과 분모
+## 58. 실습 04 · 관찰 구간과 분모
 
 요청 · 정상2·서버 오류2·입력 오류1
 
@@ -739,7 +800,7 @@ PromQL은 Prometheus Query Language다. 분자와 분모에 같은 시간 구간
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 55. 장애 진단과 복구 확인
+## 59. 장애 진단과 복구 확인
 
 증상·영향·실행 근거·완화 조치
 
@@ -749,7 +810,7 @@ PromQL은 Prometheus Query Language다. 분자와 분모에 같은 시간 구간
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 56. 증상별 첫 확인 대상
+## 60. 증상별 첫 확인 대상
 
 증상 · 첫 근거 · 피할 결론
 
@@ -767,7 +828,7 @@ ready 503 · 초기화·drain·의존성 · 프로세스 종료로 단정
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 57. 장애 대응 기록의 순서
+## 61. 장애 대응 기록의 순서
 
 감지 · 증상·범위
 
@@ -783,7 +844,7 @@ ready 503 · 초기화·drain·의존성 · 프로세스 종료로 단정
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 58. 시간 초과의 실제 Trace
+## 62. 시간 초과의 실제 Trace
 
 
 
@@ -793,7 +854,7 @@ generate에 제한시간보다 긴 대기를 주입하면 검색 후 생성 구�
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 59. 복구 절차의 완료 증거
+## 63. 복구 절차의 완료 증거
 
 상태 · ready 200 · 실행 버전 확인
 
@@ -809,7 +870,7 @@ runbook은 증상·근거·조치·검증을 연결한 대응 절차다. 이번 
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 60. 재시작과 롤백
+## 64. 재시작과 롤백
 
 재시작 · Restart · 같은 버전을 다시 실행 · 일시 상태가 사라져도 원인은 남을 수 있음
 
@@ -821,7 +882,7 @@ runbook은 증상·근거·조치·검증을 연결한 대응 절차다. 이번 
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 61. 단계적 배포의 판단 구조
+## 65. 단계적 배포의 판단 구조
 
 
 
@@ -831,7 +892,7 @@ runbook은 증상·근거·조치·검증을 연결한 대응 절차다. 이번 
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 62. 릴리스별 계약과 내용 기준
+## 66. 릴리스별 계약과 내용 기준
 
 
 
@@ -841,7 +902,7 @@ runbook은 증상·근거·조치·검증을 연결한 대응 절차다. 이번 
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 63. 배포 전 회귀 검사
+## 67. 배포 전 회귀 검사
 
 def gate(row):
 
@@ -861,7 +922,7 @@ assert not gate(v2_result)
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 64. 실습 05 · 장애와 복구
+## 68. 실습 05 · 장애와 복구
 
 주입 · 의존성 준비 실패·생성 지연
 
@@ -877,7 +938,7 @@ assert not gate(v2_result)
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 65. 실습 06 · 버전 선택과 프로젝트
+## 69. 실습 06 · 버전 선택과 프로젝트
 
 비교 · v1·v2의 동일 입력 결과
 
@@ -893,7 +954,7 @@ assert not gate(v2_result)
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 66. VS Code 실행 순서
+## 70. VS Code 실행 순서
 
 source .venv/bin/activate
 
@@ -915,7 +976,7 @@ python -m uvicorn week10.lab.app:app \
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 67. 실습 중 자주 만나는 상황
+## 71. 실습 중 자주 만나는 상황
 
 상황 · 확인·해결
 
@@ -935,7 +996,7 @@ Docker 연결 실패 · 선택 경로 · .venv 실습 계속
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 68. 프로젝트 기획서의 운영 항목
+## 72. 프로젝트 기획서의 운영 항목
 
 질문 · 이번 주 추가할 근거
 
@@ -953,7 +1014,7 @@ Docker 연결 실패 · 선택 경로 · .venv 실습 계속
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 69. 단일 프로젝트와 복수 포트폴리오
+## 73. 단일 프로젝트와 복수 포트폴리오
 
 단일 집중 · 문제 해결의 깊이·통합 품질 · 구현·평가·운영의 개선 근거
 
@@ -965,7 +1026,7 @@ Docker 연결 실패 · 선택 경로 · .venv 실습 계속
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 70. 검증 기록의 연결
+## 74. 검증 기록의 연결
 
 가설 · 사용자 문제
 
@@ -981,7 +1042,7 @@ Docker 연결 실패 · 선택 경로 · .venv 실습 계속
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 71. 오늘 실습의 최소 완료 항목
+## 75. 오늘 실습의 최소 완료 항목
 
 버전 · /release·응답 header의 일치
 
@@ -997,7 +1058,7 @@ Docker 연결 실패 · 선택 경로 · .venv 실습 계속
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 72. 다음 학습과 현재 구현 범위
+## 76. 다음 학습과 현재 구현 범위
 
 이번 주 · 다음 확장
 
@@ -1007,7 +1068,7 @@ Docker 연결 실패 · 선택 경로 · .venv 실습 계속
 
 지표 정의·관찰 구간 · 12주차 온라인 관찰·실험
 
-공통 환경·선택 Dockerfile · 이미지 빌드·보안·운영 검증
+선택 Compose 수집 · 이미지 보안·장기 보존·운영 검증
 
 강의 포인트: 공통 실습은 GPU·외부 모델·수집 서버 없이 실행
 
@@ -1015,7 +1076,7 @@ Docker 연결 실패 · 선택 경로 · .venv 실습 계속
 
 근거: repo:week10/lab/app.py, repo:week10/lab/telemetry.py, repo:week10/lab/config.py
 
-## 73. 레퍼런스와 실습 근거
+## 77. 레퍼런스와 실습 근거
 
 OpenTelemetry · Trace·Context Propagation 공식 도식
 
@@ -1027,11 +1088,11 @@ Google SRE · 모니터링 / W3C · Trace Context
 
 강의 포인트: 원문·라이선스·캡처 조건은 lecture/assets/SOURCES.md · 장표별 노트에 URL
 
-공식 자료의 개념과 직접 구현한 실습 결과를 분리해 읽는다. OpenTelemetry 공식 도식 2개는 CC BY 4.0으로 출처와 표시 변경을 기록했다. 캡처 5개는 합성 질문을 넣고 직접 실행한 화면이다.
+공식 자료의 개념과 직접 구현한 실습 결과를 분리해 읽는다. OpenTelemetry 공식 도식 2개는 CC BY 4.0으로 출처와 표시 변경을 기록했다. 앱 캡처5개와 Prometheus 캡처2개는 합성 질문·요청으로 직접 실행한 화면이다. 선택 Compose의 설치·수집 경로는 week10/QUICKSTART.md에서 확인한다.
 
 근거: https://docs.docker.com/build/building/best-practices/, https://docs.docker.com/engine/containers/run/, https://opentelemetry.io/docs/concepts/observability-primer/, https://opentelemetry.io/docs/concepts/signals/traces/, https://opentelemetry.io/docs/concepts/context-propagation/, https://www.w3.org/TR/trace-context/, https://prometheus.io/docs/practices/naming/, https://prometheus.io/docs/practices/histograms/, https://sre.google/sre-book/monitoring-distributed-systems/, https://kubernetes.io/docs/concepts/workloads/pods/probes/
 
-## 74. 기획서 2차 제출 · 개선 내용
+## 78. 기획서 2차 제출 · 개선 내용
 
 피드백 · 8주차 이후 의견과 반영 전후
 
@@ -1047,7 +1108,7 @@ Google SRE · 모니터링 / W3C · Trace Context
 
 근거: repo:curriculum/2026-2/web/project-portfolio-week10.html
 
-## 75. 기획서 제출 경로와 형식
+## 79. 기획서 제출 경로와 형식
 
 항목 · 안내
 
@@ -1067,7 +1128,7 @@ Google SRE · 모니터링 / W3C · Trace Context
 
 근거: repo:week10/README.md, repo:curriculum/2026-2/web/project-portfolio-week10.html
 
-## 76. 기획서 2차 제출 일정
+## 80. 기획서 2차 제출 일정
 
 제출일 · 2026년 · 오늘 11월 6일(금)
 

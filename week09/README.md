@@ -1,5 +1,7 @@
 # Week 09 · API 계약과 LLM 서비스 구현
 
+- [10월 30일 강의 녹화 · Drive 보기 전용](resources/README.md)
+
 2026년 10월 30일 온라인 실시간 수업용 **80쪽 강의안 초안**이다. 8주차 기획서에서 정한 기능 하나를 요청·응답·실패·완료 계약으로 구현한다. GitHub에서 PPT·PDF·실습 코드를 함께 제공하며, 학생용 강의안은 `main` 브랜치의 PDF를 기준으로 확인한다.
 
 - [발표용 PPT](lecture/09_week9_api_serving.pptx)

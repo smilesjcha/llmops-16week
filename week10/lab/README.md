@@ -78,20 +78,30 @@ PowerShell은 `$env:WEEK10_RELEASE="v2"`다. v2는 **의도적으로 잘못된 �
 
 복원은 서버 종료 후 `unset WEEK10_RELEASE`(PowerShell `Remove-Item Env:WEEK10_RELEASE`) 또는 `v1` 지정이다. `WEEK10_TIMEOUT_S` 기본0.25초(0.05–2초), `WEEK10_CAPACITY` 기본2(1–8건), `WEEK10_LOG_STDOUT` 기본1(0/1)도 시작 시 검증한다. 이 범위는 실습 장치 설정이며 운영 권장값이 아니다.
 
-## 선택: Docker
+## 선택: Docker + Prometheus
 
-**검증 범위:** 로컬 Python·Notebook·실제 TCP·브라우저 경로를 실행했다. 검수 기기의 Docker daemon이 꺼져 있어 **이미지 빌드와 컨테이너 실행은 미검증**이다. Docker 없이 공통 실습을 완료할 수 있다.
+Docker는 앱과 의존성을 이미지로 묶어 컨테이너로 실행하는 도구다. Prometheus는 앱의 `/metrics`를5초마다 읽어 시계열로 저장하고 조회·그래프를 제공한다. 공통 Notebook6개는 두 도구 없이도 실행된다.
 
-Docker daemon이 실행 중인 환경에서 저장소 루트 기준:
+**[운영체제별 설치 → 실행 → 화면 시연 → 종료 안내](../QUICKSTART.md)**
+
+저장소 루트에서 기존8010포트의 Python 서버를 종료한 뒤:
 
 ```bash
-docker build -t llmops-w10:local week10/lab
-docker run --rm --name llmops-w10-demo -p 127.0.0.1:8010:8010 -e WEEK10_RELEASE=v1 llmops-w10:local
+docker info
+docker compose -p llmops-week10-demo -f week10/lab/observability/compose.yaml up -d --build
+python week10/lab/observability/seed_traffic.py --count 30
 ```
 
-다른 터미널에서 위의 `/release`·`/health/ready`·정상 요청을 확인하고 자신의 컨테이너만 `docker stop llmops-w10-demo`로 종료한다. `Dockerfile`은 non-root UID10001·작은 허용 파일 목록·readiness HEALTHCHECK를 제공한다. `EXPOSE`는 포트 게시 명령이 아니고, HEALTHCHECK는 컨테이너 재시작·트래픽 전환 정책을 자동 구현하지 않는다.
+- 앱: <http://127.0.0.1:8010/>
+- 수집 상태: <http://127.0.0.1:9090/targets> · `week10-api`가 UP
+- 그래프: <http://127.0.0.1:9090/query> · `lab_assist_requests_total{job="week10-api"}`
+- 조회식: [queries.promql](observability/queries.promql) · 정상/실패 건수·최근 요청/초·오류 비율·기간 분포
 
-기본 이미지 태그 `python:3.11.14-slim`은 immutable digest 잠금이 아니다. 운영용 배포는 검토한 이미지 digest·빌드 결과·취약점·아키텍처·비밀 관리까지 확인한다. `requirements-runtime.txt`는 선택 컨테이너용 최소 실행 패키지의 정확한 버전 목록이며, 학생 Notebook은 공통 requirements를 사용한다.
+최초 다운로드는 미리 진행한다. `seed_traffic.py`는 loopback에만 합성 요청30건(정상18·검색 오류6·시간 초과6)을 보낸다. 운영 부하 시험이나 실제 모델 호출은 아니다. Prometheus는 컨테이너 내부 주소 `api:8010/metrics`를 수집한다. 종료는 위 Compose 명령의 `up -d --build` 대신 `down`을 사용한다. 실습 시계열은 메모리 기반tmpfs로 종료 시 사라진다.
+
+2026-11-06 Mac의 Colima/Linux arm64에서 API 이미지 빌드·readiness·정상/502/504·Prometheus UP·상태별 건수18/6/6과 그래프를 확인했다. Windows·Intel Mac의 설치/실행은 이 기기에서 시험하지 않았다. Dockerfile은 non-root UID10001·readiness HEALTHCHECK를 제공하며, HEALTHCHECK 자체가 재시작·트래픽 전환을 구현하지는 않는다.
+
+기본 이미지 `python:3.11.14-slim`과 `prom/prometheus:v3.16.0`은 태그 지정이다. 운영용 배포는 검토한 digest·취약점·아키텍처·비밀 관리까지 확인한다. `requirements-runtime.txt`는 컨테이너용 정확한 실행 패키지 버전 목록이며 학생 Notebook은 공통 requirements를 사용한다.
 
 ## 자동 확인
 
@@ -110,7 +120,7 @@ python scripts/verify_week10_live.py
 - `telemetry.py`: ContextVar·부모/자식 Span·원문 없는 완료 로그·Prometheus 텍스트.
 - `experiments.py`: lifespan client·동일 fixture 비교·counter 구간 차이.
 - 보존: 로그200건·Span800개, 누적 counter는 프로세스 수명. 외부 저장·샘플링·인증 미구현.
-- 계측은 **교육용 직접 구현**이며 OpenTelemetry SDK·OTLP 형식·Collector·Grafana·Prometheus 서버를 실행한 것이 아니다.
+- 계측은 **교육용 직접 구현**이다. 선택 Compose에서는 실제 Prometheus 서버로 지표를 수집한다. OpenTelemetry SDK·OTLP 형식·Collector·Grafana·Trace 백엔드는 포함하지 않는다.
 - Trace Context는00버전·00/01 flags의 제한된 입력만 읽는다. tracestate·baggage·샘플링·전파 완전성·원격 시계는 미구현. ID는 인증 근거가 아니다.
 - HTTP middleware의 기간은 응답 생성까지다. 클라이언트 전송·외부 모델 계산 완료의 보장이 아니다. 내부499는 취소 표시용이고 표준 응답 코드로 전송하지 않는다.
 - Histogram은 **전체 완료 assist 요청**의 기간이며 실패도 포함한다. 프로브·UI·metrics 조회는 분모에서 제외한다. 5xx 비율의 분모에는422가 포함된다.

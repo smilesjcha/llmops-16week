@@ -1,0 +1,19 @@
+# Is Prometheus able to scrape the API? 1 = up; 0 = scrape failed.
+up{job="week10-api"}
+
+# Cumulative counts, split by HTTP status. Changes after a scrape.
+lab_assist_requests_total{job="week10-api"}
+
+# Requests per second over the last minute. At least two scrapes needed.
+sum(rate(lab_assist_requests_total{job="week10-api"}[1m]))
+
+# Server error fraction. Missing data / zero traffic is NOT 100% success.
+# A missing 5xx series is zero only while the denominator has traffic.
+(sum(rate(lab_assist_requests_total{job="week10-api",status=~"5.."}[1m])) or vector(0)) / sum(rate(lab_assist_requests_total{job="week10-api"}[1m]))
+
+# Current admitted work, sampled every 5s; short jobs can be missed.
+lab_assist_active{job="week10-api"}
+
+# All-response latency estimate, seconds, including failures.
+# Coarse histogram + small sample: not an operational p95 guarantee.
+histogram_quantile(0.95, sum by(le) (rate(lab_assist_duration_seconds_bucket{job="week10-api"}[1m])))
