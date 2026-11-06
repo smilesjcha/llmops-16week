@@ -8,6 +8,7 @@
 - [발표용 PPT · 80쪽](lecture/10_week10_observable_deployment.pptx)
 - [실습 Notebook 6개·VS Code 실행 안내](lab/README.md)
 - [100분 수업 진행안](lecture/TEACHING_GUIDE.md)
+- [교수용 · OpenTelemetry·Prometheus 등 도구·서비스 기능의 장표별 해설](lecture/TOOL_EXPLANATIONS.md)
 - [장표별 설명·노트](lecture/lecture-notes.md)
 - [공식 도식·화면 캡처·측정 출처](lecture/assets/SOURCES.md)
 

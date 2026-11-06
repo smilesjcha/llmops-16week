@@ -3,6 +3,13 @@
 from pathlib import Path
 import textwrap
 import nbformat as nbf
+from week10_notebook_guidance import (
+    BROWSER_WALKTHROUGH,
+    DOCKER_WALKTHROUGH,
+    GETTING_STARTED,
+    GUIDES,
+    TROUBLESHOOTING,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 SETUP = """
@@ -15,26 +22,59 @@ import asyncio, json
 from dataclasses import replace
 from week10.lab.config import Settings
 from week10.lab.experiments import lab_client, fixture_check, window_delta, compare_releases
+assert sys.version_info[:2] == (3, 11), "Select the Python 3.11 .venv kernel in VS Code"
+print("Python:", sys.version.split()[0])
+print("실행 환경:", sys.executable)
+print("저장소:", ROOT)
+print("환경 확인 완료 · 이 Notebook은 별도 서버 없이 실행합니다.")
 """
 
 
 def make(name, title, intro, cells):
+    guide = GUIDES[name[:2]]
+    if len(guide["steps"]) != len(cells):
+        raise ValueError(f"Section guidance mismatch: {name}")
+    core = "\n".join(f"- {label}" for label in guide["core"].split(" → "))
     nb = nbf.v4.new_notebook()
     nb.cells = [
         nbf.v4.new_markdown_cell(
-            f"# {title}\n\n{intro}\n\n**실행:** Python 3.11 공통 .venv 커널에서 위→아래. 다른 Notebook·서버·Docker·모델 설치 없이 독립 실행. 코드는 MOCK 고정 문장·대기만 사용한다. 실제 LLM 품질·처리량 측정이 아니다."
+            f"# {title}\n\n{intro}\n\n**이 파일의 핵심 질문:** {guide['record']}\n\n{guide['terms']}\n\n**수업 중 먼저 실행할 단계**\n\n{core}\n\n파일 안의 변수 의존성이 있으므로 처음 실행할 때는 위에서부터 순서대로 진행한다. 핵심 단계에서는 출력을 읽고, 나머지 단계는 빠르게 실행한 뒤 복습 때 살펴본다."
         ),
+        nbf.v4.new_markdown_cell(textwrap.dedent(GETTING_STARTED).strip()),
         nbf.v4.new_code_cell(textwrap.dedent(SETUP).strip()),
     ]
-    for heading, explanation, code in cells:
+    for step, ((heading, explanation, code), (expected, meaning)) in enumerate(
+        zip(cells, guide["steps"]), start=1
+    ):
         nb.cells += [
-            nbf.v4.new_markdown_cell(f"## {heading}\n\n{explanation}"),
+            nbf.v4.new_markdown_cell(
+                f"## {step}. {heading}\n\n{explanation}\n\n"
+                f"**예상 결과:** {expected}\n\n**결과 해석:** {meaning}"
+            ),
             nbf.v4.new_code_cell(textwrap.dedent(code).strip()),
         ]
+    if name.startswith("04"):
+        nb.cells.append(nbf.v4.new_markdown_cell(textwrap.dedent(DOCKER_WALKTHROUGH).strip()))
+    if name.startswith("05"):
+        nb.cells.append(nbf.v4.new_markdown_cell(textwrap.dedent(BROWSER_WALKTHROUGH).strip()))
     nb.cells += [
         nbf.v4.new_markdown_cell(
-            "## 프로젝트 적용 기록\n\n예상 → 관찰 → 근거 → 다음 변경을 한 줄씩 기록한다. 실제로 실행하지 않은 조건은 미측정으로 표시한다. 학생 정보나 원문 입력은 공개 저장소에 올리지 않는다."
-        )
+            "## 직접 바꿔볼 실험 · 선택 복습\n\n"
+            + "\n".join(f"{i}. {item}" for i, item in enumerate(guide["try"], start=1))
+            + "\n\n한 번에 한 조건만 바꾸고 원래 코드와 비교한다. 기대값이 고정된 assert가 있다면 새 실험 조건에 맞는 값도 함께 설명한다."
+        ),
+        nbf.v4.new_markdown_cell(
+            f"## 프로젝트 적용 기록\n\n**정리 질문:** {guide['record']}\n\n"
+            "아래 Markdown 셀을 더블클릭해 자신의 결과를 적는다. 다른 파일 제출이나 화면 실행을 자동으로 수행하지 않는다.\n\n"
+            "| 항목 | 직접 기록 |\n|---|---|\n"
+            "| 예상 | 실행 전 예상한 결과 |\n"
+            "| 관찰 | 상태 코드·건수·실패 단계 등 실제 결과 |\n"
+            "| 근거 | 실행한 단계 번호·변경한 조건·캡처 위치 |\n"
+            "| 판단 | 유지·수정·채택·보류 이유 |\n"
+            "| 미검증·다음 변경 | 아직 실행하지 않은 조건과 다음 비교 |\n\n"
+            "학생 정보나 원문 입력은 공개 저장소에 올리지 않는다. 실제 실행하지 않은 조건은 미측정으로 표시한다."
+        ),
+        nbf.v4.new_markdown_cell(textwrap.dedent(TROUBLESHOOTING).strip()),
     ]
     nb.metadata = {
         "kernelspec": {
@@ -86,7 +126,7 @@ make(
         ),
         (
             "내 설정의 경계",
-            "동시 처리량을 1·2로 바꿔 manifest 차이를 확인한다. 다음 장에서 실제 거절 수를 관찰한다.",
+            "동시 처리량을1·2로 바꿔 manifest 차이를 확인한다. 이 단계는 설정 비교다.",
             "for cap in [1, 2]:\n    print(Settings(capacity=cap).manifest())",
         ),
     ],
@@ -192,7 +232,7 @@ make(
         ),
         (
             "텍스트 노출 형식",
-            "counter·gauge·histogram이 어떤 줄인지 찾는다. Prometheus 서버는 띄우지 않는다.",
+            "counter·gauge·histogram이 어떤 줄인지 찾는다. 이 코드 셀은 수집 서버 없이 실행하며, 아래 선택 확장에서는 실제 Prometheus에 연결한다.",
             'print(exposition)\nassert "trace_id" not in exposition and "request_id" not in exposition',
         ),
         (
@@ -300,4 +340,12 @@ make(
             'form = ROOT / "curriculum/2026-2/web/project-portfolio-week10.html"\nassert form.exists()\nprint(form)\nprint("아주대AI대학원: LMS / 군산대·창원대 등 별도 수강생: 공지된 이메일")',
         ),
     ],
+)
+
+# Keep the directory entry guide and Notebook04 walkthrough in sync.
+guide_path = ROOT / "week10/lab/observability/README.md"
+guide_path.write_text(
+    textwrap.dedent(DOCKER_WALKTHROUGH).strip().replace("## 선택 확장", "# 선택 확장", 1)
+    + "\n\n[통합 실행 가이드](../../QUICKSTART.md) · [전체 실습](../README.md)\n",
+    encoding="utf-8",
 )

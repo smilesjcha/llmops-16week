@@ -44,6 +44,8 @@ code .
 
 VS Code의 Python/Jupyter 확장 설치 후 Notebook 우측 커널을 **.venv / Python3.11**로 지정한다. Notebook01→02→03→04→05→06 순서로 위에서 아래로 실행한다. 6개 파일은 서로 독립이며 서버·Docker를 켜지 않아도 실행된다.
 
+각 파일의 시작 안내와 단계별 **예상 결과·결과 해석**을 읽고 실행한다. `assert`만 있는 셀은 출력 없이 완료되어도 정상이다. Notebook04 마지막에는 Docker/Prometheus, Notebook05 마지막에는 브라우저 장애·복구의 선택 확장이 있다. 선택 확장은 공통 Notebook 실행을 마친 뒤 진행한다. [완료 확인표](lab/README.md#단계별-notebook)와 [교수용 도구 해설](lecture/TOOL_EXPLANATIONS.md)도 함께 참고한다.
+
 ## 2. Python 서비스 화면
 
 ```bash
