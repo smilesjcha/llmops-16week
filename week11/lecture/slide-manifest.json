@@ -1,0 +1,762 @@
+[
+  {
+    "page": 1,
+    "title": "LLM 서비스의<br>품질 검증",
+    "sub": "11주차 오프라인 평가 체계",
+    "notes": "표지의 HOLD는 꾸민 수치가 아니라 이번 실습의 실제 결과다. 왜 검색 성능이 좋아졌는데도 배포를 보류하는지 수업 전체에서 설명한다. Core AI PM은 핵심 인공지능 제품 관리 역할이다.",
+    "chapter": "평가 설계",
+    "source": null,
+    "kind": "cover",
+    "dark": true
+  },
+  {
+    "page": 2,
+    "title": "하나의 점수로 부족한 판단",
+    "sub": "같은 test에서 관찰한 변화",
+    "notes": "가상 정책 데이터의 실제 TF-IDF 실행이다. LLM 답변 생성 정확도가 아니다. 답변 가능한 test 16개, 답변 불가 8개를 서로 다른 분모로 사용한다. 어떤 수치를 보면 후보를 채택하고 싶은지 먼저 묻는다.",
+    "chapter": "평가 설계",
+    "source": null,
+    "kind": "metrics",
+    "dark": false
+  },
+  {
+    "page": 3,
+    "title": "수업의 세 가지 산출물",
+    "sub": "정의, 비교, 판단을 연결하는 평가 기록",
+    "notes": "오늘 목표는 도구 이름을 많이 외우는 것이 아니라 평가 결과로 한 번의 의사결정을 설명하는 것이다.",
+    "chapter": "평가 설계",
+    "source": null,
+    "kind": "ledger",
+    "dark": false
+  },
+  {
+    "page": 4,
+    "title": "16주 과정의 현재 위치",
+    "sub": "전 과정 온라인 운영 / 정규 수업은 실시간",
+    "notes": "6주차는 녹화영상과 신규 과제도 없었다. 8주차는 중간고사 없이 제출물 평가였으며 10월22일23:59 마감이었다. 16주차는 온라인 실시간 발표다. 오늘은 11주차 평가 데이터를 프로젝트 증거로 추가한다.",
+    "chapter": "평가 설계",
+    "source": null,
+    "kind": "roadmap",
+    "dark": false
+  },
+  {
+    "page": 5,
+    "title": "100분 수업의 진행",
+    "sub": "설명과 실행을 짧게 번갈아 진행",
+    "notes": "76쪽 전체를 같은 속도로 읽지 않는다. 계산 심화와 참고 장표는 필요할 때 열고 핵심 셀 위주로 실행한다. 수업 전 requirements 설치를 완료하면 시간을 확보할 수 있다.",
+    "chapter": "평가 설계",
+    "source": null,
+    "kind": "schedule",
+    "dark": false
+  },
+  {
+    "page": 6,
+    "title": "실행 관찰과 품질 평가",
+    "sub": "10주차의 실행 기록을 11주차의 비교 근거로 연결",
+    "notes": "HTTP 200과 낮은 지연은 중요한 운영 신호지만 정답이라는 증거가 아니다. OpenTelemetry와 Prometheus는 오늘 품질 지표를 대신 채점하는 도구가 아니다.",
+    "chapter": "평가 설계",
+    "source": null,
+    "kind": "comparison",
+    "dark": false
+  },
+  {
+    "page": 7,
+    "title": "오프라인 평가와 온라인 실험",
+    "sub": "고정 문제의 비교와 실제 사용 환경의 관찰",
+    "notes": "오프라인을 통과하면 즉시 전체 사용자에게 배포하는 것이 아니다. 온라인에서 실패 범위를 제한하며 검증해야 한다.",
+    "chapter": "평가 설계",
+    "source": null,
+    "kind": "comparison",
+    "dark": false
+  },
+  {
+    "page": 8,
+    "title": "평가 파이프라인의 구조",
+    "sub": "모든 결과를 입력과 버전까지 추적하는 설계",
+    "notes": "각 단계의 산출물이 다음 단계 입력이 된다. 좋은 보고서에도 데이터 출처나 버전이 없으면 재현이 어렵다.",
+    "chapter": "평가 설계",
+    "source": null,
+    "kind": "flow",
+    "dark": false
+  },
+  {
+    "page": 9,
+    "title": "평가 단위의 결정",
+    "sub": "문서, 청크, 답변, 서비스 중 무엇을 판단하는가",
+    "notes": "이번 검색 지표는 문서 ID 기준이다. 실제 프로젝트에서 청크를 사용하면 정답 단위와 중복 처리 규칙을 다시 정의한다.",
+    "chapter": "평가 설계",
+    "source": null,
+    "kind": "table",
+    "dark": false
+  },
+  {
+    "page": 10,
+    "title": "평가 기준의 지도",
+    "sub": "품질은 한 축으로 정리되지 않는 서비스 속성",
+    "notes": "같은 지표 이름도 입력과 분모가 다르면 비교할 수 없다. 이 수업의 검색 점수를 범용 LLM 성능으로 확대 해석하지 않는다.",
+    "chapter": "평가 설계",
+    "source": null,
+    "kind": "map",
+    "dark": false
+  },
+  {
+    "page": 11,
+    "title": "평가 데이터",
+    "sub": "",
+    "notes": "앞 구간의 결과를 한 문장으로 연결하고 이번 구간에서 학생이 직접 확인할 산출물을 안내한다.",
+    "chapter": "데이터",
+    "source": null,
+    "kind": "section",
+    "dark": true
+  },
+  {
+    "page": 12,
+    "title": "오늘의 서비스 사례",
+    "sub": "가상 쇼핑 정책 안내 서비스",
+    "notes": "실제 무신사 정책이나 법률 안내가 아니다. 학습을 위해 만든 가상 쇼핑 정책임을 분명히 말한다. 사용자 질문은 한 문장이지만 필요한 근거는 여러 개일 수 있다.",
+    "chapter": "데이터",
+    "source": null,
+    "kind": "case",
+    "dark": false
+  },
+  {
+    "page": 13,
+    "title": "정답처럼 보이는 구버전 문서",
+    "sub": "유사도와 유효성의 분리",
+    "notes": "잘못된 답이 반드시 모델 환각은 아니다. 잘못된 버전의 검색 근거에서 출발할 수 있다. status와 version을 색인 계약에 포함한다.",
+    "chapter": "데이터",
+    "source": null,
+    "kind": "table",
+    "dark": false
+  },
+  {
+    "page": 14,
+    "title": "질문 한 건의 데이터 계약",
+    "sub": "정답 문장 하나보다 중요한 판단 정보",
+    "notes": "reference는 검토용이다. 검색기에 넣으면 정답을 입력으로 제공하는 오류다. gold 문서가 실제 존재하는지 자동 검증한다.",
+    "chapter": "데이터",
+    "source": null,
+    "kind": "code",
+    "dark": false
+  },
+  {
+    "page": 15,
+    "title": "정답 근거의 판정",
+    "sub": "문장을 그대로 복사해야만 정답인 것은 아닌 평가",
+    "notes": "문자열 일치만으로 의미를 판정하면 같은 뜻의 답을 오답 처리하거나 조건이 다른 답을 통과시킬 수 있다.",
+    "chapter": "데이터",
+    "source": null,
+    "kind": "ledger",
+    "dark": false
+  },
+  {
+    "page": 16,
+    "title": "복수 근거 질문의 성공 조건",
+    "sub": "정답 문서 두 개 중 한 개만 찾은 상황",
+    "notes": "초기 AS-IS 실습의 단일 정답에서는 Hit와 Recall이 같아 차이를 보기 어려웠다. 복수 근거로 지표의 의미를 구분한다.",
+    "chapter": "데이터",
+    "source": null,
+    "kind": "evidence",
+    "dark": false
+  },
+  {
+    "page": 17,
+    "title": "답변할 수 없는 질문",
+    "sub": "문서에 없는 사실을 평가 데이터에 포함",
+    "notes": "문서에 답이 없으면 검색기가 비슷한 문서를 찾아도 정답 근거가 아니다. 이 실습은 기권 정책만 검사하며 실제 외부 조회를 수행하지 않는다.",
+    "chapter": "데이터",
+    "source": null,
+    "kind": "taxonomy",
+    "dark": false
+  },
+  {
+    "page": 18,
+    "title": "개발 세트와 평가 세트의 분리",
+    "sub": "문장보다 의도 그룹을 먼저 분리",
+    "notes": "같은 의도의 정중한 질문과 구어체 질문은 같은 split에 둔다. 문서 집합은 공유하며, 새로운 도메인 적응 실험으로 주장하지 않는다.",
+    "chapter": "데이터",
+    "source": "leak",
+    "kind": "partition",
+    "dark": false
+  },
+  {
+    "page": 19,
+    "title": "누수의 대표적인 경로",
+    "sub": "좋아진 점수가 새 질문의 성능을 뜻하지 않는 상황",
+    "notes": "코드에서는 group이 dev/test에 동시에 나타나면 예외를 발생시킨다. 실제 운영은 사용자나 대화 단위 의존성도 확인해야 한다.",
+    "chapter": "데이터",
+    "source": "leak",
+    "kind": "flow",
+    "dark": false
+  },
+  {
+    "page": 20,
+    "title": "합성 평가 데이터의 제작 과정",
+    "sub": "생성과 검토를 분리한 데이터 준비",
+    "notes": "이번 사례는 교수 작성 합성 데이터다. LLM을 자동 호출해 생성한 데이터가 아니다. 실제 모델 생성으로 확장하더라도 검수 단계는 생략하지 않는다.",
+    "chapter": "데이터",
+    "source": null,
+    "kind": "process",
+    "dark": false
+  },
+  {
+    "page": 21,
+    "title": "연구 사례: ARES의 평가 구조",
+    "sub": "합성 데이터, 평가 모델, 사람의 검토를 연결",
+    "notes": "ARES는 합성 데이터를 활용해 평가 모델을 학습하고 사람 주석과 예측 기반 추론으로 시스템 평가를 보정한다. 우리 실습은 ARES를 실행한 재현이 아니다. 원본 연구의 역할 분리를 참고한다.",
+    "chapter": "데이터",
+    "source": "ares",
+    "kind": "paper",
+    "dark": false
+  },
+  {
+    "page": 22,
+    "title": "연구 구조와 수업 실습의 범위",
+    "sub": "비슷한 흐름과 서로 다른 구현",
+    "notes": "PPI는 Prediction-Powered Inference다. bootstrap을 PPI라고 부르지 않는다. 논문에 있는 방법과 우리가 직접 구현한 범위를 구분해 설명한다.",
+    "chapter": "데이터",
+    "source": "ares",
+    "kind": "comparison",
+    "dark": false
+  },
+  {
+    "page": 23,
+    "title": "합성 질문의 검수 기준",
+    "sub": "질문 수보다 먼저 확인할 항목",
+    "notes": "문서 없는 질문을 모두 버릴 필요는 없다. 답변 불가 유형으로 정확하게 라벨링하면 중요한 위험 평가 데이터가 된다.",
+    "chapter": "데이터",
+    "source": null,
+    "kind": "rubric",
+    "dark": false
+  },
+  {
+    "page": 24,
+    "title": "실습 01: 데이터 계약 검증",
+    "sub": "01_dataset_contract.ipynb",
+    "notes": "Notebook의 try/except가 예상 오류를 잡으므로 전체 실행이 멈추지 않는다. 코드를 고치기 전에 데이터 구조를 읽게 한다.",
+    "chapter": "데이터",
+    "source": null,
+    "kind": "lab",
+    "dark": false
+  },
+  {
+    "page": 25,
+    "title": "데이터 검증의 결과물",
+    "sub": "문항 수와 독립적인 의도 수를 함께 기록",
+    "notes": "각 유형의 수가 작다. 특히 복수 근거 test는 한 의도 두 문항뿐이다. 표본 수를 숨기지 않는 습관이 중요하다.",
+    "chapter": "데이터",
+    "source": null,
+    "kind": "results",
+    "dark": false
+  },
+  {
+    "page": 26,
+    "title": "검색 기준선과 지표",
+    "sub": "",
+    "notes": "앞 구간의 결과를 한 문장으로 연결하고 이번 구간에서 학생이 직접 확인할 산출물을 안내한다.",
+    "chapter": "검색",
+    "source": null,
+    "kind": "section",
+    "dark": true
+  },
+  {
+    "page": 27,
+    "title": "TF-IDF의 계산 관점",
+    "sub": "Term Frequency-Inverse Document Frequency / 빈도와 희소성",
+    "notes": "scikit-learn은 smoothing과 sublinear_tf 같은 구체 설정을 제공한다. 이 수업은 sublinear_tf=True, L2 정규화다. 슬라이드 표현은 직관이고 정확한 구현은 evaluation.py를 읽는다.",
+    "chapter": "검색",
+    "source": "tfidf",
+    "kind": "formula",
+    "dark": false
+  },
+  {
+    "page": 28,
+    "title": "단어 검색과 문자 검색",
+    "sub": "한국어 표현 변화에 대한 서로 다른 반응",
+    "notes": "문자 방식이 모든 질문에서 우월하다고 결론내리지 않는다. 예를 들어 의미가 비슷하지만 문자열이 다른 질문은 두 방식 모두 어렵다.",
+    "chapter": "검색",
+    "source": "tfidf",
+    "kind": "comparison",
+    "dark": false
+  },
+  {
+    "page": 29,
+    "title": "기준선으로서의 단순 검색",
+    "sub": "복잡한 검색 모델 도입 전 필요한 비교",
+    "notes": "4~5주차 검색 방법을 다시 길게 설명하는 대신 오늘은 비교 조건과 결과 해석에 집중한다. 실습은 의도적으로 단순한 기준선을 쓴다.",
+    "chapter": "검색",
+    "source": null,
+    "kind": "map",
+    "dark": false
+  },
+  {
+    "page": 30,
+    "title": "버전 필터의 적용 위치",
+    "sub": "검색 후 주의 문구보다 앞선 유효 문서 선택",
+    "notes": "권한 필터도 비슷한 구조를 가질 수 있지만 여기서 실제 접근 제어를 구현한 것은 아니다. 버전 필터의 효과만 확인한다.",
+    "chapter": "검색",
+    "source": null,
+    "kind": "flow",
+    "dark": false
+  },
+  {
+    "page": 31,
+    "title": "변경 요소를 분리한 실험",
+    "sub": "개발 세트(dev)에서 실제 실행한 결과",
+    "notes": "threshold=0인 상태에서 문서 필터와 analyzer를 한 요소씩 바꿨다. 정확한 실험 조건을 함께 말해야 수치의 원인을 설명할 수 있다.",
+    "chapter": "검색",
+    "source": null,
+    "kind": "ablation",
+    "dark": false
+  },
+  {
+    "page": 32,
+    "title": "검색 결과의 세 가지 상태",
+    "sub": "빈 결과, 동점, 관련 문서 누락",
+    "notes": "0점 문서를 억지로 k개 채우면 임의 순서의 문서가 정답과 우연히 겹쳐 지표를 부풀릴 수 있다. 코드는 점수가 양수인 결과만 반환한다.",
+    "chapter": "검색",
+    "source": null,
+    "kind": "ledger",
+    "dark": false
+  },
+  {
+    "page": 33,
+    "title": "실습 02: 검색 결과의 원인 추적",
+    "sub": "02_retrieval_baselines.ipynb",
+    "notes": "같은 질문의 표현만 바꿔 결과를 비교한다. 모델을 더 크게 바꾸기 전에 실패 원인을 설명하도록 유도한다.",
+    "chapter": "검색",
+    "source": null,
+    "kind": "lab",
+    "dark": false
+  },
+  {
+    "page": 34,
+    "title": "검색 지표의 계산 실험",
+    "sub": "정답 문서 A·B / 순위 X, A, Y, B, Z",
+    "notes": "HTML에서 슬라이더를 조작한다. 인쇄 PDF에는 기본 k=3 결과가 보인다. 학생에게 k=4일 때 Recall과 MRR 중 무엇이 바뀌는지 먼저 예측하게 한다.",
+    "chapter": "검색",
+    "source": null,
+    "kind": "interactive",
+    "dark": false
+  },
+  {
+    "page": 35,
+    "title": "평균 역순위: MRR",
+    "sub": "Mean Reciprocal Rank / 첫 관련 문서의 위치",
+    "notes": "여기서는 k 안의 첫 정답만 계산하므로 MRR@k라고 표기한다. 여러 질문의 reciprocal rank를 평균낸다.",
+    "chapter": "검색",
+    "source": null,
+    "kind": "formula",
+    "dark": false
+  },
+  {
+    "page": 36,
+    "title": "정규화 할인 누적 이득: nDCG",
+    "sub": "normalized Discounted Cumulative Gain / 순위별 관련도 누적",
+    "notes": "수식의 i는 1부터 시작한다. 실습 구현의 enumerate는 0부터 시작해서 log2(i+2)를 쓴다. 직접 계산과 sklearn ndcg_score 결과를 교차 검증한다.",
+    "chapter": "검색",
+    "source": "ndcg",
+    "kind": "formula",
+    "dark": false
+  },
+  {
+    "page": 37,
+    "title": "지표의 분모와 해석",
+    "sub": "답변 가능 질문과 답변 불가 질문의 분리",
+    "notes": "답변 불가 문항의 Recall은 None이다. 0점으로 평균에 넣지 않는다. 수락은 실제 정답 생성이 아니라 검색 후 응답 시도 정책을 뜻한다.",
+    "chapter": "검색",
+    "source": null,
+    "kind": "denominators",
+    "dark": false
+  },
+  {
+    "page": 38,
+    "title": "검색 성공과 응답 시도의 차이",
+    "sub": "순위 평가는 기권 정책 이전의 신호",
+    "notes": "오늘 서비스는 LLM 답변을 생성하지 않는다. evidence_complete는 검색 파이프라인의 진단 지표이며 생성 품질 점수로 바꾸어 말하지 않는다.",
+    "chapter": "검색",
+    "source": null,
+    "kind": "flow",
+    "dark": false
+  },
+  {
+    "page": 39,
+    "title": "검색 개수에 따른 지표 변화",
+    "sub": "문자 검색 / 현재 문서 / threshold=0 / dev",
+    "notes": "x축은 표시한 k의 이산 범주다. 점을 이은 선은 추세를 읽기 위한 안내다. LLM의 토큰 비용과 생성 정확성은 이 그래프에서 측정하지 않았다.",
+    "chapter": "검색",
+    "source": null,
+    "kind": "chart",
+    "dark": false
+  },
+  {
+    "page": 40,
+    "title": "긴 문맥과 답변 품질의 관계",
+    "sub": "검색된 문서를 많이 넣는 것만으로 해결되지 않는 문제",
+    "notes": "Lost in the Middle 연구는 당시 모델과 과업에서 관련 정보 위치에 따른 성능 변화를 관찰했다. 이 그림은 위치 조건을 설명한 재구성 도식이며 논문 성능 곡선을 복제한 것이 아니다. 최신 모든 모델에 같은 수치가 적용된다고 말하지 않는다.",
+    "chapter": "검색",
+    "source": "lost",
+    "kind": "research-diagram",
+    "dark": false
+  },
+  {
+    "page": 41,
+    "title": "실습 03: 손계산과 코드의 대조",
+    "sub": "03_metrics_and_k.ipynb",
+    "notes": "모든 숫자를 외울 필요는 없다. 지표가 무엇을 보지 못하는지 설명할 수 있는지가 학습 기준이다.",
+    "chapter": "검색",
+    "source": null,
+    "kind": "lab",
+    "dark": false
+  },
+  {
+    "page": 42,
+    "title": "기권과 오류 분석",
+    "sub": "",
+    "notes": "앞 구간의 결과를 한 문장으로 연결하고 이번 구간에서 학생이 직접 확인할 산출물을 안내한다.",
+    "chapter": "오류 분석",
+    "source": null,
+    "kind": "section",
+    "dark": true
+  },
+  {
+    "page": 43,
+    "title": "기권 임계값의 역할",
+    "sub": "응답 시도를 줄여 근거 없는 안내의 가능성을 관리",
+    "notes": "유사도는 정답 확률이 아니다. 특정 숫자 하나를 다른 모델과 인덱스에 그대로 옮기면 안 된다.",
+    "chapter": "오류 분석",
+    "source": null,
+    "kind": "tradeoff",
+    "dark": false
+  },
+  {
+    "page": 44,
+    "title": "임계값과 사용성의 변화",
+    "sub": "문자 검색 / 현재 문서 / k=3 / dev",
+    "notes": "x축 threshold를 올릴수록 두 오류가 어떻게 달라지는지 본다. 무조건 기권하면 false_accept는 낮아지지만 유용성을 잃는다.",
+    "chapter": "오류 분석",
+    "source": null,
+    "kind": "chart",
+    "dark": false
+  },
+  {
+    "page": 45,
+    "title": "후보 선택의 기준과 순서",
+    "sub": "30개 설정을 dev에서 비교한 뒤 test 평가",
+    "notes": "후보는 모두 현재 문서만 색인한다. k는1,3,5이고 threshold는0,.15,.3,.45,.6이다. test를 입력하면 select_on_dev가 거부한다.",
+    "chapter": "오류 분석",
+    "source": null,
+    "kind": "selection",
+    "dark": false
+  },
+  {
+    "page": 46,
+    "title": "고정 test의 실제 비교 결과",
+    "sub": "같은 24문항 / 검색 지표는 답변 가능 16문항 기준",
+    "notes": "파랑이 항상 좋아야 하는 그래프가 아니다. 답변 불가 수락률은 낮을수록 좋다. 근거 확보율의 감소는 기권 정책과 연결된다.",
+    "chapter": "오류 분석",
+    "source": null,
+    "kind": "measured-chart",
+    "dark": false
+  },
+  {
+    "page": 47,
+    "title": "말투별로 달라지는 결과",
+    "sub": "후보 검색기의 test 유형별 관찰",
+    "notes": "각 말투에 답변 가능8개·불가4개가 있다. 적은 표본에서 말투 전체의 성능을 단정하지 말고 실패 질문을 골라 추가 데이터를 만들 단서로 쓴다.",
+    "chapter": "오류 분석",
+    "source": null,
+    "kind": "slice",
+    "dark": false
+  },
+  {
+    "page": 48,
+    "title": "실패 사례의 검색 근거",
+    "sub": "HTML 보고서에서 직접 확인한 답변 불가 수락",
+    "notes": "기권해야 하는 질문을 수락한 사례다. 문서가 비슷해 보이는 것과 질문에 대한 답이 있다는 것을 구분한다. 보고서에서 근거 원문을 읽고 판단하도록 한다.",
+    "chapter": "오류 분석",
+    "source": null,
+    "kind": "screenshot",
+    "dark": false
+  },
+  {
+    "page": 49,
+    "title": "오류 원인별 다음 행동",
+    "sub": "모든 문제를 프롬프트 수정으로 해결하지 않는 진단",
+    "notes": "현재 기본 실습은 마지막 생성 오류를 실제로 측정하지 않는다. 생성 단계는 fixture와 선택 확장으로 다룬다.",
+    "chapter": "오류 분석",
+    "source": null,
+    "kind": "triage",
+    "dark": false
+  },
+  {
+    "page": 50,
+    "title": "실습 04: 실패 질문의 재현",
+    "sub": "04_calibration_and_error_analysis.ipynb",
+    "notes": "질문을 고친 뒤 기존 test 점수만 높이는 행위와 새 일반화 근거를 확보하는 행위의 차이를 설명한다.",
+    "chapter": "오류 분석",
+    "source": null,
+    "kind": "lab",
+    "dark": false
+  },
+  {
+    "page": 51,
+    "title": "답변 평가와 평가자",
+    "sub": "",
+    "notes": "앞 구간의 결과를 한 문장으로 연결하고 이번 구간에서 학생이 직접 확인할 산출물을 안내한다.",
+    "chapter": "답변 평가",
+    "source": null,
+    "kind": "section",
+    "dark": true
+  },
+  {
+    "page": 52,
+    "title": "검색 평가와 생성 평가의 분리",
+    "sub": "RAG: Retrieval-Augmented Generation / 검색 증강 생성",
+    "notes": "Ragas는 서로 다른 평가 차원을 분리하는 참고 사례다. metric 이름과 계산법은 구현 버전마다 확인해야 한다. 오늘 검색 Recall을 Ragas faithfulness로 부르지 않는다.",
+    "chapter": "답변 평가",
+    "source": "ragas",
+    "kind": "axes",
+    "dark": false
+  },
+  {
+    "page": 53,
+    "title": "정확성과 근거 충실성의 차이",
+    "sub": "정답을 우연히 맞힌 답변도 근거가 없을 수 있는 사례",
+    "notes": "근거 충실성만 높여도 데이터가 틀리면 사용자에게 잘못된 정보를 줄 수 있다. 반대로 외부 지식으로 맞힌 답은 근거 기반 서비스의 요구를 어길 수 있다.",
+    "chapter": "답변 평가",
+    "source": null,
+    "kind": "counterexample",
+    "dark": false
+  },
+  {
+    "page": 54,
+    "title": "연구 사례: 평가 점수와 기준값",
+    "sub": "ARES의 Natural Questions(NQ) 문맥 관련성 비교",
+    "notes": "원 논문의 Figure2는 NQ에서 시스템 조합별 문맥 관련성 평가를 비교한 그래프다. ARES·RAGAS·기준값과 ARES 신뢰구간을 보여준다. 현재 최신 모델의 순위가 아니며 수업 실행 결과도 아니다. 회색조에서는 범례가 가까워 원문도 함께 확인한다. 평가자를 기준값과 비교해야 한다는 관점에 집중한다.",
+    "chapter": "답변 평가",
+    "source": "aresresults",
+    "kind": "paper",
+    "dark": false
+  },
+  {
+    "page": 55,
+    "title": "수업용 답변 판정 기준",
+    "sub": "판정 이유를 함께 남기는 세 가지 상태",
+    "notes": "이 세 범주는 수업용 루브릭이다. 연구 프레임워크의 공식 분류로 가장하지 않는다. 제공 자료가 불완전한 상황을 사람 검토로 보내는 예시다.",
+    "chapter": "답변 평가",
+    "source": null,
+    "kind": "rubric",
+    "dark": false
+  },
+  {
+    "page": 56,
+    "title": "평가 요청과 결과의 계약",
+    "sub": "LLM-as-a-Judge / 언어 모델을 이용한 답변 평가",
+    "notes": "기본 실습에서는 이 프롬프트를 만들 뿐 실제 LLM에 전송하지 않는다. 구분자만으로 prompt injection을 막을 수 있다고 말하지 않는다.",
+    "chapter": "답변 평가",
+    "source": null,
+    "kind": "contract",
+    "dark": false
+  },
+  {
+    "page": 57,
+    "title": "빠른 규칙 검사의 한계",
+    "sub": "같은 숫자가 있어도 반대 의미가 되는 답변",
+    "notes": "규칙 기반 검증은 싸고 빠른 경보지만 의미 전체를 평가하지 못한다. 반대로 LLM 판정도 오류가 있으므로 서로 다른 검사를 조합한다.",
+    "chapter": "답변 평가",
+    "source": null,
+    "kind": "counterexample",
+    "dark": false
+  },
+  {
+    "page": 58,
+    "title": "평가자와 참고 판정의 불일치",
+    "sub": "계산법 학습을 위한 작성 예시 8건",
+    "notes": "행은 교수 작성 참고 판정, 열은 교수 작성 예시 평가자 출력이다. 조건 확대·근거 누락·다른 표기의 오판을 한 건씩 읽는다. 합성 예시 수치를 실측 모델 성능으로 발표하지 않는다.",
+    "chapter": "답변 평가",
+    "source": null,
+    "kind": "confusion",
+    "dark": false
+  },
+  {
+    "page": 59,
+    "title": "위치 편향과 길이 편향",
+    "sub": "답의 내용 이외에 판정에 영향을 줄 수 있는 요소",
+    "notes": "MT-Bench 연구는 LLM 평가자의 위치·장황함·자기 선호 등의 한계를 분석했다. 모든 모델과 설정에서 같은 정도로 나타난다고 말하지 않는다.",
+    "chapter": "답변 평가",
+    "source": "judge",
+    "kind": "bias",
+    "dark": false
+  },
+  {
+    "page": 60,
+    "title": "실제 LLM 평가로 확장할 조건",
+    "sub": "기본 실습은 API 호출 없이 기준과 분석 방법에 집중",
+    "notes": "LLM judge를 도입하면 결과를 정답으로 고정하지 말고 검증해야 한다. 평가자 모델을 바꾸면 같은 시스템의 점수가 바뀔 수 있다.",
+    "chapter": "답변 평가",
+    "source": null,
+    "kind": "manifest",
+    "dark": false
+  },
+  {
+    "page": 61,
+    "title": "실습 05: 평가자 오류 읽기",
+    "sub": "05_judge_rubric.ipynb",
+    "notes": "fixture는 실제 LLM 응답이 아니라 작성 예시임을 다시 확인한다. 숫자를 높이는 것보다 어떤 오판이 위험한지 설명하게 한다.",
+    "chapter": "답변 평가",
+    "source": null,
+    "kind": "lab",
+    "dark": false
+  },
+  {
+    "page": 62,
+    "title": "보고서와 의사결정",
+    "sub": "",
+    "notes": "앞 구간의 결과를 한 문장으로 연결하고 이번 구간에서 학생이 직접 확인할 산출물을 안내한다.",
+    "chapter": "판단",
+    "source": null,
+    "kind": "section",
+    "dark": true
+  },
+  {
+    "page": 63,
+    "title": "같은 질문의 짝 비교",
+    "sub": "후보와 기준선의 차이를 같은 평가 입력에서 계산",
+    "notes": "bootstrap은 관측 그룹을 다시 뽑는 계산이다. 새로운 실제 사용자 분포를 생성하는 것은 아니다. 여기서는 그룹 평균에 같은 가중치를 준다.",
+    "chapter": "판단",
+    "source": null,
+    "kind": "bootstrap",
+    "dark": false
+  },
+  {
+    "page": 64,
+    "title": "개선 폭의 불확실성",
+    "sub": "의도 그룹 bootstrap 2,000회 / seed=11",
+    "notes": "작은 표본의 percentile bootstrap 구간이다. 0 포함 여부만으로 사업 의사결정을 끝내지 않는다. 데이터 대표성과 중요한 실패 유형도 검토한다. 이 결과는 ARES의 PPI가 아니다.",
+    "chapter": "판단",
+    "source": null,
+    "kind": "uncertainty",
+    "dark": false
+  },
+  {
+    "page": 65,
+    "title": "배포 전 검증 조건의 결과",
+    "sub": "교육용 기준 / 실제 서비스는 위험과 비용에 맞게 재정의",
+    "notes": "결론은 HOLD다. CI가 개선 방향을 지지하더라도 사용성과 답변 불가 질문 처리의 기준을 충족하지 못한다. 통과 수를 평균내어 실패 조건을 상쇄하지 않는다.",
+    "chapter": "판단",
+    "source": null,
+    "kind": "gate",
+    "dark": false
+  },
+  {
+    "page": 66,
+    "title": "평가 보고서의 실제 화면",
+    "sub": "수치에서 질문별 근거로 이동하는 탐색",
+    "notes": "sample/report.html로 즉시 시연할 수 있고 Notebook06이나 CLI로 재생성할 수 있다. 보고서의 수치는 LLM 생성 정확도가 아니다.",
+    "chapter": "판단",
+    "source": null,
+    "kind": "screenshot",
+    "dark": false
+  },
+  {
+    "page": 67,
+    "title": "실습 06: 보고서 재생성과 확인",
+    "sub": "06_release_report.ipynb",
+    "notes": "VS Code 탐색기에서 report.html을 브라우저로 연다. 서버가 필요 없다. HTML은 결과 데이터가 내장되어 오프라인으로 열린다.",
+    "chapter": "판단",
+    "source": null,
+    "kind": "lab",
+    "dark": false
+  },
+  {
+    "page": 68,
+    "title": "지속적 통합에서의 평가 연결",
+    "sub": "Continuous Integration / 변경마다 자동 검증",
+    "notes": "CLI는 HOLD일 때 종료 코드2를 반환한다. 설치 오류가 아니라 의도한 차단이다. 기본 명령은 학습을 위해 보고서를 만들고0으로 종료한다. REVIEW도 자동 배포를 의미하지 않는다.",
+    "chapter": "판단",
+    "source": null,
+    "kind": "ci",
+    "dark": false
+  },
+  {
+    "page": 69,
+    "title": "프로젝트에 추가할 평가 근거",
+    "sub": "기획의 주장과 실제 실행 결과의 연결",
+    "notes": "2pager·PRD·PPT에 모든 코드를 넣지 않는다. 주장과 근거, 선택 이유를 짧게 쓰고 상세 보고서를 연결한다. 여러 프로젝트도 각자의 검증 근거를 제시한다.",
+    "chapter": "판단",
+    "source": null,
+    "kind": "project",
+    "dark": false
+  },
+  {
+    "page": 70,
+    "title": "한 페이지 평가 기록의 구조",
+    "sub": "복잡한 과정 설명보다 결과와 근거를 먼저 제시",
+    "notes": "제안서의 두괄식 원칙을 평가 보고서에도 적용한다. 개선 과정의 일지를 길게 붙이지 않고 현재 판단을 먼저 설명한다.",
+    "chapter": "판단",
+    "source": null,
+    "kind": "document",
+    "dark": false
+  },
+  {
+    "page": 71,
+    "title": "오프라인 통과 이후의 확인",
+    "sub": "사용 환경에서 확인할 추가 조건",
+    "notes": "오늘 기본 실습의 HOLD 후보를 실제 사용자에게 배포하라는 안내가 아니다. 일반적인 다음 검증 단계를 정리한다.",
+    "chapter": "판단",
+    "source": null,
+    "kind": "handoff",
+    "dark": false
+  },
+  {
+    "page": 72,
+    "title": "다음 주차와의 연결",
+    "sub": "12주차 온라인 관찰과 실험",
+    "notes": "11월20일은 현행 커리큘럼상 실시간 온라인 수업이다. 새 제출 일정이나 추가 배점은 이 자료에서 만들지 않는다.",
+    "chapter": "정리",
+    "source": null,
+    "kind": "transition",
+    "dark": false
+  },
+  {
+    "page": 73,
+    "title": "학습 확인 질문",
+    "sub": "설명할 수 있는지 점검할 다섯 가지",
+    "notes": "답을 외워 읽게 하기보다 자신의 실험 결과 한 건을 근거로 설명하게 한다. 수업 중 활동이며 새 별도 과제 마감은 없다.",
+    "chapter": "정리",
+    "source": null,
+    "kind": "questions",
+    "dark": false
+  },
+  {
+    "page": 74,
+    "title": "논문과 공식 문서",
+    "sub": "개념과 구현을 구분해서 확인할 읽기 자료",
+    "notes": "수업 결과는 논문 재현이 아니다. 출처의 과업·모델·조건을 확인한 뒤 프로젝트에 적용한다. 링크는 원문 자료다.",
+    "chapter": "참고",
+    "source": null,
+    "kind": "references",
+    "dark": false
+  },
+  {
+    "page": 75,
+    "title": "자료의 출처와 실행 범위",
+    "sub": "원본 그림, 재구성 도식, 실제 실행, 작성 예시의 구분",
+    "notes": "디자인 하네스는 검수 기준으로 활용했고 상표나 공식 제휴를 나타내지 않는다. 저작권과 라이선스는 assets/SOURCES.md에서 확인한다.",
+    "chapter": "참고",
+    "source": null,
+    "kind": "provenance",
+    "dark": false
+  },
+  {
+    "page": 76,
+    "title": "실습 파일과 실행 순서",
+    "sub": "VS Code에서 01부터 06까지 / 각 파일 독립 실행",
+    "notes": "HTML 강의안은 내려받아 브라우저로 연다. 방향키·목차·노트를 사용할 수 있고 인쇄 버튼으로 전체 PDF를 저장할 수 있다. 코드 실행은 Python3.11의 기존.venv에서 진행한다. 네트워크는 최초 패키지 설치에만 필요하다.",
+    "chapter": "참고",
+    "source": null,
+    "kind": "runbook",
+    "dark": false
+  }
+]

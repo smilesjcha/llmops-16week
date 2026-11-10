@@ -1,0 +1,200 @@
+[
+  {
+    "id": "D01",
+    "topic": "return",
+    "title": "반품 접수",
+    "text": "상품 수령 후 7일 이내 반품을 접수합니다. 착용 흔적과 택 제거가 없는 상품만 가능합니다.",
+    "status": "current",
+    "version": "2026-11-01",
+    "source": "authored-fiction"
+  },
+  {
+    "id": "D02",
+    "topic": "return_cost",
+    "title": "반품 배송비",
+    "text": "단순 변심 반품 배송비는 3000원입니다. 상품 불량 또는 오배송의 반품 배송비는 판매자가 부담합니다.",
+    "status": "current",
+    "version": "2026-11-01",
+    "source": "authored-fiction"
+  },
+  {
+    "id": "D03",
+    "topic": "exchange",
+    "title": "사이즈 교환",
+    "text": "사이즈 교환은 수령 후 7일 이내 신청합니다. 재고가 없으면 교환 대신 반품을 안내합니다.",
+    "status": "current",
+    "version": "2026-11-01",
+    "source": "authored-fiction"
+  },
+  {
+    "id": "D04",
+    "topic": "exchange_cost",
+    "title": "교환 배송비",
+    "text": "단순 변심 사이즈 교환의 왕복 배송비는 6000원입니다. 불량 상품 교환은 무료입니다.",
+    "status": "current",
+    "version": "2026-11-01",
+    "source": "authored-fiction"
+  },
+  {
+    "id": "D05",
+    "topic": "refund",
+    "title": "환불 소요 기간",
+    "text": "반품 검수가 완료된 후 영업일 기준 3일 이내 환불을 요청합니다. 카드사 반영일은 별도입니다.",
+    "status": "current",
+    "version": "2026-11-01",
+    "source": "authored-fiction"
+  },
+  {
+    "id": "D06",
+    "topic": "cancel",
+    "title": "주문 취소",
+    "text": "결제 완료 상태에서는 주문 취소가 가능합니다. 출고 준비 이후에는 취소 대신 배송 완료 후 반품을 접수합니다.",
+    "status": "current",
+    "version": "2026-11-01",
+    "source": "authored-fiction"
+  },
+  {
+    "id": "D07",
+    "topic": "delivery",
+    "title": "일반 배송",
+    "text": "일반 배송은 출고 후 영업일 기준 2일에서 4일이 걸립니다. 예약 상품은 상품 페이지의 출고 예정일을 따릅니다.",
+    "status": "current",
+    "version": "2026-11-01",
+    "source": "authored-fiction"
+  },
+  {
+    "id": "D08",
+    "topic": "island",
+    "title": "제주 배송",
+    "text": "제주 지역은 기본 배송비 외에 3000원이 추가됩니다. 도서 산간 지역의 정확한 비용은 결제 화면에서 확인합니다.",
+    "status": "current",
+    "version": "2026-11-01",
+    "source": "authored-fiction"
+  },
+  {
+    "id": "D09",
+    "topic": "coupon",
+    "title": "쿠폰 중복",
+    "text": "한 상품에는 쿠폰 한 장만 사용할 수 있습니다. 적립금과 쿠폰의 동시 사용은 가능합니다.",
+    "status": "current",
+    "version": "2026-11-01",
+    "source": "authored-fiction"
+  },
+  {
+    "id": "D10",
+    "topic": "points",
+    "title": "적립금 소멸",
+    "text": "적립금 유효 기간은 지급일로부터 365일입니다. 만료된 적립금은 복원되지 않습니다.",
+    "status": "current",
+    "version": "2026-11-01",
+    "source": "authored-fiction"
+  },
+  {
+    "id": "D11",
+    "topic": "membership",
+    "title": "멤버십 등급",
+    "text": "멤버십 등급은 최근 6개월의 구매 확정 금액으로 산정합니다. 매월 첫날 갱신합니다.",
+    "status": "current",
+    "version": "2026-11-01",
+    "source": "authored-fiction"
+  },
+  {
+    "id": "D12",
+    "topic": "password",
+    "title": "비밀번호 재설정",
+    "text": "로그인 화면의 비밀번호 찾기에서 가입 이메일로 재설정 링크를 요청합니다. 링크는 30분 동안 유효합니다.",
+    "status": "current",
+    "version": "2026-11-01",
+    "source": "authored-fiction"
+  },
+  {
+    "id": "D13",
+    "topic": "address",
+    "title": "배송지 변경",
+    "text": "배송지 변경은 결제 완료 상태에서만 가능합니다. 출고 준비가 시작되면 배송지 변경이 제한됩니다.",
+    "status": "current",
+    "version": "2026-11-01",
+    "source": "authored-fiction"
+  },
+  {
+    "id": "D14",
+    "topic": "gift",
+    "title": "선물 주문",
+    "text": "선물 주문은 받는 사람이 3일 이내 배송지를 입력해야 합니다. 기한 내 입력이 없으면 주문이 자동 취소됩니다.",
+    "status": "current",
+    "version": "2026-11-01",
+    "source": "authored-fiction"
+  },
+  {
+    "id": "D15",
+    "topic": "receipt",
+    "title": "현금 영수증",
+    "text": "현금 결제 주문의 현금 영수증은 구매 확정 이후 주문 상세에서 발급 신청합니다.",
+    "status": "current",
+    "version": "2026-11-01",
+    "source": "authored-fiction"
+  },
+  {
+    "id": "D16",
+    "topic": "damage",
+    "title": "불량 상품 증빙",
+    "text": "상품 불량을 접수할 때 주문 번호, 불량 부위 사진, 상품 전체 사진을 첨부합니다. 사진만으로 판별이 어려우면 회수 검수를 진행합니다.",
+    "status": "current",
+    "version": "2026-11-01",
+    "source": "authored-fiction"
+  },
+  {
+    "id": "D17",
+    "topic": "privacy",
+    "title": "개인정보 문의",
+    "text": "계정 삭제는 설정의 회원 탈퇴에서 신청합니다. 법정 보관 대상 거래 정보는 즉시 삭제되지 않을 수 있습니다.",
+    "status": "current",
+    "version": "2026-11-01",
+    "source": "authored-fiction"
+  },
+  {
+    "id": "D18",
+    "topic": "support",
+    "title": "고객센터 운영",
+    "text": "고객센터 상담은 평일 10시부터 17시까지 운영합니다. 주말과 공휴일은 상담을 운영하지 않습니다.",
+    "status": "current",
+    "version": "2026-11-01",
+    "source": "authored-fiction"
+  },
+  {
+    "id": "D19",
+    "topic": "archive",
+    "title": "반품 접수 이전 정책",
+    "text": "반품 접수는 수령 후 14일 이내 가능합니다. 2025년 폐기된 규정입니다.",
+    "status": "archived",
+    "version": "2025-01-01",
+    "source": "authored-fiction"
+  },
+  {
+    "id": "D20",
+    "topic": "archive",
+    "title": "반품 배송비 이전 정책",
+    "text": "단순 변심 반품 배송비는 무료입니다. 2025년 폐기된 규정입니다.",
+    "status": "archived",
+    "version": "2025-01-01",
+    "source": "authored-fiction"
+  },
+  {
+    "id": "D21",
+    "topic": "archive",
+    "title": "적립금 이전 정책",
+    "text": "적립금 유효 기간은 90일이며 만료 후 복원이 가능합니다. 폐기된 규정입니다.",
+    "status": "archived",
+    "version": "2025-01-01",
+    "source": "authored-fiction"
+  },
+  {
+    "id": "D22",
+    "topic": "archive",
+    "title": "상담 시간 이전 정책",
+    "text": "고객센터는 주말 포함 매일 24시간 상담합니다. 폐기된 규정입니다.",
+    "status": "archived",
+    "version": "2025-01-01",
+    "source": "authored-fiction"
+  }
+]

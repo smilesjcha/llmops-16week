@@ -1,0 +1,694 @@
+[
+  {
+    "id": "Q01a",
+    "group": "return",
+    "split": "dev",
+    "slice": "single",
+    "style": "direct",
+    "query": "반품 접수는 수령 후 언제까지 가능한가요?",
+    "gold_ids": [
+      "D01"
+    ],
+    "answerable": true,
+    "reference": "수령 후 7일 이내, 미착용·택 유지",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q01b",
+    "group": "return",
+    "split": "dev",
+    "slice": "single",
+    "style": "conversational",
+    "query": "옷 받은 지 5일 됐고 택 있어요. 반품 되나요?",
+    "gold_ids": [
+      "D01"
+    ],
+    "answerable": true,
+    "reference": "수령 후 7일 이내, 미착용·택 유지",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q02a",
+    "group": "return_cost",
+    "split": "test",
+    "slice": "single",
+    "style": "direct",
+    "query": "단순 변심 반품 배송비는 얼마인가요?",
+    "gold_ids": [
+      "D02"
+    ],
+    "answerable": true,
+    "reference": "단순 변심 3000원, 불량·오배송 판매자 부담",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q02b",
+    "group": "return_cost",
+    "split": "test",
+    "slice": "single",
+    "style": "conversational",
+    "query": "색상이 맘에 안 들어 돌려보내면 택배비 얼마죠?",
+    "gold_ids": [
+      "D02"
+    ],
+    "answerable": true,
+    "reference": "단순 변심 3000원, 불량·오배송 판매자 부담",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q03a",
+    "group": "exchange",
+    "split": "test",
+    "slice": "multi",
+    "style": "direct",
+    "query": "사이즈 교환 가능 기간과 왕복 배송비를 알려주세요.",
+    "gold_ids": [
+      "D03",
+      "D04"
+    ],
+    "answerable": true,
+    "reference": "7일 이내, 재고 필요, 단순 변심 왕복 6000원",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q03b",
+    "group": "exchange",
+    "split": "test",
+    "slice": "multi",
+    "style": "conversational",
+    "query": "작아서 큰 걸로 바꾸고 싶어요. 언제까지고 비용은요?",
+    "gold_ids": [
+      "D03",
+      "D04"
+    ],
+    "answerable": true,
+    "reference": "7일 이내, 재고 필요, 단순 변심 왕복 6000원",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q04a",
+    "group": "refund",
+    "split": "dev",
+    "slice": "single",
+    "style": "direct",
+    "query": "반품 검수 후 환불 요청까지 얼마나 걸리나요?",
+    "gold_ids": [
+      "D05"
+    ],
+    "answerable": true,
+    "reference": "검수 후 영업일 3일 이내 요청, 카드사 반영 별도",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q04b",
+    "group": "refund",
+    "split": "dev",
+    "slice": "single",
+    "style": "conversational",
+    "query": "검수 끝났는데 돈 언제 들어와요? 카드요.",
+    "gold_ids": [
+      "D05"
+    ],
+    "answerable": true,
+    "reference": "검수 후 영업일 3일 이내 요청, 카드사 반영 별도",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q05a",
+    "group": "cancel",
+    "split": "test",
+    "slice": "single",
+    "style": "direct",
+    "query": "출고 준비 중인 주문 취소가 가능한가요?",
+    "gold_ids": [
+      "D06"
+    ],
+    "answerable": true,
+    "reference": "출고 준비 이후 취소 제한, 배송 후 반품",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q05b",
+    "group": "cancel",
+    "split": "test",
+    "slice": "single",
+    "style": "conversational",
+    "query": "이미 포장 중이라는데 안 받고 취소할 수 있나요?",
+    "gold_ids": [
+      "D06"
+    ],
+    "answerable": true,
+    "reference": "출고 준비 이후 취소 제한, 배송 후 반품",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q06a",
+    "group": "delivery",
+    "split": "dev",
+    "slice": "single",
+    "style": "direct",
+    "query": "일반 배송은 출고 후 며칠 걸리나요?",
+    "gold_ids": [
+      "D07"
+    ],
+    "answerable": true,
+    "reference": "출고 후 영업일 2~4일, 예약 상품 별도",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q06b",
+    "group": "delivery",
+    "split": "dev",
+    "slice": "single",
+    "style": "conversational",
+    "query": "보냈다는데 이번 주 받을 수 있을까요?",
+    "gold_ids": [
+      "D07"
+    ],
+    "answerable": true,
+    "reference": "출고 후 영업일 2~4일, 예약 상품 별도",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q07a",
+    "group": "island",
+    "split": "test",
+    "slice": "single",
+    "style": "direct",
+    "query": "제주 지역 추가 배송비는 얼마인가요?",
+    "gold_ids": [
+      "D08"
+    ],
+    "answerable": true,
+    "reference": "제주 추가 3000원, 도서 산간 결제 화면 확인",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q07b",
+    "group": "island",
+    "split": "test",
+    "slice": "single",
+    "style": "conversational",
+    "query": "제주도로 보내면 돈 더 내야 해요?",
+    "gold_ids": [
+      "D08"
+    ],
+    "answerable": true,
+    "reference": "제주 추가 3000원, 도서 산간 결제 화면 확인",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q08a",
+    "group": "coupon",
+    "split": "dev",
+    "slice": "single",
+    "style": "direct",
+    "query": "쿠폰 두 장을 한 상품에 중복 적용할 수 있나요?",
+    "gold_ids": [
+      "D09"
+    ],
+    "answerable": true,
+    "reference": "상품당 쿠폰 한 장, 적립금 병용 가능",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q08b",
+    "group": "coupon",
+    "split": "dev",
+    "slice": "single",
+    "style": "conversational",
+    "query": "쿠폰이랑 포인트 같이 써도 되나요?",
+    "gold_ids": [
+      "D09"
+    ],
+    "answerable": true,
+    "reference": "상품당 쿠폰 한 장, 적립금 병용 가능",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q09a",
+    "group": "points",
+    "split": "test",
+    "slice": "single",
+    "style": "direct",
+    "query": "적립금 유효 기간과 만료 후 복원 가능 여부는?",
+    "gold_ids": [
+      "D10"
+    ],
+    "answerable": true,
+    "reference": "365일, 만료 후 복원 불가",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q09b",
+    "group": "points",
+    "split": "test",
+    "slice": "single",
+    "style": "conversational",
+    "query": "포인트 기한 지나서 사라졌는데 살릴 수 있나요?",
+    "gold_ids": [
+      "D10"
+    ],
+    "answerable": true,
+    "reference": "365일, 만료 후 복원 불가",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q10a",
+    "group": "membership",
+    "split": "dev",
+    "slice": "single",
+    "style": "direct",
+    "query": "멤버십 등급 산정 기간은 얼마나 되나요?",
+    "gold_ids": [
+      "D11"
+    ],
+    "answerable": true,
+    "reference": "최근 6개월 구매 확정 금액, 매월 첫날",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q10b",
+    "group": "membership",
+    "split": "dev",
+    "slice": "single",
+    "style": "conversational",
+    "query": "회원 등급은 언제 바뀌고 뭐 보고 정하나요?",
+    "gold_ids": [
+      "D11"
+    ],
+    "answerable": true,
+    "reference": "최근 6개월 구매 확정 금액, 매월 첫날",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q11a",
+    "group": "password",
+    "split": "test",
+    "slice": "single",
+    "style": "direct",
+    "query": "비밀번호 재설정 링크는 얼마 동안 유효한가요?",
+    "gold_ids": [
+      "D12"
+    ],
+    "answerable": true,
+    "reference": "가입 이메일 링크, 30분 유효",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q11b",
+    "group": "password",
+    "split": "test",
+    "slice": "single",
+    "style": "conversational",
+    "query": "비번 찾기 메일을 한 시간 뒤에 눌러도 되나요?",
+    "gold_ids": [
+      "D12"
+    ],
+    "answerable": true,
+    "reference": "가입 이메일 링크, 30분 유효",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q12a",
+    "group": "address",
+    "split": "dev",
+    "slice": "single",
+    "style": "direct",
+    "query": "배송지 변경은 어떤 주문 상태에서 가능한가요?",
+    "gold_ids": [
+      "D13"
+    ],
+    "answerable": true,
+    "reference": "결제 완료 상태만 가능",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q12b",
+    "group": "address",
+    "split": "dev",
+    "slice": "single",
+    "style": "conversational",
+    "query": "주소를 잘못 적었는데 포장 시작했대요. 수정 되나요?",
+    "gold_ids": [
+      "D13"
+    ],
+    "answerable": true,
+    "reference": "결제 완료 상태만 가능",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q13a",
+    "group": "gift",
+    "split": "test",
+    "slice": "single",
+    "style": "direct",
+    "query": "선물 받는 사람의 배송지 입력 기한은?",
+    "gold_ids": [
+      "D14"
+    ],
+    "answerable": true,
+    "reference": "3일 이내 입력, 미입력 자동 취소",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q13b",
+    "group": "gift",
+    "split": "test",
+    "slice": "single",
+    "style": "conversational",
+    "query": "선물 받은 친구가 주소 안 쓰면 어떻게 돼요?",
+    "gold_ids": [
+      "D14"
+    ],
+    "answerable": true,
+    "reference": "3일 이내 입력, 미입력 자동 취소",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q14a",
+    "group": "receipt",
+    "split": "dev",
+    "slice": "single",
+    "style": "direct",
+    "query": "현금 영수증은 어디에서 언제 신청하나요?",
+    "gold_ids": [
+      "D15"
+    ],
+    "answerable": true,
+    "reference": "구매 확정 후 주문 상세에서 신청",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q14b",
+    "group": "receipt",
+    "split": "dev",
+    "slice": "single",
+    "style": "conversational",
+    "query": "계좌로 결제했어요. 영수증 발급 받고 싶어요.",
+    "gold_ids": [
+      "D15"
+    ],
+    "answerable": true,
+    "reference": "구매 확정 후 주문 상세에서 신청",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q15a",
+    "group": "damage",
+    "split": "dev",
+    "slice": "multi",
+    "style": "direct",
+    "query": "불량 상품 반품의 증빙과 배송비 부담은?",
+    "gold_ids": [
+      "D02",
+      "D16"
+    ],
+    "answerable": true,
+    "reference": "주문 번호와 사진, 반품 비용은 판매자 부담",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q15b",
+    "group": "damage",
+    "split": "dev",
+    "slice": "multi",
+    "style": "conversational",
+    "query": "옷이 찢어져 왔어요. 사진 뭘 보내고 반품비 누가 내죠?",
+    "gold_ids": [
+      "D02",
+      "D16"
+    ],
+    "answerable": true,
+    "reference": "주문 번호와 사진, 반품 비용은 판매자 부담",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q16a",
+    "group": "support",
+    "split": "test",
+    "slice": "single",
+    "style": "direct",
+    "query": "고객센터 평일 상담 시간과 주말 운영 여부는?",
+    "gold_ids": [
+      "D18"
+    ],
+    "answerable": true,
+    "reference": "평일 10~17시, 주말·공휴일 미운영",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q16b",
+    "group": "support",
+    "split": "test",
+    "slice": "single",
+    "style": "conversational",
+    "query": "토요일 저녁에 상담원 연결 가능한가요?",
+    "gold_ids": [
+      "D18"
+    ],
+    "answerable": true,
+    "reference": "평일 10~17시, 주말·공휴일 미운영",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q17a",
+    "group": "international",
+    "split": "dev",
+    "slice": "unanswerable",
+    "style": "direct",
+    "query": "해외 배송이 가능한 국가를 알려주세요.",
+    "gold_ids": [],
+    "answerable": false,
+    "reference": "해외 배송 정책 정보 없음",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q17b",
+    "group": "international",
+    "split": "dev",
+    "slice": "unanswerable",
+    "style": "conversational",
+    "query": "캐나다로 보내는 운임은 얼마죠?",
+    "gold_ids": [],
+    "answerable": false,
+    "reference": "해외 배송 정책 정보 없음",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q18a",
+    "group": "resale",
+    "split": "test",
+    "slice": "unanswerable",
+    "style": "direct",
+    "query": "중고 상품 매입 가격은 어떻게 정하나요?",
+    "gold_ids": [],
+    "answerable": false,
+    "reference": "중고 매입 정책 정보 없음",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q18b",
+    "group": "resale",
+    "split": "test",
+    "slice": "unanswerable",
+    "style": "conversational",
+    "query": "입던 옷 팔면 얼마 주나요?",
+    "gold_ids": [],
+    "answerable": false,
+    "reference": "중고 매입 정책 정보 없음",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q19a",
+    "group": "repair",
+    "split": "dev",
+    "slice": "unanswerable",
+    "style": "direct",
+    "query": "바지 기장 수선 비용을 알려주세요.",
+    "gold_ids": [],
+    "answerable": false,
+    "reference": "수선 정책 정보 없음",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q19b",
+    "group": "repair",
+    "split": "dev",
+    "slice": "unanswerable",
+    "style": "conversational",
+    "query": "소매 줄이는 서비스도 무료인가요?",
+    "gold_ids": [],
+    "answerable": false,
+    "reference": "수선 정책 정보 없음",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q20a",
+    "group": "authentic",
+    "split": "test",
+    "slice": "unanswerable",
+    "style": "direct",
+    "query": "정품 감정서 발급 비용은 얼마인가요?",
+    "gold_ids": [],
+    "answerable": false,
+    "reference": "정품 감정 정책 정보 없음",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q20b",
+    "group": "authentic",
+    "split": "test",
+    "slice": "unanswerable",
+    "style": "conversational",
+    "query": "진품인지 감별해주는 서비스 있나요?",
+    "gold_ids": [],
+    "answerable": false,
+    "reference": "정품 감정 정책 정보 없음",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q21a",
+    "group": "price",
+    "split": "dev",
+    "slice": "unanswerable",
+    "style": "direct",
+    "query": "구매 다음 날 가격이 내리면 차액 보상이 되나요?",
+    "gold_ids": [],
+    "answerable": false,
+    "reference": "가격 보상 정책 정보 없음",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q21b",
+    "group": "price",
+    "split": "dev",
+    "slice": "unanswerable",
+    "style": "conversational",
+    "query": "어제 샀는데 할인하네요. 차액 돌려주세요.",
+    "gold_ids": [],
+    "answerable": false,
+    "reference": "가격 보상 정책 정보 없음",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q22a",
+    "group": "tax",
+    "split": "test",
+    "slice": "unanswerable",
+    "style": "direct",
+    "query": "해외 주문 관세는 누가 부담하나요?",
+    "gold_ids": [],
+    "answerable": false,
+    "reference": "해외 관세 정보 없음",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q22b",
+    "group": "tax",
+    "split": "test",
+    "slice": "unanswerable",
+    "style": "conversational",
+    "query": "미국으로 주문하면 세금 얼마나 붙어요?",
+    "gold_ids": [],
+    "answerable": false,
+    "reference": "해외 관세 정보 없음",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q23a",
+    "group": "delivery_time",
+    "split": "dev",
+    "slice": "unanswerable",
+    "style": "direct",
+    "query": "내 주문이 오늘 몇 시에 도착하나요?",
+    "gold_ids": [],
+    "answerable": false,
+    "reference": "개별 택배 실시간 위치 없음",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q23b",
+    "group": "delivery_time",
+    "split": "dev",
+    "slice": "unanswerable",
+    "style": "conversational",
+    "query": "지금 택배 기사님 위치 좀 알려주세요.",
+    "gold_ids": [],
+    "answerable": false,
+    "reference": "개별 택배 실시간 위치 없음",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q24a",
+    "group": "stock",
+    "split": "test",
+    "slice": "unanswerable",
+    "style": "direct",
+    "query": "검정 운동화 270 사이즈 현재 재고는?",
+    "gold_ids": [],
+    "answerable": false,
+    "reference": "개별 상품 실시간 재고 없음",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  },
+  {
+    "id": "Q24b",
+    "group": "stock",
+    "split": "test",
+    "slice": "unanswerable",
+    "style": "conversational",
+    "query": "그 신발 내일 재입고 몇 시죠?",
+    "gold_ids": [],
+    "answerable": false,
+    "reference": "개별 상품 실시간 재고 없음",
+    "provenance": "author-written synthetic teaching case",
+    "review": "teaching-reference-v1"
+  }
+]

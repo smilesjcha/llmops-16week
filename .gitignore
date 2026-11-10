@@ -36,3 +36,6 @@ week02/lecture/node_modules
 *.MP4
 *.m4a
 *.M4A
+
+# Student-authored evaluation runs may include private project data.
+week11/lab/reports/
