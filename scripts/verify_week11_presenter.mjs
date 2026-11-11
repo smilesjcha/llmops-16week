@@ -24,6 +24,68 @@ async function previews(page,number){
  }else{assert.ok(await page.locator('#preview-end').isVisible());assert.ok(await page.locator('#expand-next').isDisabled());}
 }
 
+async function checkDivider(teacher,audience,target){
+ const divider=teacher.locator('#pane-divider'),key='llmops.week11.presenter.previewShare';
+ const share=async()=>Number(await divider.getAttribute('aria-valuenow'));
+ const progress=()=>teacher.locator('#notes').evaluate(e=>e.scrollTop/(e.scrollHeight-e.clientHeight));
+ const dragTo=async percent=>{
+  const box=await divider.boundingBox(),bounds=await teacher.locator('.layout').boundingBox();
+  await teacher.mouse.move(box.x+box.width/2,box.y+80);await teacher.mouse.down();
+  await teacher.mouse.move(bounds.x+(bounds.width-box.width)*percent/100+box.width/2,box.y+80,{steps:12});await teacher.mouse.up();
+ };
+ await teacher.setViewportSize({width:1440,height:950});await teacher.evaluate(()=>scrollTo(0,0));
+ await teacher.locator('#split-reset').click();
+ await teacher.locator('#notes').evaluate(e=>e.scrollTop=(e.scrollHeight-e.clientHeight)*.35);
+ const revision=await teacher.frameLocator('#current-preview').locator('#preview-root').getAttribute('data-revision');
+ await dragTo(35);assert.ok(Math.abs(await share()-35)<.2);assert.ok(Math.abs(await progress()-.35)<.01);
+ const small=await teacher.locator('#current-stage').boundingBox();
+ await teacher.screenshot({path:path.join(out,(target.startsWith('file:')?'file-':'web-')+'wide-notes.png')});
+ await dragTo(65);assert.ok(Math.abs(await share()-65)<.2);assert.ok(Math.abs(await progress()-.35)<.01);
+ const large=await teacher.locator('#current-stage').boundingBox();assert.ok(large.width>small.width*1.7,'preview grows with its pane');
+ await teacher.waitForFunction(()=>Math.abs(Number(document.querySelector('#current-stage').style.getPropertyValue('--preview-scale'))-document.querySelector('#current-stage').clientWidth/1440)<.002);
+ await teacher.screenshot({path:path.join(out,(target.startsWith('file:')?'file-':'web-')+'wide-preview.png')});
+ assert.equal(await teacher.frameLocator('#current-preview').locator('#preview-root').getAttribute('data-revision'),revision,'drag does not reload previews');
+ assert.equal(await teacher.locator('body.resizing-panes').count(),0);
+ // Pointer capture keeps dragging outside the handle; pane minimums prevent clipping.
+ for(const pct of [0,100]){
+  await dragTo(pct);
+  assert.equal(await share(),Number(await divider.getAttribute(pct===0?'aria-valuemin':'aria-valuemax')));
+  assert.ok((await teacher.locator('#visual-pane').boundingBox()).width>=280);
+  assert.ok((await teacher.locator('#notes-pane').boundingBox()).width>=340);
+  assert.ok(await teacher.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+ }
+ await divider.press('Enter');assert.equal(await share(),47.5);
+ await divider.press('ArrowLeft');assert.equal(await share(),45.5);
+ await divider.press('Shift+ArrowRight');assert.equal(await share(),55.5);
+ await divider.press('Home');assert.equal(await share(),Number(await divider.getAttribute('aria-valuemin')));
+ await divider.press('End');assert.equal(await share(),Number(await divider.getAttribute('aria-valuemax')));
+ await divider.dblclick();assert.equal(await share(),47.5);
+ assert.equal(await audience.locator('#status').textContent(),'53 / 64','resizing must not advance slides');
+ assert.equal(await teacher.locator('#font-value').textContent(),'22px');
+ await dragTo(65);const saved=await teacher.evaluate(k=>localStorage.getItem(k),key);
+ await teacher.reload();await teacher.waitForSelector('body[data-connected=true]');await previews(teacher,53);
+ assert.equal(await share(),Number(saved));
+ await teacher.locator('#visual-pane').evaluate(e=>e.scrollTop=e.scrollHeight);
+ assert.ok(await teacher.locator('#visual-pane').evaluate(e=>e.scrollTop>0));
+ await teacher.locator('#next').click();await previews(teacher,54);
+ assert.equal(await teacher.locator('#visual-pane').evaluate(e=>e.scrollTop),0,'new slide starts at its current preview');
+ await teacher.locator('#previous').click();await previews(teacher,53);
+ await teacher.setViewportSize({width:800,height:950});
+ await teacher.waitForFunction(()=>Number(document.querySelector('#pane-divider').getAttribute('aria-valuenow'))<60);
+ assert.ok((await teacher.locator('#notes-pane').boundingBox()).width>=340);
+ assert.equal(await teacher.evaluate(k=>localStorage.getItem(k),key),saved,'window resize must not overwrite preferred ratio');
+ await teacher.setViewportSize({width:390,height:950});assert.equal(await divider.isVisible(),false);
+ assert.equal(await teacher.locator('#split-reset').isVisible(),false);
+ assert.ok(await teacher.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+ await teacher.setViewportSize({width:1440,height:950});
+ await teacher.waitForFunction(n=>Number(document.querySelector('#pane-divider').getAttribute('aria-valuenow'))===n,Number(saved));
+ // Aborted pointer gestures must not leave the whole page in drag mode.
+ const box=await divider.boundingBox();await teacher.mouse.move(box.x+16,box.y+80);await teacher.mouse.down();
+ await divider.dispatchEvent('pointercancel',{pointerId:1});await teacher.mouse.up();
+ assert.equal(await teacher.locator('body.resizing-panes').count(),0);
+ await teacher.locator('#split-reset').click();assert.equal(await share(),47.5);
+}
+
 try{
  for(const target of process.env.COURSE_BASE_URL?[base]:[base,'file://'+root+'/']){
   const ctx=await browser.newContext({viewport:{width:1440,height:1000}});
@@ -69,6 +131,8 @@ try{
   await teacher.setViewportSize({width:1100,height:900});
   await teacher.evaluate(()=>{window.scrollTo(0,500);document.querySelector('#jump').value='21';});
   await previews(teacher,53);
+  // Let the queued responsive fit settle before checking heartbeat scroll preservation.
+  await teacher.waitForTimeout(200);
   await teacher.locator('#notes').evaluate(e=>e.scrollTop=200);
   const noteScroll=await teacher.locator('#notes').evaluate(e=>e.scrollTop);
   const revision=await teacher.frameLocator('#current-preview').locator('#preview-root').getAttribute('data-revision');
@@ -89,6 +153,7 @@ try{
   assert.ok(await teacher.locator('#preview-dialog').isVisible());await teacher.keyboard.press('Escape');
   await teacher.locator('#expand-next').click();await teacher.waitForFunction(()=>document.querySelector('#expanded-stage').dataset.page==='54');
   await teacher.locator('#preview-close').click();await teacher.locator('#font-reset').click();
+  await checkDivider(teacher,audience,target);
   await teacher.locator('#outline').selectOption('4');
   await audience.waitForFunction(()=>location.hash==='#slide-4');
   await teacher.locator('#flow-next').click();
@@ -120,21 +185,27 @@ try{
    await teacher.setViewportSize({width,height:950});await teacher.evaluate(()=>scrollTo(0,0));await teacher.waitForTimeout(100);
    assert.ok(await teacher.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
    if(width>=1120){
-    const bounds=await teacher.evaluate(()=>({next:document.querySelector('#next-stage').getBoundingClientRect().bottom,notes:document.querySelector('#notes').getBoundingClientRect().bottom,footer:document.querySelector('footer.controls').getBoundingClientRect().top}));
-    assert.ok(bounds.next<=bounds.footer,JSON.stringify(bounds));assert.ok(bounds.notes<=bounds.footer,JSON.stringify(bounds));
+    const bounds=await teacher.evaluate(()=>({preview:document.querySelector('#visual-pane').getBoundingClientRect().bottom,notes:document.querySelector('#notes').getBoundingClientRect().bottom,footer:document.querySelector('footer.controls').getBoundingClientRect().top}));
+    assert.ok(bounds.preview<=bounds.footer,JSON.stringify(bounds));assert.ok(bounds.notes<=bounds.footer,JSON.stringify(bounds));
+    await teacher.locator('#next-stage').scrollIntoViewIfNeeded();
+    assert.ok(await teacher.locator('#next-stage').evaluate(e=>{const a=e.getBoundingClientRect(),b=document.querySelector('#visual-pane').getBoundingClientRect();return a.top>=b.top-1&&a.bottom<=b.bottom+1;}));
    }
    await teacher.screenshot({path:path.join(out,(target.startsWith('file:')?'file-':'web-')+`teacher-${width}.png`)});
   }
+  await teacher.setViewportSize({width:1440,height:950});await teacher.locator('#pane-divider').press('Shift+ArrowLeft');
+  const savedShare=await teacher.locator('#pane-divider').getAttribute('aria-valuenow');
   await teacher.locator('#font-larger').click();
   await teacher.close();assert.equal(await audience.locator('#notes-panel').isVisible(),false);
   const reopened=audience.waitForEvent('popup');await audience.locator('#presenter-button').click();teacher=await reopened;
   await teacher.waitForSelector('body[data-connected=true]');assert.equal(await teacher.locator('#position').textContent(),'53 / 64');
   assert.equal(await teacher.locator('#font-value').textContent(),'24px');
+  await teacher.setViewportSize({width:1440,height:950});
+  await teacher.waitForFunction(n=>document.querySelector('#pane-divider').getAttribute('aria-valuenow')===n,savedShare);
   const closed=teacher.waitForEvent('close');await teacher.locator('#end').click();await closed;
   assert.equal(await audience.locator('html.audience-mode').count(),0);assert.equal(await audience.locator('#notes-panel').isVisible(),false);
   const again=audience.waitForEvent('popup');await audience.locator('#presenter-button').click();teacher=await again;await teacher.waitForSelector('body[data-connected=true]');
   await audience.close();await teacher.waitForSelector('body[data-connected=false]');assert.ok(await teacher.locator('#next').isDisabled());
-  results.runs.push({target,slides:64,notes_hidden_on_audience:true,bidirectional:true,flow_steps:true,window_isolation:true,reload_both:true,close_and_reopen:true,fullscreen_sync:true,scroll_preserved:true,previews:64,live_diagram:true,live_metric:true,preview_zoom:true,font_adjustment_and_persistence:true,mobile_overflow:0});
+  results.runs.push({target,slides:64,notes_hidden_on_audience:true,bidirectional:true,flow_steps:true,window_isolation:true,reload_both:true,close_and_reopen:true,fullscreen_sync:true,scroll_preserved:true,previews:64,live_diagram:true,live_metric:true,preview_zoom:true,font_adjustment_and_persistence:true,divider_drag_keyboard_limits:true,divider_persistence_and_responsive_restore:true,mobile_overflow:0});
   await ctx.close();
  }
  const blocked=await browser.newPage();await blocked.addInitScript(()=>window.open=()=>null);

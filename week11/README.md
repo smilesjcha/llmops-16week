@@ -21,7 +21,7 @@
 
 오프라인 이용도 가능합니다. [강의안 원본](lecture/index.html)이나 [보고서 원본](lab/sample/report.html)의 **Download raw file**로 저장한 뒤 브라우저로 여세요. 글꼴·그림·스크립트가 내장된 단일 파일입니다. 공개 보고서는 수업용 합성 자료이며 학생 제출물이 아닙니다. 직접 실행한 결과는 로컬 `week11/lab/reports/report.html`에서 확인합니다.
 
-**학생 화면과 노트 분리:** [강의안](https://smilesjcha.github.io/llmops-16week/week11/lecture/) 하단의 **발표자 모드**로 별도 노트 창을 엽니다. 원래 강의 창을 **P**로 전체화면 전환하고 그 창만 공유하세요. 장표와 노트는 양방향으로 동기화됩니다. 현재·다음 장표 미리보기와 확대, 노트 글씨 크기 조절(16–36px, 기본 22px)을 지원합니다. [진행 방법](lecture/TEACHING_GUIDE.md#학생-화면과-발표자-노트의-분리)
+**학생 화면과 노트 분리:** [강의안](https://smilesjcha.github.io/llmops-16week/week11/lecture/) 하단의 **발표자 모드**로 별도 노트 창을 엽니다. 원래 강의 창을 **P**로 전체화면 전환하고 그 창만 공유하세요. 장표와 노트는 양방향으로 동기화됩니다. 현재·다음 장표 미리보기와 확대, 노트 글씨 크기 조절(16–36px, 기본 22px)을 지원합니다. 가운데 구분선을 드래그하면 장표와 노트 너비를 조절할 수 있으며, 비율과 글씨 크기는 다음 실행에도 유지됩니다. [진행 방법](lecture/TEACHING_GUIDE.md#학생-화면과-발표자-노트의-분리)
 
 **한 셀씩 예행연습:** [09·10 코드 셀 번호·클릭 위치·확인 결과](https://smilesjcha.github.io/llmops-16week/week11/lab/demo/#notebooks). Notebook 첫 설명에도 같은 표가 있습니다.
 
