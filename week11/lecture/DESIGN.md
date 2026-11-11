@@ -77,3 +77,12 @@ Impeccable 4.8.2의 layout·animate·craft-floor를 참고했습니다. layout �
 일반 보기의 읽기 배치와 전체화면 발표 배치를 분리합니다. Fullscreen API 진입 시 배율은 `min(화면 너비 / 1440, 화면 높이 / 810)`이며 100% 상한과 메뉴용 여백을 제거합니다. 장표는 중앙 정렬하고 16:9 비율을 보존합니다. 일반 보기로 돌아오면 태블릿·모바일의 읽기 배치가 복원됩니다.
 
 메뉴는 약 2.2초 뒤 숨기며 화면 위·아래 가장자리의 포인터, 터치 또는 키보드 포커스로 표시합니다. P로 전체화면 전환, Esc로 종료, F는 도식의 다음 단계입니다. Cmd/Ctrl+P 인쇄 단축키를 가로채지 않습니다. Fullscreen API가 제한된 호스트에서는 창 안의 발표 모드로 전환하고 제한 및 복귀 방법을 표시합니다. 인쇄에는 이 화면용 배치가 적용되지 않습니다.
+
+
+## 교수용 설명과 재생성
+
+`teaching-notes.json`은 최종 64쪽에 대응하는 교수 설명 원본입니다. 장표를 재구성한 뒤 페이지 번호·제목 일치를 검증하고 N 노트·lecture-notes.md에 반영합니다. 각 페이지에는 핵심·설명 예시·화면 근거·질문·기대 답변·오해 방지·다음 연결이 있습니다.
+
+`../lab/instructor-notes.json`은 09·10번 각각 9개 코드 셀의 설명 원본입니다. 학생용 실행 지도와 함께 Notebook의 접을 수 있는 교수 설명에 반영합니다. 실행 코드는 변경하지 않습니다.
+
+재생성 순서: `python scripts/build_week11_html.py`, `python scripts/build_week11_instructor.py`, `python scripts/build_week11_platform_notebooks.py`. `instructor/`는 전체 요약·개념·셀별 안내를 한 페이지에서 검색·펼침·인쇄하는 정적 HTML입니다. 장표 본문과 PDF의 학습 내용은 그대로이며 교수 설명만 보강했습니다.

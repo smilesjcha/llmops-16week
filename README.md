@@ -42,6 +42,7 @@
 - 10주차: [PDF · 배포와 실행 관찰 · 80쪽](output/pdf/10_week10_observable_deployment.pdf) · [발표용 PPT](week10/lecture/10_week10_observable_deployment.pptx) · [Notebook 6개·VS Code 실행 안내](week10/lab/README.md) · [기획서 2차 제출 공지](week10/README.md#기획서-2차-제출-공지)
 - 11주차: [HTML 강의안 바로 보기 · 품질 검증 · 64쪽](https://smilesjcha.github.io/llmops-16week/week11/lecture/) · [인쇄 PDF](output/pdf/11_week11_offline_evaluation.pdf) · [Notebook 10개·VS Code 실행 안내](week11/lab/README.md) · [실습 평가 보고서 바로 보기](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/report.html)
 - 11주차 실전: [Docker·Langfuse·100분 시간표](week11/lab/langfuse/README.md) · [실제 A/B/C 비교 결과](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/langfuse/)
+- [11주차 교수용 강의 준비](https://smilesjcha.github.io/llmops-16week/week11/lecture/instructor/): 목차별 64쪽 핵심 메시지, 설명 예시·확인 질문, 09·10번 코드 셀별 수업 안내.
 - [11주차 화면별 시연 순서·사전 점검](https://smilesjcha.github.io/llmops-16week/week11/lab/demo/): 준비 → 요청 트리 → 입출력 → 점수 → A/B/C 실험 → 배포 판단.
 - 팀 신청: [아주대AI대학원 2–4인 팀 Google Form](https://docs.google.com/forms/d/e/1FAIpQLSd3UOP4SjCUct_RJKcgvVNGEBCpOOLmNkZPi6QFBIQAilKIag/viewform)
 - 11주차 강의·실습 보고서: 위의 **바로 보기** 링크에서 로그인·다운로드 없이 실행합니다. GitHub 파일 페이지는 HTML 코드를 보여주므로 Pages 링크를 학생에게 공유하세요. 다른 HTML도 내려받아 브라우저에서 열 수 있습니다.

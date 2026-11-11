@@ -30,6 +30,17 @@ def build(name, title, intro, steps):
     assert len(guide["steps"]) == len(steps) + 1
     cell_map = "\n\n**위에서부터 코드 셀을 세는 실행 지도**\n\nVS Code 왼쪽 `[숫자]`는 실행 횟수입니다. 아래 번호는 설명 셀을 제외한 코드 셀 순서입니다. 첫 셀부터 한 개씩 실행하고 완료 후 다음 셀로 이동합니다.\n\n| 코드 셀 | 단계 | 화면에서 누를 곳 | 확인 결과 |\n|---|---|---|---|\n"
     cell_map += "\n".join(f"| {i} | {heading} | {screen} | {result} |" for i, (heading, screen, result) in enumerate(guide["steps"], 1))
+    teacher = [item for item in json.loads((ROOT / "week11/lab/instructor-notes.json").read_text()) if item["notebook"] == name[:2]]
+    assert len(teacher) == len(guide["steps"])
+    def teaching(item):
+        return "\n\n<details>\n<summary>교수 설명 · 확인 질문</summary>\n\n" + "\n\n".join([
+            "**학습 목적** — " + item["intent"],
+            "**설명 예시** — " + item["talk"],
+            "**학생 질문** — " + item["question"],
+            "**기대 답변** — " + item["answer"],
+            "**오해·문제 해결** — " + item["caution"],
+            f'[전체 강의 준비 안내](https://smilesjcha.github.io/llmops-16week/week11/lecture/instructor/#cell-{name[:2]}-{item["cell"]})',
+        ]) + "\n\n</details>"
     cells = [
         n.v4.new_markdown_cell(f"""# {title}
 
@@ -50,7 +61,7 @@ Ollama 앱과 Docker Desktop이 실행 중이어야 합니다. [Langfuse 화면]
 
 `.venv` Python 3.11 커널에서 위부터 Shift+Enter. 다른 Notebook의 변수는 필요 없습니다.
 모델의 의미 오류는 관찰 대상이며, 연결 실패·파싱 오류를 가짜 성공으로 대체하지 않습니다.
-""" + cell_map),
+""" + cell_map + teaching(teacher[0])),
         n.v4.new_code_cell(
             SETUP
             if name.startswith("09")
@@ -61,7 +72,7 @@ Ollama 앱과 Docker Desktop이 실행 중이어야 합니다. [Langfuse 화면]
         cells += [
             n.v4.new_markdown_cell(f"## {i}. {heading}\n\n{why}"),
             n.v4.new_code_cell(code),
-            n.v4.new_markdown_cell("**확인 결과 / 화면에서 볼 것**\n\n" + check),
+            n.v4.new_markdown_cell("**확인 결과 / 화면에서 볼 것**\n\n" + check + teaching(teacher[i])),
         ]
     cells += [
         n.v4.new_markdown_cell("""## 마무리
@@ -140,7 +151,7 @@ print('실제 부모 1개 + 하위 작업 4개 확인')""",
 print('참고 기준:', by_id['Q03a']['reference'])
 print('실제 답변:', first['answer']['answer'])
 print('실제 평가자:', first['judge'])""",
-            "Trace의 Scores에서 BOOLEAN 검사와 CATEGORICAL llm_groundedness를 확인합니다. 숫자 1은 해당 코드 조건 통과이며 답변 정확도 100%가 아닙니다. 기간·비용·미착용·재고 조건을 직접 읽어봅니다.",
+            "Trace의 Scores에서 BOOLEAN 검사와 CATEGORICAL llm_groundedness를 확인합니다. 숫자 1은 해당 코드 조건 통과이며 답변 정확도 100%가 아닙니다. 기간·비용·재고 조건을 직접 읽어봅니다.",
         ),
         (
             "문서 밖 재고 질문의 두 응답 비교",

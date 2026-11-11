@@ -9,6 +9,8 @@
 - [실제 Ollama 실행 보고서](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/ollama/ollama-report.html)
 - [Notebook별 실행 순서·확인 결과](lab/WALKTHROUGH.md)
 - [Langfuse·LangSmith의 역할과 도입 기준](lab/PLATFORMS.md)
+- [교수용 강의 준비: 64쪽 핵심·설명·질문 + 09·10 코드 셀별 안내](https://smilesjcha.github.io/llmops-16week/week11/lecture/instructor/)
+- [목차·페이지별 한 문장 요약](lecture/INSTRUCTOR_OVERVIEW.md)
 - [100분 교수 진행안](lecture/TEACHING_GUIDE.md)
 - [장표별 설명 노트](lecture/lecture-notes.md)
 - [출처·이미지·라이선스](lecture/assets/SOURCES.md)
