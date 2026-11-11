@@ -17,16 +17,25 @@
   if(presenterActive){$('#notes-panel').classList.remove('open');$('#notes-panel').inert=true;$('#notes-button').setAttribute('aria-expanded','false');}
   rememberPresenter();
  }
- function presenterState(){
+ function previewSlide(index){
+  const source=slides[index];if(!source)return null;
+  const clone=source.cloneNode(true);clone.classList.add('active');
+  clone.removeAttribute('aria-hidden');clone.removeAttribute('inert');
+  clone.querySelector('.presenter-note')?.remove();clone.querySelectorAll('.enlarge').forEach(el=>el.remove());
+  clone.querySelectorAll('input').forEach((el,i)=>{el.setAttribute('value',source.querySelectorAll('input')[i].value);});
+  return {page:index+1,title:outline[index].title,html:clone.outerHTML};
+ }
+ function presenterState(includePreviews){
   const walk=slides[current].querySelector('.diagram-walk');
   return {page:current+1,count:slides.length,title:outline[current].title,chapter:outline[current].chapter,
    notes:slides[current].querySelector('.presenter-note').textContent,
    nextTitle:outline[current+1]?.title||'마지막 장표',outline,
+   ...(includePreviews?{previews:{current:previewSlide(current),next:previewSlide(current+1)}}:{}),
    flow:walk?{caption:walk.querySelector('.walk-caption').textContent,backDisabled:walk.querySelector('.walk-back').disabled}:null};
  }
- function sendPresenter(type='state'){
+ function sendPresenter(type='state',includePreviews=true){
   if(!presenterActive||!presenterWindow||presenterWindow.closed)return;
-  presenterWindow.postMessage({protocol:presenterProtocol,session:presenterSession,type,...(type==='state'?{state:presenterState()}:{})},messageOrigin);
+  presenterWindow.postMessage({protocol:presenterProtocol,session:presenterSession,type,...(type==='state'?{state:presenterState(includePreviews)}:{})},messageOrigin);
  }
  function openPresenter(){
   presenterActive=true;applyPresenterMode();
@@ -47,13 +56,14 @@
   if(!presenterActive||!data||data.protocol!==presenterProtocol||data.session!==presenterSession)return;
   if(event.origin!==(location.protocol==='file:'?'null':location.origin))return;
   if(presenterWindow&&event.source!==presenterWindow)return;
+  const reconnected=!presenterWindow;
   if(!presenterWindow){
    if(data.type!=='hello')return;
    // Recover the window reference after reloading this deck, without a broadcast.
    try{if(event.source?.opener!==window)return;}catch{return;}
    presenterWindow=event.source;
   }
-  if(data.type==='hello'){sendPresenter();return;}
+  if(data.type==='hello'){sendPresenter('state',reconnected||data.wantPreviews===true);return;}
   if(data.type!=='command')return;
   if(presentationMode){document.activeElement?.blur();clearTimeout(uiTimer);document.documentElement.classList.remove('presentation-ui');}
   if(data.action==='next')show(current+1);
@@ -179,6 +189,7 @@
   $('#metric-k-label').textContent=k;
   $('#metric-live').textContent='Hit '+hit.toFixed(2)+' / Recall '+recall.toFixed(2)+' / MRR '+mrr.toFixed(2)+' / nDCG '+(dcg/idcg).toFixed(2);
   document.querySelectorAll('#rank-demo .rank').forEach((r,i)=>{r.classList.toggle('excluded',i>=k);r.children[2].textContent=i>=k?'제외':(['A','B'].includes(r.children[1].textContent)?'관련':'무관');});
+  sendPresenter();
  }
  slider?.addEventListener('input',updateMetrics);if(slider)updateMetrics();
  const viewer=$('#image-viewer');

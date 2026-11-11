@@ -368,6 +368,10 @@ controls='''<dialog id="image-viewer" aria-labelledby="image-heading"><header><s
 result='<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="LLMOps 11주차 오프라인 평가 체계. 64쪽 HTML 강의안과 실제 Ollama 평가 실습."><title>11주차 | LLM 서비스의 품질 검증</title><style>'+css+fonts+'</style></head><body><main class="deck-shell">'+"\n".join(sections)+'</main>'+controls+'<script>'+(P/"deck.js").read_text()+'</script></body></html>'
 result=result.replace("–","~")
 (P/"index.html").write_text(result,encoding="utf-8")
+# A lightweight, self-contained renderer receives only the two visible slide snapshots.
+preview_html='<!doctype html><html lang="ko" class="js presentation-mode"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>장표 미리보기</title><style>'+css+fonts+(P/"preview.css").read_text()+'</style></head><body><main id="preview-root" inert></main><script>'+(P/"preview.js").read_text()+'</script></body></html>'
+(P/"preview.html").write_text(preview_html,encoding="utf-8")
+
 (P/"lecture-notes.md").write_text("# 11주차 페이지별 교수 설명 노트\n\n[전체 목차·핵심 요약·셀별 강의 안내](https://smilesjcha.github.io/llmops-16week/week11/lecture/instructor/)\n\n"+"\n\n".join(f'## {i:02d}. {s["title"].replace("<br>"," ")}\n\n'+"\n\n".join(f"### {label}\n\n{teaching_notes[i-1][key]}" for key,label in NOTE_FIELDS)+(f'\n\n출처: {SOURCES[s["source"]][1]}' if s["source"] else "") for i,s in enumerate(slides,1)))
 (P/"slide-manifest.json").write_text(json.dumps([dict(page=i,**{k:v for k,v in s.items() if k!="body"}) for i,s in enumerate(slides,1)],ensure_ascii=False,indent=2))
 print("Built",len(slides),"slides;",len(result.encode()),"bytes; run",R["run_id"])

@@ -99,3 +99,14 @@ Impeccable 4.8.2의 layout·animate·craft-floor를 참고했습니다. layout �
 검증: `node scripts/verify_week11_presenter.mjs`. 전체 64쪽 동기화, 양방향 이동, 연결 복구, 창 분리, 전체화면, 도식, 모바일, 팝업 차단을 실제 브라우저 창에서 검사합니다. 공개 배포 확인은 `COURSE_BASE_URL=https://smilesjcha.github.io/llmops-16week/`를 앞에 붙입니다.
 
 브라우저 API 참고: [Window.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage), [Window.open](https://developer.mozilla.org/en-US/docs/Web/API/Window/open).
+
+
+## 실제 장표 미리보기와 노트 크기
+
+발표자 창은 현재·다음 장표의 DOM을 강의 창에서 받아 1440×810 비율로 렌더링합니다. 도식의 강조 클래스와 지표의 실제 값도 복사하며 설명 노트는 미리보기에서 제거합니다. 페이지·도식·지표가 바뀔 때만 새 미리보기를 보내고, 주기적인 연결 확인에는 큰 HTML을 반복 전송하지 않습니다.
+
+`preview.html`은 `build_week11_html.py`가 기존 장표 CSS·폰트와 `preview.css`·`preview.js`로 생성합니다. 별도의 예전 이미지나 모든 장표를 로드한 iframe 두 개를 유지하지 않습니다. 각 프레임은 받은 장표 하나만 렌더링하고, 새 렌더의 완료 응답을 확인한 뒤 표시합니다. 확대 창도 같은 렌더러를 사용합니다. 스크립트만 허용한 opaque sandbox와 창 참조·세션·슬롯 검증으로 조작 권한을 분리합니다. 프레임은 페이지 이동 명령을 보내지 않으며 학생용 창에 접근하지 않습니다.
+
+넓은 창에서는 미리보기와 설명을 나란히 배치하고, 다음 장표는 작은 미리보기와 제목으로 이어집니다. 노트 영역은 창 높이에 맞추어 독립 스크롤합니다. 작은 창에서는 세로로 전환합니다. 글씨 크기는 16–36px(기본 22px), 설정은 localStorage의 사용자 환경 값 하나로 보관합니다. 브라우저 저장소가 제한되어도 크기 조절은 동작합니다. 장표의 글씨 크기와 동기화 상태는 바꾸지 않습니다.
+
+검증 범위: 64개 현재·다음 장표, 마지막 페이지, 실제 이미지 로드, 도식·지표 변화, 확대 창, 글씨 크기 경계·초기화·재접속 후 복원, 읽던 위치 유지, 여러 창 독립성, HTTP와 로컬 파일 실행.
