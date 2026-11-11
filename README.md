@@ -40,7 +40,9 @@
 - 9주차: [PDF · API 계약과 LLM 서비스 구현 · 80쪽](output/pdf/09_week9_api_serving.pdf) · [발표용 PPT](week09/lecture/09_week9_api_serving.pptx) · [5개 Notebook·VS Code 실행 안내](week09/lab/README.md)
 - 10주차 실행: [학생 공유 링크·VS Code·Docker/Prometheus 시연 순서](week10/QUICKSTART.md)
 - 10주차: [PDF · 배포와 실행 관찰 · 80쪽](output/pdf/10_week10_observable_deployment.pdf) · [발표용 PPT](week10/lecture/10_week10_observable_deployment.pptx) · [Notebook 6개·VS Code 실행 안내](week10/lab/README.md) · [기획서 2차 제출 공지](week10/README.md#기획서-2차-제출-공지)
-- 11주차: [HTML 강의안 바로 보기 · 품질 검증 · 52쪽](https://smilesjcha.github.io/llmops-16week/week11/lecture/) · [인쇄 PDF](output/pdf/11_week11_offline_evaluation.pdf) · [Notebook 8개·VS Code 실행 안내](week11/lab/README.md) · [실습 평가 보고서 바로 보기](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/report.html)
+- 11주차: [HTML 강의안 바로 보기 · 품질 검증 · 64쪽](https://smilesjcha.github.io/llmops-16week/week11/lecture/) · [인쇄 PDF](output/pdf/11_week11_offline_evaluation.pdf) · [Notebook 10개·VS Code 실행 안내](week11/lab/README.md) · [실습 평가 보고서 바로 보기](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/report.html)
+- 11주차 실전: [Docker·Langfuse·100분 시간표](week11/lab/langfuse/README.md) · [실제 A/B/C 비교 결과](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/langfuse/)
+- [11주차 화면별 시연 순서·사전 점검](https://smilesjcha.github.io/llmops-16week/week11/lab/demo/): 준비 → 요청 트리 → 입출력 → 점수 → A/B/C 실험 → 배포 판단.
 - 팀 신청: [아주대AI대학원 2–4인 팀 Google Form](https://docs.google.com/forms/d/e/1FAIpQLSd3UOP4SjCUct_RJKcgvVNGEBCpOOLmNkZPi6QFBIQAilKIag/viewform)
 - 11주차 강의·실습 보고서: 위의 **바로 보기** 링크에서 로그인·다운로드 없이 실행합니다. GitHub 파일 페이지는 HTML 코드를 보여주므로 Pages 링크를 학생에게 공유하세요. 다른 HTML도 내려받아 브라우저에서 열 수 있습니다.
 - 1주차 강의안: [01주차 PDF · LLM 서비스 운영의 기본](output/pdf/01_week1_llmops_kickoff.pdf)
@@ -67,9 +69,9 @@ PPT 제작 시 내용·근거와 디자인 코드를 분리한 [강의 PPT 제�
 
 [AS-IS 2025년 2학기 안내](AS-IS%202025%202nd%20semester/README.md)에서 문서와 실습자료를 확인한다.
 
-최신 11주차 수업은 [Week 11 패키지](week11/README.md)에서 시작한다. 52쪽 HTML 프레젠테이션·PDF와 평가 실습 Notebook 8개, 실행 결과 HTML 보고서를 제공한다.
+최신 11주차 수업은 [Week 11 패키지](week11/README.md)에서 시작한다. 64쪽 HTML 프레젠테이션·PDF와 평가 실습 Notebook 10개, 실행 결과 HTML 보고서를 제공한다.
 [Week 04 패키지](week04/README.md)와 [Week 05 패키지](week05/README.md)의 기존 실습은 문서 분할·검색·평가·순위 결합·API 검증을 직접 변경하는 8개 notebook(272셀, 코드96셀)로 구성한다.
-4–5주차 필수 실습은 모델 다운로드·API 키 없이 루트 `.venv`에서 실행한다. 해당 주차의 Ollama 임베딩·생성은 선택 경로다. 11주차는 07–08번에서 로컬 모델의 실제 생성·평가를 진행하며, [실행 결과](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/ollama/ollama-report.html)를 미리 확인할 수 있다.
+4–5주차 필수 실습은 모델 다운로드·API 키 없이 루트 `.venv`에서 실행한다. 해당 주차의 Ollama 임베딩·생성은 선택 경로다. 11주차는 07–08번에서 로컬 모델의 실제 생성·평가, 09–10번에서 Docker Langfuse 추적·실험 비교를 진행하며, [실행 결과](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/ollama/ollama-report.html)를 미리 확인할 수 있다.
 학생 연락처와 팀 신청 응답은 제한된 Google Drive에만 보관하며 공개 GitHub에 포함하지 않는다.
 1주차 수업과 공통 환경 설정은 [Week 01 패키지](week01/README.md)에 보존한다.
 

@@ -1,47 +1,38 @@
-# Langfuse·LangSmith가 필요한 이유와 실습 범위
+# Langfuse·LangSmith의 역할과 실제 실습 범위
 
-**제품 설치는 선택이지만, 요청 추적·평가 데이터·실험 비교·검토 기록은 LLMOps의 핵심 기능입니다.** 초기 자료는 설치 없는 평가 계산에 집중해 실제 생성과 운영 도구의 연결이 부족했습니다. 개정판은 07–08의 실제 Ollama 호출과 제품 사례를 연결합니다.
+**요청 추적·평가 데이터·실험 비교·검토 기록은 LLMOps의 핵심 기능입니다.** 특정 제품만이 필수인 것은 아니지만, 이번 수업은 원리와 실제 운영 도구를 연결하기 위해 Langfuse를 직접 실행합니다.
 
-| 기능 | 이번 실습 | Langfuse 사례 | LangSmith 사례 |
-|---|---|---|---|
-| 요청 원인 분석 | trace_id·단계별 spans·원응답 | Trace와 observations 탐색 | Run trace와 child runs 탐색 |
-| 기준 데이터 | 질문·참고 답변·필수 문서 | Dataset item | Dataset example |
-| 변경 비교 | baseline/grounded 프롬프트 | Experiments | Experiments |
-| 평가 근거 | 코드 검사·실제 judge·사람 검토 | Scores·annotation | Feedback·annotation queue |
-
-## 수업에서 필요한 자료
-
-- **필수:** 서비스 아키텍처, 평가기의 입력과 출력, 실패 사례, 버전·지연 기록. ‘왜 틀렸는지’와 ‘변경 후 나아졌는지’를 설명하는 데 필요합니다.
-- **사례로 필요:** Langfuse·LangSmith가 위 기록을 어떻게 검색·비교·검토하게 하는지. 도구 이름만 나열하지 않고 같은 실습 요청과 대응합니다.
-- **이번 수업의 필수 범위 밖:** 두 제품의 동시 설치, 클라우드 계정 가입, 모든 SDK API, 서버 운영·과금·권한 체계. 실제 프로젝트의 협업·보관·보안 요구에 따라 하나를 선택하거나 다른 도구로 구현할 수 있습니다.
-
-## 구현과 시연의 구분
-
-| 대상 | 이번에 실행한 것 | 수행하지 않은 것 |
+| 단계 | 실제 수행 | 경계 |
 |---|---|---|
-| 01–06 | 실제 TF-IDF 검색, 지표, bootstrap, 보고서 | 실제 답변 생성 |
-| 05 | 작성 예시의 평가자 일치율 계산 | 실제 모델 판정 |
-| 07 | 로컬 모델의 실제 검색 기반 답변·지연·토큰 | 신경망 임베딩 검색 |
-| 08 | 실제 모델 판정·기준과 비교·로컬 trace | Langfuse·LangSmith로 전송 |
-| 강의의 제품 화면 | 공식 문서의 Langfuse UI 사례 | 수업 계정에서 실행했다고 주장하지 않음 |
+| 01–06 | TF-IDF 검색·지표·보고서 | 05의 judge 표는 작성 예시 |
+| 07–08 | Ollama 생성·모델 평가·로컬 기록 | 이 파일들만으로 플랫폼에 전송하지 않음 |
+| 09 | Docker Langfuse + SDK, trace·점수·서버 재조회 | 로컬 프로젝트에 합성 사례 전송 |
+| 10 | 실제 Datasets·Experiments·A/B/C 비교·배포 조건 | 작은 회귀 사례, 운영 배포·롤백 없음 |
+| LangSmith | 같은 기능을 설명하는 비교 사례 | 별도 계정 연결·전송 미실행 |
 
-`traces.jsonl`은 학습용 로컬 형식입니다. 제품의 직접 가져오기 파일이나 OpenTelemetry 전송 규격이 아닙니다. 연결하려면 공식 SDK로 입력·출력·부모 작업·모델 버전·점수를 매핑해야 합니다. 현재 코드는 키를 읽거나 외부 추적 서비스로 데이터를 전송하지 않습니다.
+## 같은 개념의 대응
 
-## 프로젝트 적용 순서
+| 기능 | Langfuse 실제 실습 | LangSmith 개념 |
+|---|---|---|
+| 요청 원인 분석 | Trace / observations / 입력·출력·토큰 | Run trace / child runs |
+| 기준 데이터 | Dataset item / 참고 기준 / source trace | Dataset example |
+| 변경 비교 | 같은 데이터의 A/B/C Experiments | Experiments |
+| 평가 근거 | 코드 Scores / 실제 judge / 사람 검토 | Feedback / annotation queue |
 
-1. 같은 질문의 두 버전을 로컬에서 실행하고 실패 원인을 설명합니다.
-2. 기록해야 할 입력·출력·모델·프롬프트 버전·지연·평가 근거를 확정합니다.
-3. 팀 단위 검색·공유·검토가 필요해지면 플랫폼을 선택합니다.
-4. 공개 가능한 시연 데이터로 SDK 연결을 확인한 뒤 접근 권한·보관 정책을 설정합니다.
-5. 운영 사례를 검토하여 회귀 평가 세트로 추가합니다. 실패 사례와 대표 정상 사례를 함께 유지합니다.
+07–08의 `traces.jsonl`은 교육용 로컬 형식이며 제품 직접 업로드 포맷이 아닙니다. 09–10은 실제 Langfuse SDK의 OpenTelemetry 기반 관찰 전송과 Scores API를 사용합니다. 연결 주소는 로컬로 제한하고 별도 `.env`의 키만 읽습니다.
 
-## 공식 참고 자료
+## 왜 세 버전을 비교하는가
 
-- [Langfuse 관찰·추적](https://langfuse.com/docs/observability/overview)
-- [Langfuse 평가](https://langfuse.com/docs/evaluation/overview)
-- [Langfuse 실험 SDK](https://langfuse.com/docs/evaluation/experiments/experiments-via-sdk)
-- [LangSmith 평가 개념](https://docs.langchain.com/langsmith/evaluation-concepts)
-- [MLflow 평가 실행 구성](https://mlflow.org/docs/latest/genai/eval-monitor/)
-- [OpenTelemetry trace 개념](https://opentelemetry.io/docs/concepts/signals/traces/)
+A는 현재 동작의 기준선, B는 프롬프트 개선, C는 서비스 기능 정책입니다. “정책 안내”만 구현한 서비스가 “실시간 재고 조회” 기능까지 제공하는 것처럼 답하지 않도록 C에서 기능 경계를 적용합니다. 이는 모의 LLM 응답이 아니라 실제 서비스 코드의 분기이며, 이 경로는 모델을 호출하지 않았다고 기록합니다.
 
-확인일: 2026-11-11. 특정 제품을 유일한 업계 표준이나 필수 기술로 지정하지 않습니다.
+기능 유형은 UI 메뉴/API 라우트의 입력입니다. 정답·answerable을 읽어 분기하지 않으며 자유 문장 의도 분류기는 포함하지 않습니다. 정상 사례의 실제 LLM 호출과 경계 사례의 정책 응답을 같은 회귀 데이터에서 확인합니다.
+
+## 수업에서 설치하는 것과 이후의 범위
+
+- **이번에 실행:** Langfuse 로컬 서버, 실제 Ollama 호출, 요청·점수·실험 저장, 같은 질문의 비교, 배포 전 조건 검사.
+- **학생이 판단:** 원문 근거와 답변의 의미 일치, 조건 누락, 모델 평가의 오판, 서비스의 제공 가능한 기능, 다음 변경.
+- **이후 확장:** 운영 인증·권한·보관 정책, 실시간 재고 API, 더 독립적인 평가 모델, 대표 운영 데이터, CI 배포 파이프라인·롤백.
+
+[Docker·VS Code 준비와 100분 시간표](langfuse/README.md)에서 시작합니다.
+
+공식 자료: [Langfuse SDK](https://langfuse.com/docs/observability/sdk/instrumentation), [Scores](https://langfuse.com/docs/evaluation/evaluation-methods/scores-via-sdk), [Experiments](https://langfuse.com/docs/evaluation/experiments/experiments-via-sdk), [LangSmith 평가 개념](https://docs.langchain.com/langsmith/evaluation-concepts). 확인일 2026-11-11.

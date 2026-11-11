@@ -1,0 +1,4 @@
+# Week 11 optional local platform: Python 3.11 + Langfuse server 4.78.0.
+# Install separately from the historical observability-week03-10 profile.
+-r week11-offline.txt
+-r locks/week11-langfuse-sdk-py311.txt

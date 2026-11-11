@@ -104,3 +104,9 @@ TF-IDF는 학습된 임베딩이 아니며, 규칙 재정렬은 신경망 rerank
 - [Current TRL DPOTrainer](https://huggingface.co/docs/trl/main/dpo_trainer)
 - [bitsandbytes platform installation](https://huggingface.co/docs/bitsandbytes/installation)
 - [Langfuse Python v3 → v4 upgrade path](https://langfuse.com/docs/observability/sdk/upgrade-path/python-v3-to-v4)
+
+## 11주차 실제 Langfuse 실습
+
+`requirements/week11-langfuse.txt`는 기존 Python 3.11 기반에 **Langfuse SDK 5.2.0**과 검증한 OpenTelemetry 의존성을 추가합니다. 서버는 Docker **Langfuse 4.78.0**으로 고정했습니다. 과거 `observability-week03-10.txt`의 Langfuse 3.x와 동시에 설치하지 않습니다.
+
+[09·10번 실습 준비](../week11/lab/langfuse/README.md)는 실제 로컬 Docker·Ollama·SDK·UI 저장까지 검증하는 경로입니다. 이전 주차의 비용·모델 없는 기본 검증 범위와 구분합니다.

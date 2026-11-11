@@ -12,7 +12,10 @@
 - [11주차 실제 Ollama 실행 보고서](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/ollama/ollama-report.html)
 - [11주차 PDF](https://smilesjcha.github.io/llmops-16week/output/pdf/11_week11_offline_evaluation.pdf)
 - [실습 코드·VS Code 안내](https://github.com/smilesjcha/llmops-16week/tree/main/week11/lab)
-- [Notebook 01–08 실행 순서·확인 결과](https://github.com/smilesjcha/llmops-16week/blob/main/week11/lab/WALKTHROUGH.md)
+- [Notebook 01–10 실행 순서·확인 결과](https://github.com/smilesjcha/llmops-16week/blob/main/week11/lab/WALKTHROUGH.md)
+
+- [Langfuse 실제 A/B/C 비교 결과](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/langfuse/)
+- [09·10번 Docker 준비·100분 시간표](https://github.com/smilesjcha/llmops-16week/blob/main/week11/lab/langfuse/README.md)
 
 ## 수정본 반영
 
@@ -30,3 +33,5 @@ gh api repos/smilesjcha/llmops-16week/pages/builds/latest
 인증 없는 새 Chrome 세션에서 HTTP 상태, 원본 파일 일치, 슬라이드 이동·지표 조작·이미지 확대, 보고서 필터·상세 조회를 확인합니다.
 
 공식 문서: [브랜치 기반 게시 설정](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+
+- 화면별 시연 안내: https://smilesjcha.github.io/llmops-16week/week11/lab/demo/

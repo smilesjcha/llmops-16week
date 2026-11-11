@@ -1,0 +1,145 @@
+# Local teaching stack adapted from Langfuse v4.78.0 docker-compose.yml.
+# Python/Ollama run on the host; only the UI/API is published on loopback.
+name: llmops-week11-langfuse
+
+x-common: &common
+  restart: unless-stopped
+  logging:
+    driver: json-file
+    options: {max-size: "10m", max-file: "3"}
+
+x-env: &env
+  NEXTAUTH_URL: http://localhost:${LANGFUSE_PORT:-3011}
+  DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD:?Run init_env.py}@postgres:5432/langfuse
+  SALT: ${SALT:?Run init_env.py}
+  ENCRYPTION_KEY: ${ENCRYPTION_KEY:?Run init_env.py}
+  TELEMETRY_ENABLED: "false"
+  CLICKHOUSE_MIGRATION_URL: clickhouse://clickhouse:9000
+  CLICKHOUSE_URL: http://clickhouse:8123
+  CLICKHOUSE_USER: langfuse
+  CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD:?Run init_env.py}
+  CLICKHOUSE_CLUSTER_ENABLED: "false"
+  REDIS_HOST: redis
+  REDIS_PORT: "6379"
+  REDIS_AUTH: ${REDIS_AUTH:?Run init_env.py}
+  REDIS_TLS_ENABLED: "false"
+  LANGFUSE_S3_EVENT_UPLOAD_BUCKET: langfuse
+  LANGFUSE_S3_EVENT_UPLOAD_REGION: auto
+  LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: minio
+  LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD:?Run init_env.py}
+  LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: http://minio:9000
+  LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: "true"
+  LANGFUSE_S3_EVENT_UPLOAD_PREFIX: events/
+  LANGFUSE_S3_MEDIA_UPLOAD_BUCKET: langfuse
+  LANGFUSE_S3_MEDIA_UPLOAD_REGION: auto
+  LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID: minio
+  LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD:?Run init_env.py}
+  LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: http://minio:9000
+  LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE: "true"
+  LANGFUSE_S3_MEDIA_UPLOAD_PREFIX: media/
+  LANGFUSE_S3_BATCH_EXPORT_ENABLED: "false"
+
+services:
+  langfuse-web:
+    <<: *common
+    image: docker.langfuse.com/langfuse/langfuse:4.78.0
+    ports: ["127.0.0.1:${LANGFUSE_PORT:-3011}:3000"]
+    depends_on: &dependencies
+      postgres: {condition: service_healthy}
+      clickhouse: {condition: service_healthy}
+      redis: {condition: service_healthy}
+      minio: {condition: service_healthy}
+    environment:
+      <<: *env
+      HOSTNAME: 0.0.0.0
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:?Run init_env.py}
+      LANGFUSE_INIT_ORG_ID: llmops-course
+      LANGFUSE_INIT_ORG_NAME: LLMOps Course
+      LANGFUSE_INIT_PROJECT_ID: week11-local
+      LANGFUSE_INIT_PROJECT_NAME: Week 11 Ollama
+      LANGFUSE_INIT_PROJECT_PUBLIC_KEY: ${LANGFUSE_PUBLIC_KEY:?Run init_env.py}
+      LANGFUSE_INIT_PROJECT_SECRET_KEY: ${LANGFUSE_SECRET_KEY:?Run init_env.py}
+      LANGFUSE_INIT_USER_EMAIL: ${LANGFUSE_LOGIN_EMAIL:?Run init_env.py}
+      LANGFUSE_INIT_USER_NAME: Course Student
+      LANGFUSE_INIT_USER_PASSWORD: ${LANGFUSE_LOGIN_PASSWORD:?Run init_env.py}
+      AUTH_DISABLE_SIGNUP: "true"
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://localhost:3000/api/public/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 90s
+
+  langfuse-worker:
+    <<: *common
+    image: docker.langfuse.com/langfuse/langfuse-worker:4.78.0
+    depends_on: *dependencies
+    environment: *env
+
+  postgres:
+    <<: *common
+    image: postgres:17.6-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run init_env.py}
+      POSTGRES_DB: langfuse
+      TZ: UTC
+      PGTZ: UTC
+    volumes: ["postgres-data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U postgres -d langfuse"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  clickhouse:
+    <<: *common
+    image: clickhouse/clickhouse-server:26.3.62.3
+    user: "101:101"
+    environment:
+      CLICKHOUSE_DB: default
+      CLICKHOUSE_USER: langfuse
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD:?Run init_env.py}
+    volumes:
+      - clickhouse-data:/var/lib/clickhouse
+      - clickhouse-logs:/var/log/clickhouse-server
+    healthcheck:
+      test: [CMD, wget, --no-verbose, --tries=1, --spider, "http://localhost:8123/ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  redis:
+    <<: *common
+    image: redis:7.4.2-alpine
+    command: [redis-server, --requirepass, "${REDIS_AUTH:?Run init_env.py}", --maxmemory-policy, noeviction]
+    environment:
+      REDISCLI_AUTH: ${REDIS_AUTH:?Run init_env.py}
+    volumes: ["redis-data:/data"]
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  minio:
+    <<: *common
+    image: cgr.dev/chainguard/minio@sha256:db3f583fa49121942168bd6383a773b2cde3384c9a99bf7193560b9a0f3a28fd
+    entrypoint: sh
+    command: -c 'mkdir -p /data/langfuse && minio server --address ":9000" /data'
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:?Run init_env.py}
+    volumes: ["minio-data:/data"]
+    healthcheck:
+      test: [CMD, mc, ready, local]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  postgres-data:
+  clickhouse-data:
+  clickhouse-logs:
+  redis-data:
+  minio-data:

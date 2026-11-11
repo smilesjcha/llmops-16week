@@ -1,13 +1,17 @@
 # 11주차 실습: 평가 데이터부터 배포 전 판단까지
 
-**처음 따라 할 때:** [Notebook 01–08 실행 순서와 확인 결과](WALKTHROUGH.md). 파일별 정상 출력, 예상된 오류 실험, 보고서 확인 방법을 함께 정리했습니다.
+**처음 따라 할 때:** [Notebook 01–10 실행 순서와 확인 결과](WALKTHROUGH.md). 파일별 정상 출력, 예상된 오류 실험, 보고서 확인 방법을 함께 정리했습니다.
 
-기존 Python 3.11 환경에서 실행합니다. **01–06은 외부 모델 없이 실행**, **07–08은 로컬 Ollama의 실제 instruct 모델을 호출**합니다. Docker·클라우드 API 키는 필요 없습니다. 07–08은 모델을 최초 한 번 다운로드합니다. 직접 실행해 비교하고 실패 원인을 설명하는 실습입니다.
+기존 Python 3.11 환경에서 실행합니다. **01–06은 외부 모델 없이 실행**, **07–08은 로컬 Ollama의 실제 instruct 모델을 호출**합니다. 01–08은 Docker·클라우드 API 키가 필요 없습니다. 09–10은 Docker의 로컬 Langfuse와 실제 SDK를 사용합니다. 07–10은 모델을 최초 한 번 다운로드합니다. 직접 실행해 비교하고 실패 원인을 설명하는 실습입니다.
 
 - [11주차 HTML 강의안 바로 보기](https://smilesjcha.github.io/llmops-16week/week11/lecture/)
 - [실습 평가 보고서 바로 보기](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/report.html): 설치·다운로드 없이 필터와 근거 탐색을 먼저 체험할 수 있습니다.
 
 공개 보고서는 수업용 합성 데이터로 실행한 예제입니다. 아래 명령으로 직접 실행한 결과는 자신의 `week11/lab/reports/report.html`에 저장되며 공개 페이지에 자동 업로드되지 않습니다.
+
+**오늘 수업의 핵심:** [09·10번 Docker·Langfuse 준비와 100분 시간표](langfuse/README.md). 실제 요청 추적, A/B/C 실험, 배포 전 검증까지 진행합니다.
+
+- [11주차 화면별 시연 순서·사전 점검](https://smilesjcha.github.io/llmops-16week/week11/lab/demo/): 준비 → 요청 트리 → 입출력 → 점수 → A/B/C 실험 → 배포 판단.
 
 ## VS Code 준비
 
@@ -93,8 +97,10 @@ HOLD이면 종료 코드 2입니다. 이것을 설치 오류로 오해하지 마
 | 06 | [보고서와 판단](notebooks/06_release_report.ipynb) | 재현 실행, 그룹 bootstrap, 검증 조건, 독립 HTML 보고서 |
 | 07 | [실제 Ollama RAG](notebooks/07_ollama_rag_generation.ipynb) | 실제 검색·생성, 프롬프트 비교, 인용·기권 검사, 지연·토큰 |
 | 08 | [실제 LLM 평가·추적](notebooks/08_ollama_judge_and_traces.ipynb) | 실제 평가자 판정, 사람 기준과 비교, 요청별 trace, 플랫폼 용어 대응 |
+| 09 | [Langfuse 실제 추적](notebooks/09_langfuse_ollama_tracing.ipynb) | SDK·요청 트리·입출력·점수·서버 저장 확인 |
+| 10 | [실험 비교·배포 조건](notebooks/10_langfuse_experiments_release_gate.ipynb) | 회귀 데이터·A/B/C 비교·기능 정책·배포 전 차단 |
 
-총 168셀, 코드 56셀입니다. 수업에서는 각 파일의 핵심 단계부터 실행하고 확장 항목은 복습합니다. 모든 파일은 새 커널에서 Run All로 검증했습니다.
+총 222셀, 코드 74셀입니다. 수업에서는 각 파일의 핵심 단계부터 실행하고 확장 항목은 복습합니다. 모든 파일은 새 커널에서 Run All로 검증했습니다.
 
 ### 학생이 직접 바꿀 부분
 

@@ -1,0 +1,913 @@
+{
+  "baseline": {
+    "version": "baseline",
+    "experiment_id": "7edfe4ed77a200dd",
+    "experiment_url": "http://localhost:3011/project/week11-local/experiments/results?baseline=7edfe4ed77a200dd",
+    "dataset": "week11-release-2757eeb133",
+    "rows": [
+      {
+        "question_id": "Q24a",
+        "trace_id": "fe9c0dc89289eeaa12003bb7e6c3401e",
+        "output": {
+          "trace_id": "fe9c0dc89289eeaa12003bb7e6c3401e",
+          "url": "http://localhost:3011/project/week11-local/traces/fe9c0dc89289eeaa12003bb7e6c3401e",
+          "session_id": "week11-9e138f993cd3",
+          "question_id": "Q24a",
+          "prompt_version": "baseline",
+          "answer": {
+            "answer": "현재 재고는 없습니다.",
+            "citations": [
+              "D03",
+              "D04"
+            ],
+            "abstain": false
+          },
+          "checks": {
+            "citations_in_context": true,
+            "citations_unique": true,
+            "decision_matches_reference": false,
+            "required_evidence_cited": null,
+            "answer_citation_consistent": true
+          },
+          "judge": {
+            "verdict": "supported",
+            "reason": "답변은 제공된 자료에 근거해 검정 운동화 270 사이즈의 현재 재고가 없습니다고 답변하고 있습니다."
+          },
+          "generation_ms": 238.2,
+          "generation_load_ms": 0.9,
+          "output_tokens": 33,
+          "expected_score_names": [
+            "citations_in_context",
+            "citations_unique",
+            "decision_matches_reference",
+            "answer_citation_consistent",
+            "llm_groundedness"
+          ]
+        },
+        "evaluations": [
+          {
+            "name": "execution_ok",
+            "value": 1.0,
+            "comment": null
+          },
+          {
+            "name": "structural_pass",
+            "value": 0.0,
+            "comment": "인용·기권 계약 검사. 의미 정확도 아님"
+          },
+          {
+            "name": "generation_ms",
+            "value": 238.2,
+            "comment": "모델 생성 요청 경과 시간. 로컬 기기 관측값"
+          },
+          {
+            "name": "llm_verdict",
+            "value": "supported",
+            "comment": "답변은 제공된 자료에 근거해 검정 운동화 270 사이즈의 현재 재고가 없습니다고 답변하고 있습니다."
+          },
+          {
+            "name": "false_accept",
+            "value": 1.0,
+            "comment": "문서 밖 질문에서 응답을 시도했는지"
+          }
+        ]
+      },
+      {
+        "question_id": "Q05b",
+        "trace_id": "2ce5932ccf2f6694367d8b7bc53705b6",
+        "output": {
+          "trace_id": "2ce5932ccf2f6694367d8b7bc53705b6",
+          "url": "http://localhost:3011/project/week11-local/traces/2ce5932ccf2f6694367d8b7bc53705b6",
+          "session_id": "week11-9558a1d814d5",
+          "question_id": "Q05b",
+          "prompt_version": "baseline",
+          "answer": {
+            "answer": "죄송합니다, 취소는 불가능합니다. 출고 준비 이후에는 취소 대신 배송 완료 후 반품을 접수해 주시기 바랍니다.",
+            "citations": [
+              "D06"
+            ],
+            "abstain": false
+          },
+          "checks": {
+            "citations_in_context": true,
+            "citations_unique": true,
+            "decision_matches_reference": true,
+            "required_evidence_cited": true,
+            "answer_citation_consistent": true
+          },
+          "judge": {
+            "verdict": "supported",
+            "reason": "답변은 근거에 기반한 정보를 제공하고 있습니다."
+          },
+          "generation_ms": 376.0,
+          "generation_load_ms": 0.6,
+          "output_tokens": 60,
+          "expected_score_names": [
+            "citations_in_context",
+            "citations_unique",
+            "decision_matches_reference",
+            "required_evidence_cited",
+            "answer_citation_consistent",
+            "llm_groundedness"
+          ]
+        },
+        "evaluations": [
+          {
+            "name": "execution_ok",
+            "value": 1.0,
+            "comment": null
+          },
+          {
+            "name": "structural_pass",
+            "value": 1.0,
+            "comment": "인용·기권 계약 검사. 의미 정확도 아님"
+          },
+          {
+            "name": "generation_ms",
+            "value": 376.0,
+            "comment": "모델 생성 요청 경과 시간. 로컬 기기 관측값"
+          },
+          {
+            "name": "llm_verdict",
+            "value": "supported",
+            "comment": "답변은 근거에 기반한 정보를 제공하고 있습니다."
+          }
+        ]
+      },
+      {
+        "question_id": "Q03a",
+        "trace_id": "f04d05f249f6c7db81894368769fc8d0",
+        "output": {
+          "trace_id": "f04d05f249f6c7db81894368769fc8d0",
+          "url": "http://localhost:3011/project/week11-local/traces/f04d05f249f6c7db81894368769fc8d0",
+          "session_id": "week11-1275df1e4972",
+          "question_id": "Q03a",
+          "prompt_version": "baseline",
+          "answer": {
+            "answer": "사이즈 교환의 왕복 배송비는 6000원입니다.",
+            "citations": [
+              "D04",
+              "D03",
+              "D02"
+            ],
+            "abstain": false
+          },
+          "checks": {
+            "citations_in_context": true,
+            "citations_unique": true,
+            "decision_matches_reference": true,
+            "required_evidence_cited": true,
+            "answer_citation_consistent": true
+          },
+          "judge": {
+            "verdict": "supported",
+            "reason": "답변은 제공된 자료의 내용을 충분히 반영하고 있습니다."
+          },
+          "generation_ms": 321.2,
+          "generation_load_ms": 0.6,
+          "output_tokens": 51,
+          "expected_score_names": [
+            "citations_in_context",
+            "citations_unique",
+            "decision_matches_reference",
+            "required_evidence_cited",
+            "answer_citation_consistent",
+            "llm_groundedness"
+          ]
+        },
+        "evaluations": [
+          {
+            "name": "execution_ok",
+            "value": 1.0,
+            "comment": null
+          },
+          {
+            "name": "structural_pass",
+            "value": 1.0,
+            "comment": "인용·기권 계약 검사. 의미 정확도 아님"
+          },
+          {
+            "name": "generation_ms",
+            "value": 321.2,
+            "comment": "모델 생성 요청 경과 시간. 로컬 기기 관측값"
+          },
+          {
+            "name": "llm_verdict",
+            "value": "supported",
+            "comment": "답변은 제공된 자료의 내용을 충분히 반영하고 있습니다."
+          }
+        ]
+      },
+      {
+        "question_id": "Q01a",
+        "trace_id": "3a6610cbe5fe090d47ca119e67c24925",
+        "output": {
+          "trace_id": "3a6610cbe5fe090d47ca119e67c24925",
+          "url": "http://localhost:3011/project/week11-local/traces/3a6610cbe5fe090d47ca119e67c24925",
+          "session_id": "week11-5dd37ea3c192",
+          "question_id": "Q01a",
+          "prompt_version": "baseline",
+          "answer": {
+            "answer": "상품 수령 후 7일 이내 반품을 접수할 수 있습니다.",
+            "citations": [
+              "D01",
+              "D06"
+            ],
+            "abstain": false
+          },
+          "checks": {
+            "citations_in_context": true,
+            "citations_unique": true,
+            "decision_matches_reference": true,
+            "required_evidence_cited": true,
+            "answer_citation_consistent": true
+          },
+          "judge": {
+            "verdict": "supported",
+            "reason": "답변은 제공된 자료에 근거해 반품 접수 기간을 7일 이내로 제시하고 있습니다."
+          },
+          "generation_ms": 286.2,
+          "generation_load_ms": 0.6,
+          "output_tokens": 45,
+          "expected_score_names": [
+            "citations_in_context",
+            "citations_unique",
+            "decision_matches_reference",
+            "required_evidence_cited",
+            "answer_citation_consistent",
+            "llm_groundedness"
+          ]
+        },
+        "evaluations": [
+          {
+            "name": "execution_ok",
+            "value": 1.0,
+            "comment": null
+          },
+          {
+            "name": "structural_pass",
+            "value": 1.0,
+            "comment": "인용·기권 계약 검사. 의미 정확도 아님"
+          },
+          {
+            "name": "generation_ms",
+            "value": 286.2,
+            "comment": "모델 생성 요청 경과 시간. 로컬 기기 관측값"
+          },
+          {
+            "name": "llm_verdict",
+            "value": "supported",
+            "comment": "답변은 제공된 자료에 근거해 반품 접수 기간을 7일 이내로 제시하고 있습니다."
+          }
+        ]
+      }
+    ]
+  },
+  "candidate": {
+    "version": "grounded",
+    "experiment_id": "9d7bcb0f12f3323d",
+    "experiment_url": "http://localhost:3011/project/week11-local/experiments/results?baseline=9d7bcb0f12f3323d",
+    "dataset": "week11-release-2757eeb133",
+    "rows": [
+      {
+        "question_id": "Q24a",
+        "trace_id": "8cbab0470bb29a0dfa39b4c3510c07bd",
+        "output": {
+          "trace_id": "8cbab0470bb29a0dfa39b4c3510c07bd",
+          "url": "http://localhost:3011/project/week11-local/traces/8cbab0470bb29a0dfa39b4c3510c07bd",
+          "session_id": "week11-f8036894c282",
+          "question_id": "Q24a",
+          "prompt_version": "grounded",
+          "answer": {
+            "answer": "검정 운동화 270 사이즈의 재고는 확인할 수 없습니다.",
+            "citations": [
+              "D03",
+              "D04",
+              "D15"
+            ],
+            "abstain": false
+          },
+          "checks": {
+            "citations_in_context": true,
+            "citations_unique": true,
+            "decision_matches_reference": false,
+            "required_evidence_cited": null,
+            "answer_citation_consistent": true
+          },
+          "judge": {
+            "verdict": "unsupported",
+            "reason": "자료는 검정 운동화 270 사이즈의 재고에 대한 정보를 제공하지 않아 근거가 부족합니다."
+          },
+          "generation_ms": 376.1,
+          "generation_load_ms": 0.6,
+          "output_tokens": 52,
+          "expected_score_names": [
+            "citations_in_context",
+            "citations_unique",
+            "decision_matches_reference",
+            "answer_citation_consistent",
+            "llm_groundedness"
+          ]
+        },
+        "evaluations": [
+          {
+            "name": "execution_ok",
+            "value": 1.0,
+            "comment": null
+          },
+          {
+            "name": "structural_pass",
+            "value": 0.0,
+            "comment": "인용·기권 계약 검사. 의미 정확도 아님"
+          },
+          {
+            "name": "generation_ms",
+            "value": 376.1,
+            "comment": "모델 생성 요청 경과 시간. 로컬 기기 관측값"
+          },
+          {
+            "name": "llm_verdict",
+            "value": "unsupported",
+            "comment": "자료는 검정 운동화 270 사이즈의 재고에 대한 정보를 제공하지 않아 근거가 부족합니다."
+          },
+          {
+            "name": "false_accept",
+            "value": 1.0,
+            "comment": "문서 밖 질문에서 응답을 시도했는지"
+          }
+        ]
+      },
+      {
+        "question_id": "Q05b",
+        "trace_id": "85e9f99f673d9b5e1f87d04dc4bc9df1",
+        "output": {
+          "trace_id": "85e9f99f673d9b5e1f87d04dc4bc9df1",
+          "url": "http://localhost:3011/project/week11-local/traces/85e9f99f673d9b5e1f87d04dc4bc9df1",
+          "session_id": "week11-ba27d1633110",
+          "question_id": "Q05b",
+          "prompt_version": "grounded",
+          "answer": {
+            "answer": "취소는 불가능합니다.",
+            "citations": [
+              "D06"
+            ],
+            "abstain": false
+          },
+          "checks": {
+            "citations_in_context": true,
+            "citations_unique": true,
+            "decision_matches_reference": true,
+            "required_evidence_cited": true,
+            "answer_citation_consistent": true
+          },
+          "judge": {
+            "verdict": "unsupported",
+            "reason": "자료는 취소가 불가능하다고 하지만, 실제 상품의 포장 상태와 결제 상태에 대한 정보가 부족하여 근거를 확인할 수 없다."
+          },
+          "generation_ms": 314.4,
+          "generation_load_ms": 0.7,
+          "output_tokens": 30,
+          "expected_score_names": [
+            "citations_in_context",
+            "citations_unique",
+            "decision_matches_reference",
+            "required_evidence_cited",
+            "answer_citation_consistent",
+            "llm_groundedness"
+          ]
+        },
+        "evaluations": [
+          {
+            "name": "execution_ok",
+            "value": 1.0,
+            "comment": null
+          },
+          {
+            "name": "structural_pass",
+            "value": 1.0,
+            "comment": "인용·기권 계약 검사. 의미 정확도 아님"
+          },
+          {
+            "name": "generation_ms",
+            "value": 314.4,
+            "comment": "모델 생성 요청 경과 시간. 로컬 기기 관측값"
+          },
+          {
+            "name": "llm_verdict",
+            "value": "unsupported",
+            "comment": "자료는 취소가 불가능하다고 하지만, 실제 상품의 포장 상태와 결제 상태에 대한 정보가 부족하여 근거를 확인할 수 없다."
+          }
+        ]
+      },
+      {
+        "question_id": "Q03a",
+        "trace_id": "033c9bf689e5e2439d84f8c40739e921",
+        "output": {
+          "trace_id": "033c9bf689e5e2439d84f8c40739e921",
+          "url": "http://localhost:3011/project/week11-local/traces/033c9bf689e5e2439d84f8c40739e921",
+          "session_id": "week11-4100b0896137",
+          "question_id": "Q03a",
+          "prompt_version": "grounded",
+          "answer": {
+            "answer": "사이즈 교환 기간은 수령 후 7일 이내이며, 왕복 배송비는 6000원입니다. 재고가 없을 경우 교환 대신 반품을 안내합니다.",
+            "citations": [
+              "D04",
+              "D03",
+              "D02"
+            ],
+            "abstain": false
+          },
+          "checks": {
+            "citations_in_context": true,
+            "citations_unique": true,
+            "decision_matches_reference": true,
+            "required_evidence_cited": true,
+            "answer_citation_consistent": true
+          },
+          "judge": {
+            "verdict": "supported",
+            "reason": "답변은 제공된 자료에 근거해 이전에 언급된 사이즈 교환 기간과 배송비를 정확히 제공합니다."
+          },
+          "generation_ms": 626.4,
+          "generation_load_ms": 0.9,
+          "output_tokens": 85,
+          "expected_score_names": [
+            "citations_in_context",
+            "citations_unique",
+            "decision_matches_reference",
+            "required_evidence_cited",
+            "answer_citation_consistent",
+            "llm_groundedness"
+          ]
+        },
+        "evaluations": [
+          {
+            "name": "execution_ok",
+            "value": 1.0,
+            "comment": null
+          },
+          {
+            "name": "structural_pass",
+            "value": 1.0,
+            "comment": "인용·기권 계약 검사. 의미 정확도 아님"
+          },
+          {
+            "name": "generation_ms",
+            "value": 626.4,
+            "comment": "모델 생성 요청 경과 시간. 로컬 기기 관측값"
+          },
+          {
+            "name": "llm_verdict",
+            "value": "supported",
+            "comment": "답변은 제공된 자료에 근거해 이전에 언급된 사이즈 교환 기간과 배송비를 정확히 제공합니다."
+          }
+        ]
+      },
+      {
+        "question_id": "Q01a",
+        "trace_id": "e0a13d4fd306d1b9bd379f68aa25d976",
+        "output": {
+          "trace_id": "e0a13d4fd306d1b9bd379f68aa25d976",
+          "url": "http://localhost:3011/project/week11-local/traces/e0a13d4fd306d1b9bd379f68aa25d976",
+          "session_id": "week11-083fc249ea3e",
+          "question_id": "Q01a",
+          "prompt_version": "grounded",
+          "answer": {
+            "answer": "상품 수령 후 7일 이내 반품을 접수할 수 있습니다.",
+            "citations": [
+              "D01",
+              "D06"
+            ],
+            "abstain": false
+          },
+          "checks": {
+            "citations_in_context": true,
+            "citations_unique": true,
+            "decision_matches_reference": true,
+            "required_evidence_cited": true,
+            "answer_citation_consistent": true
+          },
+          "judge": {
+            "verdict": "supported",
+            "reason": "답변은 제공된 자료에 근거해 반품 접수 기간을 7일 이내로 제시하고 있습니다."
+          },
+          "generation_ms": 423.8,
+          "generation_load_ms": 0.6,
+          "output_tokens": 46,
+          "expected_score_names": [
+            "citations_in_context",
+            "citations_unique",
+            "decision_matches_reference",
+            "required_evidence_cited",
+            "answer_citation_consistent",
+            "llm_groundedness"
+          ]
+        },
+        "evaluations": [
+          {
+            "name": "execution_ok",
+            "value": 1.0,
+            "comment": null
+          },
+          {
+            "name": "structural_pass",
+            "value": 1.0,
+            "comment": "인용·기권 계약 검사. 의미 정확도 아님"
+          },
+          {
+            "name": "generation_ms",
+            "value": 423.8,
+            "comment": "모델 생성 요청 경과 시간. 로컬 기기 관측값"
+          },
+          {
+            "name": "llm_verdict",
+            "value": "supported",
+            "comment": "답변은 제공된 자료에 근거해 반품 접수 기간을 7일 이내로 제시하고 있습니다."
+          }
+        ]
+      }
+    ]
+  },
+  "guarded": {
+    "version": "capability_guard",
+    "experiment_id": "8b8a6d7524fd23d8",
+    "experiment_url": "http://localhost:3011/project/week11-local/experiments/results?baseline=8b8a6d7524fd23d8",
+    "dataset": "week11-release-2757eeb133",
+    "rows": [
+      {
+        "question_id": "Q24a",
+        "trace_id": "85d6e2bb0cfe0da2ce421791ddc1182b",
+        "output": {
+          "trace_id": "85d6e2bb0cfe0da2ce421791ddc1182b",
+          "url": "http://localhost:3011/project/week11-local/traces/85d6e2bb0cfe0da2ce421791ddc1182b",
+          "question_id": "Q24a",
+          "prompt_version": "capability_guard",
+          "answer": {
+            "answer": "실시간 조회 기능이 연결되지 않아 현재 재고를 확인할 수 없습니다. 상품 상세 페이지에서 확인해 주세요.",
+            "citations": [],
+            "abstain": true
+          },
+          "checks": {
+            "citations_in_context": true,
+            "citations_unique": true,
+            "decision_matches_reference": true,
+            "required_evidence_cited": null,
+            "answer_citation_consistent": true
+          },
+          "judge": {
+            "verdict": "not_run",
+            "reason": "서비스 정책 응답: 생성·모델 평가 호출 없음"
+          },
+          "generation_ms": 0,
+          "generation_load_ms": 0,
+          "output_tokens": 0,
+          "expected_score_names": [
+            "citations_in_context",
+            "citations_unique",
+            "decision_matches_reference",
+            "answer_citation_consistent"
+          ],
+          "expected_observation_names": [
+            "capability-check",
+            "contract-checks"
+          ]
+        },
+        "evaluations": [
+          {
+            "name": "execution_ok",
+            "value": 1.0,
+            "comment": null
+          },
+          {
+            "name": "structural_pass",
+            "value": 1.0,
+            "comment": "인용·기권 계약 검사. 의미 정확도 아님"
+          },
+          {
+            "name": "generation_ms",
+            "value": 0,
+            "comment": "모델 생성 요청 경과 시간. 로컬 기기 관측값"
+          },
+          {
+            "name": "llm_verdict",
+            "value": "not_run",
+            "comment": "서비스 정책 응답: 생성·모델 평가 호출 없음"
+          },
+          {
+            "name": "false_accept",
+            "value": 0.0,
+            "comment": "문서 밖 질문에서 응답을 시도했는지"
+          }
+        ]
+      },
+      {
+        "question_id": "Q05b",
+        "trace_id": "50c61c45a1970ccbb9547d7326129c37",
+        "output": {
+          "trace_id": "50c61c45a1970ccbb9547d7326129c37",
+          "url": "http://localhost:3011/project/week11-local/traces/50c61c45a1970ccbb9547d7326129c37",
+          "session_id": "week11-18bc49ef5724",
+          "question_id": "Q05b",
+          "prompt_version": "grounded",
+          "answer": {
+            "answer": "취소는 불가능합니다.",
+            "citations": [
+              "D06"
+            ],
+            "abstain": false
+          },
+          "checks": {
+            "citations_in_context": true,
+            "citations_unique": true,
+            "decision_matches_reference": true,
+            "required_evidence_cited": true,
+            "answer_citation_consistent": true
+          },
+          "judge": {
+            "verdict": "unsupported",
+            "reason": "자료는 취소가 불가능하다고 하지만, 실제 상품의 포장 상태와 결제 상태에 대한 정보가 부족하여 근거를 확인할 수 없다."
+          },
+          "generation_ms": 318.6,
+          "generation_load_ms": 0.6,
+          "output_tokens": 30,
+          "expected_score_names": [
+            "citations_in_context",
+            "citations_unique",
+            "decision_matches_reference",
+            "required_evidence_cited",
+            "answer_citation_consistent",
+            "llm_groundedness"
+          ]
+        },
+        "evaluations": [
+          {
+            "name": "execution_ok",
+            "value": 1.0,
+            "comment": null
+          },
+          {
+            "name": "structural_pass",
+            "value": 1.0,
+            "comment": "인용·기권 계약 검사. 의미 정확도 아님"
+          },
+          {
+            "name": "generation_ms",
+            "value": 318.6,
+            "comment": "모델 생성 요청 경과 시간. 로컬 기기 관측값"
+          },
+          {
+            "name": "llm_verdict",
+            "value": "unsupported",
+            "comment": "자료는 취소가 불가능하다고 하지만, 실제 상품의 포장 상태와 결제 상태에 대한 정보가 부족하여 근거를 확인할 수 없다."
+          }
+        ]
+      },
+      {
+        "question_id": "Q03a",
+        "trace_id": "49b01805298242564db1069391e2b1b8",
+        "output": {
+          "trace_id": "49b01805298242564db1069391e2b1b8",
+          "url": "http://localhost:3011/project/week11-local/traces/49b01805298242564db1069391e2b1b8",
+          "session_id": "week11-a5c7287c1c6c",
+          "question_id": "Q03a",
+          "prompt_version": "grounded",
+          "answer": {
+            "answer": "사이즈 교환 기간은 수령 후 7일 이내이며, 왕복 배송비는 6000원입니다. 재고가 없을 경우 교환 대신 반품을 안내합니다.",
+            "citations": [
+              "D04",
+              "D03",
+              "D02"
+            ],
+            "abstain": false
+          },
+          "checks": {
+            "citations_in_context": true,
+            "citations_unique": true,
+            "decision_matches_reference": true,
+            "required_evidence_cited": true,
+            "answer_citation_consistent": true
+          },
+          "judge": {
+            "verdict": "supported",
+            "reason": "답변은 제공된 자료에 근거해 이전에 언급된 사이즈 교환 기간과 배송비를 정확히 제공합니다."
+          },
+          "generation_ms": 641.3,
+          "generation_load_ms": 0.8,
+          "output_tokens": 85,
+          "expected_score_names": [
+            "citations_in_context",
+            "citations_unique",
+            "decision_matches_reference",
+            "required_evidence_cited",
+            "answer_citation_consistent",
+            "llm_groundedness"
+          ]
+        },
+        "evaluations": [
+          {
+            "name": "execution_ok",
+            "value": 1.0,
+            "comment": null
+          },
+          {
+            "name": "structural_pass",
+            "value": 1.0,
+            "comment": "인용·기권 계약 검사. 의미 정확도 아님"
+          },
+          {
+            "name": "generation_ms",
+            "value": 641.3,
+            "comment": "모델 생성 요청 경과 시간. 로컬 기기 관측값"
+          },
+          {
+            "name": "llm_verdict",
+            "value": "supported",
+            "comment": "답변은 제공된 자료에 근거해 이전에 언급된 사이즈 교환 기간과 배송비를 정확히 제공합니다."
+          }
+        ]
+      },
+      {
+        "question_id": "Q01a",
+        "trace_id": "959e86964e00286f45e1d5af5b75e9eb",
+        "output": {
+          "trace_id": "959e86964e00286f45e1d5af5b75e9eb",
+          "url": "http://localhost:3011/project/week11-local/traces/959e86964e00286f45e1d5af5b75e9eb",
+          "session_id": "week11-7141575860f7",
+          "question_id": "Q01a",
+          "prompt_version": "grounded",
+          "answer": {
+            "answer": "상품 수령 후 7일 이내 반품을 접수할 수 있습니다.",
+            "citations": [
+              "D01",
+              "D06"
+            ],
+            "abstain": false
+          },
+          "checks": {
+            "citations_in_context": true,
+            "citations_unique": true,
+            "decision_matches_reference": true,
+            "required_evidence_cited": true,
+            "answer_citation_consistent": true
+          },
+          "judge": {
+            "verdict": "supported",
+            "reason": "답변은 제공된 자료에 근거해 반품 접수 기간을 7일 이내로 제시하고 있습니다."
+          },
+          "generation_ms": 425.0,
+          "generation_load_ms": 0.6,
+          "output_tokens": 46,
+          "expected_score_names": [
+            "citations_in_context",
+            "citations_unique",
+            "decision_matches_reference",
+            "required_evidence_cited",
+            "answer_citation_consistent",
+            "llm_groundedness"
+          ]
+        },
+        "evaluations": [
+          {
+            "name": "execution_ok",
+            "value": 1.0,
+            "comment": null
+          },
+          {
+            "name": "structural_pass",
+            "value": 1.0,
+            "comment": "인용·기권 계약 검사. 의미 정확도 아님"
+          },
+          {
+            "name": "generation_ms",
+            "value": 425.0,
+            "comment": "모델 생성 요청 경과 시간. 로컬 기기 관측값"
+          },
+          {
+            "name": "llm_verdict",
+            "value": "supported",
+            "comment": "답변은 제공된 자료에 근거해 반품 접수 기간을 7일 이내로 제시하고 있습니다."
+          }
+        ]
+      }
+    ]
+  },
+  "decision": {
+    "decision": "HOLD",
+    "policy": {
+      "max_generation_ms": 3000,
+      "max_false_accepts": 0,
+      "min_structural_pass_rate": 1.0,
+      "human_review_required": true
+    },
+    "summary": {
+      "baseline": {
+        "structural_pass_rate": 0.75,
+        "false_accepts": 1,
+        "max_generation_ms": 376.0,
+        "llm_verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ]
+      },
+      "candidate": {
+        "structural_pass_rate": 0.75,
+        "false_accepts": 1,
+        "max_generation_ms": 626.4,
+        "llm_verdicts": [
+          "unsupported",
+          "unsupported",
+          "supported",
+          "supported"
+        ]
+      }
+    },
+    "checks": [
+      {
+        "name": "답변 불가 수락 건수",
+        "pass": false,
+        "value": 1
+      },
+      {
+        "name": "인용·기권 계약 통과율",
+        "pass": false,
+        "value": 0.75
+      },
+      {
+        "name": "기준선 대비 계약 검사 저하 없음",
+        "pass": true,
+        "value": 0.0
+      },
+      {
+        "name": "단일 생성 요청 시간 예산",
+        "pass": true,
+        "value": 626.4
+      }
+    ],
+    "reason": "필수 조건 통과 후에도 답변 내용의 사람 검토 필요. 자동 배포하지 않음."
+  },
+  "guarded_decision": {
+    "decision": "REVIEW",
+    "policy": {
+      "max_generation_ms": 3000,
+      "max_false_accepts": 0,
+      "min_structural_pass_rate": 1.0,
+      "human_review_required": true
+    },
+    "summary": {
+      "baseline": {
+        "structural_pass_rate": 0.75,
+        "false_accepts": 1,
+        "max_generation_ms": 376.0,
+        "llm_verdicts": [
+          "supported",
+          "supported",
+          "supported",
+          "supported"
+        ]
+      },
+      "candidate": {
+        "structural_pass_rate": 1.0,
+        "false_accepts": 0,
+        "max_generation_ms": 641.3,
+        "llm_verdicts": [
+          "not_run",
+          "unsupported",
+          "supported",
+          "supported"
+        ]
+      }
+    },
+    "checks": [
+      {
+        "name": "답변 불가 수락 건수",
+        "pass": true,
+        "value": 0
+      },
+      {
+        "name": "인용·기권 계약 통과율",
+        "pass": true,
+        "value": 1.0
+      },
+      {
+        "name": "기준선 대비 계약 검사 저하 없음",
+        "pass": true,
+        "value": 0.25
+      },
+      {
+        "name": "단일 생성 요청 시간 예산",
+        "pass": true,
+        "value": 641.3
+      }
+    ],
+    "reason": "필수 조건 통과 후에도 답변 내용의 사람 검토 필요. 자동 배포하지 않음."
+  },
+  "provenance": {
+    "server": "Langfuse 4.78.0",
+    "sdk": "5.2.0",
+    "model": "qwen2.5:1.5b-instruct",
+    "verified_at": "2026-11-11",
+    "scope": "actual local Docker + Ollama; synthetic teaching regression set"
+  }
+}

@@ -1,9 +1,9 @@
 # 11주차: LLM 서비스의 품질 검증
 
-2026년 11월 13일 실시간 온라인 수업. **52쪽 HTML 프레젠테이션**, 인쇄 PDF, 단계별 Notebook 8개로 검색 평가·실제 Ollama 생성·LLM 평가·실행 추적을 다룹니다.
+2026년 11월 13일 실시간 온라인 수업. **64쪽 HTML 프레젠테이션**, 인쇄 PDF, 단계별 Notebook 10개로 검색 평가·실제 Ollama 생성·LLM 평가·실행 추적을 다룹니다.
 
-- [HTML 강의안 바로 보기 · 52쪽](https://smilesjcha.github.io/llmops-16week/week11/lecture/): 로그인·다운로드 없이 브라우저에서 열기
-- [학생용 PDF / 52쪽](../output/pdf/11_week11_offline_evaluation.pdf)
+- [HTML 강의안 바로 보기 · 64쪽](https://smilesjcha.github.io/llmops-16week/week11/lecture/): 로그인·다운로드 없이 브라우저에서 열기
+- [학생용 PDF / 64쪽](../output/pdf/11_week11_offline_evaluation.pdf)
 - [실습 코드와 VS Code 실행 순서](lab/README.md)
 - [실습 평가 보고서 바로 보기](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/report.html): 필터·질문 검색·근거 탐색이 가능한 실행 예제
 - [실제 Ollama 실행 보고서](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/ollama/ollama-report.html)
@@ -19,6 +19,10 @@
 
 오프라인 이용도 가능합니다. [강의안 원본](lecture/index.html)이나 [보고서 원본](lab/sample/report.html)의 **Download raw file**로 저장한 뒤 브라우저로 여세요. 글꼴·그림·스크립트가 내장된 단일 파일입니다. 공개 보고서는 수업용 합성 자료이며 학생 제출물이 아닙니다. 직접 실행한 결과는 로컬 `week11/lab/reports/report.html`에서 확인합니다.
 
+**오늘의 핵심 실습:** [09·10번 Docker·VS Code 준비·100분 시간표](lab/langfuse/README.md) · [실제 A/B/C 비교 결과](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/langfuse/).
+
+- [11주차 화면별 시연 순서·사전 점검](https://smilesjcha.github.io/llmops-16week/week11/lab/demo/): 준비 → 요청 트리 → 입출력 → 점수 → A/B/C 실험 → 배포 판단.
+
 ## 이번 주에 만드는 결과
 
 1. 질문·필수 근거·답변 가능 여부·의도 그룹을 갖춘 평가 데이터
@@ -29,8 +33,10 @@
 6. 그룹 bootstrap, 학습용 검증 조건, 재현 가능한 HTML 보고서
 7. 실제 로컬 LLM의 프롬프트별 답변·인용·기권 비교
 8. 실제 LLM 평가, 요청별 실행 추적과 플랫폼 기능의 연결
+9. 로컬 Langfuse의 실제 요청 트리·입출력·Scores
+10. 실패 사례의 회귀 평가·A/B/C 실험·배포 전 차단
 
-공통 실습은 실제 TF-IDF 검색을 실행합니다. **가상 정책 22개·교수 작성 합성 질문 48개**를 사용하며 실제 기업 정책·학생 정보는 포함하지 않습니다. 01–06은 외부 모델 호출 없이 계산 원리를 확인합니다. 07–08은 로컬 Ollama에 실제 요청을 보내 답변 생성과 모델 평가를 실행합니다. 05번의 작성 예시와 08번의 실제 판정을 구분하며, Langfuse·LangSmith 계정으로 데이터는 전송하지 않습니다.
+공통 실습은 실제 TF-IDF 검색을 실행합니다. **가상 정책 22개·교수 작성 합성 질문 48개**를 사용하며 실제 기업 정책·학생 정보는 포함하지 않습니다. 01–06은 외부 모델 호출 없이 계산 원리를 확인합니다. 07–08은 로컬 Ollama에 실제 요청을 보내 답변 생성과 모델 평가를 실행합니다. 05번의 작성 예시와 08번의 실제 판정을 구분하며, 09–10에서는 로컬 Langfuse로 실제 SDK 전송·실험 비교를 진행합니다. LangSmith·외부 클라우드에는 전송하지 않습니다.
 
 실제 실행에서 후보의 Recall@3는 56.25%에서 81.25%로 높아졌지만, 기권을 반영한 필수 근거 확보율은 56.25%에서 50%로 낮아졌습니다. 답변 불가 수락률도 12.5%로 교육용 기준 10%를 넘어서 **HOLD**입니다. HOLD는 실행 오류가 아니라 평가의 결론입니다. 세 지표의 분모와 범위가 다르므로 한 점수로 합쳐 해석하지 않습니다.
 
@@ -38,10 +44,11 @@
 
 - 이전/다음 버튼, 방향키, PageUp/PageDown, Home/End
 - 페이지 번호 입력과 URL hash로 위치 유지
-- 목차로 바로 이동, N으로 설명 노트, O로 목차
+- 상단 학습 단계 이동, 검색 가능한 목차, N으로 설명 노트, O로 목차
+- 4·5·21·44쪽의 흐름 보기 / F로 다음 단계, 전체 보기로 복원
 - 그림 확대와 Escape로 닫기
 - 16쪽에서 검색 개수 k를 바꿔 지표 계산
-- 인쇄 / PDF 버튼: 전체 52쪽 출력, 노트·조작 버튼 제외
+- 인쇄 / PDF 버튼: 전체 64쪽 출력, 노트·조작 버튼 제외
 
 JS를 꺼도 전체 장표는 문서 순서대로 읽을 수 있습니다. 휴대폰에서는 내용을 세로로 배치하며 차트 수치는 표로 제공합니다. 발표에는 데스크톱 브라우저를 권장합니다.
 

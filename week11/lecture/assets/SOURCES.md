@@ -65,3 +65,14 @@ LangSmith 사례는 공식 문서의 기능 관계를 재구성한 편집 가능
 ### 실제 로컬 호출
 
 `week11/lab/sample/ollama/`는 `ollama_lab.py`의 실제 생성·평가 결과입니다. 모델 digest, 프롬프트, 데이터·코드 해시, 원응답, 토큰·지연을 기록합니다. 선택된 합성 시연 사례이므로 미공개 test 벤치마크나 실제 서비스 정확도를 뜻하지 않습니다.
+
+## 로컬 Langfuse 실제 연동 개정
+
+- `langfuse-local-trace.png`, `langfuse-local-scores.png`, `langfuse-local-experiments.png`: 이 저장소의 09·10번 실습을 Langfuse **4.78.0** Docker 서버에서 실제 실행하고 캡처한 화면입니다. 합성 질문·정책만 사용합니다.
+- 캡처는 UI의 작업 영역이며, HTML/PDF에서 회색조로 표시합니다. 실제 입력·출력·점수 값을 임의로 수정하지 않았습니다.
+- `lab/sample/langfuse/results.json`: 동일 데이터의 세 실제 실험과 배포 조건 결과. 응답 문장·시간·모델 판정은 실행마다 달라질 수 있습니다.
+- [Docker Compose](https://langfuse.com/self-hosting/deployment/docker-compose), [headless initialization](https://langfuse.com/self-hosting/administration/headless-initialization)
+- [SDK instrumentation](https://langfuse.com/docs/observability/sdk/instrumentation), [Scores via SDK](https://langfuse.com/docs/evaluation/evaluation-methods/scores-via-sdk), [Experiments via SDK](https://langfuse.com/docs/evaluation/experiments/experiments-via-sdk)
+- 실제 SDK 전송은 로컬 Langfuse에만 수행했습니다. 외부 클라우드·LangSmith 연동을 수행한 자료가 아닙니다.
+
+확인일: 2026-11-11. 4건의 계약 검사 통과율을 답변 의미 정확도나 일반화된 모델 성능으로 해석하지 않습니다.
