@@ -1,6 +1,8 @@
 # 11주차 실습: 평가 데이터부터 배포 전 판단까지
 
-기존 Python 3.11 환경에서 실행합니다. **Ollama·Docker·GPU·API 키는 필요 없습니다.** 인터넷은 최초 패키지 설치에만 필요합니다. 직접 실행해 비교하고 실패 원인을 설명하는 실습입니다.
+**처음 따라 할 때:** [Notebook 01–08 실행 순서와 확인 결과](WALKTHROUGH.md). 파일별 정상 출력, 예상된 오류 실험, 보고서 확인 방법을 함께 정리했습니다.
+
+기존 Python 3.11 환경에서 실행합니다. **01–06은 외부 모델 없이 실행**, **07–08은 로컬 Ollama의 실제 instruct 모델을 호출**합니다. Docker·클라우드 API 키는 필요 없습니다. 07–08은 모델을 최초 한 번 다운로드합니다. 직접 실행해 비교하고 실패 원인을 설명하는 실습입니다.
 
 - [11주차 HTML 강의안 바로 보기](https://smilesjcha.github.io/llmops-16week/week11/lecture/)
 - [실습 평가 보고서 바로 보기](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/report.html): 설치·다운로드 없이 필터와 근거 탐색을 먼저 체험할 수 있습니다.
@@ -37,6 +39,23 @@ PowerShell 활성화가 제한된 환경에서는 정책을 바꾸지 않고 아
 
 예상 Python 버전은 3.11.x입니다. 공통 base에 scikit-learn 및 과학 계산 의존성을 추가한 전용 프로필입니다. 기존 16주 공통 requirements를 덮어쓰지 않습니다. 이 배포의 실제 검증 환경은 macOS arm64 / Python 3.11.14이며 다른 운영체제의 실기 검증을 했다고 주장하지 않습니다.
 
+## 실제 LLM 실습 준비
+
+Ollama 앱을 실행하고 별도 터미널에서 한 번만 다운로드합니다.
+
+```sh
+ollama pull qwen2.5:1.5b-instruct
+```
+
+실제 응답·평가·추적을 한 번에 확인하려면 저장소 루트에서 실행합니다.
+
+```sh
+python -m week11.lab.ollama_lab --limit 3 --judge
+open week11/lab/reports/ollama-report.html  # macOS
+```
+
+[실제 호출 결과 미리 보기](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/ollama/ollama-report.html) · [도구 역할과 범위](PLATFORMS.md). 작은 모델의 의미 오류를 숨기지 않고 기록합니다. 실패 시 mock 응답으로 대체하지 않습니다.
+
 ## 가장 빠른 사전 점검
 
 저장소 루트에서 실행합니다.
@@ -72,8 +91,10 @@ HOLD이면 종료 코드 2입니다. 이것을 설치 오류로 오해하지 마
 | 04 | [기권과 오류](notebooks/04_calibration_and_error_analysis.ipynb) | dev 선택, 임계값 곡선, 고정 test, 말투별 실패 추적 |
 | 05 | [평가자 검증](notebooks/05_judge_rubric.ipynb) | 수업용 루브릭, JSON 계약, 불일치 행렬, 순서 편향 |
 | 06 | [보고서와 판단](notebooks/06_release_report.ipynb) | 재현 실행, 그룹 bootstrap, 검증 조건, 독립 HTML 보고서 |
+| 07 | [실제 Ollama RAG](notebooks/07_ollama_rag_generation.ipynb) | 실제 검색·생성, 프롬프트 비교, 인용·기권 검사, 지연·토큰 |
+| 08 | [실제 LLM 평가·추적](notebooks/08_ollama_judge_and_traces.ipynb) | 실제 평가자 판정, 사람 기준과 비교, 요청별 trace, 플랫폼 용어 대응 |
 
-총 126셀, 코드 42셀입니다. 수업에서는 각 파일의 핵심 단계부터 실행하고 확장 항목은 복습합니다. 모든 파일은 새 커널에서 Run All로 검증했습니다.
+총 168셀, 코드 56셀입니다. 수업에서는 각 파일의 핵심 단계부터 실행하고 확장 항목은 복습합니다. 모든 파일은 새 커널에서 Run All로 검증했습니다.
 
 ### 학생이 직접 바꿀 부분
 
@@ -83,6 +104,8 @@ HOLD이면 종료 코드 2입니다. 이것을 설치 오류로 오해하지 마
 - 04: dev에서 임계값과 목적함수 검토, test 실패 근거 기록
 - 05: 조건 누락·수치 충돌·잘못된 전제 fixture 추가
 - 06: 실제 프로젝트의 위험·비용에 맞는 판단 기준 제안
+- 07: 질문·프롬프트 중 하나를 변경하고 실제 답변·인용·기권 비교
+- 08: 평가자 오판 사례를 추가하고 사람 판정과 실제 모델 판정 비교
 
 test를 반복 관찰하며 설정을 바꾸면 새 평가 세트가 필요합니다. 공개 학습용 test를 실제 미공개 서비스 성능의 근거로 쓰지 않습니다.
 
@@ -90,6 +113,7 @@ test를 반복 관찰하며 설정을 바꾸면 새 평가 세트가 필요합�
 
 - evaluation.py: 입력 검증, 검색, 지표, dev 선택, bootstrap, 판단
 - judging.py: 작성 fixture와 평가 JSON 검증. 모델 호출 없음
+- ollama_lab.py: 로컬 실제 생성·평가·trace와 HTML 보고서
 - run_eval.py: 명령행 실행과 보고서 저장
 - report-template.html: 결과를 내장하는 HTML 탐색기
 - data/: 22개 가상 문서와 48개 교수 작성 질문
@@ -123,4 +147,4 @@ test를 반복 관찰하며 설정을 바꾸면 새 평가 세트가 필요합�
 
 결론 → 조건과 버전 → 지표와 실패 사례 → 한계 → 다음 실험 순서로 정리합니다.
 원문·고객 정보·API 키·학생 제출물은 공개 GitHub에 올리지 않습니다.
-실제 API/임베딩/LLM judge는 선택 확장이며 기본 검증 범위에 포함되지 않습니다.
+07–08의 로컬 생성·LLM judge는 실제 실행 검증 범위입니다. 신경망 임베딩, 클라우드 추적 전송, 플랫폼 서버 배포는 이번 실습에서 실행하지 않습니다.

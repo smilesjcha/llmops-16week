@@ -9,12 +9,14 @@
 
 - [11주차 HTML 강의안](https://smilesjcha.github.io/llmops-16week/week11/lecture/)
 - [11주차 실습 평가 보고서](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/report.html)
+- [11주차 실제 Ollama 실행 보고서](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/ollama/ollama-report.html)
 - [11주차 PDF](https://smilesjcha.github.io/llmops-16week/output/pdf/11_week11_offline_evaluation.pdf)
 - [실습 코드·VS Code 안내](https://github.com/smilesjcha/llmops-16week/tree/main/week11/lab)
+- [Notebook 01–08 실행 순서·확인 결과](https://github.com/smilesjcha/llmops-16week/blob/main/week11/lab/WALKTHROUGH.md)
 
 ## 수정본 반영
 
-강의안 원본 `week11/lecture/index.html`을 수정하여 `main`에 push하면 GitHub가 다시 배포합니다. 저장소 Actions의 **pages build and deployment**가 성공한 뒤 학생용 주소를 확인합니다. 보고서는 `week11/lab/sample/report.html`에 반영한 공개 수업 예제만 공유합니다. 학생의 로컬 결과 `week11/lab/reports/`는 Git 제외 상태를 유지합니다.
+생성 원본 `scripts/week11_refinement.py`와 `week11/lecture/deck.css`, `deck.js`를 수정하고 `python scripts/build_week11_html.py`로 강의안 HTML을 생성합니다. `node scripts/verify_week11_browser.mjs`는 화면과 조작을 검사하고 PDF를 갱신합니다. 생성물까지 `main`에 push하면 GitHub가 다시 배포합니다. 저장소 Actions의 **pages build and deployment**가 성공한 뒤 학생용 주소를 확인합니다. 보고서는 `week11/lab/sample/`에 반영한 공개 합성 수업 예제만 공유합니다. 학생의 로컬 결과 `week11/lab/reports/`는 Git 제외 상태를 유지합니다.
 
 배포 범위는 공개 저장소의 커밋된 파일입니다. 로컬 `.venv`·환경변수 파일·개인정보·학생 제출물을 커밋하지 않습니다.
 

@@ -1,7 +1,7 @@
 /* Hallmark: theme custom; idea evidence before release; vibe precise editorial Korean teaching; genre editorial; shape paged lecture; hero large question and measured decision; nav bottom presentation controls; footer source and page; posture restrained; surface: absolute; job understand and run experiments */
 /* Critique: established black-white-blue course identity; self-hosted Korean type; source figures and real measurements. */
 /* Hallmark · waive 7b · surface: absolute · User requires white paper and black-white-blue teaching slides; contrast checked against these tokens. */
-/* Waiver: website section-count and fold assumptions do not apply to a 76-page HTML lecture; document order and print are primary. */
+/* Waiver: website section-count and fold assumptions do not apply to a 52-page HTML lecture; document order and print are primary. */
 :root{
  --paper:#ffffff;--ink:#15191f;--muted:#515e70;--rule:#c7d0dc;--blue:#1954cb;
  --navy:#0b203a;--wash:#edf3fc;--light:#dce8ff;--inverse:#ffffff;--canvas:#e6eaf0;
@@ -140,3 +140,12 @@ figure .enlarge{font-size:16px;min-height:40px;margin-top:12px}#image-viewer{bor
 @media print{figure .enlarge,#image-viewer{display:none!important}.chart{display:block}.chart-values{display:none}}
 
 .report-shots{display:grid;gap:28px}.report-shots figure img{width:100%;max-height:180px}.report-shots figcaption{font-size:18px}.report-shots .enlarge{display:none}@media(max-width:700px){.report-shots figure img{max-height:none}.report-shots .enlarge{display:inline-flex}}
+
+/* Editable reference architectures: separate connectors and readable nodes. */
+.architecture{width:100%;max-height:450px;overflow:visible}.architecture .node rect,.architecture .node polygon{fill:var(--paper);stroke:var(--rule);stroke-width:2}.architecture .node.focus rect,.architecture .node.focus polygon{fill:var(--wash);stroke:var(--blue)}.architecture text{fill:var(--ink);font:700 26px var(--font-body)}.architecture .node-sub{font:400 21px var(--font-body);fill:var(--muted)}.architecture .edge{stroke:var(--muted);stroke-width:2;fill:none}.architecture marker path{fill:var(--muted)}.architecture .edge-label{font:400 20px var(--font-body);fill:var(--muted)}.architecture-text{display:none}
+@media(max-width:700px){.architecture{display:none}.architecture-text{display:grid;gap:16px}.architecture-text p{font-size:19px}}
+@media print{.architecture{display:block}.architecture-text{display:none}}
+
+.product-crop{height:350px;overflow:clip}.product-crop img{max-height:none;max-width:none;width:180%;transform:translate(-42%,-120px);transform-origin:top left;margin:0}.product-crop+figcaption{font-size:18px}@media(max-width:700px){.product-crop{height:230px}.product-crop img{width:200%;transform:translate(-45%,-50px)}}
+
+.overview-list{display:block}.overview-chapter{margin-bottom:32px}.overview-chapter h3{font-size:24px;margin:0 0 16px}.chapter-items{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}@media(max-width:700px){.chapter-items{grid-template-columns:minmax(0,1fr)}}

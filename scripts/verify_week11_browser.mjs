@@ -5,12 +5,14 @@ const root=path.resolve(import.meta.dirname,'..'),out=path.join(root,'output/val
 await fs.mkdir(out,{recursive:true});
 const browser=await chromium.launch({headless:true,channel:'chrome'});
 const errors=[],issues=[],report={};
+const manifest=JSON.parse(await fs.readFile(path.join(root,'week11/lecture/slide-manifest.json'),'utf8'));
+const expected=manifest.length, interactive=manifest.findIndex(s=>s.kind==='interactive'), paper=manifest.findIndex(s=>s.kind==='paper');
 try{
  const page=await browser.newPage({viewport:{width:1500,height:930},deviceScaleFactor:1});
  page.on('pageerror',e=>errors.push(String(e)));
  await page.goto('file://'+path.join(root,'week11/lecture/index.html'));
  await page.evaluate(()=>document.fonts.ready);
- for(let i=0;i<76;i++){
+ for(let i=0;i<expected;i++){
   await page.evaluate(i=>window.courseDeck.show(i),i);
   const problem=await page.locator('.slide.active').evaluate(slide=>{
    const rect=slide.getBoundingClientRect(),footer=slide.querySelector('footer').getBoundingClientRect();
@@ -29,13 +31,13 @@ try{
  report.slide_count=await page.locator('.slide').count();
  await page.evaluate(()=>window.courseDeck.show(0));await page.keyboard.press('ArrowRight');
  if(!page.url().endsWith('#slide-2'))throw Error('keyboard navigation failed');
- await page.locator('#overview-button').click();await page.locator('[data-slide="33"]').click();
- if(!(await page.locator('#status').textContent()).startsWith('34 /'))throw Error('overview navigation failed');
+ await page.locator('#overview-button').click();await page.locator(`[data-slide="${interactive}"]`).click();
+ if(!(await page.locator('#status').textContent()).startsWith(`${interactive+1} /`))throw Error('overview navigation failed');
  await page.locator('#metric-k').fill('4');await page.locator('#metric-k').dispatchEvent('input');
  if(!(await page.locator('#metric-live').textContent()).includes('Recall 1.00'))throw Error('interactive metric failed');
  await page.locator('#notes-button').click();if(!(await page.locator('#notes-panel').isVisible()))throw Error('notes failed');
- await page.reload();if(!(await page.locator('#status').textContent()).startsWith('34 /'))throw Error('hash resume failed');
- await page.evaluate(()=>window.courseDeck.show(53));
+ await page.reload();if(!(await page.locator('#status').textContent()).startsWith(`${interactive+1} /`))throw Error('hash resume failed');
+ await page.evaluate(i=>window.courseDeck.show(i),paper);
  await page.locator('.slide.active .enlarge').click();
  if(!(await page.locator('#image-viewer').isVisible()))throw Error('image zoom failed');
  await page.keyboard.press('Escape');
@@ -44,7 +46,7 @@ try{
  // Verify every slide at phone width, text flow rather than shrinking the whole deck.
  await page.setViewportSize({width:390,height:844});
  const mobile=[];
- for(let i=0;i<76;i++){
+ for(let i=0;i<expected;i++){
   await page.evaluate(i=>window.courseDeck.show(i),i);
   const extra=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
   if(extra>1)mobile.push({page:i+1,overflow:extra});
@@ -57,6 +59,7 @@ try{
  await page.emulateMedia({media:'print'});
  await page.pdf({path:path.join(root,'output/pdf/11_week11_offline_evaluation.pdf'),printBackground:true,preferCSSPageSize:true});
  report.pdf_created=true;
+ if(issues.length||mobile.length||report.slide_count!==expected)throw Error('Lecture layout/count verification failed: '+JSON.stringify({issues,mobile}));
  // Report is functional offline, handles empty filters, text escaping and details.
  await page.emulateMedia({media:'screen'});
  await page.goto('file://'+path.join(root,'week11/lab/sample/report.html'));

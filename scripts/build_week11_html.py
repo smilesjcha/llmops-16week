@@ -1,4 +1,4 @@
-"""Build a portable, source-attributed 76-page HTML lecture from actual lab results."""
+"""Build a portable, source-attributed 52-page HTML lecture from actual lab results."""
 from pathlib import Path
 import sys, json, base64, html
 ROOT=Path(__file__).resolve().parents[1]
@@ -336,7 +336,9 @@ add("실습 파일과 실행 순서","VS Code에서 01부터 06까지 / 각 파�
         rows([("Notebook","week11/lab/notebooks/"),("즉시 볼 보고서","week11/lab/sample/report.html"),("실행 결과","week11/lab/reports/report.html")])),
     "HTML 강의안은 내려받아 브라우저로 연다. 방향키·목차·노트를 사용할 수 있고 인쇄 버튼으로 전체 PDF를 저장할 수 있다. 코드 실행은 Python3.11의 기존.venv에서 진행한다. 네트워크는 최초 패키지 설치에만 필요하다.",chapter="참고",kind="runbook")
 
-assert len(slides)==76, len(slides)
+from week11_refinement import refine
+slides = refine(slides, globals(), R)
+assert len(slides)==52, len(slides)
 css=(P/"deck.css").read_text()
 fonts="".join('@font-face{font-family:\"Course Pretendard\";font-weight:'+str(w)+';font-style:normal;font-display:swap;src:url(data:font/woff2;base64,'+base64.b64encode((P/"assets"/name).read_bytes()).decode()+') format(\"woff2\");}' for w,name in [(400,"Pretendard-Regular.woff2"),(700,"Pretendard-Bold.woff2")])
 sections=[]
@@ -349,9 +351,9 @@ for i,s in enumerate(slides,1):
  if s["kind"]=="section":
   content=body
  else: content=f'<div class="body">{body}</div>'
- sections.append(f'<section class="slide {"dark" if s["dark"] else ""}" id="slide-{i}" data-kind="{s["kind"]}" aria-label="{i}페이지 {h(s["title"].replace("<br>"," "))}"><header><{title_tag}>{s["title"]}</{title_tag}>{para(s["sub"],"subtitle") if s["sub"] else ""}</header>{content}<footer><span class="source">{src}</span><span class="pageno">{s["chapter"]} / {i:02d}</span></footer><aside class="presenter-note">{h(s["notes"])}</aside></section>')
-controls='''<dialog id="image-viewer" aria-labelledby="image-heading"><header><strong id="image-heading">그림 확대</strong><button id="image-close">닫기</button></header><div id="image-content"></div><p id="image-caption"></p></dialog><nav class="controls" aria-label="프레젠테이션 조작"><button id="previous">이전</button><span id="status" role="status" aria-live="polite"></span><button id="next">다음</button><label id="jump-label" for="jump">페이지</label><input id="jump" type="number" min="1" max="76" value="1"><button id="overview-button" aria-controls="overview">목차</button><button id="notes-button" aria-expanded="false" aria-controls="notes-panel">설명 노트</button><button id="fullscreen">전체 화면</button><button id="print">인쇄 / PDF</button></nav><aside id="notes-panel"><strong>교수 설명 노트</strong><p id="notes-text"></p></aside><div id="overview" role="dialog" aria-modal="true" aria-labelledby="overview-heading"><header><h2 id="overview-heading">11주차 전체 목차</h2><button id="overview-close">목차 닫기</button></header><div class="overview-list"></div></div>'''
-result='<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="LLMOps 11주차 오프라인 평가 체계. 76쪽 HTML 강의안과 실제 평가 실습."><title>11주차 | LLM 서비스의 품질 검증</title><style>'+css+fonts+'</style></head><body><main class="deck-shell">'+"\n".join(sections)+'</main>'+controls+'<script>'+(P/"deck.js").read_text()+'</script></body></html>'
+ sections.append(f'<section class="slide {"dark" if s["dark"] else ""}" id="slide-{i}" data-kind="{s["kind"]}" data-chapter="{h(s["chapter"])}" aria-label="{i}페이지 {h(s["title"].replace("<br>"," "))}"><header><{title_tag}>{s["title"]}</{title_tag}>{para(s["sub"],"subtitle") if s["sub"] else ""}</header>{content}<footer><span class="source">{src}</span><span class="pageno">{s["chapter"]} / {i:02d}</span></footer><aside class="presenter-note">{h(s["notes"])}</aside></section>')
+controls='''<dialog id="image-viewer" aria-labelledby="image-heading"><header><strong id="image-heading">그림 확대</strong><button id="image-close">닫기</button></header><div id="image-content"></div><p id="image-caption"></p></dialog><nav class="controls" aria-label="프레젠테이션 조작"><button id="previous">이전</button><span id="status" role="status" aria-live="polite"></span><button id="next">다음</button><label id="jump-label" for="jump">페이지</label><input id="jump" type="number" min="1" max="52" value="1"><button id="overview-button" aria-controls="overview">목차</button><button id="notes-button" aria-expanded="false" aria-controls="notes-panel">설명 노트</button><button id="fullscreen">전체 화면</button><button id="print">인쇄 / PDF</button></nav><aside id="notes-panel"><strong>교수 설명 노트</strong><p id="notes-text"></p></aside><div id="overview" role="dialog" aria-modal="true" aria-labelledby="overview-heading"><header><h2 id="overview-heading">11주차 전체 목차</h2><button id="overview-close">목차 닫기</button></header><div class="overview-list"></div></div>'''
+result='<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="LLMOps 11주차 오프라인 평가 체계. 52쪽 HTML 강의안과 실제 Ollama 평가 실습."><title>11주차 | LLM 서비스의 품질 검증</title><style>'+css+fonts+'</style></head><body><main class="deck-shell">'+"\n".join(sections)+'</main>'+controls+'<script>'+(P/"deck.js").read_text()+'</script></body></html>'
 result=result.replace("–","~")
 (P/"index.html").write_text(result,encoding="utf-8")
 (P/"lecture-notes.md").write_text("# 11주차 강의 노트\n\n"+"\n\n".join(f'## {i:02d}. {s["title"].replace("<br>"," ")}\n\n{s["notes"]}\n'+(f'\n출처: {SOURCES[s["source"]][1]}' if s["source"] else "") for i,s in enumerate(slides,1)))

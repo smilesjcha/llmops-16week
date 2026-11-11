@@ -17,7 +17,15 @@
  function closeOverview(){$('#overview').classList.remove('open');$('#overview').inert=true;previousFocus?.focus();}
  $('#overview-button').onclick=()=>{previousFocus=document.activeElement;$('#overview').inert=false;$('#overview').classList.add('open');$('#overview-close').focus();};
  $('#overview-close').onclick=closeOverview;
- $('.overview-list').innerHTML=slides.map((s,i)=>'<button data-slide="'+i+'">'+String(i+1).padStart(2,'0')+'　'+s.querySelector('h1,h2').textContent+'</button>').join('');
+ const chapters=new Map();
+ slides.forEach((s,i)=>{const title=s.dataset.chapter||'강의';if(!chapters.has(title))chapters.set(title,[]);chapters.get(title).push({slide:s,index:i});});
+ for(const [title,items] of chapters){
+  const section=document.createElement('section');section.className='overview-chapter';
+  const heading=document.createElement('h3');heading.textContent=title;section.append(heading);
+  const group=document.createElement('div');group.className='chapter-items';
+  for(const {slide,index} of items){const button=document.createElement('button');button.dataset.slide=index;button.textContent=String(index+1).padStart(2,'0')+'　'+slide.querySelector('h1,h2').textContent;group.append(button);}
+  section.append(group);$('.overview-list').append(section);
+ }
  $('.overview-list').onclick=e=>{const b=e.target.closest('[data-slide]');if(b){show(Number(b.dataset.slide));closeOverview();}};
  $('#notes-button').onclick=()=>{const opened=$('#notes-panel').classList.toggle('open');$('#notes-button').setAttribute('aria-expanded',String(opened));};
  $('#fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{$('#status').textContent='전체화면 미지원';}};

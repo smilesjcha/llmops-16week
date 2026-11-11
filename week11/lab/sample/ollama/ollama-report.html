@@ -1,0 +1,580 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>11주차 실제 Ollama 실행</title><style>:root{--ink:#15191f;--paper:#fff;--blue:#1954cb;--rule:#c7d0dc;--wash:#edf3fc;--font:system-ui,sans-serif}*{box-sizing:border-box}html,body{overflow-x:clip}body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.7 var(--font)}main{max-width:1000px;margin:auto;padding:40px 24px}h1{font-size:36px;line-height:1.3}h2{font-size:24px}article{border-top:1px solid var(--rule);margin-top:32px;padding-top:20px}blockquote{margin:20px 0;padding:20px;background:var(--wash)}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}summary{cursor:pointer;color:var(--blue)}summary:focus-visible{outline:2px solid var(--blue)}@media print{details{display:block}summary{display:none}}</style><main><h1>실제 LLM 응답과 평가 기록</h1><p>qwen2.5:1.5b-instruct / 2026-11-11T11:27:48.854554+00:00</p><p>로컬 Ollama의 실제 응답입니다. 가상 정책을 사용한 선택 사례이며 서비스 성능 벤치마크가 아닙니다. 코드 검사 통과와 작은 모델의 판정만으로 답변의 정확성을 보장하지 않습니다.</p><article><h2>Q01a / baseline</h2><p><strong>반품 접수는 수령 후 언제까지 가능한가요?</strong></p><blockquote>상품 수령 후 7일 이내 반품을 접수할 수 있습니다.</blockquote><p>기권: False / 인용: [&#x27;D01&#x27;, &#x27;D06&#x27;]</p><p>응답 334.8ms / 모델 로드 1.1ms / 출력 45 tokens</p><p>실제 LLM 평가: {&#x27;verdict&#x27;: &#x27;supported&#x27;, &#x27;reason&#x27;: &#x27;답변은 제공된 자료에 근거해 반품 접수 기간을 7일 이내로 제시하고 있습니다.&#x27;}</p><details><summary>검색 근거·검사·실행 기록</summary><pre>{
+  &quot;documents&quot;: [
+    {
+      &quot;id&quot;: &quot;D01&quot;,
+      &quot;score&quot;: 0.37865382568448086,
+      &quot;status&quot;: &quot;current&quot;,
+      &quot;title&quot;: &quot;반품 접수&quot;,
+      &quot;text&quot;: &quot;상품 수령 후 7일 이내 반품을 접수합니다. 착용 흔적과 택 제거가 없는 상품만 가능합니다.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;D03&quot;,
+      &quot;score&quot;: 0.1707814445351712,
+      &quot;status&quot;: &quot;current&quot;,
+      &quot;title&quot;: &quot;사이즈 교환&quot;,
+      &quot;text&quot;: &quot;사이즈 교환은 수령 후 7일 이내 신청합니다. 재고가 없으면 교환 대신 반품을 안내합니다.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;D06&quot;,
+      &quot;score&quot;: 0.10432966170103178,
+      &quot;status&quot;: &quot;current&quot;,
+      &quot;title&quot;: &quot;주문 취소&quot;,
+      &quot;text&quot;: &quot;결제 완료 상태에서는 주문 취소가 가능합니다. 출고 준비 이후에는 취소 대신 배송 완료 후 반품을 접수합니다.&quot;
+    }
+  ],
+  &quot;checks&quot;: {
+    &quot;citations_in_context&quot;: true,
+    &quot;citations_unique&quot;: true,
+    &quot;decision_matches_reference&quot;: true,
+    &quot;required_evidence_cited&quot;: true,
+    &quot;answer_citation_consistent&quot;: true
+  },
+  &quot;spans&quot;: [
+    {
+      &quot;name&quot;: &quot;retrieval&quot;,
+      &quot;parent_id&quot;: &quot;b9af216f40524738b72adf0679978306&quot;,
+      &quot;duration_ms&quot;: 3.9,
+      &quot;document_ids&quot;: [
+        &quot;D01&quot;,
+        &quot;D03&quot;,
+        &quot;D06&quot;
+      ]
+    },
+    {
+      &quot;name&quot;: &quot;generation&quot;,
+      &quot;parent_id&quot;: &quot;b9af216f40524738b72adf0679978306&quot;,
+      &quot;duration_ms&quot;: 334.8,
+      &quot;model&quot;: &quot;qwen2.5:1.5b-instruct&quot;
+    },
+    {
+      &quot;name&quot;: &quot;code_checks&quot;,
+      &quot;parent_id&quot;: &quot;b9af216f40524738b72adf0679978306&quot;,
+      &quot;results&quot;: {
+        &quot;citations_in_context&quot;: true,
+        &quot;citations_unique&quot;: true,
+        &quot;decision_matches_reference&quot;: true,
+        &quot;required_evidence_cited&quot;: true,
+        &quot;answer_citation_consistent&quot;: true
+      }
+    },
+    {
+      &quot;name&quot;: &quot;llm_judge&quot;,
+      &quot;parent_id&quot;: &quot;b9af216f40524738b72adf0679978306&quot;,
+      &quot;duration_ms&quot;: 354.4,
+      &quot;result&quot;: {
+        &quot;verdict&quot;: &quot;supported&quot;,
+        &quot;reason&quot;: &quot;답변은 제공된 자료에 근거해 반품 접수 기간을 7일 이내로 제시하고 있습니다.&quot;
+      }
+    }
+  ],
+  &quot;generation&quot;: {
+    &quot;parsed&quot;: {
+      &quot;answer&quot;: &quot;상품 수령 후 7일 이내 반품을 접수할 수 있습니다.&quot;,
+      &quot;citations&quot;: [
+        &quot;D01&quot;,
+        &quot;D06&quot;
+      ],
+      &quot;abstain&quot;: false
+    },
+    &quot;raw&quot;: &quot;{\&quot;answer\&quot;: \&quot;상품 수령 후 7일 이내 반품을 접수할 수 있습니다.\&quot;, \&quot;citations\&quot;: [\&quot;D01\&quot;, \&quot;D06\&quot;], \&quot;abstain\&quot;: false}&quot;,
+    &quot;started_at&quot;: &quot;2026-11-11T11:27:44.787219+00:00&quot;,
+    &quot;ended_at&quot;: &quot;2026-11-11T11:27:45.122136+00:00&quot;,
+    &quot;latency_ms&quot;: 334.8,
+    &quot;load_ms&quot;: 1.1,
+    &quot;input_tokens&quot;: 229,
+    &quot;output_tokens&quot;: 45,
+    &quot;tokens_per_second&quot;: 164.1,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;options&quot;: {
+      &quot;temperature&quot;: 0,
+      &quot;seed&quot;: 11,
+      &quot;num_ctx&quot;: 2048,
+      &quot;num_predict&quot;: 192
+    },
+    &quot;think&quot;: null,
+    &quot;prompt_sha256&quot;: &quot;3c54eba19dc3465236286ec1aa765866f8ddc22b464b62395ec31eec2f086f85&quot;
+  }
+}</pre></details></article><article><h2>Q01a / grounded</h2><p><strong>반품 접수는 수령 후 언제까지 가능한가요?</strong></p><blockquote>상품 수령 후 7일 이내 반품을 접수할 수 있습니다.</blockquote><p>기권: False / 인용: [&#x27;D01&#x27;, &#x27;D06&#x27;]</p><p>응답 328.1ms / 모델 로드 0.7ms / 출력 46 tokens</p><p>실제 LLM 평가: {&#x27;verdict&#x27;: &#x27;supported&#x27;, &#x27;reason&#x27;: &#x27;답변은 제공된 자료에 근거해 반품 접수 기간을 7일 이내로 제시하고 있습니다.&#x27;}</p><details><summary>검색 근거·검사·실행 기록</summary><pre>{
+  &quot;documents&quot;: [
+    {
+      &quot;id&quot;: &quot;D01&quot;,
+      &quot;score&quot;: 0.37865382568448086,
+      &quot;status&quot;: &quot;current&quot;,
+      &quot;title&quot;: &quot;반품 접수&quot;,
+      &quot;text&quot;: &quot;상품 수령 후 7일 이내 반품을 접수합니다. 착용 흔적과 택 제거가 없는 상품만 가능합니다.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;D03&quot;,
+      &quot;score&quot;: 0.1707814445351712,
+      &quot;status&quot;: &quot;current&quot;,
+      &quot;title&quot;: &quot;사이즈 교환&quot;,
+      &quot;text&quot;: &quot;사이즈 교환은 수령 후 7일 이내 신청합니다. 재고가 없으면 교환 대신 반품을 안내합니다.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;D06&quot;,
+      &quot;score&quot;: 0.10432966170103178,
+      &quot;status&quot;: &quot;current&quot;,
+      &quot;title&quot;: &quot;주문 취소&quot;,
+      &quot;text&quot;: &quot;결제 완료 상태에서는 주문 취소가 가능합니다. 출고 준비 이후에는 취소 대신 배송 완료 후 반품을 접수합니다.&quot;
+    }
+  ],
+  &quot;checks&quot;: {
+    &quot;citations_in_context&quot;: true,
+    &quot;citations_unique&quot;: true,
+    &quot;decision_matches_reference&quot;: true,
+    &quot;required_evidence_cited&quot;: true,
+    &quot;answer_citation_consistent&quot;: true
+  },
+  &quot;spans&quot;: [
+    {
+      &quot;name&quot;: &quot;retrieval&quot;,
+      &quot;parent_id&quot;: &quot;0660c561e3c64d24b34e52948bb2d6e1&quot;,
+      &quot;duration_ms&quot;: 5.6,
+      &quot;document_ids&quot;: [
+        &quot;D01&quot;,
+        &quot;D03&quot;,
+        &quot;D06&quot;
+      ]
+    },
+    {
+      &quot;name&quot;: &quot;generation&quot;,
+      &quot;parent_id&quot;: &quot;0660c561e3c64d24b34e52948bb2d6e1&quot;,
+      &quot;duration_ms&quot;: 328.1,
+      &quot;model&quot;: &quot;qwen2.5:1.5b-instruct&quot;
+    },
+    {
+      &quot;name&quot;: &quot;code_checks&quot;,
+      &quot;parent_id&quot;: &quot;0660c561e3c64d24b34e52948bb2d6e1&quot;,
+      &quot;results&quot;: {
+        &quot;citations_in_context&quot;: true,
+        &quot;citations_unique&quot;: true,
+        &quot;decision_matches_reference&quot;: true,
+        &quot;required_evidence_cited&quot;: true,
+        &quot;answer_citation_consistent&quot;: true
+      }
+    },
+    {
+      &quot;name&quot;: &quot;llm_judge&quot;,
+      &quot;parent_id&quot;: &quot;0660c561e3c64d24b34e52948bb2d6e1&quot;,
+      &quot;duration_ms&quot;: 270.5,
+      &quot;result&quot;: {
+        &quot;verdict&quot;: &quot;supported&quot;,
+        &quot;reason&quot;: &quot;답변은 제공된 자료에 근거해 반품 접수 기간을 7일 이내로 제시하고 있습니다.&quot;
+      }
+    }
+  ],
+  &quot;generation&quot;: {
+    &quot;parsed&quot;: {
+      &quot;answer&quot;: &quot;상품 수령 후 7일 이내 반품을 접수할 수 있습니다.&quot;,
+      &quot;citations&quot;: [
+        &quot;D01&quot;,
+        &quot;D06&quot;
+      ],
+      &quot;abstain&quot;: false
+    },
+    &quot;raw&quot;: &quot;{\&quot;answer\&quot;: \&quot;상품 수령 후 7일 이내 반품을 접수할 수 있습니다.\&quot;, \&quot;citations\&quot;: [\&quot;D01\&quot;, \&quot;D06\&quot;], \&quot;abstain\&quot;: false}&quot;,
+    &quot;started_at&quot;: &quot;2026-11-11T11:27:45.484288+00:00&quot;,
+    &quot;ended_at&quot;: &quot;2026-11-11T11:27:45.812428+00:00&quot;,
+    &quot;latency_ms&quot;: 328.1,
+    &quot;load_ms&quot;: 0.7,
+    &quot;input_tokens&quot;: 368,
+    &quot;output_tokens&quot;: 46,
+    &quot;tokens_per_second&quot;: 149.0,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;options&quot;: {
+      &quot;temperature&quot;: 0,
+      &quot;seed&quot;: 11,
+      &quot;num_ctx&quot;: 2048,
+      &quot;num_predict&quot;: 192
+    },
+    &quot;think&quot;: null,
+    &quot;prompt_sha256&quot;: &quot;c65382d8d965e7f1afcba73377d500d8f63d2aac765177989ba009faf93c006c&quot;
+  }
+}</pre></details></article><article><h2>Q03a / baseline</h2><p><strong>사이즈 교환 가능 기간과 왕복 배송비를 알려주세요.</strong></p><blockquote>사이즈 교환의 왕복 배송비는 6000원입니다.</blockquote><p>기권: False / 인용: [&#x27;D04&#x27;, &#x27;D03&#x27;, &#x27;D02&#x27;]</p><p>응답 311.2ms / 모델 로드 0.5ms / 출력 51 tokens</p><p>실제 LLM 평가: {&#x27;verdict&#x27;: &#x27;supported&#x27;, &#x27;reason&#x27;: &#x27;답변은 제공된 자료의 내용을 충분히 반영하고 있습니다.&#x27;}</p><details><summary>검색 근거·검사·실행 기록</summary><pre>{
+  &quot;documents&quot;: [
+    {
+      &quot;id&quot;: &quot;D04&quot;,
+      &quot;score&quot;: 0.4478095352681035,
+      &quot;status&quot;: &quot;current&quot;,
+      &quot;title&quot;: &quot;교환 배송비&quot;,
+      &quot;text&quot;: &quot;단순 변심 사이즈 교환의 왕복 배송비는 6000원입니다. 불량 상품 교환은 무료입니다.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;D03&quot;,
+      &quot;score&quot;: 0.3456573376453431,
+      &quot;status&quot;: &quot;current&quot;,
+      &quot;title&quot;: &quot;사이즈 교환&quot;,
+      &quot;text&quot;: &quot;사이즈 교환은 수령 후 7일 이내 신청합니다. 재고가 없으면 교환 대신 반품을 안내합니다.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;D02&quot;,
+      &quot;score&quot;: 0.0942567866440746,
+      &quot;status&quot;: &quot;current&quot;,
+      &quot;title&quot;: &quot;반품 배송비&quot;,
+      &quot;text&quot;: &quot;단순 변심 반품 배송비는 3000원입니다. 상품 불량 또는 오배송의 반품 배송비는 판매자가 부담합니다.&quot;
+    }
+  ],
+  &quot;checks&quot;: {
+    &quot;citations_in_context&quot;: true,
+    &quot;citations_unique&quot;: true,
+    &quot;decision_matches_reference&quot;: true,
+    &quot;required_evidence_cited&quot;: true,
+    &quot;answer_citation_consistent&quot;: true
+  },
+  &quot;spans&quot;: [
+    {
+      &quot;name&quot;: &quot;retrieval&quot;,
+      &quot;parent_id&quot;: &quot;c9a2222186f84413b134beb9be12e63f&quot;,
+      &quot;duration_ms&quot;: 6.2,
+      &quot;document_ids&quot;: [
+        &quot;D04&quot;,
+        &quot;D03&quot;,
+        &quot;D02&quot;
+      ]
+    },
+    {
+      &quot;name&quot;: &quot;generation&quot;,
+      &quot;parent_id&quot;: &quot;c9a2222186f84413b134beb9be12e63f&quot;,
+      &quot;duration_ms&quot;: 311.2,
+      &quot;model&quot;: &quot;qwen2.5:1.5b-instruct&quot;
+    },
+    {
+      &quot;name&quot;: &quot;code_checks&quot;,
+      &quot;parent_id&quot;: &quot;c9a2222186f84413b134beb9be12e63f&quot;,
+      &quot;results&quot;: {
+        &quot;citations_in_context&quot;: true,
+        &quot;citations_unique&quot;: true,
+        &quot;decision_matches_reference&quot;: true,
+        &quot;required_evidence_cited&quot;: true,
+        &quot;answer_citation_consistent&quot;: true
+      }
+    },
+    {
+      &quot;name&quot;: &quot;llm_judge&quot;,
+      &quot;parent_id&quot;: &quot;c9a2222186f84413b134beb9be12e63f&quot;,
+      &quot;duration_ms&quot;: 300.1,
+      &quot;result&quot;: {
+        &quot;verdict&quot;: &quot;supported&quot;,
+        &quot;reason&quot;: &quot;답변은 제공된 자료의 내용을 충분히 반영하고 있습니다.&quot;
+      }
+    }
+  ],
+  &quot;generation&quot;: {
+    &quot;parsed&quot;: {
+      &quot;answer&quot;: &quot;사이즈 교환의 왕복 배송비는 6000원입니다.&quot;,
+      &quot;citations&quot;: [
+        &quot;D04&quot;,
+        &quot;D03&quot;,
+        &quot;D02&quot;
+      ],
+      &quot;abstain&quot;: false
+    },
+    &quot;raw&quot;: &quot;{\&quot;answer\&quot;: \&quot;사이즈 교환의 왕복 배송비는 6000원입니다.\&quot;, \&quot;citations\&quot;: [\&quot;D04\&quot;, \&quot;D03\&quot;, \&quot;D02\&quot;], \&quot;abstain\&quot;: false}&quot;,
+    &quot;started_at&quot;: &quot;2026-11-11T11:27:46.090569+00:00&quot;,
+    &quot;ended_at&quot;: &quot;2026-11-11T11:27:46.401769+00:00&quot;,
+    &quot;latency_ms&quot;: 311.2,
+    &quot;load_ms&quot;: 0.5,
+    &quot;input_tokens&quot;: 232,
+    &quot;output_tokens&quot;: 51,
+    &quot;tokens_per_second&quot;: 171.2,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;options&quot;: {
+      &quot;temperature&quot;: 0,
+      &quot;seed&quot;: 11,
+      &quot;num_ctx&quot;: 2048,
+      &quot;num_predict&quot;: 192
+    },
+    &quot;think&quot;: null,
+    &quot;prompt_sha256&quot;: &quot;7f4721b3d68329124860dd147a8c3c31199164b6be192ab42417c5649faf9d40&quot;
+  }
+}</pre></details></article><article><h2>Q03a / grounded</h2><p><strong>사이즈 교환 가능 기간과 왕복 배송비를 알려주세요.</strong></p><blockquote>사이즈 교환 기간은 수령 후 7일 이내이며, 왕복 배송비는 6000원입니다. 재고가 없을 경우 교환 대신 반품을 안내합니다.</blockquote><p>기권: False / 인용: [&#x27;D04&#x27;, &#x27;D03&#x27;, &#x27;D02&#x27;]</p><p>응답 541.2ms / 모델 로드 0.6ms / 출력 85 tokens</p><p>실제 LLM 평가: {&#x27;verdict&#x27;: &#x27;supported&#x27;, &#x27;reason&#x27;: &#x27;답변은 제공된 자료에 근거해 이전에 언급된 사이즈 교환 기간과 배송비를 정확히 제공합니다.&#x27;}</p><details><summary>검색 근거·검사·실행 기록</summary><pre>{
+  &quot;documents&quot;: [
+    {
+      &quot;id&quot;: &quot;D04&quot;,
+      &quot;score&quot;: 0.4478095352681035,
+      &quot;status&quot;: &quot;current&quot;,
+      &quot;title&quot;: &quot;교환 배송비&quot;,
+      &quot;text&quot;: &quot;단순 변심 사이즈 교환의 왕복 배송비는 6000원입니다. 불량 상품 교환은 무료입니다.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;D03&quot;,
+      &quot;score&quot;: 0.3456573376453431,
+      &quot;status&quot;: &quot;current&quot;,
+      &quot;title&quot;: &quot;사이즈 교환&quot;,
+      &quot;text&quot;: &quot;사이즈 교환은 수령 후 7일 이내 신청합니다. 재고가 없으면 교환 대신 반품을 안내합니다.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;D02&quot;,
+      &quot;score&quot;: 0.0942567866440746,
+      &quot;status&quot;: &quot;current&quot;,
+      &quot;title&quot;: &quot;반품 배송비&quot;,
+      &quot;text&quot;: &quot;단순 변심 반품 배송비는 3000원입니다. 상품 불량 또는 오배송의 반품 배송비는 판매자가 부담합니다.&quot;
+    }
+  ],
+  &quot;checks&quot;: {
+    &quot;citations_in_context&quot;: true,
+    &quot;citations_unique&quot;: true,
+    &quot;decision_matches_reference&quot;: true,
+    &quot;required_evidence_cited&quot;: true,
+    &quot;answer_citation_consistent&quot;: true
+  },
+  &quot;spans&quot;: [
+    {
+      &quot;name&quot;: &quot;retrieval&quot;,
+      &quot;parent_id&quot;: &quot;bde471247abb49bd927b4208147b1161&quot;,
+      &quot;duration_ms&quot;: 5.8,
+      &quot;document_ids&quot;: [
+        &quot;D04&quot;,
+        &quot;D03&quot;,
+        &quot;D02&quot;
+      ]
+    },
+    {
+      &quot;name&quot;: &quot;generation&quot;,
+      &quot;parent_id&quot;: &quot;bde471247abb49bd927b4208147b1161&quot;,
+      &quot;duration_ms&quot;: 541.2,
+      &quot;model&quot;: &quot;qwen2.5:1.5b-instruct&quot;
+    },
+    {
+      &quot;name&quot;: &quot;code_checks&quot;,
+      &quot;parent_id&quot;: &quot;bde471247abb49bd927b4208147b1161&quot;,
+      &quot;results&quot;: {
+        &quot;citations_in_context&quot;: true,
+        &quot;citations_unique&quot;: true,
+        &quot;decision_matches_reference&quot;: true,
+        &quot;required_evidence_cited&quot;: true,
+        &quot;answer_citation_consistent&quot;: true
+      }
+    },
+    {
+      &quot;name&quot;: &quot;llm_judge&quot;,
+      &quot;parent_id&quot;: &quot;bde471247abb49bd927b4208147b1161&quot;,
+      &quot;duration_ms&quot;: 331.0,
+      &quot;result&quot;: {
+        &quot;verdict&quot;: &quot;supported&quot;,
+        &quot;reason&quot;: &quot;답변은 제공된 자료에 근거해 이전에 언급된 사이즈 교환 기간과 배송비를 정확히 제공합니다.&quot;
+      }
+    }
+  ],
+  &quot;generation&quot;: {
+    &quot;parsed&quot;: {
+      &quot;answer&quot;: &quot;사이즈 교환 기간은 수령 후 7일 이내이며, 왕복 배송비는 6000원입니다. 재고가 없을 경우 교환 대신 반품을 안내합니다.&quot;,
+      &quot;citations&quot;: [
+        &quot;D04&quot;,
+        &quot;D03&quot;,
+        &quot;D02&quot;
+      ],
+      &quot;abstain&quot;: false
+    },
+    &quot;raw&quot;: &quot;{\n  \&quot;answer\&quot;: \&quot;사이즈 교환 기간은 수령 후 7일 이내이며, 왕복 배송비는 6000원입니다. 재고가 없을 경우 교환 대신 반품을 안내합니다.\&quot;,\n  \&quot;citations\&quot;: [\&quot;D04\&quot;, \&quot;D03\&quot;, \&quot;D02\&quot;],\n  \&quot;abstain\&quot;: false\n}&quot;,
+    &quot;started_at&quot;: &quot;2026-11-11T11:27:46.708953+00:00&quot;,
+    &quot;ended_at&quot;: &quot;2026-11-11T11:27:47.250122+00:00&quot;,
+    &quot;latency_ms&quot;: 541.2,
+    &quot;load_ms&quot;: 0.6,
+    &quot;input_tokens&quot;: 371,
+    &quot;output_tokens&quot;: 85,
+    &quot;tokens_per_second&quot;: 160.9,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;options&quot;: {
+      &quot;temperature&quot;: 0,
+      &quot;seed&quot;: 11,
+      &quot;num_ctx&quot;: 2048,
+      &quot;num_predict&quot;: 192
+    },
+    &quot;think&quot;: null,
+    &quot;prompt_sha256&quot;: &quot;e14b02cb44de0b97779599e9646ab91961a0aa7a0f581d37177ae249e2dca015&quot;
+  }
+}</pre></details></article><article><h2>Q24a / baseline</h2><p><strong>검정 운동화 270 사이즈 현재 재고는?</strong></p><blockquote>현재 재고는 없습니다.</blockquote><p>기권: False / 인용: [&#x27;D03&#x27;, &#x27;D04&#x27;]</p><p>응답 205.4ms / 모델 로드 0.5ms / 출력 33 tokens</p><p>실제 LLM 평가: {&#x27;verdict&#x27;: &#x27;supported&#x27;, &#x27;reason&#x27;: &#x27;답변은 제공된 자료에 근거해 검정 운동화 270 사이즈의 현재 재고가 없습니다고 답변하고 있습니다.&#x27;}</p><details><summary>검색 근거·검사·실행 기록</summary><pre>{
+  &quot;documents&quot;: [
+    {
+      &quot;id&quot;: &quot;D03&quot;,
+      &quot;score&quot;: 0.30742406349182905,
+      &quot;status&quot;: &quot;current&quot;,
+      &quot;title&quot;: &quot;사이즈 교환&quot;,
+      &quot;text&quot;: &quot;사이즈 교환은 수령 후 7일 이내 신청합니다. 재고가 없으면 교환 대신 반품을 안내합니다.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;D04&quot;,
+      &quot;score&quot;: 0.16567271852348617,
+      &quot;status&quot;: &quot;current&quot;,
+      &quot;title&quot;: &quot;교환 배송비&quot;,
+      &quot;text&quot;: &quot;단순 변심 사이즈 교환의 왕복 배송비는 6000원입니다. 불량 상품 교환은 무료입니다.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;D15&quot;,
+      &quot;score&quot;: 0.053323502255093566,
+      &quot;status&quot;: &quot;current&quot;,
+      &quot;title&quot;: &quot;현금 영수증&quot;,
+      &quot;text&quot;: &quot;현금 결제 주문의 현금 영수증은 구매 확정 이후 주문 상세에서 발급 신청합니다.&quot;
+    }
+  ],
+  &quot;checks&quot;: {
+    &quot;citations_in_context&quot;: true,
+    &quot;citations_unique&quot;: true,
+    &quot;decision_matches_reference&quot;: false,
+    &quot;required_evidence_cited&quot;: null,
+    &quot;answer_citation_consistent&quot;: true
+  },
+  &quot;spans&quot;: [
+    {
+      &quot;name&quot;: &quot;retrieval&quot;,
+      &quot;parent_id&quot;: &quot;3c362252861c4ade81edcd5cf9380672&quot;,
+      &quot;duration_ms&quot;: 6.6,
+      &quot;document_ids&quot;: [
+        &quot;D03&quot;,
+        &quot;D04&quot;,
+        &quot;D15&quot;
+      ]
+    },
+    {
+      &quot;name&quot;: &quot;generation&quot;,
+      &quot;parent_id&quot;: &quot;3c362252861c4ade81edcd5cf9380672&quot;,
+      &quot;duration_ms&quot;: 205.4,
+      &quot;model&quot;: &quot;qwen2.5:1.5b-instruct&quot;
+    },
+    {
+      &quot;name&quot;: &quot;code_checks&quot;,
+      &quot;parent_id&quot;: &quot;3c362252861c4ade81edcd5cf9380672&quot;,
+      &quot;results&quot;: {
+        &quot;citations_in_context&quot;: true,
+        &quot;citations_unique&quot;: true,
+        &quot;decision_matches_reference&quot;: false,
+        &quot;required_evidence_cited&quot;: null,
+        &quot;answer_citation_consistent&quot;: true
+      }
+    },
+    {
+      &quot;name&quot;: &quot;llm_judge&quot;,
+      &quot;parent_id&quot;: &quot;3c362252861c4ade81edcd5cf9380672&quot;,
+      &quot;duration_ms&quot;: 368.1,
+      &quot;result&quot;: {
+        &quot;verdict&quot;: &quot;supported&quot;,
+        &quot;reason&quot;: &quot;답변은 제공된 자료에 근거해 검정 운동화 270 사이즈의 현재 재고가 없습니다고 답변하고 있습니다.&quot;
+      }
+    }
+  ],
+  &quot;generation&quot;: {
+    &quot;parsed&quot;: {
+      &quot;answer&quot;: &quot;현재 재고는 없습니다.&quot;,
+      &quot;citations&quot;: [
+        &quot;D03&quot;,
+        &quot;D04&quot;
+      ],
+      &quot;abstain&quot;: false
+    },
+    &quot;raw&quot;: &quot;{\&quot;answer\&quot;: \&quot;현재 재고는 없습니다.\&quot;, \&quot;citations\&quot;: [\&quot;D03\&quot;, \&quot;D04\&quot;], \&quot;abstain\&quot;: false}&quot;,
+    &quot;started_at&quot;: &quot;2026-11-11T11:27:47.589070+00:00&quot;,
+    &quot;ended_at&quot;: &quot;2026-11-11T11:27:47.794471+00:00&quot;,
+    &quot;latency_ms&quot;: 205.4,
+    &quot;load_ms&quot;: 0.5,
+    &quot;input_tokens&quot;: 219,
+    &quot;output_tokens&quot;: 33,
+    &quot;tokens_per_second&quot;: 172.9,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;options&quot;: {
+      &quot;temperature&quot;: 0,
+      &quot;seed&quot;: 11,
+      &quot;num_ctx&quot;: 2048,
+      &quot;num_predict&quot;: 192
+    },
+    &quot;think&quot;: null,
+    &quot;prompt_sha256&quot;: &quot;b6c48b26bd38c1184db94807cb28c315cba9e2f5d911290c3770cc883f7f1590&quot;
+  }
+}</pre></details></article><article><h2>Q24a / grounded</h2><p><strong>검정 운동화 270 사이즈 현재 재고는?</strong></p><blockquote>검정 운동화 270 사이즈의 재고는 확인할 수 없습니다.</blockquote><p>기권: False / 인용: [&#x27;D03&#x27;, &#x27;D04&#x27;, &#x27;D15&#x27;]</p><p>응답 368.2ms / 모델 로드 0.7ms / 출력 52 tokens</p><p>실제 LLM 평가: {&#x27;verdict&#x27;: &#x27;unsupported&#x27;, &#x27;reason&#x27;: &#x27;자료는 검정 운동화 270 사이즈의 재고에 대한 정보를 제공하지 않아 근거가 부족합니다.&#x27;}</p><details><summary>검색 근거·검사·실행 기록</summary><pre>{
+  &quot;documents&quot;: [
+    {
+      &quot;id&quot;: &quot;D03&quot;,
+      &quot;score&quot;: 0.30742406349182905,
+      &quot;status&quot;: &quot;current&quot;,
+      &quot;title&quot;: &quot;사이즈 교환&quot;,
+      &quot;text&quot;: &quot;사이즈 교환은 수령 후 7일 이내 신청합니다. 재고가 없으면 교환 대신 반품을 안내합니다.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;D04&quot;,
+      &quot;score&quot;: 0.16567271852348617,
+      &quot;status&quot;: &quot;current&quot;,
+      &quot;title&quot;: &quot;교환 배송비&quot;,
+      &quot;text&quot;: &quot;단순 변심 사이즈 교환의 왕복 배송비는 6000원입니다. 불량 상품 교환은 무료입니다.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;D15&quot;,
+      &quot;score&quot;: 0.053323502255093566,
+      &quot;status&quot;: &quot;current&quot;,
+      &quot;title&quot;: &quot;현금 영수증&quot;,
+      &quot;text&quot;: &quot;현금 결제 주문의 현금 영수증은 구매 확정 이후 주문 상세에서 발급 신청합니다.&quot;
+    }
+  ],
+  &quot;checks&quot;: {
+    &quot;citations_in_context&quot;: true,
+    &quot;citations_unique&quot;: true,
+    &quot;decision_matches_reference&quot;: false,
+    &quot;required_evidence_cited&quot;: null,
+    &quot;answer_citation_consistent&quot;: true
+  },
+  &quot;spans&quot;: [
+    {
+      &quot;name&quot;: &quot;retrieval&quot;,
+      &quot;parent_id&quot;: &quot;6242d1d331194f46b33a8d61b510f1c6&quot;,
+      &quot;duration_ms&quot;: 5.8,
+      &quot;document_ids&quot;: [
+        &quot;D03&quot;,
+        &quot;D04&quot;,
+        &quot;D15&quot;
+      ]
+    },
+    {
+      &quot;name&quot;: &quot;generation&quot;,
+      &quot;parent_id&quot;: &quot;6242d1d331194f46b33a8d61b510f1c6&quot;,
+      &quot;duration_ms&quot;: 368.2,
+      &quot;model&quot;: &quot;qwen2.5:1.5b-instruct&quot;
+    },
+    {
+      &quot;name&quot;: &quot;code_checks&quot;,
+      &quot;parent_id&quot;: &quot;6242d1d331194f46b33a8d61b510f1c6&quot;,
+      &quot;results&quot;: {
+        &quot;citations_in_context&quot;: true,
+        &quot;citations_unique&quot;: true,
+        &quot;decision_matches_reference&quot;: false,
+        &quot;required_evidence_cited&quot;: null,
+        &quot;answer_citation_consistent&quot;: true
+      }
+    },
+    {
+      &quot;name&quot;: &quot;llm_judge&quot;,
+      &quot;parent_id&quot;: &quot;6242d1d331194f46b33a8d61b510f1c6&quot;,
+      &quot;duration_ms&quot;: 316.3,
+      &quot;result&quot;: {
+        &quot;verdict&quot;: &quot;unsupported&quot;,
+        &quot;reason&quot;: &quot;자료는 검정 운동화 270 사이즈의 재고에 대한 정보를 제공하지 않아 근거가 부족합니다.&quot;
+      }
+    }
+  ],
+  &quot;generation&quot;: {
+    &quot;parsed&quot;: {
+      &quot;answer&quot;: &quot;검정 운동화 270 사이즈의 재고는 확인할 수 없습니다.&quot;,
+      &quot;citations&quot;: [
+        &quot;D03&quot;,
+        &quot;D04&quot;,
+        &quot;D15&quot;
+      ],
+      &quot;abstain&quot;: false
+    },
+    &quot;raw&quot;: &quot;{\&quot;answer\&quot;: \&quot;검정 운동화 270 사이즈의 재고는 확인할 수 없습니다.\&quot;, \&quot;citations\&quot;: [\&quot;D03\&quot;, \&quot;D04\&quot;, \&quot;D15\&quot;], \&quot;abstain\&quot;: false}&quot;,
+    &quot;started_at&quot;: &quot;2026-11-11T11:27:48.169825+00:00&quot;,
+    &quot;ended_at&quot;: &quot;2026-11-11T11:27:48.538011+00:00&quot;,
+    &quot;latency_ms&quot;: 368.2,
+    &quot;load_ms&quot;: 0.7,
+    &quot;input_tokens&quot;: 358,
+    &quot;output_tokens&quot;: 52,
+    &quot;tokens_per_second&quot;: 148.5,
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;options&quot;: {
+      &quot;temperature&quot;: 0,
+      &quot;seed&quot;: 11,
+      &quot;num_ctx&quot;: 2048,
+      &quot;num_predict&quot;: 192
+    },
+    &quot;think&quot;: null,
+    &quot;prompt_sha256&quot;: &quot;82ef8b23afcfdef443c88753cead3b7ec3a311309e9e902aafeb11fb6a3518a0&quot;
+  }
+}</pre></details></article></main></html>

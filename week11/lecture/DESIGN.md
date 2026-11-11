@@ -10,35 +10,44 @@
 - 본문은 과도한 축약 대신 입력·판단 기준·실패 사례를 구체적으로 설명합니다.
 - 순서가 있는 과정만 번호를 사용합니다. 화살표를 긴 문장 연결에 사용하지 않습니다.
 - 똑같은 카드의 반복을 피하고 비교표·흐름·데이터 계약·계산·실험 차트·연구 그림·실제 화면·질문으로 구조를 바꿉니다.
-- 6개 Notebook 진입 장표는 학습자가 실행·확인·변경을 찾기 쉽도록 일관된 형식을 유지합니다.
+- 8개 Notebook 진입 장표는 학습자가 실행·확인·변경을 찾기 쉽도록 일관된 형식을 유지합니다.
 
 ## 기능
 
 키보드 이동, 목차, 페이지 번호, 설명 노트, hash 복원, 그림 확대, 전체 화면, 전체 인쇄.
 이미지·폰트·CSS·JS를 내장하여 HTML 하나로 공유합니다.
 모바일에서는 강제 축소 대신 세로 배치하고 차트는 수치 표로 제공합니다.
-JS 없이도 76쪽을 문서 순서로 읽을 수 있습니다.
+JS 없이도 52쪽을 문서 순서로 읽을 수 있습니다.
 
 ## Impeccable·Hallmark 적용
 
 공식 지침의 내용 우선·시각 위계·토큰·대비·여백·상태·실제 렌더 검수 원칙을 사용했습니다.
 새 브랜드 선택이나 재승인을 요구하는 흐름은 사용자가 이미 제시한 방향에 따라 반복하지 않았습니다.
-웹사이트용 6–9개 섹션, 마케팅 행동 유도, 사진 요구는 76쪽 수업 자료에 적용하지 않았습니다.
+웹사이트용 6–9개 섹션, 마케팅 행동 유도, 사진 요구는 52쪽 수업 자료에 적용하지 않았습니다.
 
-Impeccable detector는 변경 HTML/CSS에서 항목 0개를 보고했습니다.
+이번 개정은 Impeccable distill 지침에 따라 반복 정의를 통합하고, 52쪽의 단계별 목차와 실제 서비스 도식을 추가했습니다.
 Hallmark 정적 검사에서 색상 리터럴·간격·범위 표기를 정리했습니다.
 흰 배경은 사용자의 명시적 팔레트이므로 absolute surface로 기록했습니다.
 Hallmark 자체 render tier는 로컬 puppeteer-core 부재로 실행되지 않았으며, 이를 통과했다고 표시하지 않습니다.
-별도 Playwright/Chrome으로 76쪽, 모바일, 키보드·목차·그림 확대·인쇄·보고서 기능을 검증했습니다.
-Hallmark 지침에 따른 독립 검수에서 그림 설명 불일치·작은 캡처·모바일 차트 글씨 문제를 발견해 수정했습니다.
+별도 Playwright/Chrome으로 52쪽, 모바일, 키보드·목차·그림 확대·인쇄·보고서 기능을 검증했습니다.
+초기 버전의 독립 검수에서 지적된 가독성 기준을 유지합니다. 개정판에서는 화살표와 라벨의 간격, 참고 기준의 별도 흐름, 제품 화면 확대와 모바일 대체 텍스트를 점검합니다.
 
 ## 재생성
 
 1. python -m week11.lab.run_eval --out week11/lab/sample
-2. node scripts/capture_week11_lab.mjs
-3. python scripts/build_week11_html.py
-4. node scripts/verify_week11_browser.mjs
+2. python -m week11.lab.ollama_lab --limit 3 --judge --out week11/lab/sample/ollama
+3. node scripts/capture_week11_lab.mjs
+4. python scripts/build_week11_html.py
+5. node scripts/verify_week11_browser.mjs
 
 Node 검증 스크립트는 개발자용 Playwright와 설치된 Chrome을 사용합니다.
 학생 실습에는 Node나 Playwright가 필요 없습니다.
 PDF는 HTML의 print CSS와 Chrome 인쇄 엔진으로 생성하며 모든 페이지를 점검합니다.
+
+## 계층과 근거
+
+서비스 구조 → 평가 데이터 → 검색 비교 → 실패 분석 → 실제 생성 → 평가자 → 운영 도구 → 배포 판단 순서입니다. 100분 중 실제 Ollama 생성·평가를 위한 시간을 따로 배정합니다. 자세한 코드와 조건은 Notebook·WALKTHROUGH.md·설명 노트로 이어집니다.
+
+핵심 SVG는 서비스 구조, 두 버전의 평가, 기권 분기, LangSmith 실험 비교, 배포 승인 흐름입니다. 사각형은 처리·산출물, 마름모는 배포 기준 판단에 사용합니다. 출처 기반 재구성이며 단일 산업 표준이라고 주장하지 않습니다.
+
+52쪽의 내용 구성은 `scripts/week11_refinement.py`, 기존 설명·도식 생성 함수는 `scripts/build_week11_html.py`에서 관리합니다. 생성 보고서의 실패·오판도 실제 출력 그대로 반영합니다.
