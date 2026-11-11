@@ -1,5 +1,6 @@
 """Build the Docker/Langfuse trace and release-comparison teaching notebooks."""
 
+import json
 from pathlib import Path
 
 import nbformat as n
@@ -25,6 +26,10 @@ by_id = {q['id']: q for q in load_data()[1]}
 
 
 def build(name, title, intro, steps):
+    guide = json.loads((ROOT / "week11/lab/notebook-steps.json").read_text())[name[:2]]
+    assert len(guide["steps"]) == len(steps) + 1
+    cell_map = "\n\n**위에서부터 코드 셀을 세는 실행 지도**\n\nVS Code 왼쪽 `[숫자]`는 실행 횟수입니다. 아래 번호는 설명 셀을 제외한 코드 셀 순서입니다. 첫 셀부터 한 개씩 실행하고 완료 후 다음 셀로 이동합니다.\n\n| 코드 셀 | 단계 | 화면에서 누를 곳 | 확인 결과 |\n|---|---|---|---|\n"
+    cell_map += "\n".join(f"| {i} | {heading} | {screen} | {result} |" for i, (heading, screen, result) in enumerate(guide["steps"], 1))
     cells = [
         n.v4.new_markdown_cell(f"""# {title}
 
@@ -45,7 +50,7 @@ Ollama 앱과 Docker Desktop이 실행 중이어야 합니다. [Langfuse 화면]
 
 `.venv` Python 3.11 커널에서 위부터 Shift+Enter. 다른 Notebook의 변수는 필요 없습니다.
 모델의 의미 오류는 관찰 대상이며, 연결 실패·파싱 오류를 가짜 성공으로 대체하지 않습니다.
-"""),
+""" + cell_map),
         n.v4.new_code_cell(
             SETUP
             if name.startswith("09")
@@ -204,6 +209,7 @@ C의 실시간 조회 요청은 실제 서비스 정책으로 중단하며 모�
             """from week11.lab.release_lab import ensure_dataset, run_version, release_decision, DEFAULT_POLICY
 incident = traced_question(lf, ollama, by_id['Q24a'], prompt_version='baseline')
 wait_for_trace(lf, incident)
+display(Markdown(f"[재고 질문 관찰 요청 열기]({incident['url']})"))
 print(incident['answer'])
 print('가설 B: 근거 제한 프롬프트로 개선 / 가설 C: 미지원 기능을 서비스에서 차단')""",
             "실제 답변이 우연히 올바르더라도 경계 사례로 유지합니다. 실패 사례만 모으지 않고 정상 사례도 함께 넣습니다.",
@@ -246,6 +252,8 @@ print('정책 안내:', capability_response('policy_qa'))
 print('미지원 실시간 조회:', capability_response('live_inventory'))
 guarded = run_version(lf, ollama, dataset, 'capability_guard')
 display(Markdown(f"[C 기능 정책 실험 열기]({guarded['experiment_url']})"))
+guard_case = next(row for row in guarded['rows'] if row['question_id'] == 'Q24a')
+display(Markdown(f"[C 재고 질문 요청 열기]({guard_case['output']['url']})"))
 decision_c = release_decision(baseline, guarded, POLICY)
 print(decision_c['decision'])
 display(pd.DataFrame(decision_c['checks']))""",

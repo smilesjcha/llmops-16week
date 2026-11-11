@@ -239,3 +239,13 @@ python -m pytest week11/lab/tests -q
 
 [화면별 시연 안내](https://smilesjcha.github.io/llmops-16week/week11/lab/demo/)에는 클릭 위치, 질문, 확인 결과, 설명 포인트와 시간을 정리했습니다.
 09·10의 마지막 기록 저장 셀을 실행한 후 `python -m week11.lab.demo_guide`를 실행하면 `week11/lab/reports/langfuse/instructor-console.html`에 이번 실행의 실제 trace·비교 URL이 들어갑니다. 브라우저로 열어 사용합니다. 실행 결과와 안내 파일은 Git 제외입니다.
+
+
+## 09·10 한 셀씩 실행하는 순서
+
+[코드 셀별 실행표](https://smilesjcha.github.io/llmops-16week/week11/lab/demo/#notebooks)와 각 Notebook 첫 설명을 참고합니다. 번호는 **설명 셀을 제외하고 위에서부터 세는 코드 셀 순서**입니다. VS Code의 `[1]`, `[2]`는 실행 횟수이므로 셀 번호로 사용하지 않습니다.
+
+- 09: 환경 → 최소 생성 → 전체 요청 → 서버 저장 → 점수 → 재고 비교 → 사람 검토 → 저장 → 개선 정리.
+- 10: 환경 → 경계 요청 → 고정 데이터 → A → B → C → 비교 → 서버 저장 확인 → 결과 저장.
+- 각 셀의 완료 후 다음 셀로 이동합니다. 10번 첫 환경 셀도 다시 실행합니다.
+- 같은 실험이 여러 번 쌓였다면 현재 Notebook 출력의 링크를 사용합니다. 데이터의 source trace는 해당 데이터가 처음 만들어진 요청일 수 있습니다.

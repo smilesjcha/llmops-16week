@@ -19,6 +19,8 @@
 
 오프라인 이용도 가능합니다. [강의안 원본](lecture/index.html)이나 [보고서 원본](lab/sample/report.html)의 **Download raw file**로 저장한 뒤 브라우저로 여세요. 글꼴·그림·스크립트가 내장된 단일 파일입니다. 공개 보고서는 수업용 합성 자료이며 학생 제출물이 아닙니다. 직접 실행한 결과는 로컬 `week11/lab/reports/report.html`에서 확인합니다.
 
+**한 셀씩 예행연습:** [09·10 코드 셀 번호·클릭 위치·확인 결과](https://smilesjcha.github.io/llmops-16week/week11/lab/demo/#notebooks). Notebook 첫 설명에도 같은 표가 있습니다.
+
 **오늘의 핵심 실습:** [09·10번 Docker·VS Code 준비·100분 시간표](lab/langfuse/README.md) · [실제 A/B/C 비교 결과](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/langfuse/).
 
 - [11주차 화면별 시연 순서·사전 점검](https://smilesjcha.github.io/llmops-16week/week11/lab/demo/): 준비 → 요청 트리 → 입출력 → 점수 → A/B/C 실험 → 배포 판단.
@@ -48,6 +50,7 @@
 - 4·5·21·44쪽의 흐름 보기 / F로 다음 단계, 전체 보기로 복원
 - 그림 확대와 Escape로 닫기
 - 16쪽에서 검색 개수 k를 바꿔 지표 계산
+- 전체 화면 버튼 또는 P: 16:9 비율로 화면에 맞게 확대. Esc/P로 종료. 화면 상·하단에 포인터를 옮기면 메뉴 표시
 - 인쇄 / PDF 버튼: 전체 64쪽 출력, 노트·조작 버튼 제외
 
 JS를 꺼도 전체 장표는 문서 순서대로 읽을 수 있습니다. 휴대폰에서는 내용을 세로로 배치하며 차트 수치는 표로 제공합니다. 발표에는 데스크톱 브라우저를 권장합니다.

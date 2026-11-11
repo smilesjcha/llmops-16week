@@ -49,3 +49,6 @@
 - 46·47·51쪽: 큰 설명을 먼저 안내한 뒤 ‘그림 확대 → 원본 크기’ 또는 실제 Langfuse 링크로 이동.
 - [클릭 순서·학생 질문·확인 결과](https://smilesjcha.github.io/llmops-16week/week11/lab/demo/)
 - `python -m week11.lab.demo_guide`로 최신 실제 실행 URL을 모은 로컬 `reports/langfuse/instructor-console.html` 생성.
+
+
+전체화면 발표는 하단 **전체 화면** 버튼 또는 **P**로 시작합니다. 메뉴는 자동으로 숨겨지며 포인터를 위·아래 가장자리로 옮기면 다시 나타납니다. **Esc/P**로 종료합니다. 16:9가 아닌 화면의 여백은 비율 유지용입니다. 최신 배포 이후 기존 탭은 새로고침합니다.

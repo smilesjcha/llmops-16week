@@ -1,0 +1,32 @@
+{
+  "09": {
+    "filename": "09_langfuse_ollama_tracing.ipynb",
+    "title": "09 요청 한 건의 원인 추적",
+    "steps": [
+      ["환경 연결", "Langfuse 로그인 → Week 11 Ollama", "첫 코드 셀의 Python 3.11·모델 확인. 오류가 없으면 다음 셀로 이동."],
+      ["1. 최소 SDK 예제", "출력 ‘실제 생성 요청 열기’ → Tree → ollama-generation → Preview", "mini-ollama-request 아래 generation 1개. 실제 Input/Output·모델·토큰 확인. 저장 전이면 몇 초 뒤 같은 링크 새로고침."],
+      ["2. 전체 요청", "출력 ‘Q03a 전체 요청 열기’", "교환 기간·비용 질문의 실제 답변 생성. 다음 코드 셀까지 실행한 뒤 화면 확인."],
+      ["3. 서버 저장 확인", "Tree → 01-retrieval → Output; 02-ollama-answer → Input/Output", "‘실제 부모 1개 + 하위 작업 4개 확인’. observations 5개, generation 2개. 생성 입력에 참고 정답이 없는지 확인."],
+      ["4. 점수와 근거", "Tree의 rag-Q03a-grounded 선택 → Scores; 04-ollama-judge → Preview", "코드 검사와 llm_groundedness 분리. 교환 7일·재고 조건·왕복 6000원과 실제 답변 대조. True나 supported는 의미 정확성 보증이 아님."],
+      ["5. 재고 질문 비교", "출력 baseline·grounded 요청 링크를 각각 열기", "검색 문서에는 실시간 재고가 없음. 답변 문장·citations·abstain·judge 판정을 비교."],
+      ["6. 사람 검토", "grounded 요청 → Scores → human_review", "답변을 읽은 뒤 REVIEW와 COMMENT 입력 후 실행. None이면 ‘미실행’이 정상이며 점수가 생기지 않음."],
+      ["7. 결과 저장", "VS Code → week11/lab/reports/langfuse/lesson09-traces.json", "요청 3건 저장. 공개 GitHub에 자동 업로드되지 않음."],
+      ["8. 개선 정리", "VS Code 결과표", "관찰·검토·다음 실험의 연결 확인. 이후 10번 파일로 이동."]
+    ]
+  },
+  "10": {
+    "filename": "10_langfuse_experiments_release_gate.ipynb",
+    "title": "10 같은 질문의 A/B/C 실험",
+    "steps": [
+      ["환경 연결", "Langfuse의 Week 11 Ollama", "10번에서도 첫 코드 셀을 실행. 09번 변수에 의존하지 않음."],
+      ["1. 경계 사례", "출력 ‘재고 질문 관찰 요청 열기’ → 생성 입력·출력", "재고 질문의 실제 응답. 이번 실행이 맞았더라도 경계 사례로 유지."],
+      ["2. 평가 데이터", "Datasets → 셀에 출력된 week11-release-… 이름", "정상 3개 + 재고 1개, 총 4개. Input과 Expected output을 구분. 기존 데이터의 source trace는 최초 등록 요청일 수 있음."],
+      ["3. A 기준선", "출력 ‘A 기준선 실험 열기’", "한 실험의 질문 4개와 실제 출력·지표. 다음 셀 실행 전 완료 확인."],
+      ["4. B 프롬프트", "출력 ‘B 프롬프트 개선 실험 열기’", "같은 모델·데이터로 지시만 변경. decision_b와 실패한 checks 확인. 결과가 항상 좋아지지는 않음."],
+      ["5. C 기능 정책", "출력 ‘C 기능 정책 실험 열기’와 ‘C 재고 질문 요청 열기’", "Q24a의 capability-check·contract-checks 확인. 이 경로는 generation 없음, judge not_run. 정상 3건에는 실제 모델 호출."],
+      ["6. 비교와 판단", "A 실험 → Compare에서 이번 B/C 선택 → Display → Score matrix 또는 Grid", "Score matrix로 structural_pass·false_accept·generation_ms, Grid로 실제 답변 확인. Notebook의 HOLD/REVIEW 이유와 대조."],
+      ["7. 서버 검증", "VS Code 저장 확인 표 / 연결된 trace", "3개 실험 × 4개 요청, 총 12개 저장 확인. C 재고 경로의 작업 수는 다른 요청보다 적은 것이 정상."],
+      ["8. 결과 저장", "VS Code → week11/lab/reports/langfuse/release-comparison.json", "A/B/C 결과와 판단 기록 저장. 이어 python -m week11.lab.demo_guide로 이번 실행의 바로가기 생성."]
+    ]
+  }
+}

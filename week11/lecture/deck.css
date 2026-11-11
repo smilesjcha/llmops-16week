@@ -104,23 +104,7 @@ img.screenshot{max-height:440px;border:1px solid var(--rule)}
 .range-control{display:flex;align-items:center;gap:20px;font-size:22px}
 .range-control input{width:220px;padding:0;accent-color:var(--blue)}
 #metric-live{min-height:2.8em;font-size:27px;font-weight:700;line-height:1.45}
-@media screen and (max-width:1100px), screen and (max-height:640px){
- body{font-size:19px}.js .deck-shell,.deck-shell{width:100%;height:auto;margin:0 auto 100px;max-width:100%}
- .slide,.js .slide{width:100%;height:auto;min-height:calc(100dvh - 96px);padding:32px 24px;transform:none;gap:24px}
- .slide h1{font-size:46px}.slide h2{font-size:34px}.slide h3{font-size:25px}.subtitle{font-size:19px}
- .body{min-height:0;gap:28px}.two,.two.wide-left,.two.wide-right,.thirds,.bookend{grid-template-columns:minmax(0,1fr);gap:28px}
- .statement,.section-opening .statement{font-size:38px}.quote{font-size:27px}.big{font-size:46px}
- .row{grid-template-columns:minmax(0,1fr);gap:12px;padding:20px 0}.row p{font-size:20px}
- .flow{flex-direction:column;gap:12px}.step{padding:20px}.connector{display:none}
- table,.small-table table{font-size:16px}th,.small-table th{font-size:16px}th,td,.small-table td,.small-table th{padding:12px 8px;word-break:normal;overflow-wrap:anywhere}
- pre{font-size:16px;padding:16px}.formula{font-size:21px}
- .roadmap{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.roadmap div{font-size:17px;padding:12px}
- figure img{max-height:none}.chart text{font-size:24px}
- .slide footer{font-size:14px;align-items:start}.slide footer .source{max-width:72%}
- .js .controls{gap:8px;padding:8px;flex-wrap:wrap;font-size:14px}
- .controls button{padding:8px 8px;font-size:14px}.controls #jump-label,.controls #jump,.controls #fullscreen{display:none}
- .overview-list{grid-template-columns:minmax(0,1fr)}#overview{padding:24px}
- .range-control{flex-wrap:wrap;font-size:19px}
+@media screen and (max-width:1100px), screen and (max-height:640px){:root:not(.presentation-mode) body{font-size:19px}:root.js:not(.presentation-mode) .deck-shell,:root:not(.presentation-mode) .deck-shell{width:100%;height:auto;margin:0 auto 100px;max-width:100%}:root:not(.presentation-mode) .slide,:root.js:not(.presentation-mode) .slide{width:100%;height:auto;min-height:calc(100dvh - 96px);padding:32px 24px;transform:none;gap:24px}:root:not(.presentation-mode) .slide h1{font-size:46px}:root:not(.presentation-mode) .slide h2{font-size:34px}:root:not(.presentation-mode) .slide h3{font-size:25px}:root:not(.presentation-mode) .subtitle{font-size:19px}:root:not(.presentation-mode) .body{min-height:0;gap:28px}:root:not(.presentation-mode) .two,:root:not(.presentation-mode) .two.wide-left,:root:not(.presentation-mode) .two.wide-right,:root:not(.presentation-mode) .thirds,:root:not(.presentation-mode) .bookend{grid-template-columns:minmax(0,1fr);gap:28px}:root:not(.presentation-mode) .statement,:root:not(.presentation-mode) .section-opening .statement{font-size:38px}:root:not(.presentation-mode) .quote{font-size:27px}:root:not(.presentation-mode) .big{font-size:46px}:root:not(.presentation-mode) .row{grid-template-columns:minmax(0,1fr);gap:12px;padding:20px 0}:root:not(.presentation-mode) .row p{font-size:20px}:root:not(.presentation-mode) .flow{flex-direction:column;gap:12px}:root:not(.presentation-mode) .step{padding:20px}:root:not(.presentation-mode) .connector{display:none}:root:not(.presentation-mode) table,:root:not(.presentation-mode) .small-table table{font-size:16px}:root:not(.presentation-mode) th,:root:not(.presentation-mode) .small-table th{font-size:16px}:root:not(.presentation-mode) th,:root:not(.presentation-mode) td,:root:not(.presentation-mode) .small-table td,:root:not(.presentation-mode) .small-table th{padding:12px 8px;word-break:normal;overflow-wrap:anywhere}:root:not(.presentation-mode) pre{font-size:16px;padding:16px}:root:not(.presentation-mode) .formula{font-size:21px}:root:not(.presentation-mode) .roadmap{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}:root:not(.presentation-mode) .roadmap div{font-size:17px;padding:12px}:root:not(.presentation-mode) figure img{max-height:none}:root:not(.presentation-mode) .chart text{font-size:24px}:root:not(.presentation-mode) .slide footer{font-size:14px;align-items:start}:root:not(.presentation-mode) .slide footer .source{max-width:72%}:root.js:not(.presentation-mode) .controls{gap:8px;padding:8px;flex-wrap:wrap;font-size:14px}:root:not(.presentation-mode) .controls button{padding:8px 8px;font-size:14px}:root:not(.presentation-mode) .controls #jump-label,:root:not(.presentation-mode) .controls #jump{display:none}:root:not(.presentation-mode) .overview-list{grid-template-columns:minmax(0,1fr)}:root:not(.presentation-mode) #overview{padding:24px}:root:not(.presentation-mode) .range-control{flex-wrap:wrap;font-size:19px}
 }
 
 @page{size:1440px 810px;margin:0}
@@ -136,19 +120,19 @@ img.screenshot{max-height:440px;border:1px solid var(--rule)}
 
 .chart-values{display:none}.context-row{display:grid;grid-template-columns:170px minmax(0,1fr);gap:24px;align-items:center;margin:24px 0}.context-strip{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:8px}.context-strip span{background:var(--wash);padding:28px 8px;text-align:center;font-size:22px}.context-strip .evidence{background:var(--navy);color:var(--inverse)}
 figure .enlarge{font-size:16px;min-height:40px;margin-top:12px}#image-viewer{border:1px solid var(--rule);background:var(--paper);color:var(--ink);padding:24px;max-width:96%;max-height:94dvh}#image-viewer::backdrop{background:var(--navy);opacity:.8}#image-viewer img{max-width:100%;max-height:75dvh;object-fit:contain}#image-viewer p{font-size:18px;margin:12px 0}#image-viewer header{display:flex;justify-content:space-between;gap:24px;align-items:center}#image-viewer header strong{font-size:24px}#image-viewer button{font-size:18px}.rank.excluded{color:var(--muted)}
-@media screen and (max-width:1100px), screen and (max-height:640px){.chart{display:none}.chart-values{display:block}.context-row{grid-template-columns:minmax(0,1fr);gap:12px}.context-strip{gap:4px}.context-strip span{font-size:14px;padding:20px 0}#image-viewer{padding:16px}#image-viewer header strong{font-size:19px}}
+@media screen and (max-width:1100px), screen and (max-height:640px){:root:not(.presentation-mode) .chart{display:none}:root:not(.presentation-mode) .chart-values{display:block}:root:not(.presentation-mode) .context-row{grid-template-columns:minmax(0,1fr);gap:12px}:root:not(.presentation-mode) .context-strip{gap:4px}:root:not(.presentation-mode) .context-strip span{font-size:14px;padding:20px 0}:root:not(.presentation-mode) #image-viewer{padding:16px}:root:not(.presentation-mode) #image-viewer header strong{font-size:19px}}
 @media print{figure .enlarge,#image-viewer{display:none!important}.chart{display:block}.chart-values{display:none}}
 
-.report-shots{display:grid;gap:28px}.report-shots figure img{width:100%;max-height:180px}.report-shots figcaption{font-size:18px}.report-shots .enlarge{display:none}@media screen and (max-width:1100px), screen and (max-height:640px){.report-shots figure img{max-height:none}.report-shots .enlarge{display:inline-flex}}
+.report-shots{display:grid;gap:28px}.report-shots figure img{width:100%;max-height:180px}.report-shots figcaption{font-size:18px}.report-shots .enlarge{display:none}@media screen and (max-width:1100px), screen and (max-height:640px){:root:not(.presentation-mode) .report-shots figure img{max-height:none}:root:not(.presentation-mode) .report-shots .enlarge{display:inline-flex}}
 
 /* Editable reference architectures: separate connectors and readable nodes. */
 .architecture{width:100%;max-height:450px;overflow:visible}.architecture .node rect,.architecture .node polygon{fill:var(--paper);stroke:var(--rule);stroke-width:2}.architecture .node.focus rect,.architecture .node.focus polygon{fill:var(--wash);stroke:var(--blue)}.architecture text{fill:var(--ink);font:700 26px var(--font-body)}.architecture .node-sub{font:400 21px var(--font-body);fill:var(--muted)}.architecture .edge{stroke:var(--muted);stroke-width:2;fill:none}.architecture marker path{fill:var(--muted)}.architecture .edge-label{font:400 20px var(--font-body);fill:var(--muted)}.architecture-text{display:none}
-@media screen and (max-width:1100px), screen and (max-height:640px){.architecture{display:none}.architecture-text{display:grid;gap:16px}.architecture-text p{font-size:19px}}
+@media screen and (max-width:1100px), screen and (max-height:640px){:root:not(.presentation-mode) .architecture{display:none}:root:not(.presentation-mode) .architecture-text{display:grid;gap:16px}:root:not(.presentation-mode) .architecture-text p{font-size:19px}}
 @media print{.architecture{display:block}.architecture-text{display:none}}
 
-.product-crop{height:350px;overflow:clip}.product-crop img{max-height:none;max-width:none;width:180%;transform:translate(-42%,-120px);transform-origin:top left;margin:0}.product-crop+figcaption{font-size:18px}@media screen and (max-width:1100px), screen and (max-height:640px){.product-crop{height:230px}.product-crop img{width:200%;transform:translate(-45%,-50px)}}
+.product-crop{height:350px;overflow:clip}.product-crop img{max-height:none;max-width:none;width:180%;transform:translate(-42%,-120px);transform-origin:top left;margin:0}.product-crop+figcaption{font-size:18px}@media screen and (max-width:1100px), screen and (max-height:640px){:root:not(.presentation-mode) .product-crop{height:230px}:root:not(.presentation-mode) .product-crop img{width:200%;transform:translate(-45%,-50px)}}
 
-.overview-list{display:block}.overview-chapter{margin-bottom:32px}.overview-chapter h3{font-size:24px;margin:0 0 16px}.chapter-items{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}@media screen and (max-width:1100px), screen and (max-height:640px){.chapter-items{grid-template-columns:minmax(0,1fr)}}
+.overview-list{display:block}.overview-chapter{margin-bottom:32px}.overview-chapter h3{font-size:24px;margin:0 0 16px}.chapter-items{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}@media screen and (max-width:1100px), screen and (max-height:640px){:root:not(.presentation-mode) .chapter-items{grid-template-columns:minmax(0,1fr)}}
 
 /* Conference composition: one user-paced motion system for causal diagrams. */
 :root{--ease-out:cubic-bezier(.16,1,.3,1);--motion-time:320ms;--chapter-height:38px}
@@ -184,29 +168,9 @@ figure .enlarge{font-size:16px;min-height:40px;margin-top:12px}#image-viewer{bor
 .screen-study{display:grid;grid-template-columns:minmax(0,2.1fr) minmax(0,1fr);gap:36px;align-items:center}
 .screen-study img{max-height:390px;width:100%;object-fit:contain;border:1px solid var(--rule)}
 .screen-study figcaption{font-size:16px}.screen-study .rows .row{grid-template-columns:minmax(0,1fr);gap:8px;padding:20px 0}.screen-study .row strong{font-size:24px}.screen-study .row p{font-size:21px}
-@media screen and (max-width:1100px), screen and (max-height:640px){
- .js .deck-shell{margin-top:44px}.js #chapter-nav{justify-content:flex-start;overflow-x:auto;overscroll-behavior-x:contain}
- #chapter-nav button{flex:none}.slide,.js .slide{padding:36px clamp(24px,5vw,56px);min-height:calc(100dvh - 142px)}
- .body{justify-content:flex-start}.slide h1{font-size:clamp(40px,6vw,64px)}.slide h2{font-size:clamp(30px,4vw,42px)}
- .conference-cover{grid-template-columns:minmax(0,1fr);gap:32px}.cover-question{font-size:clamp(36px,5vw,50px)}.cover-author{font-size:17px}
- .cover-route{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.cover-route strong{font-size:22px}.cover-route p{font-size:18px}
- .diagram-walk .architecture{display:none}.diagram-walk .architecture-text{display:grid;list-style-position:outside;padding-left:1.3em;gap:24px}
- .architecture-text li+li{margin-top:0}.architecture-text strong{font-size:23px}.architecture-text p{margin-top:8px;font-size:20px}
- .js .walk-controls{display:none}.diagram-walk>.label{margin-bottom:24px}.diagram-walk .architecture-text{margin-top:24px}
- .screen-study{grid-template-columns:minmax(0,1fr);gap:24px}.screen-study img{max-height:none;width:100%}.screen-study .rows{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
- .decision-lead{font-size:30px}.decision-lead span{font-size:24px}
- .js .controls{flex-wrap:nowrap;overflow-x:auto;justify-content:center;min-height:64px}.controls #jump-label,.controls #jump,.controls #fullscreen{display:none}
- #overview header{gap:20px}#overview h2{font-size:26px}
+@media screen and (max-width:1100px), screen and (max-height:640px){:root.js:not(.presentation-mode) .deck-shell{margin-top:44px}:root.js:not(.presentation-mode) #chapter-nav{justify-content:flex-start;overflow-x:auto;overscroll-behavior-x:contain}:root:not(.presentation-mode) #chapter-nav button{flex:none}:root:not(.presentation-mode) .slide,:root.js:not(.presentation-mode) .slide{padding:36px clamp(24px,5vw,56px);min-height:calc(100dvh - 142px)}:root:not(.presentation-mode) .body{justify-content:flex-start}:root:not(.presentation-mode) .slide h1{font-size:clamp(40px,6vw,64px)}:root:not(.presentation-mode) .slide h2{font-size:clamp(30px,4vw,42px)}:root:not(.presentation-mode) .conference-cover{grid-template-columns:minmax(0,1fr);gap:32px}:root:not(.presentation-mode) .cover-question{font-size:clamp(36px,5vw,50px)}:root:not(.presentation-mode) .cover-author{font-size:17px}:root:not(.presentation-mode) .cover-route{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}:root:not(.presentation-mode) .cover-route strong{font-size:22px}:root:not(.presentation-mode) .cover-route p{font-size:18px}:root:not(.presentation-mode) .diagram-walk .architecture{display:none}:root:not(.presentation-mode) .diagram-walk .architecture-text{display:grid;list-style-position:outside;padding-left:1.3em;gap:24px}:root:not(.presentation-mode) .architecture-text li+li{margin-top:0}:root:not(.presentation-mode) .architecture-text strong{font-size:23px}:root:not(.presentation-mode) .architecture-text p{margin-top:8px;font-size:20px}:root.js:not(.presentation-mode) .walk-controls{display:none}:root:not(.presentation-mode) .diagram-walk>.label{margin-bottom:24px}:root:not(.presentation-mode) .diagram-walk .architecture-text{margin-top:24px}:root:not(.presentation-mode) .screen-study{grid-template-columns:minmax(0,1fr);gap:24px}:root:not(.presentation-mode) .screen-study img{max-height:none;width:100%}:root:not(.presentation-mode) .screen-study .rows{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}:root:not(.presentation-mode) .decision-lead{font-size:30px}:root:not(.presentation-mode) .decision-lead span{font-size:24px}:root.js:not(.presentation-mode) .controls{flex-wrap:nowrap;overflow-x:auto;justify-content:center;min-height:64px}:root:not(.presentation-mode) .controls #jump-label,:root:not(.presentation-mode) .controls #jump{display:none}:root:not(.presentation-mode) #overview header{gap:20px}:root:not(.presentation-mode) #overview h2{font-size:26px}
 }
-@media screen and (max-width:540px){
- .cover-route,.screen-study .rows{grid-template-columns:minmax(0,1fr)}.cover-route{gap:20px}.cover-route>div{padding-top:12px}.cover-route p{margin-top:4px}
- table thead{display:none}table,table tbody,table tr,table td{display:block;width:100%}
- table tr{border-top:1px solid var(--rule);padding:12px 0}table td,.small-table td{display:grid;grid-template-columns:90px minmax(0,1fr);gap:12px;padding:8px 0;border:0;font-size:17px;word-break:keep-all;overflow-wrap:break-word}
- td::before{content:attr(data-label);font-size:14px;font-weight:400;color:var(--muted)}
- .controls #notes-button{font-size:0}.controls #notes-button::after{content:'노트';font-size:14px}.controls #print{font-size:0}.controls #print::after{content:'PDF';font-size:14px}
- .controls #status{min-width:60px}.js .controls{gap:8px}.controls button{padding:8px}
- .decision-table tbody tr:last-child{padding:12px}.slide[data-kind=mission-opening] .statement{font-size:36px}
- .slide[data-kind=mission-opening] .row{grid-template-columns:minmax(0,1fr)}.slide footer{gap:16px}.slide footer .pageno{white-space:normal;text-align:right}
+@media screen and (max-width:540px){:root:not(.presentation-mode) .cover-route,:root:not(.presentation-mode) .screen-study .rows{grid-template-columns:minmax(0,1fr)}:root:not(.presentation-mode) .cover-route{gap:20px}:root:not(.presentation-mode) .cover-route>div{padding-top:12px}:root:not(.presentation-mode) .cover-route p{margin-top:4px}:root:not(.presentation-mode) table thead{display:none}:root:not(.presentation-mode) table,:root:not(.presentation-mode) table tbody,:root:not(.presentation-mode) table tr,:root:not(.presentation-mode) table td{display:block;width:100%}:root:not(.presentation-mode) table tr{border-top:1px solid var(--rule);padding:12px 0}:root:not(.presentation-mode) table td,:root:not(.presentation-mode) .small-table td{display:grid;grid-template-columns:90px minmax(0,1fr);gap:12px;padding:8px 0;border:0;font-size:17px;word-break:keep-all;overflow-wrap:break-word}:root:not(.presentation-mode) td::before{content:attr(data-label);font-size:14px;font-weight:400;color:var(--muted)}:root:not(.presentation-mode) .controls #notes-button{font-size:0}:root:not(.presentation-mode) .controls #notes-button::after{content:'노트';font-size:14px}:root:not(.presentation-mode) .controls #print{font-size:0}:root:not(.presentation-mode) .controls #print::after{content:'PDF';font-size:14px}:root:not(.presentation-mode) .controls #status{min-width:60px}:root.js:not(.presentation-mode) .controls{gap:8px}:root:not(.presentation-mode) .controls button{padding:8px}:root:not(.presentation-mode) .decision-table tbody tr:last-child{padding:12px}:root:not(.presentation-mode) .slide[data-kind=mission-opening] .statement{font-size:36px}:root:not(.presentation-mode) .slide[data-kind=mission-opening] .row{grid-template-columns:minmax(0,1fr)}:root:not(.presentation-mode) .slide footer{gap:16px}:root:not(.presentation-mode) .slide footer .pageno{white-space:normal;text-align:right}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 @media print{
@@ -217,3 +181,25 @@ figure .enlarge{font-size:16px;min-height:40px;margin-top:12px}#image-viewer{bor
  .diagram-walk .node.focus rect,.diagram-walk .node.focus polygon{fill:var(--wash);stroke:var(--blue)}
 }
 @media print{*,*::before,*::after{transition:none!important;animation:none!important}}
+
+/* A separate full-canvas presentation mode; reading layouts remain unchanged. */
+#presentation-notice{display:none}
+@media screen{
+ :root.presentation-mode,:root.presentation-mode body{height:100%;overflow:clip;background:var(--navy)}
+ .js.presentation-mode .deck-shell{position:fixed;left:50%;top:50%;width:calc(1440px * var(--scale));height:calc(810px * var(--scale));margin:0;max-width:none;transform:translate(-50%,-50%)}
+ .presentation-mode .controls,.presentation-mode #chapter-nav{opacity:0;pointer-events:none;transition:opacity 160ms var(--ease-out)}
+ .presentation-mode .controls{transform:translateY(100%)}
+ .presentation-mode #chapter-nav{transform:translateY(-100%)}
+ .presentation-mode.presentation-ui .controls,.presentation-mode .controls:focus-within{opacity:1;pointer-events:auto;transform:none}
+ .presentation-mode.presentation-ui #chapter-nav,.presentation-mode #chapter-nav:focus-within{opacity:1;pointer-events:auto;transform:none}
+ .presentation-mode .controls{max-width:100%;justify-content:center;overflow-x:auto;font-size:16px}
+ .presentation-mode #chapter-nav{justify-content:flex-start;overflow-x:auto}
+ .presentation-mode #chapter-nav button{flex:none}
+ .presentation-mode #presentation-notice:not(:empty){display:block;position:fixed;z-index:10;left:50%;bottom:84px;transform:translateX(-50%);width:max-content;max-width:calc(100% - 40px);padding:12px 20px;background:var(--navy);color:var(--inverse);border:1px solid var(--dark-rule);font-size:16px;text-align:center}
+}
+@media screen and (max-width:540px){
+ :root.js:not(.presentation-mode) .controls{justify-content:flex-start}
+ :root:not(.presentation-mode) .controls #fullscreen{font-size:0}
+ :root:not(.presentation-mode) .controls #fullscreen::after{content:'발표';font-size:14px}
+}
+@media print{#presentation-notice{display:none!important}}
