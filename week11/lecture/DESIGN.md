@@ -86,3 +86,16 @@ Impeccable 4.8.2의 layout·animate·craft-floor를 참고했습니다. layout �
 `../lab/instructor-notes.json`은 09·10번 각각 9개 코드 셀의 설명 원본입니다. 학생용 실행 지도와 함께 Notebook의 접을 수 있는 교수 설명에 반영합니다. 실행 코드는 변경하지 않습니다.
 
 재생성 순서: `python scripts/build_week11_html.py`, `python scripts/build_week11_instructor.py`, `python scripts/build_week11_platform_notebooks.py`. `instructor/`는 전체 요약·개념·셀별 안내를 한 페이지에서 검색·펼침·인쇄하는 정적 HTML입니다. 장표 본문과 PDF의 학습 내용은 그대로이며 교수 설명만 보강했습니다.
+
+
+## 별도 창 발표자 모드
+
+강의안의 발표자 모드 버튼이 `presenter.html`을 별도 창으로 엽니다. `deck.js`가 현재 페이지·제목·노트·목차·도식 상태를 전송하고, `presenter.js`가 실제 장표 이동 명령을 돌려보냅니다. 같은 창 쌍의 origin·Window 참조·세션 식별자를 확인하며 일반 학생 탭이나 다른 발표에는 연결하지 않습니다. HTTP(S)는 정확한 origin, 로컬 file은 opaque origin과 창 참조를 함께 검사합니다. BroadcastChannel·외부 서버·로그인 없이 동작합니다.
+
+세션은 현재 history entry에 보관해 양쪽 새로고침 후에도 현재 페이지에서 복구합니다. 새 탐색이나 복제 탭은 별도 세션으로 시작합니다. 주기적 연결 확인은 읽던 노트 위치나 입력 중인 페이지 번호를 초기화하지 않습니다. 장표가 바뀔 때만 노트를 상단으로 이동합니다. 별도 창 폐쇄·팝업 차단·부모 창 종료를 처리하며 강의 창의 노트 잠금은 명시적 모드 종료까지 유지합니다.
+
+교수용 화면은 현재 장표 설명을 중심에 두고 다음 제목·목차·도식 단계를 옆에 둡니다. 작은 창에서는 세로로 배치합니다. 실제 화면 공유는 사용자가 강의 창만 선택해야 합니다. 전체 데스크톱 공유에서 별도 창을 숨기는 기능은 아닙니다.
+
+검증: `node scripts/verify_week11_presenter.mjs`. 전체 64쪽 동기화, 양방향 이동, 연결 복구, 창 분리, 전체화면, 도식, 모바일, 팝업 차단을 실제 브라우저 창에서 검사합니다. 공개 배포 확인은 `COURSE_BASE_URL=https://smilesjcha.github.io/llmops-16week/`를 앞에 붙입니다.
+
+브라우저 API 참고: [Window.postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage), [Window.open](https://developer.mozilla.org/en-US/docs/Web/API/Window/open).

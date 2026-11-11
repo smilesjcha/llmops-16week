@@ -213,3 +213,9 @@ figure .enlarge{font-size:16px;min-height:40px;margin-top:12px}#image-viewer{bor
  :root:not(.presentation-mode) .controls #fullscreen::after{content:'발표';font-size:14px}
 }
 @media print{#presentation-notice{display:none!important}}
+
+/* While paired, the audience window never opens the inline speaker notes. */
+.audience-mode #notes-panel,.audience-mode #notes-button{display:none!important}
+#presenter-stop[hidden],#presenter-feedback[hidden]{display:none!important}
+#presenter-feedback{position:fixed;right:20px;bottom:82px;z-index:9;background:var(--paper);color:var(--ink);border:1px solid var(--rule);padding:16px 20px;max-width:min(560px,calc(100% - 40px));font-size:17px;line-height:1.5}
+@media print{#presenter-feedback{display:none!important}}

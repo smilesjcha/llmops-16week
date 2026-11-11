@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>교수용 발표자 노트 · 11주차</title><link rel="stylesheet" href="presenter.css"></head>
+<body>
+<header class="top"><strong>교수용 발표자 노트</strong><p id="connection" role="status" aria-live="polite">강의 창 연결 대기</p></header>
+<div class="share-guide"><strong>학생에게는 강의 창만 공유하세요.</strong> 이 창은 별도 모니터나 공유하지 않는 창에 둡니다. 전체 데스크톱을 공유하면 노트도 보일 수 있습니다.</div>
+<noscript><p class="empty">자동 동기화를 사용하려면 JavaScript를 켜세요.</p></noscript>
+<main>
+<section id="waiting" class="empty"><h1>강의 창에서 발표자 모드 시작</h1><p>원래 강의 창의 <strong>발표자 모드</strong> 버튼으로 이 창을 열면 현재 장표와 연결됩니다. 강의 창은 P 또는 전체 화면 버튼으로 발표합니다.</p><a href="index.html" target="_blank" rel="noopener">강의안 열기</a> · <a href="instructor/index.html" target="_blank" rel="noopener">전체 강의 준비 자료</a></section>
+<div id="workspace" hidden>
+<header class="current"><p><span id="position"></span><span id="chapter"></span></p><h1 id="slide-title"></h1></header>
+<div class="layout"><article id="notes" aria-label="현재 장표 설명 노트"></article><aside class="side">
+<section><h2>다음 장표</h2><p id="next-title"></p></section>
+<section id="flow" hidden><h2>현재 도식 단계</h2><p id="flow-caption"></p><div class="flow-buttons"><button id="flow-back" data-control disabled>이전 단계</button><button id="flow-next" data-control disabled>다음 단계</button><button id="flow-reset" data-control disabled>전체 보기</button></div></section>
+<section><h2>페이지 이동</h2><label for="jump">장표 번호</label><form id="jump-form"><input id="jump" type="number" min="1" max="64" value="1" data-control disabled><button data-control disabled>이동</button></form><label for="outline">목차에서 선택</label><select id="outline" data-control disabled></select></section>
+<section><h2>강의 준비</h2><p><a id="full-note" href="instructor/index.html" target="_blank" rel="noopener">현재 페이지 상세 설명</a></p><p class="help">← / → 또는 PageUp / PageDown으로 장표 이동. F는 도식의 다음 단계입니다. 읽는 중에는 노트 스크롤이 유지됩니다.</p></section>
+</aside></div>
+</div>
+</main>
+<footer class="controls"><button id="previous" data-control disabled>이전 장표</button><span id="footer-position">— / —</span><button id="next" data-control disabled>다음 장표</button><button id="audience-focus" data-control disabled>강의 창 보기</button><button id="end" data-control disabled>발표자 모드 종료</button></footer>
+<script src="presenter.js"></script>
+</body></html>
