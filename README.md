@@ -40,9 +40,9 @@
 - 9주차: [PDF · API 계약과 LLM 서비스 구현 · 80쪽](output/pdf/09_week9_api_serving.pdf) · [발표용 PPT](week09/lecture/09_week9_api_serving.pptx) · [5개 Notebook·VS Code 실행 안내](week09/lab/README.md)
 - 10주차 실행: [학생 공유 링크·VS Code·Docker/Prometheus 시연 순서](week10/QUICKSTART.md)
 - 10주차: [PDF · 배포와 실행 관찰 · 80쪽](output/pdf/10_week10_observable_deployment.pdf) · [발표용 PPT](week10/lecture/10_week10_observable_deployment.pptx) · [Notebook 6개·VS Code 실행 안내](week10/lab/README.md) · [기획서 2차 제출 공지](week10/README.md#기획서-2차-제출-공지)
-- 11주차: [HTML 프레젠테이션 · 품질 검증 · 76쪽](week11/lecture/index.html) · [인쇄 PDF](output/pdf/11_week11_offline_evaluation.pdf) · [Notebook 6개·VS Code 실행 안내](week11/lab/README.md) · [실행된 평가 보고서 HTML](week11/lab/sample/report.html)
+- 11주차: [HTML 강의안 바로 보기 · 품질 검증 · 76쪽](https://smilesjcha.github.io/llmops-16week/week11/lecture/) · [인쇄 PDF](output/pdf/11_week11_offline_evaluation.pdf) · [Notebook 6개·VS Code 실행 안내](week11/lab/README.md) · [실습 평가 보고서 바로 보기](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/report.html)
 - 팀 신청: [아주대AI대학원 2–4인 팀 Google Form](https://docs.google.com/forms/d/e/1FAIpQLSd3UOP4SjCUct_RJKcgvVNGEBCpOOLmNkZPi6QFBIQAilKIag/viewform)
-- 강의·과제 HTML: 파일을 내려받아 브라우저로 열기. GitHub 파일 페이지는 HTML을 실행하지 않습니다.
+- 11주차 강의·실습 보고서: 위의 **바로 보기** 링크에서 로그인·다운로드 없이 실행합니다. GitHub 파일 페이지는 HTML 코드를 보여주므로 Pages 링크를 학생에게 공유하세요. 다른 HTML도 내려받아 브라우저에서 열 수 있습니다.
 - 1주차 강의안: [01주차 PDF · LLM 서비스 운영의 기본](output/pdf/01_week1_llmops_kickoff.pdf)
 - 1주차 복습: [강의영상·음성·채팅 기록](week01/resources/README.md)
 - 4–5주차 통합 녹화: [Drive 영상·복습 안내](week05/resources/README.md)

@@ -2,6 +2,11 @@
 
 기존 Python 3.11 환경에서 실행합니다. **Ollama·Docker·GPU·API 키는 필요 없습니다.** 인터넷은 최초 패키지 설치에만 필요합니다. 직접 실행해 비교하고 실패 원인을 설명하는 실습입니다.
 
+- [11주차 HTML 강의안 바로 보기](https://smilesjcha.github.io/llmops-16week/week11/lecture/)
+- [실습 평가 보고서 바로 보기](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/report.html): 설치·다운로드 없이 필터와 근거 탐색을 먼저 체험할 수 있습니다.
+
+공개 보고서는 수업용 합성 데이터로 실행한 예제입니다. 아래 명령으로 직접 실행한 결과는 자신의 `week11/lab/reports/report.html`에 저장되며 공개 페이지에 자동 업로드되지 않습니다.
+
 ## VS Code 준비
 
 1. 저장소를 받거나 기존 저장소를 최신 상태로 갱신합니다. 개인 수정이 있으면 먼저 보관하고, git pull --ff-only가 실패하면 강제로 덮어쓰지 않습니다.
@@ -105,7 +110,7 @@ test를 반복 관찰하며 설정을 바꾸면 새 평가 세트가 필요합�
 | 저장소 경로 오류 | 폴더 전체를 열고 그 안의 Notebook에서 실행 |
 | pytest 없음 | python -m pip install -r requirements/dev.txt |
 | reports 파일 없음 | 저장소 루트에서 python -m week11.lab.run_eval |
-| HTML이 코드로 보임 | GitHub 미리보기 대신 파일을 내려받아 브라우저로 열기 |
+| HTML이 코드로 보임 | 위의 GitHub Pages 바로 보기 링크 이용. 자신의 실행 결과는 로컬 report.html을 브라우저로 열기 |
 | 빈 필터 결과 | 필터 초기화 / 입력 검색어 지우기 |
 | --enforce-gate 종료 2 | HOLD의 의도된 차단. report.html에서 실패 조건 확인 |
 

@@ -45,7 +45,7 @@
 
 - 학생용 PDF: `output/pdf/`
 - 발표용 PowerPoint: `weekNN/lecture/`
-- 11주차 발표용 HTML: `week11/lecture/index.html` (다운로드 후 브라우저 실행, 전체 인쇄 PDF 지원)
+- 11주차 발표용 HTML: [GitHub Pages 바로 보기](https://smilesjcha.github.io/llmops-16week/week11/lecture/) (로그인·다운로드 없이 실행, 전체 인쇄 PDF 지원)
 - 실습 안내와 코드: `weekNN/README.md`, `weekNN/lab/`
 - 강의영상·음성·채팅 참조 링크: `weekNN/resources/` (비식별 처리 여부는 주차별 안내 확인)
 - 학기 운영 일정: `curriculum/2026-2/`
@@ -53,7 +53,7 @@
 4주차 추석에는 녹화영상을 업로드했다. 6주차 한글날에는 실시간 수업·녹화영상·신규 과제가 없다. 7주차에 기획서 초안을 검토하고, 8주차에는 실시간 수업 없이 피드백 반영 수정본을 온라인 제출·평가한다. 16주차 발표는 실시간 온라인으로 진행한다.
 ## 최신 추가 자료
 
-- [11주차 · LLM 서비스의 품질 검증 · 76쪽](11_week11_offline_evaluation.pdf) · [HTML 강의·실습 안내](../../week11/README.md)
+- [11주차 · LLM 서비스의 품질 검증 · 76쪽](11_week11_offline_evaluation.pdf) · [HTML 강의안 바로 보기](https://smilesjcha.github.io/llmops-16week/week11/lecture/) · [실습 평가 보고서 바로 보기](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/report.html) · [실습 안내](../../week11/lab/README.md)
 
 - [10주차 · 배포와 실행 관찰 · 80장](10_week10_observable_deployment.pdf) · [기획서 2차: 11월 6일, 미제출자는 11월 7일까지](../../week10/README.md#기획서-2차-제출-공지)
 
