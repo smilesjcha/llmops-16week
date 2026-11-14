@@ -14,7 +14,7 @@
 
 과제는 **상담 AI의 배포 판단 한 페이지 + 실행 근거 화면 1개**입니다. 02·04번 실습 결과를 활용하며 예상 60–90분입니다. 소속 학교와 관계없이 공개 안내를 로그인 없이 볼 수 있고, 작성한 메모를 HTML 또는 PDF로 저장할 수 있습니다. **11월 27일(금), 수업 후 1주일 이내** 제출을 기준으로 하며 정확한 시각은 소속별 최종 공지를 따릅니다. 아주대AI대학원은 LMS, 별도 수강생은 수업에서 공지된 교수 이메일을 사용합니다. 페이지에서 자동 제출되지는 않습니다.
 
-[100분 수업 계획](week12/README.md) · [교수용 64쪽 설명 노트·셀별 안내](https://smilesjcha.github.io/llmops-16week/week12/lecture/instructor/)
+[10·11·12주차 비교](week12/lecture/WEEKS_10_12_COMPARISON.md) · [100분 수업 계획](week12/README.md) · [교수용 64쪽 설명 노트·셀별 안내](https://smilesjcha.github.io/llmops-16week/week12/lecture/instructor/)
 
 ## 11주차 학생용 자료 바로 가기
 

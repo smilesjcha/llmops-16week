@@ -1,9 +1,11 @@
 """Independent, guided notebooks: execute, inspect, change, explain."""
 from pathlib import Path
+import json
 import nbformat as nb
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "week12/lab/notebooks"
+NOTES = json.loads((OUT.parent / "instructor-notes.json").read_text())
 SETUP = '''from pathlib import Path
 import sys, json, os
 ROOT = next((p for p in [Path.cwd(), *Path.cwd().parents] if (p / "week12/lab/analysis.py").exists()), None)
@@ -24,6 +26,7 @@ INDEX = []
 
 
 def build(name, title, minutes, purpose, steps, extension):
+    teaching = NOTES['books'][name[:2]]
     cells = [nb.v4.new_markdown_cell(f'''# {title}
 
 **핵심 실행 {minutes}분** · {purpose}
@@ -40,11 +43,13 @@ VS Code 오른쪽 위 **Select Kernel → 저장소 .venv의 Python 3.11**을 �
 | 코드 셀 | 실행 | 확인할 결과 |
 |---:|---|---|
 | 1 | 환경 준비 | Python 3.11과 설정 버전 |
-'''+"\n".join(f"| {i+2} | {s[0]} | {s[3].split('.')[0]} |" for i,s in enumerate(steps))), nb.v4.new_code_cell(SETUP)]
+'''+"\n".join(f"| {i+2} | {s[0]} | {teaching['cells'][str(i+2)]['expected']} |" for i,s in enumerate(steps))+
+        f"\n\n**이번 파일의 역할:** {teaching['summary']}\n\n**재실행 방법:** {teaching['rerun']}\n\n**코드 셀 1 설명:** {NOTES['common_setup']['talk']}\n\n번호는 코드 셀 순서이며 실행 횟수 `[1]`, `[2]`와 다릅니다. [셀별 교수 설명](https://smilesjcha.github.io/llmops-16week/week12/lecture/instructor/#book-{name[:2]})"), nb.v4.new_code_cell(SETUP)]
     for i, (heading, why, code, check, question) in enumerate(steps,2):
+        note = teaching['cells'][str(i)]
         cells.extend([nb.v4.new_markdown_cell(f"## 코드 셀 {i} · {heading}\n\n{why}"),
                       nb.v4.new_code_cell(code.strip()),
-                      nb.v4.new_markdown_cell(f"**확인과 해석:** {check}\n\n**직접 설명:** {question}")])
+                      nb.v4.new_markdown_cell(f"**확인과 해석:** {note['expected']}\n\n**화면에서 볼 곳:** {note['point']}\n\n**설명 핵심:** {note['talk']}\n\n**직접 설명:** {question}")])
     cells.append(nb.v4.new_markdown_cell(f'''## 복습과 다음 단계
 
 {extension}
@@ -54,6 +59,11 @@ VS Code 오른쪽 위 **Select Kernel → 저장소 .venv의 Python 3.11**을 �
 [실행 안내](../WALKTHROUGH.md) · [100분 강의안](https://smilesjcha.github.io/llmops-16week/week12/lecture/) · [9–12주차 과제](https://smilesjcha.github.io/llmops-16week/week12/assignment/)
 '''))
     doc=nb.v4.new_notebook(cells=cells,metadata={"kernelspec":{"display_name":"Python 3.11 (llmops)","language":"python","name":"python3"},"language_info":{"name":"python","version":"3.11"}})
+    if (OUT/name).exists():
+        previous=nb.read(OUT/name,as_version=4)
+        if len(previous.cells)==len(doc.cells):
+            for old,new in zip(previous.cells,doc.cells):
+                new['id']=old['id']
     OUT.mkdir(parents=True,exist_ok=True);nb.write(doc,OUT/name)
     INDEX.append({"file":name,"title":title,"minutes":minutes,"cells":len(cells),"code_cells":1+len(steps),"steps":[{"code_cell":i+2,"title":s[0],"expected":s[3],"question":s[4]} for i,s in enumerate(steps)]})
 

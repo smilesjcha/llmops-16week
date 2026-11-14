@@ -10,7 +10,7 @@
 | [04 효과·배포 판단](notebooks/04_effect_and_release.ipynb) | %p, 구간, 지연 기준, 반복 확인의 함정 | 12분 | slow HOLD, healthy REVIEW, srm INVALID |
 | [05 실제 모델·보고서](notebooks/05_ollama_and_report.ipynb) | Ollama A/B 생성, 출력 한계, 보고서 저장 | 10분 / 수업 발췌 6분 | 실제 응답·종료 이유·토큰, HTML 보고서 |
 
-총 114셀, 코드 셀 38개입니다. [셀별 실행·확인 질문](WALKTHROUGH.md) · [공개 보고서](https://smilesjcha.github.io/llmops-16week/week12/lab/sample/report.html) · **[공개 과제](https://smilesjcha.github.io/llmops-16week/week12/assignment/)**
+총 114셀, 코드 셀 38개입니다. [38개 코드 셀별 실행·예상 결과·교수 설명](WALKTHROUGH.md) · [브라우저 교수 안내](https://smilesjcha.github.io/llmops-16week/week12/lecture/instructor/#cells) · [공개 보고서](https://smilesjcha.github.io/llmops-16week/week12/lab/sample/report.html) · **[공개 과제](https://smilesjcha.github.io/llmops-16week/week12/assignment/)**
 
 ## VS Code 준비
 
@@ -37,7 +37,7 @@ python -m uvicorn week12.lab.service:app --host 127.0.0.1 --port 8012
 ```
 
 1. [실습 서비스](http://127.0.0.1:8012/)에서 `u-`로 시작하는 실습 ID와 질문 유형을 선택합니다. 처음에는 **정책 템플릿**으로 실행합니다. 이 경로는 LLM 응답이 아닙니다.
-2. 요청 후 `assigned_variant`, `served_variant`, `request_id`, `latency_ms`를 읽습니다. 사용자 ID를 유지한 요청은 같은 버전입니다.
+2. 요청 후 응답의 `assigned_variant`, `variant`, `request_id`, `latency_ms` (이벤트 표에서는 실제 제공 버전을 `served_variant`로 표시)를 읽습니다. 사용자 ID를 유지한 요청은 같은 버전입니다.
 3. 재전송 버튼으로 같은 요청이 중복 집계되지 않는지 확인합니다. 피드백을 남기고 사용자 분모를 확인합니다.
 4. [API 이벤트](http://127.0.0.1:8012/api/events), [요약](http://127.0.0.1:8012/api/summary), [지표](http://127.0.0.1:8012/metrics), [Swagger API](http://127.0.0.1:8012/docs)를 확인합니다.
 5. 중단 스위치를 끄면 B 사용자에게 A를 제공합니다. 배정 기록은 유지하며 이 상태의 혼합 데이터는 INVALID입니다. 다시 켜도 과거 복구 기록을 지우거나 정상 실험이라고 바꾸지 않습니다.

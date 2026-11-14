@@ -2,6 +2,10 @@
 
 [64쪽 핵심·설명·코드 셀별 준비](https://smilesjcha.github.io/llmops-16week/week12/lecture/instructor/)를 강의 전에 확인합니다. [100분 시간표](../README.md#수업-흐름)와 [Notebook 실행 지도](../lab/WALKTHROUGH.md)를 함께 사용하세요.
 
+## 시작 전 주차 구분
+
+[10·11·12주차 비교·중복 점검](WEEKS_10_12_COMPARISON.md)을 확인하고 4–5쪽에서 검증 단위를 먼저 설명합니다. API·Trace·Docker·평가자 정의는 이전 자료로 연결하고 12주차는 배정·분모·누락·관찰 창·효과 해석에 집중합니다.
+
 ## 수업 전 10분
 
 1. VS Code에서 저장소를 열고 Python 3.11 `.venv` 커널 선택.

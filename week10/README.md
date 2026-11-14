@@ -2,6 +2,8 @@
 
 2026년 11월 6일 온라인 실시간 수업용 **80쪽 강의안**과 단계별 실습이다. 9주차 API의 다음 단계로 실행 버전·구조화 로그·Trace·지표·장애 진단·복구·배포 전 검증을 다룬다.
 
+[10·11·12주차의 차이와 연결](../week12/lecture/WEEKS_10_12_COMPARISON.md): 요청 운영 → 고정 질문의 답변 품질 → 사용자 집단의 변경 효과.
+
 - [학생 공유 링크·VS Code·Docker/Prometheus 시연 순서](QUICKSTART.md)
 - [10주차 강의 녹화 · Drive 보기 전용](resources/README.md)
 - [지난주 9주차 강의 녹화 · Drive 보기 전용](../week09/resources/README.md)

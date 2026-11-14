@@ -2,6 +2,8 @@
 
 2026년 11월 13일 실시간 온라인 수업. **64쪽 HTML 프레젠테이션**, 인쇄 PDF, 단계별 Notebook 10개로 검색 평가·실제 Ollama 생성·LLM 평가·실행 추적을 다룹니다.
 
+[10·11·12주차의 차이와 연결](../week12/lecture/WEEKS_10_12_COMPARISON.md): 요청 운영 → 고정 질문의 답변 품질 → 사용자 집단의 변경 효과.
+
 - [HTML 강의안 바로 보기 · 64쪽](https://smilesjcha.github.io/llmops-16week/week11/lecture/): 로그인·다운로드 없이 브라우저에서 열기
 - [학생용 PDF 바로 보기·저장 · 64쪽](https://smilesjcha.github.io/llmops-16week/output/pdf/11_week11_offline_evaluation.pdf): 2026.11.14 최신 HTML 인쇄본 · [GitHub 파일](../output/pdf/11_week11_offline_evaluation.pdf)
 - [실습 코드와 VS Code 실행 순서](lab/README.md)

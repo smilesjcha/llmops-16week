@@ -2,6 +2,7 @@
 import base64
 import html
 import json
+import itertools
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -23,6 +24,7 @@ SOURCES={
  'data':('교수 작성 합성 사용자 2400명 · 실제 제품 성과 아님','https://github.com/smilesjcha/llmops-16week/tree/main/week12/lab/data'),
 }
 slides=[]
+_diagram_ids=itertools.count(1)
 def para(text,cls=''):return f'<p class="{cls}">{text}</p>'
 def two(a,b,cls=''):return f'<div class="two {cls}"><div>{a}</div><div>{b}</div></div>'
 def table(head,rows):
@@ -40,7 +42,7 @@ def add(title,sub,body,message,talk,question,answer,*,chapter='1 실험의 질�
                     point=point or message,caution=caution or '수업의 합성 사례와 실제 사용자 실험의 결과를 구분합니다.'))
 def diagram(nodes,edges,caption,walk=False):
  # Coordinates are authored for each diagram; paths avoid box interiors.
- mid='arrow-'+str(len(slides)+1)
+ mid='arrow-'+str(next(_diagram_ids))
  svg=f'<svg class="architecture" role="img" aria-label="{h(caption)}" viewBox="0 0 1220 390"><defs><marker id="{mid}" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z"/></marker></defs>'
  for i,j,label in edges:
   x,y,w,t,sub=nodes[i];xx,yy,ww,tt,ss=nodes[j]
@@ -358,6 +360,12 @@ add('강의·실습·과제와 참고 자료','다시 실행하고 판단 근거
  '코드·데이터·출처를 다시 열어 같은 판단을 재현할 수 있습니다.',
  '학생에게 공개 과제 링크를 마지막으로 한 번 열어 보여줍니다. PDF는 같은 장표 순서이며 인터랙션은 웹에서 사용할 수 있습니다. 실제 모델 응답과 합성 사용자 분석의 원본도 각각 저장소에서 확인할 수 있습니다.',
  '수업 후 과제 안내를 보려면 학교 계정으로 로그인해야 하나요?','공개 과제 페이지는 로그인 없이 열립니다. 제출만 소속별 채널을 사용합니다.',chapter=C,kind='resources')
+
+if __package__:
+ from .week12_progression import apply as clarify_progression
+else:
+ from week12_progression import apply as clarify_progression
+clarify_progression(slides,table=table,two=two,para=para,rows=rows,flow=flow,diagram=diagram)
 
 assert len(slides)==64,len(slides)
 for i,s in enumerate(slides):
