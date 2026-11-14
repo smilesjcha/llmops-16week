@@ -1,0 +1,15 @@
+{
+  "source": "authored_synthetic",
+  "seed": 12,
+  "generated_users": 2400,
+  "unit": "one eligible visitor; first request outcome within 30 minutes",
+  "duration_days": 14,
+  "all_outcome_windows_mature": true,
+  "notes": "가상의 14일 종료 스냅샷. day는 분석 설명용이며 실제 서비스 기록이 아님. 사용자 비율·성과를 제품 효과로 인용하지 않음.",
+  "scenarios": {
+    "healthy": "개선 근거와 운영 기준 충족",
+    "slow": "해결 확인율 상승·응답 지연 악화",
+    "srm": "B 사용자 수집 누락"
+  },
+  "config_version": "78b4aa1a4e96"
+}

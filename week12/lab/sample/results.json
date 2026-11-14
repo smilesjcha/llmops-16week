@@ -1,0 +1,165 @@
+{
+  "healthy": {
+    "label": "개선 근거와 운영 기준 충족",
+    "report": {
+      "contract": {
+        "experiment_id": "w12-help-v1",
+        "allocation_b": 0.5,
+        "min_per_arm": 1000,
+        "planned_days": 14,
+        "srm_alpha": 0.001,
+        "max_p95_ms": 1800.0,
+        "max_error_rate": 0.03,
+        "practical_lift": 0.03,
+        "metric": "first_request_confirmed_resolution",
+        "observation_minutes": 30
+      },
+      "config_version": "78b4aa1a4e96",
+      "source": "authored_synthetic",
+      "decision": "REVIEW",
+      "reasons": [
+        "고정 시점 개선 근거·운영 기준 통과. 사람 검토 후 제한 배포 여부 결정."
+      ],
+      "arms": {
+        "A": {
+          "n": 1196,
+          "resolved": 658,
+          "rate": 0.5501672240802675,
+          "feedback_rate": 0.887123745819398,
+          "exposure_rate": 0.9899665551839465,
+          "error_rate": 0.010033444816053512,
+          "p95_ms": 924.44
+        },
+        "B": {
+          "n": 1204,
+          "resolved": 771,
+          "rate": 0.6403654485049833,
+          "feedback_rate": 0.8862126245847176,
+          "exposure_rate": 0.9858803986710963,
+          "error_rate": 0.014119601328903655,
+          "p95_ms": 1147.091
+        }
+      },
+      "effect": {
+        "difference": 0.09019822442471581,
+        "low": 0.05095064418654099,
+        "high": 0.12905853182075427,
+        "method": "Newcombe-Wilson 95% fixed-horizon"
+      },
+      "srm": {
+        "chi2": 0.02666666666666667,
+        "p_value": 0.8702827722810359,
+        "sufficient": true
+      },
+      "elapsed_days": 14,
+      "outcomes_mature": true
+    }
+  },
+  "slow": {
+    "label": "해결 확인율 상승·응답 지연 악화",
+    "report": {
+      "contract": {
+        "experiment_id": "w12-help-v1",
+        "allocation_b": 0.5,
+        "min_per_arm": 1000,
+        "planned_days": 14,
+        "srm_alpha": 0.001,
+        "max_p95_ms": 1800.0,
+        "max_error_rate": 0.03,
+        "practical_lift": 0.03,
+        "metric": "first_request_confirmed_resolution",
+        "observation_minutes": 30
+      },
+      "config_version": "78b4aa1a4e96",
+      "source": "authored_synthetic",
+      "decision": "HOLD",
+      "reasons": [
+        "B p95 2868ms > 1800ms"
+      ],
+      "arms": {
+        "A": {
+          "n": 1196,
+          "resolved": 658,
+          "rate": 0.5501672240802675,
+          "feedback_rate": 0.887123745819398,
+          "exposure_rate": 0.9899665551839465,
+          "error_rate": 0.010033444816053512,
+          "p95_ms": 924.44
+        },
+        "B": {
+          "n": 1204,
+          "resolved": 771,
+          "rate": 0.6403654485049833,
+          "feedback_rate": 0.8862126245847176,
+          "exposure_rate": 0.9858803986710963,
+          "error_rate": 0.014119601328903655,
+          "p95_ms": 2867.7274999999995
+        }
+      },
+      "effect": {
+        "difference": 0.09019822442471581,
+        "low": 0.05095064418654099,
+        "high": 0.12905853182075427,
+        "method": "Newcombe-Wilson 95% fixed-horizon"
+      },
+      "srm": {
+        "chi2": 0.02666666666666667,
+        "p_value": 0.8702827722810359,
+        "sufficient": true
+      },
+      "elapsed_days": 14,
+      "outcomes_mature": true
+    }
+  },
+  "srm": {
+    "label": "B 사용자 수집 누락",
+    "report": {
+      "contract": {
+        "experiment_id": "w12-help-v1",
+        "allocation_b": 0.5,
+        "min_per_arm": 1000,
+        "planned_days": 14,
+        "srm_alpha": 0.001,
+        "max_p95_ms": 1800.0,
+        "max_error_rate": 0.03,
+        "practical_lift": 0.03,
+        "metric": "first_request_confirmed_resolution",
+        "observation_minutes": 30
+      },
+      "config_version": "78b4aa1a4e96",
+      "source": "authored_synthetic",
+      "decision": "INVALID",
+      "reasons": [
+        "SRM: 배정·수집·필터를 진단하기 전 효과 해석 중단"
+      ],
+      "arms": {
+        "A": {
+          "n": 1196,
+          "resolved": 658,
+          "rate": 0.5501672240802675,
+          "feedback_rate": 0.887123745819398,
+          "exposure_rate": 0.9899665551839465,
+          "error_rate": 0.010033444816053512,
+          "p95_ms": 924.44
+        },
+        "B": {
+          "n": 602,
+          "resolved": 374,
+          "rate": 0.6212624584717608,
+          "feedback_rate": 0.8787375415282392,
+          "exposure_rate": 0.9800664451827242,
+          "error_rate": 0.019933554817275746,
+          "p95_ms": 1140.9324999999994
+        }
+      },
+      "effect": null,
+      "srm": {
+        "chi2": 196.23804226918799,
+        "p_value": 1.382972108150239e-44,
+        "sufficient": true
+      },
+      "elapsed_days": 14,
+      "outcomes_mature": true
+    }
+  }
+}

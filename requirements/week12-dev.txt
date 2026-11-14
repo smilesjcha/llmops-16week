@@ -1,0 +1,4 @@
+# Optional maintainer verification, not required for student notebooks.
+-r week12-online.txt
+-r dev.txt
+scipy==1.17.1

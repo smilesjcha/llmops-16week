@@ -39,3 +39,6 @@ week02/lecture/node_modules
 
 # Student-authored evaluation runs may include private project data.
 week11/lab/reports/
+week12/lab/reports/
+week12/lab/*.sqlite3*
+week12/**/*.sqlite3*

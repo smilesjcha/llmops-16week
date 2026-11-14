@@ -36,6 +36,7 @@
 | 09 | 2026.10.30 | API 계약과 LLM 서비스 구현 | [09주차 강의안 · 80쪽](09_week9_api_serving.pdf) | 실시간 온라인 | [5개 Notebook·VS Code 실행 안내](../../week09/lab/README.md) · [강의 녹화](../../week09/resources/README.md) |
 | 10 | 2026.11.06 | LLM 서비스 배포와 실행 관찰 | [10주차 강의안 · 80쪽](10_week10_observable_deployment.pdf) | 실시간 온라인 | [실습6개·기획서 2차 제출](../../week10/README.md) · [강의 녹화](../../week10/resources/README.md) |
 | 11 | 2026.11.13 | LLM 서비스의 품질 검증 | [11주차 강의안 · 64쪽](11_week11_offline_evaluation.pdf) | 실시간 온라인 | [HTML 강의안 바로 보기](https://smilesjcha.github.io/llmops-16week/week11/lecture/) · [Notebook 10개·평가 보고서](../../week11/lab/README.md) |
+| 12 | 2026.11.20 | 온라인 실험과 A/B 테스트 | [12주차 강의안 · 64쪽](12_week12_online_experiments.pdf) | 실시간 온라인 | [HTML 강의안](https://smilesjcha.github.io/llmops-16week/week12/lecture/) · [실습 5개](../../week12/lab/README.md) · [9–12주차 공개 과제](https://smilesjcha.github.io/llmops-16week/week12/assignment/) |
 
 2주차 강의안은 72쪽으로, 1–60쪽은 2시간 본 수업용이고 61–72쪽은 심화 참고용이다. 실습은 [VS Code 실행 가이드](../../week02/VS_CODE_GUIDE.md)를 따라 진행한다.
 
@@ -54,6 +55,8 @@
 
 4주차 추석에는 녹화영상을 업로드했다. 6주차 한글날에는 실시간 수업·녹화영상·신규 과제가 없다. 7주차에 기획서 초안을 검토하고, 8주차에는 실시간 수업 없이 피드백 반영 수정본을 온라인 제출·평가한다. 16주차 발표는 실시간 온라인으로 진행한다.
 ## 최신 추가 자료
+
+- [12주차 · 온라인 실험과 A/B 테스트 · 64쪽](12_week12_online_experiments.pdf) · [HTML 강의안](https://smilesjcha.github.io/llmops-16week/week12/lecture/) · [공개 과제·작성 양식](https://smilesjcha.github.io/llmops-16week/week12/assignment/)
 
 - [11주차 · LLM 서비스의 품질 검증 · 64쪽](11_week11_offline_evaluation.pdf) · [HTML 강의안 바로 보기](https://smilesjcha.github.io/llmops-16week/week11/lecture/) · [실습 평가 보고서 바로 보기](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/report.html) · [실습 안내](../../week11/lab/README.md)
 

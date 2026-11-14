@@ -1,0 +1,25 @@
+{
+  "source": "actual_local_ollama",
+  "responses": [
+    {
+      "variant": "A",
+      "answer": "- 수령 후 7일 이내 교환 접수 가능합니다.\n- 재고가 있어야 하며, 왕복 배송비 6000원이 포함됩니다.",
+      "provider": "ollama",
+      "model": "qwen2.5:1.5b-instruct",
+      "latency_ms": 1681.36,
+      "output_tokens": 42,
+      "done_reason": "stop",
+      "load_duration_ms": 1340.4385
+    },
+    {
+      "variant": "B",
+      "answer": "1. 가능 조건: 제품이 수령한 지 7일 이내에 교환을 신청해야 합니다. 교환은 재고가 있어야 하며, 이는 배송비를 포함합니다.\n\n2. 비용: 교환을 신청할 때는 배송비 6000원이 추가로 발생합니다.\n\n3. 다음 행동의 세 항목으로 짧게 설명하세요:\n\n- 수령한 제품을 7일 이내에 교환 신청합니다.\n- 교환을 신청하면 배송비 6000원이 추가로 발생합니다",
+      "provider": "ollama",
+      "model": "qwen2.5:1.5b-instruct",
+      "latency_ms": 828.62,
+      "output_tokens": 128,
+      "done_reason": "length",
+      "load_duration_ms": 0.441167
+    }
+  ]
+}

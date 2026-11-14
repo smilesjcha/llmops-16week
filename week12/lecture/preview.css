@@ -1,0 +1,1 @@
+:root{--scale:1}html,body,#preview-root{width:1440px;height:810px;margin:0;overflow:hidden}#preview-root>.slide{display:flex!important;width:1440px!important;height:810px!important;transform:none!important;margin:0!important}.presenter-note,.enlarge{display:none!important}*,*::before,*::after{animation:none!important;transition:none!important}

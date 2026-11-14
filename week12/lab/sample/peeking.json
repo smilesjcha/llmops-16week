@@ -1,0 +1,7 @@
+{
+  "seed": 12,
+  "repeats": 500,
+  "fixed_end_false_positive_rate": 0.036,
+  "any_day_false_positive_rate": 0.176,
+  "source": "null_simulation"
+}

@@ -2,6 +2,20 @@
 
 현행 LLMOps 수업의 강의안·실습·프로젝트 운영 문서와 2025년 2학기 보존본을 함께 관리하는 저장소다. 2025년 공개 Notion 커리큘럼, 실제 PPTX/PDF와 기존 실습 repository는 `AS-IS` 자료로 보존하고, 현행 학기 설계는 별도 문서에서 관리한다.
 
+## 12주차 학생용 자료 · 공개 과제
+
+| 자료 | 바로 보기 |
+|---|---|
+| HTML 강의안 · 64쪽 | [온라인 실험과 A/B 테스트](https://smilesjcha.github.io/llmops-16week/week12/lecture/) · 발표자 모드·도식·표본 수 조작 |
+| 학생용 PDF · 64쪽 | [PDF 열기·저장](https://smilesjcha.github.io/llmops-16week/output/pdf/12_week12_online_experiments.pdf) |
+| 단계별 실습 · Notebook 5개 | [VS Code 준비·실행 순서](week12/lab/README.md) · [셀별 확인 결과](week12/lab/WALKTHROUGH.md) |
+| 실습 결과 보고서 | [REVIEW / HOLD / INVALID 비교](https://smilesjcha.github.io/llmops-16week/week12/lab/sample/report.html) |
+| **9–12주차 통합 과제** | **[과제 안내·작성 양식 바로 보기](https://smilesjcha.github.io/llmops-16week/week12/assignment/)** |
+
+과제는 **상담 AI의 배포 판단 한 페이지 + 실행 근거 화면 1개**입니다. 02·04번 실습 결과를 활용하며 예상 60–90분입니다. 소속 학교와 관계없이 공개 안내를 로그인 없이 볼 수 있고, 작성한 메모를 HTML 또는 PDF로 저장할 수 있습니다. **11월 27일(금), 수업 후 1주일 이내** 제출을 기준으로 하며 정확한 시각은 소속별 최종 공지를 따릅니다. 아주대AI대학원은 LMS, 별도 수강생은 수업에서 공지된 교수 이메일을 사용합니다. 페이지에서 자동 제출되지는 않습니다.
+
+[100분 수업 계획](week12/README.md) · [교수용 64쪽 설명 노트·셀별 안내](https://smilesjcha.github.io/llmops-16week/week12/lecture/instructor/)
+
 ## 11주차 학생용 자료 바로 가기
 
 | 자료 | 바로 보기 | 활용 |
@@ -45,7 +59,7 @@ PDF는 **2026년 11월 14일 최신 HTML 강의안에서 다시 생성한 학생
 - 5주차: [PDF · 검색 품질 개선](output/pdf/05_week5_search_quality.pdf) · [단계별 Notebook 실습](week05/lab/README.md)
 - 6주차: [SFT·LoRA·QLoRA 확장 강의안 · 76쪽](output/pdf/06_week6_sft_lora_reference.pdf) · [손실·마스킹·양자화 실습](week06/lab/README.md) · 10.09 휴일, 기술 내용은 7주차 통합 강의에서 진행
 - 7주차: [PDF · 모델 적응과 서비스 기획 · 80쪽](output/pdf/07_week7_model_adaptation_project.pdf) · [5개 Notebook·VS Code](week07/lab/README.md) · [기획서 초안 안내 HTML](week07/assignment/project-draft.html)
-- 이번 과제: [과제 02 · 독립 HTML · 10월 8일(목)까지](week04/assignment/assignment02.html)
+- 이전 과제: [과제 02 · 독립 HTML · 10월 8일(목)까지](week04/assignment/assignment02.html)
 - 8주차: [기획서 제출 안내](curriculum/2026-2/web/project-submission.html) · [요약 PDF](output/pdf/08_project_proposal_guide.pdf)
 - 9주차: [PDF · API 계약과 LLM 서비스 구현 · 80쪽](output/pdf/09_week9_api_serving.pdf) · [발표용 PPT](week09/lecture/09_week9_api_serving.pptx) · [5개 Notebook·VS Code 실행 안내](week09/lab/README.md)
 - 10주차 실행: [학생 공유 링크·VS Code·Docker/Prometheus 시연 순서](week10/QUICKSTART.md)
