@@ -3,7 +3,7 @@
 2026년 11월 13일 실시간 온라인 수업. **64쪽 HTML 프레젠테이션**, 인쇄 PDF, 단계별 Notebook 10개로 검색 평가·실제 Ollama 생성·LLM 평가·실행 추적을 다룹니다.
 
 - [HTML 강의안 바로 보기 · 64쪽](https://smilesjcha.github.io/llmops-16week/week11/lecture/): 로그인·다운로드 없이 브라우저에서 열기
-- [학생용 PDF / 64쪽](../output/pdf/11_week11_offline_evaluation.pdf)
+- [학생용 PDF 바로 보기·저장 · 64쪽](https://smilesjcha.github.io/llmops-16week/output/pdf/11_week11_offline_evaluation.pdf): 2026.11.14 최신 HTML 인쇄본 · [GitHub 파일](../output/pdf/11_week11_offline_evaluation.pdf)
 - [실습 코드와 VS Code 실행 순서](lab/README.md)
 - [실습 평가 보고서 바로 보기](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/report.html): 필터·질문 검색·근거 탐색이 가능한 실행 예제
 - [실제 Ollama 실행 보고서](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/ollama/ollama-report.html)
@@ -18,6 +18,8 @@
 - [실행 검증 결과](VALIDATION.md)
 
 위의 **바로 보기** 링크는 GitHub Pages에서 실행됩니다. Chrome·Edge 등에서 바로 열고 주소를 학생들에게 공유하면 됩니다. `main`의 수정본은 Pages 배포가 완료되면 같은 주소에 반영됩니다.
+
+학생용 PDF는 웹 강의안과 같은 순서로 한 페이지에 장표 하나씩 담았습니다. 텍스트 검색과 인쇄가 가능하며 교수 설명 노트·조작 버튼은 제외합니다. 도식은 전체 흐름을 표시하고 16쪽 검색 지표는 기본값 `k=3`으로 고정합니다. 도식 단계 진행·그림 확대·지표 변경은 **HTML 강의안 바로 보기**에서 이용하세요.
 
 오프라인 이용도 가능합니다. [강의안 원본](lecture/index.html)이나 [보고서 원본](lab/sample/report.html)의 **Download raw file**로 저장한 뒤 브라우저로 여세요. 글꼴·그림·스크립트가 내장된 단일 파일입니다. 공개 보고서는 수업용 합성 자료이며 학생 제출물이 아닙니다. 직접 실행한 결과는 로컬 `week11/lab/reports/report.html`에서 확인합니다.
 

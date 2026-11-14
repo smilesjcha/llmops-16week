@@ -2,6 +2,16 @@
 
 현행 LLMOps 수업의 강의안·실습·프로젝트 운영 문서와 2025년 2학기 보존본을 함께 관리하는 저장소다. 2025년 공개 Notion 커리큘럼, 실제 PPTX/PDF와 기존 실습 repository는 `AS-IS` 자료로 보존하고, 현행 학기 설계는 별도 문서에서 관리한다.
 
+## 11주차 학생용 자료 바로 가기
+
+| 자료 | 바로 보기 | 활용 |
+|---|---|---|
+| 웹 강의안 · 64쪽 | [GitHub Pages에서 열기](https://smilesjcha.github.io/llmops-16week/week11/lecture/) | 장표 이동·도식 단계·그림 확대·지표 조작 |
+| 학생용 PDF · 64쪽 | [PDF 열기·저장](https://smilesjcha.github.io/llmops-16week/output/pdf/11_week11_offline_evaluation.pdf) | 수업 복습·텍스트 검색·인쇄 |
+| 실습 | [Notebook 10개와 VS Code 실행 안내](week11/lab/README.md) | 검색 평가·Ollama 생성·Langfuse 추적·A/B/C 비교 |
+
+PDF는 **2026년 11월 14일 최신 HTML 강의안에서 다시 생성한 학생용 인쇄본**입니다. 웹과 PDF의 장표 순서는 같으며, PDF는 한 페이지에 장표 하나씩 담고 교수 설명 노트와 조작 버튼은 제외합니다. 움직이는 도식과 지표 실험은 위 웹 강의안에서 확인하세요.
+
 ## 현행 학기 운영
 
 - [2026년 2학기 운영 커리큘럼](curriculum/2026-2/00_운영_커리큘럼.md)
@@ -40,7 +50,7 @@
 - 9주차: [PDF · API 계약과 LLM 서비스 구현 · 80쪽](output/pdf/09_week9_api_serving.pdf) · [발표용 PPT](week09/lecture/09_week9_api_serving.pptx) · [5개 Notebook·VS Code 실행 안내](week09/lab/README.md)
 - 10주차 실행: [학생 공유 링크·VS Code·Docker/Prometheus 시연 순서](week10/QUICKSTART.md)
 - 10주차: [PDF · 배포와 실행 관찰 · 80쪽](output/pdf/10_week10_observable_deployment.pdf) · [발표용 PPT](week10/lecture/10_week10_observable_deployment.pptx) · [Notebook 6개·VS Code 실행 안내](week10/lab/README.md) · [기획서 2차 제출 공지](week10/README.md#기획서-2차-제출-공지)
-- 11주차: [HTML 강의안 바로 보기 · 품질 검증 · 64쪽](https://smilesjcha.github.io/llmops-16week/week11/lecture/) · [인쇄 PDF](output/pdf/11_week11_offline_evaluation.pdf) · [Notebook 10개·VS Code 실행 안내](week11/lab/README.md) · [실습 평가 보고서 바로 보기](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/report.html)
+- 11주차: [HTML 강의안 바로 보기 · 품질 검증 · 64쪽](https://smilesjcha.github.io/llmops-16week/week11/lecture/) · [학생용 PDF 바로 보기](https://smilesjcha.github.io/llmops-16week/output/pdf/11_week11_offline_evaluation.pdf) · [Notebook 10개·VS Code 실행 안내](week11/lab/README.md) · [실습 평가 보고서 바로 보기](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/report.html)
 - 11주차 실전: [Docker·Langfuse·100분 시간표](week11/lab/langfuse/README.md) · [실제 A/B/C 비교 결과](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/langfuse/)
 - [11주차 교수용 강의 준비](https://smilesjcha.github.io/llmops-16week/week11/lecture/instructor/): 목차별 64쪽 핵심 메시지, 설명 예시·확인 질문, 09·10번 코드 셀별 수업 안내.
 - [11주차 화면별 시연 순서·사전 점검](https://smilesjcha.github.io/llmops-16week/week11/lab/demo/): 준비 → 요청 트리 → 입출력 → 점수 → A/B/C 실험 → 배포 판단.

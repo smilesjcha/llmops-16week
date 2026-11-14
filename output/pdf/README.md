@@ -2,6 +2,8 @@
 
 학생은 매주 이 폴더의 PDF를 강의안 기준본으로 사용한다. 현재 강의안은 특정 대학에 한정하지 않는 대학생·대학원생 대상 통합 LLMOps 강좌 기준이다. `AS-IS 2025 2nd semester` 폴더는 이전 학기 참고자료이며, 현재 수업 자료가 아니다.
 
+**11주차 학생용 자료:** [PDF 바로 보기·저장 · 64쪽](https://smilesjcha.github.io/llmops-16week/output/pdf/11_week11_offline_evaluation.pdf) · [웹 강의안 바로 보기 · GitHub Pages](https://smilesjcha.github.io/llmops-16week/week11/lecture/). PDF는 2026.11.14 최신 HTML 인쇄본이며, 웹 강의안과 같은 순서로 한 페이지에 장표 하나씩 담았다. 교수 설명 노트와 조작 버튼은 제외하고, 도식 단계 진행·지표 변경은 웹에서 확인한다.
+
 > 현재 저장소는 공개(Public)다. 영상은 교수자가 공개를 요청한 Drive 파일로 연결한다. 1주차 이외의 원본 녹화 전체를 비식별 처리했다고 보장하지 않는다. 학생 연락처·명단·메일·제출물은 포함하지 않는다.
 
 ## 확인 순서
@@ -33,7 +35,7 @@
 | 08 | 2026.10.23 | 프로젝트 기획서 제출 | [제출 안내 · 16쪽](08_project_proposal_guide.pdf) | 온라인 제출·평가만 | [양식·평가 안내](../../week08/README.md) |
 | 09 | 2026.10.30 | API 계약과 LLM 서비스 구현 | [09주차 강의안 · 80쪽](09_week9_api_serving.pdf) | 실시간 온라인 | [5개 Notebook·VS Code 실행 안내](../../week09/lab/README.md) · [강의 녹화](../../week09/resources/README.md) |
 | 10 | 2026.11.06 | LLM 서비스 배포와 실행 관찰 | [10주차 강의안 · 80쪽](10_week10_observable_deployment.pdf) | 실시간 온라인 | [실습6개·기획서 2차 제출](../../week10/README.md) · [강의 녹화](../../week10/resources/README.md) |
-| 11 | 2026.11.13 | LLM 서비스의 품질 검증 | [11주차 강의안 · 64쪽](11_week11_offline_evaluation.pdf) | 실시간 온라인 | [HTML 프레젠테이션](../../week11/lecture/index.html) · [Notebook 10개·평가 보고서](../../week11/lab/README.md) |
+| 11 | 2026.11.13 | LLM 서비스의 품질 검증 | [11주차 강의안 · 64쪽](11_week11_offline_evaluation.pdf) | 실시간 온라인 | [HTML 강의안 바로 보기](https://smilesjcha.github.io/llmops-16week/week11/lecture/) · [Notebook 10개·평가 보고서](../../week11/lab/README.md) |
 
 2주차 강의안은 72쪽으로, 1–60쪽은 2시간 본 수업용이고 61–72쪽은 심화 참고용이다. 실습은 [VS Code 실행 가이드](../../week02/VS_CODE_GUIDE.md)를 따라 진행한다.
 
