@@ -1,0 +1,168 @@
+"""Small, real Langfuse assignment reusing the tested Week 11 pipeline."""
+from pathlib import Path
+import nbformat as nb
+ROOT=Path(__file__).resolve().parents[1]
+P=ROOT/'week12/assignment/01_langfuse_mission.ipynb'
+cells=[]
+def md(s): cells.append(nb.v4.new_markdown_cell(s))
+def code(s): cells.append(nb.v4.new_code_cell(s.strip()))
+md('''# 9–12주차 통합 미션 · Langfuse로 상담 AI 개선 판단
+
+**개인 과제 · 설치 후 60–90분 · 12월 4일(금) 23:59 KST · LMS 제출 최대 5회**
+
+[공개 과제·작성 양식](https://smilesjcha.github.io/llmops-16week/week12/assignment/) · [Docker·Ollama 준비](../../week11/lab/langfuse/README.md)
+
+정상 교환 질문과 실시간 재고 질문을 각각 두 프롬프트로 실행합니다. **전체 요청 4개, 실제 모델 호출 8회**(답변 4 + 모델 평가 4), 순차 실행입니다. Langfuse에 남은 실제 답변·코드 검사·모델 판정을 읽고 판단합니다. B가 반드시 좋아져야 하는 과제가 아닙니다.
+
+VS Code에서 저장소 전체를 열고 Python 3.11 `.venv` 커널을 선택합니다. 터미널에서 `python -m pip install -r requirements/week12-langfuse.txt`를 실행하고, 기존 11주차 Docker와 Ollama를 켭니다. 유료 API는 사용하지 않습니다. 코드 셀 **1 → 8** 순서로 실행합니다. 3·4를 다시 실행하면 새로운 trace가 추가됩니다.
+
+| 코드 셀 | 실행·확인 | 연결 단원 |
+|---|---|---|
+| 1–2 | 연결·질문·응답 계약 확인 | 9 API 계약 |
+| 3–4 | 동일 질문의 A/B 실제 응답 | 11 품질 비교 |
+| 5 | Trace 트리·Scores·개별 지연 | 10 관찰 / 11 평가 |
+| 6 | 직접 읽은 답변의 사람 검토 | 11 평가 근거 |
+| 7 | 사용자 고정 배정·온라인 실험 계획 | 12 실험 설계 |
+| 8 | 원본 증거 저장·제출 정리 | 9–12 종합 |
+
+이 Notebook은 기존 Python 파이프라인에서 Ollama HTTP API를 호출합니다. 별도 웹 서버나 사용자 A/B 실험을 띄우는 것은 아닙니다. 7번의 사용자 ID는 배정 확인용 가상 ID이며 실제 행동 결과는 생성하지 않습니다.
+''')
+md('## 코드 셀 1 · 환경과 연결\n인증 키는 출력하지 않습니다. 기존 11주차 로컬 프로젝트를 재사용하므로 화면의 환경 이름은 `week11-local`로 표시됩니다. 이번 실행은 `w12-mission-...` session ID로 구분합니다.')
+code('''from pathlib import Path
+import sys, json, uuid
+ROOT = next(p for p in [Path.cwd(), *Path.cwd().parents] if (p / 'week11/lab/langfuse_lab.py').exists())
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+assert sys.version_info[:2] == (3, 11), 'Python 3.11 .venv 커널을 선택하세요.'
+import pandas as pd
+from IPython.display import display, Markdown
+from week11.lab.evaluation import load_data
+from week11.lab.ollama_lab import OllamaClient, validate_answer
+from week11.lab.langfuse_lab import connect_langfuse, traced_question, wait_for_trace, observation_table, score_table
+from week12.lab.experiment import assign
+lf = connect_langfuse()
+ollama = OllamaClient()
+print(ollama.probe())
+session_id = 'w12-mission-' + uuid.uuid4().hex[:12]
+print('이번 실행:', session_id)
+by_id = {q['id']: q for q in load_data()[1]}
+''')
+md('## 코드 셀 2 · 비교 조건과 응답 계약\n질문·모델·검색기는 고정하고 프롬프트만 바꿉니다. `answer`는 문자열, `citations`는 문서 ID 목록, `abstain`은 기권 여부입니다. JSON 형식 통과가 의미 정확성을 보장하지는 않습니다.')
+code('''question_ids = ['Q03a', 'Q24a']
+display(pd.DataFrame([{'id': qid, '질문': by_id[qid]['query'], '참고 기준': by_id[qid]['reference']} for qid in question_ids]))
+GENERATION_BUDGET_MS = 3000  # 수업용 개별 생성 시간 기준. 결과 확인 전에 정합니다.
+print('비교: A baseline / B grounded, 모델:', ollama.model)
+print('지연 기준:', GENERATION_BUDGET_MS, 'ms / 생성 요청')
+print('형식·인용·기권 검사 + 답변 의미의 직접 검토. 두 질문으로 p95·일반 정확도를 추정하지 않습니다.')
+''')
+md('## 코드 셀 3 · A 기준선\n두 질문을 순서대로 실행합니다. 질문당 답변 생성 1회와 모델 평가 1회가 수행됩니다. 출력 URL을 열어 실제 Input과 Output을 확인합니다.')
+code('''baseline = []
+for qid in question_ids:
+    result = traced_question(lf, ollama, by_id[qid], prompt_version='baseline', session_id=session_id)
+    baseline.append(result)
+    print(qid, result['answer'])
+    display(Markdown(f"[A {qid} Trace 열기]({result['url']})"))
+''')
+md('## 코드 셀 4 · B 프롬프트 변경\n동일 질문에 근거 제한 프롬프트를 사용합니다. 결과가 비슷하거나 나빠져도 원문을 유지합니다. 이 A/B는 고정 질문의 오프라인 비교이며 사용자 효과 검증이 아닙니다.')
+code('''candidate = []
+for qid in question_ids:
+    result = traced_question(lf, ollama, by_id[qid], prompt_version='grounded', session_id=session_id)
+    candidate.append(result)
+    print(qid, result['answer'])
+    display(Markdown(f"[B {qid} Trace 열기]({result['url']})"))
+''')
+md('''## 코드 셀 5 · 저장된 Trace·Scores·개별 지연
+
+1. 출력된 **B Q24a 링크**를 엽니다. 트리에서 `01-retrieval`의 근거, `02-ollama-answer`의 입력·출력, `04-ollama-judge`의 판정을 확인합니다.
+2. **Scores**에서 코드 검사와 `llm_groundedness`의 이유를 비교합니다. 근거 없는 재고 단정이나 `abstain` 불일치를 직접 찾습니다. 오류가 없으면 근거와 조건을 만족한 사례를 설명합니다.
+3. Trace 트리·입출력 화면 1장, Scores 또는 A/B 비교표 화면 1장을 캡처합니다.
+
+Trace는 요청 전체, Span/Observation은 내부 작업, Generation은 실제 모델 호출 기록, Score는 평가값입니다. 부모 1개와 하위 작업 4개가 저장되어야 합니다. 생성 시간은 답변 생성 호출의 실제 경과 시간이며 전체 요청 시간과 다릅니다. 첫 호출의 모델 로딩·기기 부하도 함께 고려합니다.
+''')
+code('''results = baseline + candidate
+assert len(results) == 4
+stored = {r['trace_id']: wait_for_trace(lf, r) for r in results}
+for r in results:
+    validate_answer(r['answer'])
+    obs = stored[r['trace_id']]['observations']
+    roots = [o for o in obs if o['name'].startswith('rag-')]
+    assert len(roots) == 1
+    assert sum(o.get('parentObservationId') == roots[0]['id'] for o in obs) == 4
+comparison = pd.DataFrame([{
+    'question': r['question_id'], 'version': r['prompt_version'],
+    'answer': r['answer']['answer'], 'abstain': r['answer']['abstain'],
+    'checks': r['checks'], 'judge': r['judge']['verdict'],
+    'generation_ms': round(r['generation_ms'], 1),
+    'load_ms': round(r['generation_load_ms'], 1),
+    'within_budget': r['generation_ms'] <= GENERATION_BUDGET_MS,
+    'output_tokens': r['output_tokens'], 'trace_id': r['trace_id'],
+} for r in results])
+display(comparison)
+focus = candidate[-1]
+display(pd.DataFrame(observation_table(stored[focus['trace_id']])))
+display(pd.DataFrame(score_table(stored[focus['trace_id']])))
+display(Markdown(f"[B Q24a: 트리와 Scores 확인]({focus['url']})"))
+''')
+md('## 코드 셀 6 · 사람 검토\nB Q24a의 실제 답변·검색 근거를 읽고 `REVIEW`와 `COMMENT`를 직접 채운 뒤 재실행합니다. 기본값은 미검토이며 점수를 만들어 보내지 않습니다. 전송 후 같은 Trace의 Scores에 `human_review`와 코멘트가 저장됐는지 확인하세요. 원래 코드·모델 점수를 바꾸는 것이 아닙니다.')
+code('''REVIEW = None  # 'supported', 'unsupported', 'needs_review' 중 직접 선택
+COMMENT = ''  # 답변의 어떤 문장과 근거로 판단했는지 1–2문장
+if REVIEW is None:
+    print('사람 검토 미작성: 답변과 근거를 읽은 뒤 REVIEW·COMMENT를 채우고 이 셀을 다시 실행하세요.')
+else:
+    assert REVIEW in {'supported', 'unsupported', 'needs_review'} and COMMENT.strip()
+    lf.create_score(trace_id=focus['trace_id'], name='human_review', value=REVIEW,
+                    data_type='CATEGORICAL', comment=COMMENT,
+                    score_id=focus['trace_id']+'-w12-human-review')
+    lf.flush()
+    expected = {**focus, 'expected_score_names': focus['expected_score_names'] + ['human_review']}
+    display(pd.DataFrame(score_table(wait_for_trace(lf, expected))))
+''')
+md('''## 코드 셀 7 · 온라인 A/B로 이어지는 계획
+
+같은 사용자의 버전 유지 여부만 코드로 확인합니다. **20명은 가상 ID이고 성과 데이터가 없으므로 승자·신뢰구간을 계산하지 않습니다.**
+
+아래는 설계 예시입니다. 자신의 변경에 맞게 다섯 항목을 수정해 제출 메모에 적습니다. 사용자를 모집하거나 14일 동안 실제 실험을 진행하라는 요구가 아닙니다. 실행 결과를 보기 전 계획을 정하는 연습입니다.
+''')
+code('''users = pd.DataFrame({'visitor_id': [f'u-mission-{i:02d}' for i in range(20)]})
+users['first'] = users.visitor_id.map(assign)
+users['return_visit'] = users.visitor_id.map(assign)
+assert (users['first'] == users['return_visit']).all()
+display(users)
+print('가상 사용자 배정:', users['first'].value_counts().to_dict())
+plan = {
+    '변경과 배정': '품질 재검증을 통과한 프롬프트만 후보로 사용. 사용자별 A/B 50:50 고정 배정.',
+    '성공 지표와 분모': '첫 요청 후 30분 내 해결 확인 사용자 / 전체 진입 사용자. 오류·미응답도 분모 유지.',
+    '운영 보호 기준': '실제 사용자 환경에서 p95 1800ms 이하, 오류율 3% 이하를 가정. 서비스 요구로 사전 확정.',
+    '기간과 종료': '계획 예: 모집 14일 + 마지막 진입자의 30분 관찰. 목표 표본을 별도 계획하며 중간 유의성으로 조기 종료하지 않음.',
+    '배포 판단과 한계': '4개 Trace는 후보 품질의 탐색 근거. 실제 사용자 개선은 아직 검증하지 않음.',
+}
+display(pd.DataFrame(plan.items(), columns=['항목', '설계 예시 — 본인 내용으로 수정']))
+''')
+md('## 코드 셀 8 · 증거 저장과 제출\n저장 파일은 본인 PC의 Git 제외 폴더에 남습니다. 제출은 공개 HTML 양식에서 **판단·관찰·다음 변경·실험 계획**을 적어 PDF 또는 HTML로 저장하고, 캡처 2장과 함께 LMS/이메일에 올립니다. 로컬 Trace URL만 제출하면 교수 PC에서 열리지 않으므로 캡처가 필요합니다.')
+code('''out = ROOT / 'week12/lab/reports/langfuse-mission'
+out.mkdir(parents=True, exist_ok=True)
+payload = {'session_id': session_id, 'results': results,
+           'human_review': {'value': REVIEW, 'comment': COMMENT},
+           'online_plan': plan, 'generation_budget_ms': GENERATION_BUDGET_MS,
+           'online_user_effect_measured': False}
+(out/'evidence.json').write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding='utf-8')
+comparison.to_csv(out/'comparison.csv', index=False)
+lf.flush()
+print('저장:', out)
+print('사람 검토:', '완료' if REVIEW is not None else '미작성 — 코드 셀 6을 작성하세요')
+print('제출: 판단 메모 1–2쪽 PDF/HTML + 화면 2장. 2026-12-04 23:59 KST, LMS 최대 5회.')
+''')
+md('''## 마무리·문제 해결
+
+- Trace가 늦게 나타나면 같은 URL을 새로고침하고 `wait_for_trace`로 저장을 확인합니다. worker 상태를 확인하기 전에 반복 실행으로 Trace를 무한히 늘리지 않습니다.
+- API 키·비밀번호·다른 사람의 정보는 캡처하지 않습니다. `.env`를 제출하지 않습니다.
+- 설치 문제는 [준비·오류 해결](../../week11/lab/langfuse/README.md)을 먼저 확인합니다. 끝내 실행이 어렵다면 오류 내용과 시도한 해결을 제출하고 [공개 실제 실행 예시](https://smilesjcha.github.io/llmops-16week/week11/lab/sample/langfuse/)로 분석한 범위를 구분합니다. 이를 본인의 실행 증거라고 표시하지 않습니다.
+- Docker를 멈출 때는 `docker compose -f week11/lab/langfuse/compose.yaml stop`을 사용합니다. 데이터 보존을 위해 `down -v`는 사용하지 않습니다.
+''')
+doc=nb.v4.new_notebook(cells=cells,metadata={'kernelspec':{'display_name':'Python 3.11 (llmops)','language':'python','name':'python3'},'language_info':{'name':'python','version':'3.11'}})
+if P.exists():
+ old=nb.read(P,as_version=4)
+ if len(old.cells)==len(cells):
+  for a,b in zip(old.cells,cells):b['id']=a['id']
+nb.write(doc,P)
+print('Built mission:',len(cells),'cells,',sum(c.cell_type=='code' for c in cells),'code cells')

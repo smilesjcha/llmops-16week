@@ -7,12 +7,17 @@ const browser=await chromium.launch({headless:true,channel:'chrome'}),errors=[];
 try{
  const page=await browser.newPage({viewport:{width:1440,height:1000},acceptDownloads:true});page.on('pageerror',e=>errors.push(String(e)));
  await page.goto('file://'+path.join(root,'week12/assignment/index.html'));
- const text='B 보류. +9.02%p 개선이 있으나 p95 2868ms로 상한 1800ms 초과.';
+ assert.ok((await page.locator('#submit').textContent()).includes('12월 4일(금) 23:59'));
+ assert.ok((await page.locator('#submit').textContent()).includes('최대 5회'));
+ assert.equal(await page.locator('a[href*="01_langfuse_mission.ipynb"]').count(),1);
+ const text='B 보류. 재고 답변과 기권 필드의 불일치를 직접 확인한 뒤 개선.';
  await page.locator('#decision').fill(text);await page.reload();assert.equal(await page.locator('#decision').inputValue(),text);
+ await page.locator('#plan').fill('사용자별 고정 배정 · 전체 진입자 분모 · 종료 규칙 사전 확정');
  await page.locator('#limits').fill('</textarea><script>window.INJECTED=true</script> 합성 데이터');
  const promise=page.waitForEvent('download');await page.locator('#save-html').click();const download=await promise;const file=path.join(out,download.suggestedFilename());await download.saveAs(file);
- await page.goto('file://'+file);assert.equal(await page.locator('#decision').inputValue(),text);assert.equal(await page.locator('#task').count(),0);assert.equal(await page.evaluate(()=>window.INJECTED),undefined);assert.ok((await page.locator('#limits').inputValue()).includes('<script>'));
- await page.locator('#limits').fill('교수 작성 합성 데이터이며 실제 제품 성과가 아님.');await page.locator('#api').fill('02번 요청 ID r-01, 배정 버전 확인. 같은 요청 재전송으로 중복 기록 없음.');await page.locator('#next').fill('B의 출력 길이를 줄인 뒤 같은 질문으로 정책 기간·비용·재고 조건·완결성을 검사.');await page.locator('#evidence').fill('A 1196명 55.02%, B 1204명 64.04%. 차이 +9.02%p, 95% 구간 [5.10, 12.91]%p.');
+ await page.goto('file://'+file);assert.equal(await page.locator('#decision').inputValue(),text);assert.equal(await page.locator('#task').count(),0);assert.ok((await page.locator('#plan').inputValue()).includes('사용자별 고정 배정'));assert.equal(await page.evaluate(()=>window.INJECTED),undefined);assert.ok((await page.locator('#limits').inputValue()).includes('<script>'));
+ const resave=page.waitForEvent('download');await page.locator('#save-html').click();await(await resave).saveAs(path.join(out,'resaved-memo.html'));
+ await page.locator('#limits').fill('수업용 질문 2개이며 실제 사용자 성과가 아님.');await page.locator('#api').fill('Trace ID와 검색·생성·평가 확인. 개별 생성 시간 1200ms.');await page.locator('#next').fill('B의 출력 길이를 줄인 뒤 같은 질문으로 정책 기간·비용·재고 조건·완결성을 검사.');await page.locator('#evidence').fill('A/B 원문·코드 검사와 모델 판정을 비교하고 사람 검토 근거 기록.');
  await page.screenshot({path:path.join(out,'saved-memo.png'),fullPage:true});
  await page.evaluate(()=>document.body.classList.add('memo-print'));await page.emulateMedia({media:'print'});await page.pdf({path:path.join(out,'memo-print.pdf'),printBackground:true,preferCSSPageSize:true});await page.emulateMedia({media:'screen'});
  const mobile=[];for(const target of ['week12/assignment/index.html','week12/lab/sample/report.html','week12/lecture/instructor/index.html']){await page.goto('file://'+path.join(root,target));await page.setViewportSize({width:390,height:844});const extra=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);if(extra>1)mobile.push({target,extra});}

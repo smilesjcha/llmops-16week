@@ -12,6 +12,8 @@
 
 총 114셀, 코드 셀 38개입니다. [38개 코드 셀별 실행·예상 결과·교수 설명](WALKTHROUGH.md) · [브라우저 교수 안내](https://smilesjcha.github.io/llmops-16week/week12/lecture/instructor/#cells) · [공개 보고서](https://smilesjcha.github.io/llmops-16week/week12/lab/sample/report.html) · **[공개 과제](https://smilesjcha.github.io/llmops-16week/week12/assignment/)**
 
+**11월 20일 과제 개정:** [Langfuse 미션 Notebook과 제출 안내](../assignment/README.md)를 사용합니다. 아래 5개 Notebook은 100분 수업 실습입니다.
+
 ## VS Code 준비
 
 저장소 폴더를 VS Code로 열고 Python·Jupyter 확장을 설치합니다. 아래 명령은 **저장소 루트** 터미널에서 실행합니다. 기존 `.venv`가 있으면 재사용하며 새로 만들지 않아도 됩니다.

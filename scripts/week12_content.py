@@ -289,7 +289,7 @@ add('실제 계산 보고서의 읽는 순서','원본 CSV → 분석 함수 →
  '표는 결과를 꾸미는 화면이 아니라 결론을 검토할 수 있는 근거입니다.',
  'A와 B의 사용자 수를 먼저 읽고 수집률과 오류율을 확인합니다. 해결 확인율 차이가 양수여도 B의 p95가 상한보다 높습니다. 학생은 결과 JSON과 같은 숫자가 HTML에 표시되는지 확인할 수 있습니다.',
  '보고서에서 가장 먼저 큰 파란색 결론만 읽으면 무엇을 놓치나요?','분모·배정·가정·결론을 만든 구체적 실패 이유를 놓칠 수 있습니다.',chapter=C,source='data',kind='screenshot')
-add('실습 04: 효과와 배포 판단','04_effect_and_release.ipynb / 핵심 12분',two(code('slow → HOLD\n차이 ≈ +9.02%p\n95% 구간 ≈ [5.10, 12.91]%p\nB p95 ≈ 2868ms\n\n다음 변경 + 재검증 계획'),rows([('핵심','코드 셀 1–6, 9'),('심화','셀 7 표본 계획 / 셀 8 반복 확인'),('과제','이 결과를 그대로 활용'),('해석','좋은 지표와 위험을 함께 설명') ])),
+add('실습 04: 효과와 배포 판단','04_effect_and_release.ipynb / 핵심 12분',two(code('slow → HOLD\n차이 ≈ +9.02%p\n95% 구간 ≈ [5.10, 12.91]%p\nB p95 ≈ 2868ms\n\n다음 변경 + 재검증 계획'),rows([('핵심','코드 셀 1–6, 9'),('심화','셀 7 표본 계획 / 셀 8 반복 확인'),('연결','배포 판단의 원리 정리'),('해석','좋은 지표와 위험을 함께 설명') ])),
  '계산 결과를 한 문장 결론과 다음 변경으로 바꿔 봅니다.',
  'slow 결과를 먼저 읽고 배포 여부를 말하게 합니다. 그 다음 절대 차이와 구간을 계산해 성과 근거가 있어도 HOLD가 타당함을 확인합니다. 심화 셀은 교수 시연으로 보고 학생은 복습할 수 있습니다.',
  'B를 보류한다면 다음 실험에서 무엇을 바꿀까요?','출력 길이·불필요한 처리 등 한 가지 원인을 개선하고 품질 회귀 평가 후 새 실험을 설계합니다.',chapter=C,kind='lab')
@@ -366,6 +366,11 @@ if __package__:
 else:
  from week12_progression import apply as clarify_progression
 clarify_progression(slides,table=table,two=two,para=para,rows=rows,flow=flow,diagram=diagram)
+if __package__:
+ from .week12_assignment_slides import apply as update_assignment
+else:
+ from week12_assignment_slides import apply as update_assignment
+update_assignment(slides,table=table,two=two,para=para,rows=rows,flow=flow)
 
 assert len(slides)==64,len(slides)
 for i,s in enumerate(slides):

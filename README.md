@@ -12,7 +12,7 @@
 | 실습 결과 보고서 | [REVIEW / HOLD / INVALID 비교](https://smilesjcha.github.io/llmops-16week/week12/lab/sample/report.html) |
 | **9–12주차 통합 과제** | **[과제 안내·작성 양식 바로 보기](https://smilesjcha.github.io/llmops-16week/week12/assignment/)** |
 
-과제는 **상담 AI의 배포 판단 한 페이지 + 실행 근거 화면 1개**입니다. 02·04번 실습 결과를 활용하며 예상 60–90분입니다. 소속 학교와 관계없이 공개 안내를 로그인 없이 볼 수 있고, 작성한 메모를 HTML 또는 PDF로 저장할 수 있습니다. **11월 27일(금), 수업 후 1주일 이내** 제출을 기준으로 하며 정확한 시각은 소속별 최종 공지를 따릅니다. 아주대AI대학원은 LMS, 별도 수강생은 수업에서 공지된 교수 이메일을 사용합니다. 페이지에서 자동 제출되지는 않습니다.
+과제는 **Langfuse 상담 AI 개선 미션**입니다. [전용 Notebook 1개](https://github.com/smilesjcha/llmops-16week/blob/main/week12/assignment/01_langfuse_mission.ipynb)에서 질문 2개 × 프롬프트 2개를 실제로 실행하고 Trace·Scores·지연을 비교한 뒤 사용자 A/B 계획을 작성합니다. 설치 후 60–90분, **판단 메모 1–2쪽 PDF/HTML + 화면 2장**을 제출합니다. **2026년 12월 4일(금) 23:59 KST**, 아주대AI대학원은 LMS에 **최대 5회** 제출 가능하며 마지막 제출물을 평가합니다. 그 외 수강생은 같은 기한까지 공지된 교수 이메일로 개인 제출합니다. [실행·평가 기준](https://github.com/smilesjcha/llmops-16week/blob/main/week12/assignment/README.md)
 
 [10·11·12주차 비교](week12/lecture/WEEKS_10_12_COMPARISON.md) · [100분 수업 계획](week12/README.md) · [교수용 64쪽 설명 노트·셀별 안내](https://smilesjcha.github.io/llmops-16week/week12/lecture/instructor/)
 

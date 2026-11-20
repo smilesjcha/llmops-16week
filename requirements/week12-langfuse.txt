@@ -1,0 +1,3 @@
+# Week 12 assignment: reuse pinned Week 11 Langfuse + Week 12 analysis profiles.
+-r week11-langfuse.txt
+-r week12-online.txt
